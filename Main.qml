@@ -17,7 +17,8 @@ Kirigami.ApplicationWindow {
         actions: [
             Kirigami.Action {
                 text: "hello"
-                AC.ActionCollection.collection: "pollo"
+                objectName: "hello"
+                AC.ActionCollection.collection: "org.kde.collection"
             },
             Kirigami.Action {
                 text: "world"
