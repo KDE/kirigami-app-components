@@ -4,6 +4,13 @@
 
 #include "actioncollection.h"
 
+#include <QSettings>
+#include <QKeySequence>
+
+#include <KConfig>
+#include <KSharedConfig>
+#include <KConfigGroup>
+
 Q_GLOBAL_STATIC(ActionCollectionStorage, s_actionCollectionStorage)
 
 ActionCollectionData::ActionCollectionData(QObject *parent)
@@ -40,9 +47,19 @@ ActionCollectionData *ActionCollectionData::qmlAttachedProperties(QObject *objec
 
 //////////////////////////////////
 
-ActionCollection::ActionCollection(QObject *parent)
+ActionCollection::ActionCollection(const QString &name, QObject *parent)
     : QObject(parent)
 {
+    KSharedConfig::Ptr config = KSharedConfig::openConfig(QStringLiteral(":/actionsrc"));
+    KConfigGroup rootCg(config, name);
+
+    for (const QString &grp : rootCg.groupList()) {
+        KConfigGroup cg(&rootCg, grp);
+        m_shortcuts[grp] = QKeySequence(cg.readEntry("shortcut", QString()));
+    }
+
+    qWarning()<<m_shortcuts;
+
 }
 
 ActionCollection::~ActionCollection()
@@ -77,7 +94,7 @@ ActionCollection *ActionCollectionStorage::collection(const QString &name)
 {
     ActionCollection *coll = nullptr;
     if (!m_collections.contains(name)) {
-        coll = new ActionCollection(this);
+        coll = new ActionCollection(name, this);
         m_collections[name] = coll;
         return coll;
     }

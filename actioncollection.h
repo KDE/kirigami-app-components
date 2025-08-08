@@ -43,7 +43,7 @@ class ActionCollection : public QObject
     QML_UNCREATABLE("Cannot create objects of type ActionCollection")
 
 public:
-    explicit ActionCollection(QObject *parent = nullptr);
+    explicit ActionCollection(const QString &name, QObject *parent = nullptr);
     ~ActionCollection() override;
 
     void addAction(const QString &name, QObject *action);
@@ -51,6 +51,7 @@ public:
 
 private:
     QHash<QString, QObject*> m_actions;
+    QHash<QString, QKeySequence> m_shortcuts;
 };
 
 
