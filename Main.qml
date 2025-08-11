@@ -1,4 +1,9 @@
+// SPDX-License-Identifier: LGPL-2.0-or-later
+// SPDX-FileCopyrightText: 2025 Marco Martin <notmart@gmail.com>
+
 import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
 import actioncollection as AC
 
@@ -12,7 +17,7 @@ Kirigami.ApplicationWindow {
         initialPage: testPage
     }
 
-    Kirigami.Page {
+    Kirigami.ScrollablePage {
         id: testPage
         actions: [
             Kirigami.Action {
@@ -33,6 +38,24 @@ Kirigami.ApplicationWindow {
             }
         ]
 
-
+        ListView {
+            model: AC.ActionCollectionModel {
+                name: "org.kde.collection"
+            }
+            delegate: RowLayout {
+                Kirigami.Icon {
+                    source: model.iconName
+                }
+                QQC.Label {
+                    text: model.display
+                }
+                QQC.Label {
+                    text: model.defaultShortcut
+                }
+                QQC.Label {
+                    text: model.shortcut
+                }
+            }
+        }
     }
 }

@@ -67,6 +67,11 @@ ActionCollection::ActionCollection(const QString &name, QObject *parent)
 ActionCollection::~ActionCollection()
 {}
 
+QString ActionCollection::name() const
+{
+    return m_name;
+}
+
 void ActionCollection::addAction(const QString &name, QObject *action)
 {
     if (!action) {
@@ -102,6 +107,107 @@ void ActionCollection::addAction(const QString &name, QObject *action)
 QObject *ActionCollection::action(const QString &name)
 {
     return m_actions.value(name);
+}
+
+QList<QObject *> ActionCollection::actions() const
+{
+    return m_actions.values();
+}
+
+QString ActionCollection::defaultShortcut(const QString &name) const
+{
+    return m_actionData.value(name).shortcut;
+}
+
+/////////////////////////////////
+
+ActionCollectionModel::ActionCollectionModel(QObject *parent)
+    : QAbstractListModel(parent)
+{}
+
+ActionCollectionModel::~ActionCollectionModel()
+{}
+
+QString ActionCollectionModel::name() const
+{
+    if (m_collection) {
+        return m_collection->name();
+    }
+
+    return {};
+}
+
+void ActionCollectionModel::setName(const QString &name)
+{
+    if (m_collection && name == m_collection->name()) {
+        return;
+    }
+
+    m_collection = ActionCollectionStorage::self()->collection(name);
+
+    Q_EMIT nameChanged(m_collection ? name : QString());
+}
+
+QObject *ActionCollectionModel::action(const QString &name)
+{
+    if (!m_collection) {
+        return nullptr;
+    }
+
+    return m_collection->action(name);
+}
+
+ActionCollection *ActionCollectionModel::collection() const
+{
+    return m_collection;
+}
+
+int ActionCollectionModel::rowCount(const QModelIndex &parent) const
+{
+    if (!m_collection) {
+        return 0;
+    }
+
+    return m_collection->actions().count();
+}
+
+QVariant ActionCollectionModel::data(const QModelIndex &index, int role) const
+{
+    Q_ASSERT(checkIndex(index, QAbstractItemModel::CheckIndexOption::IndexIsValid));
+
+    if (!m_collection) {
+        return {};
+    }
+
+    QObject *action = m_collection->actions()[index.row()];
+
+    switch (role) {
+    case Qt::DisplayRole:
+        return action->property("text");
+    case IconNameRole: {
+        QQmlProperty property(action, "icon.name");
+        return property.read();
+    }
+    case DefaultShortcutRole:
+        return m_collection->defaultShortcut(action->objectName());
+    case ShortcutRole:
+        return action->property("shortcut");
+    }
+
+    return {};
+}
+
+QHash<int, QByteArray> ActionCollectionModel::roleNames() const
+{
+    return {
+        { Qt::DisplayRole, "display" },
+        { IconNameRole, "iconName" },
+        { DefaultShortcutRole, "defaultShortcut" },
+        { ShortcutRole, "shortcut" },
+        { ShortcutDisplayRole, "shortcutDisplay" },
+        { AlternateShortcutsRole, "alternateShortcuts" },
+        { CollectionNameRole, "collectionName" },
+    };
 }
 
 /////////////////////////////////
