@@ -1,2 +1,7 @@
 [org.kde.collection][hello]
-shortcut=Ctrl+C
+icon=document-send
+shortcut=Ctrl+H
+
+[org.kde.collection][copy]
+icon=edit-copy
+shortcut=copy

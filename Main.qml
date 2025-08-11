@@ -19,10 +19,20 @@ Kirigami.ApplicationWindow {
                 text: "hello"
                 objectName: "hello"
                 AC.ActionCollection.collection: "org.kde.collection"
+                onTriggered: {
+                    print("hello")
+                }
             },
             Kirigami.Action {
-                text: "world"
+                text: "Copy"
+                objectName: "copy"
+                AC.ActionCollection.collection: "org.kde.collection"
+                onTriggered: {
+                    print("copy")
+                }
             }
         ]
+
+
     }
 }

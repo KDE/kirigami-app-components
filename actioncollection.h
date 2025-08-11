@@ -36,6 +36,11 @@ private:
 QML_DECLARE_TYPEINFO(ActionCollectionData, QML_HAS_ATTACHED_PROPERTIES)
 
 
+struct ActionData {
+    QString icon;
+    QString shortcut;
+};
+
 class ActionCollection : public QObject
 {
     Q_OBJECT
@@ -51,7 +56,7 @@ public:
 
 private:
     QHash<QString, QObject*> m_actions;
-    QHash<QString, QKeySequence> m_shortcuts;
+    QHash<QString, ActionData> m_actionData;
 };
 
 

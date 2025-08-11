@@ -6,6 +6,7 @@
 
 #include <QSettings>
 #include <QKeySequence>
+#include <QQmlProperty>
 
 #include <KConfig>
 #include <KSharedConfig>
@@ -55,11 +56,12 @@ ActionCollection::ActionCollection(const QString &name, QObject *parent)
 
     for (const QString &grp : rootCg.groupList()) {
         KConfigGroup cg(&rootCg, grp);
-        m_shortcuts[grp] = QKeySequence(cg.readEntry("shortcut", QString()));
+        ActionData a;
+        a.icon = cg.readEntry("icon", QString());
+        a.shortcut = cg.readEntry("shortcut", QString());
+        m_actionData[grp] = a;
+        qWarning() << grp << a.icon << a.shortcut;
     }
-
-    qWarning()<<m_shortcuts;
-
 }
 
 ActionCollection::~ActionCollection()
@@ -67,8 +69,34 @@ ActionCollection::~ActionCollection()
 
 void ActionCollection::addAction(const QString &name, QObject *action)
 {
+    if (!action) {
+        return;
+    }
     qWarning() << "adding action" << name << action;
     m_actions[name] = action;
+
+    ActionData data = m_actionData.value(name);
+    if (!data.icon.isEmpty()) {
+        QQmlProperty property(action, "icon.name");
+        property.write(data.icon);
+    }
+    if (data.shortcut.isEmpty()) {
+        return;
+    }
+
+    QMetaEnum me = QMetaEnum::fromType<QKeySequence::StandardKey>();
+
+    // Is the default shortcut a named one, such as "Copy", "Back" etc ?
+    for (int i = 0; i < me.keyCount(); ++i) {
+        if (QString::fromUtf8(me.key(i)).toLower() == data.shortcut.toLower()) {
+            QQmlProperty property(action, "shortcut");
+            property.write(QKeySequence::StandardKey(me.value(i)));
+            return;
+        }
+    }
+
+    QQmlProperty property(action, "shortcut");
+    property.write(data.shortcut);
 }
 
 QObject *ActionCollection::action(const QString &name)
