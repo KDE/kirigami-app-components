@@ -78,6 +78,17 @@ void ActionCollection::addAction(const QString &name, QObject *action)
         return;
     }
     qWarning() << "adding action" << name << action;
+
+    int position = -1;
+
+    for (const QString &n : m_actions.keys()) {
+        ++position;
+        if (n > name) {
+            break;
+        }
+    }
+    Q_EMIT aboutToAddAction(position, action);
+
     m_actions[name] = action;
 
     ActionData data = m_actionData.value(name);
@@ -100,8 +111,17 @@ void ActionCollection::addAction(const QString &name, QObject *action)
         }
     }
 
+    connect(action, &QObject::destroyed, this, [this] () {
+        QObject *action = sender();
+        const int position = m_actions.keys().indexOf(action->objectName());
+        Q_EMIT aboutToRemoveAction(position, action);
+        m_actions.remove(action->objectName());
+        Q_EMIT actionRemoved(position, action);
+    });
+
     QQmlProperty property(action, "shortcut");
     property.write(data.shortcut);
+    Q_EMIT actionAdded(position, action);
 }
 
 QObject *ActionCollection::action(const QString &name)
@@ -123,7 +143,8 @@ QString ActionCollection::defaultShortcut(const QString &name) const
 
 ActionCollectionModel::ActionCollectionModel(QObject *parent)
     : QAbstractListModel(parent)
-{}
+{
+}
 
 ActionCollectionModel::~ActionCollectionModel()
 {}
@@ -144,6 +165,29 @@ void ActionCollectionModel::setName(const QString &name)
     }
 
     m_collection = ActionCollectionStorage::self()->collection(name);
+
+    connect(m_collection, &ActionCollection::aboutToAddAction,
+            this, [this](int position, QObject *action) {
+                Q_UNUSED(position);
+                beginInsertRows(QModelIndex(), position, position);
+            });
+    connect(m_collection, &ActionCollection::actionAdded,
+            this, [this](int position, QObject *action) {
+                Q_UNUSED(position);
+                Q_UNUSED(action);
+                endInsertRows();
+            });
+    connect(m_collection, &ActionCollection::aboutToRemoveAction,
+            this, [this](int position, QObject *action) {
+                Q_UNUSED(position);
+                beginRemoveRows(QModelIndex(), position, position);
+            });
+    connect(m_collection, &ActionCollection::actionAdded,
+            this, [this](int position, QObject *action) {
+                Q_UNUSED(position);
+                Q_UNUSED(action);
+                endRemoveRows();
+            });
 
     Q_EMIT nameChanged(m_collection ? name : QString());
 }
@@ -190,8 +234,14 @@ QVariant ActionCollectionModel::data(const QModelIndex &index, int role) const
     }
     case DefaultShortcutRole:
         return m_collection->defaultShortcut(action->objectName());
-    case ShortcutRole:
-        return action->property("shortcut");
+    case ShortcutRole: {
+        QVariant shortcutVariant = action->property("shortcut");
+        if (shortcutVariant.canConvert<int>()) {
+            QKeySequence seq(QKeySequence::StandardKey(shortcutVariant.value<int>()));
+            return seq.toString();
+        }
+        return shortcutVariant;
+    }
     }
 
     return {};

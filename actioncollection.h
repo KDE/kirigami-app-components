@@ -62,7 +62,10 @@ public:
     QString defaultShortcut(const QString &name) const;
 
 Q_SIGNALS:
-    void actionAdded(QObject *action);
+    void aboutToAddAction(int position, QObject *action);
+    void actionAdded(int position, QObject *action);
+    void aboutToRemoveAction(int position, QObject *action);
+    void actionRemoved(int position, QObject *action);
     void actionRemoved(QObject *action);
 
 private:
