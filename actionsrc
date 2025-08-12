@@ -7,3 +7,8 @@ shortcut=Ctrl+H
 text=Copy
 icon=edit-copy
 shortcut=copy
+
+[org.kde.collection][explore-actions]
+text=Actions
+icon=view-form-action
+shortcut=Ctrl+I

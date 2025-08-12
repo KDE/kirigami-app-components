@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 // SPDX-FileCopyrightText: 2025 Marco Martin <notmart@gmail.com>
 
-#pragma once
+#ifndef ACTIONCOLLECTION_H
+#define ACTIONCOLLECTION_H
 
 #include <QAbstractListModel>
 #include <QObject>
 #include <qqmlregistration.h>
 #include <QQmlEngine>
+
 
 class ActionCollectionData : public QObject
 {
@@ -84,31 +86,22 @@ private:
     QHash<QString, ActionData> m_actionData;
 };
 
-class ActionCollectionModel : public QAbstractListModel {
+class ActionsModel : public QAbstractListModel {
     Q_OBJECT
-    QML_NAMED_ELEMENT(ActionCollectionModel)
+    QML_NAMED_ELEMENT(ActionsModel)
     // TODO: this should be able to have multiple names and multiple collections
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
 
 public:
     enum Role {
-        ActionNameRole = Qt::UserRole + 1,
-        IconNameRole,
-        ShortcutRole,
-        ShortcutDisplayRole,
-        DefaultShortcutRole,
-        AlternateShortcutsRole,
-        CollectionNameRole,
+        ActionInstanceRole = Qt::UserRole + 1
     };
 
-    explicit ActionCollectionModel(QObject *parent = nullptr);
-    ~ActionCollectionModel() override;
+    explicit ActionsModel(QObject *parent = nullptr);
+    ~ActionsModel() override;
 
     QString name() const;
     void setName(const QString &name);
-
-    // Somewhere outside ActionCollectionModel ?
-    Q_INVOKABLE void setShortcut(const QString &name, const QString &shortcut);
 
     ActionCollection *collection() const;
 
@@ -140,3 +133,4 @@ private:
     QHash<QString, ActionCollection*> m_collections;
 };
 
+#endif

@@ -36,11 +36,39 @@ Kirigami.ApplicationWindow {
                 onTriggered: {
                     print("copy")
                 }
+            },
+            Kirigami.Action {
+                objectName: "explore-actions"
+                AC.ActionCollection.collection: "org.kde.collection"
+                onTriggered: {
+                    print("explore")
+                    actionsDialog.open()
+                }
             }
         ]
 
+        QQC.Dialog {
+            id: actionsDialog
+            contentItem: QQC.ScrollView {
+                ListView {
+                    model: AC.ActionsModel {
+                        name: "org.kde.collection"
+                    }
+                    delegate: QQC.ItemDelegate {
+                        required property QtObject actionInstance
+                        icon.name: actionInstance.icon.name
+                        text: actionInstance.text + " " + actionInstance.shortcut
+                        onClicked: {
+                            actionInstance.trigger()
+                            actionsDialog.close()
+                        }
+                    }
+                }
+            }
+        }
+
         ListView {
-            model: AC.ActionCollectionModel {
+            model: AC.ShortcutsModel {
                 id: collectionModel
                 name: "org.kde.collection"
             }

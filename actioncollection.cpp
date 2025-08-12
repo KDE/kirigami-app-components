@@ -108,21 +108,24 @@ void ActionCollection::addActionInstance(const QString &name, QObject *action)
             break;
         }
     }
-    //FIXME: rethink how actions can be dinamically added/removed
-    bool knownAction = m_actionData.contains(name);
-    if (!knownAction) {
-        Q_EMIT aboutToAddAction(position, action);
-        ActionData ad;
-        ad.text = action->property("text").toString();
-        QQmlProperty property(action, "icon.name");
-        ad.icon = property.read().toString();
-        ad.shortcut = action->property("shortcut").toString();
-        m_actionData[name] = ad;
-    }
+
+    Q_EMIT aboutToAddAction(position, action);
 
     m_actions[name] = action;
 
+    connect(action, &QObject::destroyed, this, [this] () {
+        QObject *action = sender();
+        const int position = m_actions.keys().indexOf(action->objectName());
+        Q_EMIT aboutToRemoveAction(position, action);
+        m_actions.remove(action->objectName());
+        Q_EMIT actionRemoved(position, action);
+    });
+
     ActionData data = m_actionData.value(name);
+    if (!data.text.isEmpty()) {
+        QQmlProperty property(action, "text");
+        property.write(decodeStandardShortcut(data.text));
+    }
     if (!data.icon.isEmpty()) {
         QQmlProperty property(action, "icon.name");
         property.write(data.icon);
@@ -131,20 +134,9 @@ void ActionCollection::addActionInstance(const QString &name, QObject *action)
         return;
     }
 
-    /*
-    connect(action, &QObject::destroyed, this, [this] () {
-        QObject *action = sender();
-        const int position = m_actions.keys().indexOf(action->objectName());
-        Q_EMIT aboutToRemoveAction(position, action);
-        m_actions.remove(action->objectName());
-        Q_EMIT actionRemoved(position, action);
-    });*/
-
     QQmlProperty property(action, "shortcut");
     property.write(decodeStandardShortcut(data.shortcut));
-    if (!knownAction) {
-        Q_EMIT actionAdded(position, action);
-    }
+    Q_EMIT actionAdded(position, action);
 }
 
 QObject *ActionCollection::actionInstance(const QString &name)
@@ -197,15 +189,15 @@ QString ActionCollection::defaultShortcut(const QString &name) const
 
 /////////////////////////////////
 
-ActionCollectionModel::ActionCollectionModel(QObject *parent)
+ActionsModel::ActionsModel(QObject *parent)
     : QAbstractListModel(parent)
 {
 }
 
-ActionCollectionModel::~ActionCollectionModel()
+ActionsModel::~ActionsModel()
 {}
 
-QString ActionCollectionModel::name() const
+QString ActionsModel::name() const
 {
     if (m_collection) {
         return m_collection->name();
@@ -214,7 +206,7 @@ QString ActionCollectionModel::name() const
     return {};
 }
 
-void ActionCollectionModel::setName(const QString &name)
+void ActionsModel::setName(const QString &name)
 {
     if (m_collection && name == m_collection->name()) {
         return;
@@ -248,20 +240,12 @@ void ActionCollectionModel::setName(const QString &name)
     Q_EMIT nameChanged(m_collection ? name : QString());
 }
 
-void ActionCollectionModel::setShortcut(const QString &name, const QString &shortcut)
-{
-    if (!m_collection) {
-        return;
-    }
-    m_collection->setShortcut(name, shortcut);
-}
-
-ActionCollection *ActionCollectionModel::collection() const
+ActionCollection *ActionsModel::collection() const
 {
     return m_collection;
 }
 
-int ActionCollectionModel::rowCount(const QModelIndex &parent) const
+int ActionsModel::rowCount(const QModelIndex &parent) const
 {
     if (!m_collection || parent.isValid()) {
         return 0;
@@ -270,7 +254,7 @@ int ActionCollectionModel::rowCount(const QModelIndex &parent) const
     return m_collection->actionDescriptions().count();
 }
 
-QVariant ActionCollectionModel::data(const QModelIndex &index, int role) const
+QVariant ActionsModel::data(const QModelIndex &index, int role) const
 {
     Q_ASSERT(checkIndex(index, QAbstractItemModel::CheckIndexOption::IndexIsValid));
 
@@ -278,35 +262,23 @@ QVariant ActionCollectionModel::data(const QModelIndex &index, int role) const
         return {};
     }
 
-    ActionData ad = m_collection->actionDescriptions()[index.row()];
+    QObject *action = m_collection->actions()[index.row()];
 
     switch (role) {
     case Qt::DisplayRole:
-        return ad.text;
-    case ActionNameRole:
-        return ad.name;
-    case IconNameRole:
-        return ad.icon;
-    case DefaultShortcutRole:
-        return decodeStandardShortcut(ad.defaultShortcut);
-    case ShortcutRole:
-        return decodeStandardShortcut(ad.shortcut);
+        return action->property("text");
+    case ActionInstanceRole:
+        return QVariant::fromValue(action);
     }
 
     return {};
 }
 
-QHash<int, QByteArray> ActionCollectionModel::roleNames() const
+QHash<int, QByteArray> ActionsModel::roleNames() const
 {
     return {
         { Qt::DisplayRole, "display" },
-        { ActionNameRole, "actionName" },
-        { IconNameRole, "iconName" },
-        { DefaultShortcutRole, "defaultShortcut" },
-        { ShortcutRole, "shortcut" },
-        { ShortcutDisplayRole, "shortcutDisplay" },
-        { AlternateShortcutsRole, "alternateShortcuts" },
-        { CollectionNameRole, "collectionName" },
+        { ActionInstanceRole, "actionInstance" }
     };
 }
 
