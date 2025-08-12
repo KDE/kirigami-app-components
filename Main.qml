@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
 import actioncollection as AC
+import org.kde.kquickcontrols as KQ
 
 Kirigami.ApplicationWindow {
     width: 640
@@ -40,6 +41,7 @@ Kirigami.ApplicationWindow {
 
         ListView {
             model: AC.ActionCollectionModel {
+                id: collectionModel
                 name: "org.kde.collection"
             }
             delegate: RowLayout {
@@ -52,8 +54,14 @@ Kirigami.ApplicationWindow {
                 QQC.Label {
                     text: model.defaultShortcut
                 }
-                QQC.Label {
-                    text: model.shortcut
+                KQ.KeySequenceItem {
+                    keySequence: model.shortcut
+                    onKeySequenceModified: {
+                        if (keySequence == "") {
+                            keySequence = model.defaultShortcut
+                        }
+                        collectionModel.setShortcut(model.actionName, keySequence);
+                    }
                 }
             }
         }

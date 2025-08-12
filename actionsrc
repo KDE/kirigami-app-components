@@ -1,7 +1,9 @@
 [org.kde.collection][hello]
+text=Hello
 icon=document-send
 shortcut=Ctrl+H
 
 [org.kde.collection][copy]
+text=Copy
 icon=edit-copy
 shortcut=copy

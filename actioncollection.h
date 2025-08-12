@@ -29,6 +29,7 @@ public:
 
 Q_SIGNALS:
     void collectionChanged();
+    void shortcutChanged();
 
 private:
     QString m_collection;
@@ -38,15 +39,18 @@ QML_DECLARE_TYPEINFO(ActionCollectionData, QML_HAS_ATTACHED_PROPERTIES)
 
 
 struct ActionData {
+    QString name;
+    QString text;
     QString icon;
+    QString defaultShortcut;
     QString shortcut;
 };
 
+
+// C++ only api
 class ActionCollection : public QObject
 {
     Q_OBJECT
-    //QML_NAMED_ELEMENT(ActionCollection)
-    //QML_UNCREATABLE("Cannot create objects of type ActionCollection")
 
 public:
     explicit ActionCollection(const QString &name, QObject *parent = nullptr);
@@ -54,10 +58,15 @@ public:
 
     QString name() const;
 
-    void addAction(const QString &name, QObject *action);
-    QObject *action(const QString &name);
+    void addActionInstance(const QString &name, QObject *action);
+    QObject *actionInstance(const QString &name);
 
     QList<QObject *> actions() const;
+    QList <ActionData> actionDescriptions() const;
+
+    // TODO: perhaps on the c++ facing api expose only QKeySequence
+    void setShortcut(const QString &name, const QString &shortcut);
+    QString shortcut(const QString &name) const;
 
     QString defaultShortcut(const QString &name) const;
 
@@ -67,6 +76,7 @@ Q_SIGNALS:
     void aboutToRemoveAction(int position, QObject *action);
     void actionRemoved(int position, QObject *action);
     void actionRemoved(QObject *action);
+    void shortcutChanged(const QString &shortcut);
 
 private:
     QString m_name;
@@ -82,7 +92,8 @@ class ActionCollectionModel : public QAbstractListModel {
 
 public:
     enum Role {
-        IconNameRole = Qt::UserRole + 1,
+        ActionNameRole = Qt::UserRole + 1,
+        IconNameRole,
         ShortcutRole,
         ShortcutDisplayRole,
         DefaultShortcutRole,
@@ -96,7 +107,8 @@ public:
     QString name() const;
     void setName(const QString &name);
 
-    Q_INVOKABLE QObject *action(const QString &name);
+    // Somewhere outside ActionCollectionModel ?
+    Q_INVOKABLE void setShortcut(const QString &name, const QString &shortcut);
 
     ActionCollection *collection() const;
 
@@ -111,6 +123,7 @@ private:
     QPointer<ActionCollection> m_collection;
 };
 
+// C++ only api
 class ActionCollectionStorage : public QObject
 {
     Q_OBJECT

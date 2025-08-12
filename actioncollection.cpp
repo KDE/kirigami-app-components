@@ -11,6 +11,7 @@
 #include <KConfig>
 #include <KSharedConfig>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 Q_GLOBAL_STATIC(ActionCollectionStorage, s_actionCollectionStorage)
 
@@ -35,7 +36,7 @@ void ActionCollectionData::setCollection(const QString &collection)
     m_collection = collection;
 
     if (!parent()->objectName().isEmpty()) {
-        ActionCollectionStorage::self()->collection(collection)->addAction(parent()->objectName(), parent());
+        ActionCollectionStorage::self()->collection(collection)->addActionInstance(parent()->objectName(), parent());
     }
 
     Q_EMIT collectionChanged();
@@ -48,19 +49,39 @@ ActionCollectionData *ActionCollectionData::qmlAttachedProperties(QObject *objec
 
 //////////////////////////////////
 
+QString decodeStandardShortcut(const QString &shortcut)
+{
+    // Is the default shortcut a named one, such as "Copy", "Back" etc ?
+    QMetaEnum me = QMetaEnum::fromType<QKeySequence::StandardKey>();
+    for (int i = 0; i < me.keyCount(); ++i) {
+        if (QString::fromUtf8(me.key(i)).toLower() == shortcut) {
+            return QKeySequence(QKeySequence::StandardKey(me.value(i))).toString();
+        }
+    }
+
+    return shortcut;
+}
+
 ActionCollection::ActionCollection(const QString &name, QObject *parent)
     : QObject(parent)
 {
     KSharedConfig::Ptr config = KSharedConfig::openConfig(QStringLiteral(":/actionsrc"));
     KConfigGroup rootCg(config, name);
+    KConfigGroup savedShortcutsCg(KSharedConfig::openConfig(), "Shortcuts");
 
+    int i = 0;
     for (const QString &grp : rootCg.groupList()) {
         KConfigGroup cg(&rootCg, grp);
-        ActionData a;
-        a.icon = cg.readEntry("icon", QString());
-        a.shortcut = cg.readEntry("shortcut", QString());
-        m_actionData[grp] = a;
-        qWarning() << grp << a.icon << a.shortcut;
+        ActionData ad;
+        ad.name = grp;
+        ad.text = cg.readEntry("text", i18n("Action %1", i));
+        ad.icon = cg.readEntry("icon", QString());
+        ad.defaultShortcut = cg.readEntry("shortcut", QString());
+        ad.shortcut = savedShortcutsCg.readEntry(grp, ad.defaultShortcut);
+
+        m_actionData[grp] = ad;
+        qWarning() << grp << ad.icon << ad.shortcut;
+        ++i;
     }
 }
 
@@ -72,12 +93,12 @@ QString ActionCollection::name() const
     return m_name;
 }
 
-void ActionCollection::addAction(const QString &name, QObject *action)
+void ActionCollection::addActionInstance(const QString &name, QObject *action)
 {
     if (!action) {
         return;
     }
-    qWarning() << "adding action" << name << action;
+    qWarning() << "adding action instance" << name << action;
 
     int position = -1;
 
@@ -87,7 +108,17 @@ void ActionCollection::addAction(const QString &name, QObject *action)
             break;
         }
     }
-    Q_EMIT aboutToAddAction(position, action);
+    //FIXME: rethink how actions can be dinamically added/removed
+    bool knownAction = m_actionData.contains(name);
+    if (!knownAction) {
+        Q_EMIT aboutToAddAction(position, action);
+        ActionData ad;
+        ad.text = action->property("text").toString();
+        QQmlProperty property(action, "icon.name");
+        ad.icon = property.read().toString();
+        ad.shortcut = action->property("shortcut").toString();
+        m_actionData[name] = ad;
+    }
 
     m_actions[name] = action;
 
@@ -100,31 +131,23 @@ void ActionCollection::addAction(const QString &name, QObject *action)
         return;
     }
 
-    QMetaEnum me = QMetaEnum::fromType<QKeySequence::StandardKey>();
-
-    // Is the default shortcut a named one, such as "Copy", "Back" etc ?
-    for (int i = 0; i < me.keyCount(); ++i) {
-        if (QString::fromUtf8(me.key(i)).toLower() == data.shortcut.toLower()) {
-            QQmlProperty property(action, "shortcut");
-            property.write(QKeySequence::StandardKey(me.value(i)));
-            return;
-        }
-    }
-
+    /*
     connect(action, &QObject::destroyed, this, [this] () {
         QObject *action = sender();
         const int position = m_actions.keys().indexOf(action->objectName());
         Q_EMIT aboutToRemoveAction(position, action);
         m_actions.remove(action->objectName());
         Q_EMIT actionRemoved(position, action);
-    });
+    });*/
 
     QQmlProperty property(action, "shortcut");
-    property.write(data.shortcut);
-    Q_EMIT actionAdded(position, action);
+    property.write(decodeStandardShortcut(data.shortcut));
+    if (!knownAction) {
+        Q_EMIT actionAdded(position, action);
+    }
 }
 
-QObject *ActionCollection::action(const QString &name)
+QObject *ActionCollection::actionInstance(const QString &name)
 {
     return m_actions.value(name);
 }
@@ -132,6 +155,39 @@ QObject *ActionCollection::action(const QString &name)
 QList<QObject *> ActionCollection::actions() const
 {
     return m_actions.values();
+}
+
+QList<ActionData > ActionCollection::actionDescriptions() const
+{
+    return m_actionData.values();
+}
+
+void ActionCollection::setShortcut(const QString &name, const QString &shortcut)
+{
+    if (shortcut == ActionCollection::shortcut(name)) {
+        return;
+    }
+    QString actualShortcut = shortcut;
+    KConfigGroup cg(KSharedConfig::openConfig(), "Shortcuts");
+    if (shortcut.isEmpty() || shortcut == decodeStandardShortcut(defaultShortcut(name))) {
+        cg.deleteEntry(name);
+        actualShortcut = decodeStandardShortcut(defaultShortcut(name));
+    } else {
+        cg.writeEntry(name, actualShortcut);
+    }
+
+    QObject *action = m_actions.value(name);
+    if (action) {
+        action->setProperty("shortcut", actualShortcut);
+    }
+
+    Q_EMIT shortcutChanged(actualShortcut);
+}
+
+QString ActionCollection::shortcut(const QString &name) const
+{
+    KConfigGroup cg(KSharedConfig::openConfig(), "Shortcuts");
+    return cg.readEntry(name, m_actionData.value(name).shortcut);
 }
 
 QString ActionCollection::defaultShortcut(const QString &name) const
@@ -192,13 +248,12 @@ void ActionCollectionModel::setName(const QString &name)
     Q_EMIT nameChanged(m_collection ? name : QString());
 }
 
-QObject *ActionCollectionModel::action(const QString &name)
+void ActionCollectionModel::setShortcut(const QString &name, const QString &shortcut)
 {
     if (!m_collection) {
-        return nullptr;
+        return;
     }
-
-    return m_collection->action(name);
+    m_collection->setShortcut(name, shortcut);
 }
 
 ActionCollection *ActionCollectionModel::collection() const
@@ -208,11 +263,11 @@ ActionCollection *ActionCollectionModel::collection() const
 
 int ActionCollectionModel::rowCount(const QModelIndex &parent) const
 {
-    if (!m_collection) {
+    if (!m_collection || parent.isValid()) {
         return 0;
     }
 
-    return m_collection->actions().count();
+    return m_collection->actionDescriptions().count();
 }
 
 QVariant ActionCollectionModel::data(const QModelIndex &index, int role) const
@@ -223,25 +278,19 @@ QVariant ActionCollectionModel::data(const QModelIndex &index, int role) const
         return {};
     }
 
-    QObject *action = m_collection->actions()[index.row()];
+    ActionData ad = m_collection->actionDescriptions()[index.row()];
 
     switch (role) {
     case Qt::DisplayRole:
-        return action->property("text");
-    case IconNameRole: {
-        QQmlProperty property(action, "icon.name");
-        return property.read();
-    }
+        return ad.text;
+    case ActionNameRole:
+        return ad.name;
+    case IconNameRole:
+        return ad.icon;
     case DefaultShortcutRole:
-        return m_collection->defaultShortcut(action->objectName());
-    case ShortcutRole: {
-        QVariant shortcutVariant = action->property("shortcut");
-        if (shortcutVariant.canConvert<int>()) {
-            QKeySequence seq(QKeySequence::StandardKey(shortcutVariant.value<int>()));
-            return seq.toString();
-        }
-        return shortcutVariant;
-    }
+        return decodeStandardShortcut(ad.defaultShortcut);
+    case ShortcutRole:
+        return decodeStandardShortcut(ad.shortcut);
     }
 
     return {};
@@ -251,6 +300,7 @@ QHash<int, QByteArray> ActionCollectionModel::roleNames() const
 {
     return {
         { Qt::DisplayRole, "display" },
+        { ActionNameRole, "actionName" },
         { IconNameRole, "iconName" },
         { DefaultShortcutRole, "defaultShortcut" },
         { ShortcutRole, "shortcut" },
