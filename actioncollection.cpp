@@ -3,6 +3,7 @@
 
 
 #include "actioncollection.h"
+#include "actiondata.h"
 
 #include <QSettings>
 #include <QKeySequence>
@@ -15,36 +16,38 @@
 
 Q_GLOBAL_STATIC(ActionCollectionStorage, s_actionCollectionStorage)
 
-ActionCollectionData::ActionCollectionData(QObject *parent)
+ActionCollectionAttached::ActionCollectionAttached(QObject *parent)
     : QObject(parent)
 {
 }
 
-ActionCollectionData::~ActionCollectionData()
+ActionCollectionAttached::~ActionCollectionAttached()
 {}
 
-QString ActionCollectionData::collection() const
+QString ActionCollectionAttached::collection() const
 {
     return m_collection;
 }
 
-void ActionCollectionData::setCollection(const QString &collection)
+void ActionCollectionAttached::setCollection(const QString &collection)
 {
     if (m_collection == collection)
         return;
 
     m_collection = collection;
 
-    if (!parent()->objectName().isEmpty()) {
-        ActionCollectionStorage::self()->collection(collection)->addActionInstance(parent()->objectName(), parent());
+    ActionCollection *coll = ActionCollectionStorage::self()->collection(collection);
+    const QString name = parent()->objectName();
+
+    if (coll && !name.isEmpty()) {
+        ActionData *ad = coll->action(name);
+        qWarning()<<ad;
+        if (ad) {
+            ad->setAction(parent());
+        }
     }
 
     Q_EMIT collectionChanged();
-}
-
-ActionCollectionData *ActionCollectionData::qmlAttachedProperties(QObject *object)
-{
-    return new ActionCollectionData(object);
 }
 
 //////////////////////////////////
@@ -62,9 +65,10 @@ QString decodeStandardShortcut(const QString &shortcut)
     return shortcut;
 }
 
-ActionCollection::ActionCollection(const QString &name, QObject *parent)
+ActionCollection::ActionCollection(QObject *parent)
     : QObject(parent)
 {
+    /*
     KSharedConfig::Ptr config = KSharedConfig::openConfig(QStringLiteral(":/actionsrc"));
     KConfigGroup rootCg(config, name);
     KConfigGroup savedShortcutsCg(KSharedConfig::openConfig(), "Shortcuts");
@@ -82,7 +86,7 @@ ActionCollection::ActionCollection(const QString &name, QObject *parent)
         m_actionData[grp] = ad;
         qWarning() << grp << ad.icon << ad.shortcut;
         ++i;
-    }
+    }*/
 }
 
 ActionCollection::~ActionCollection()
@@ -93,102 +97,109 @@ QString ActionCollection::name() const
     return m_name;
 }
 
-void ActionCollection::addActionInstance(const QString &name, QObject *action)
+void ActionCollection::setName(const QString &name)
 {
-    if (!action) {
+    if (name == m_name) {
         return;
     }
-    qWarning() << "adding action instance" << name << action;
 
-    int position = -1;
+    m_name = name;
 
-    for (const QString &n : m_actions.keys()) {
-        ++position;
-        if (n > name) {
-            break;
-        }
+    ActionCollectionStorage::self()->insertCollection(this);
+
+    Q_EMIT nameChanged(name);
+}
+
+ActionData *ActionCollection::action(const QString &name)
+{
+    return m_actionMap.value(name);
+}
+
+QList<ActionData *> ActionCollection::actions() const
+{
+    return m_actions;
+}
+
+QList<ActionData *> ActionCollection::activeActions() const
+{
+    //TODO
+    return m_actions;
+}
+
+ActionCollectionAttached *ActionCollection::qmlAttachedProperties(QObject *object)
+{
+    return new ActionCollectionAttached(object);
+}
+
+void ActionCollection::actions_append(QQmlListProperty<ActionData> *prop, ActionData *action)
+{
+    // This can only be called from QML
+    ActionCollection *coll = static_cast<ActionCollection *>(prop->object);
+    if (!coll) {
+        return;
     }
 
-    Q_EMIT aboutToAddAction(position, action);
+    const QString name = action->name();
+    if (coll->m_actionMap.contains(name)) {
+        qmlEngine(coll)->throwError(i18n("Action name %1 not unique.", name));
+    }
+    coll->m_actions.append(action);
+    coll->m_actionMap[name] = action;
 
-    m_actions[name] = action;
-
-    connect(action, &QObject::destroyed, this, [this] () {
-        QObject *action = sender();
-        const int position = m_actions.keys().indexOf(action->objectName());
-        Q_EMIT aboutToRemoveAction(position, action);
-        m_actions.remove(action->objectName());
-        Q_EMIT actionRemoved(position, action);
+    connect(action, &QObject::destroyed, coll, [coll, action, name]() {
+        coll->m_actionMap.remove(name);
+        coll->m_actions.removeAll(action);
     });
 
-    ActionData data = m_actionData.value(name);
-    if (!data.text.isEmpty()) {
-        QQmlProperty property(action, "text");
-        property.write(decodeStandardShortcut(data.text));
+    action->setParent(coll);
+}
+
+qsizetype ActionCollection::actions_count(QQmlListProperty<ActionData> *prop)
+{
+    ActionCollection *coll = static_cast<ActionCollection *>(prop->object);
+    if (!coll) {
+        return 0;
     }
-    if (!data.icon.isEmpty()) {
-        QQmlProperty property(action, "icon.name");
-        property.write(data.icon);
+
+    return coll->m_actions.count();
+}
+
+ActionData *ActionCollection::actions_at(QQmlListProperty<ActionData> *prop, qsizetype index)
+{
+    ActionCollection *coll = static_cast<ActionCollection *>(prop->object);
+    if (!coll) {
+        return nullptr;
     }
-    if (data.shortcut.isEmpty()) {
+
+    if (index < 0 || index >= coll->m_actions.count()) {
+        return nullptr;
+    }
+    return coll->m_actions.value(index);
+}
+
+void ActionCollection::actions_clear(QQmlListProperty<ActionData> *prop)
+{
+    ActionCollection *coll = static_cast<ActionCollection *>(prop->object);
+    if (!coll) {
         return;
     }
 
-    QQmlProperty property(action, "shortcut");
-    property.write(decodeStandardShortcut(data.shortcut));
-    Q_EMIT actionAdded(position, action);
+    coll->m_actionMap.clear();
+    coll->m_actions.clear();
 }
 
-QObject *ActionCollection::actionInstance(const QString &name)
+QQmlListProperty<ActionData> ActionCollection::actionsProperty()
 {
-    return m_actions.value(name);
-}
-
-QList<QObject *> ActionCollection::actions() const
-{
-    return m_actions.values();
-}
-
-QList<ActionData > ActionCollection::actionDescriptions() const
-{
-    return m_actionData.values();
-}
-
-void ActionCollection::setShortcut(const QString &name, const QString &shortcut)
-{
-    if (shortcut == ActionCollection::shortcut(name)) {
-        return;
-    }
-    QString actualShortcut = shortcut;
-    KConfigGroup cg(KSharedConfig::openConfig(), "Shortcuts");
-    if (shortcut.isEmpty() || shortcut == decodeStandardShortcut(defaultShortcut(name))) {
-        cg.deleteEntry(name);
-        actualShortcut = decodeStandardShortcut(defaultShortcut(name));
-    } else {
-        cg.writeEntry(name, actualShortcut);
-    }
-
-    QObject *action = m_actions.value(name);
-    if (action) {
-        action->setProperty("shortcut", actualShortcut);
-    }
-
-    Q_EMIT shortcutChanged(actualShortcut);
-}
-
-QString ActionCollection::shortcut(const QString &name) const
-{
-    KConfigGroup cg(KSharedConfig::openConfig(), "Shortcuts");
-    return cg.readEntry(name, m_actionData.value(name).shortcut);
-}
-
-QString ActionCollection::defaultShortcut(const QString &name) const
-{
-    return m_actionData.value(name).shortcut;
+    return QQmlListProperty<ActionData>(this,
+                                        nullptr,
+                                        actions_append,
+                                        actions_count,
+                                        actions_at,
+                                        actions_clear);
 }
 
 /////////////////////////////////
-
+/*
 ActionsModel::ActionsModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -240,7 +251,7 @@ void ActionsModel::setName(const QString &name)
     Q_EMIT nameChanged(m_collection ? name : QString());
 }
 
-ActionCollection *ActionsModel::collection() const
+ActionCollection *collModel::collection() const
 {
     return m_collection;
 }
@@ -281,7 +292,7 @@ QHash<int, QByteArray> ActionsModel::roleNames() const
         { ActionInstanceRole, "actionInstance" }
     };
 }
-
+*/
 /////////////////////////////////
 
 ActionCollectionStorage::ActionCollectionStorage(QObject *parent)
@@ -296,16 +307,14 @@ ActionCollectionStorage *ActionCollectionStorage::self()
     return s_actionCollectionStorage;
 }
 
+void ActionCollectionStorage::insertCollection(ActionCollection *collection)
+{
+    m_collections.insert(collection->name(), collection);
+}
+
 ActionCollection *ActionCollectionStorage::collection(const QString &name)
 {
-    ActionCollection *coll = nullptr;
-    if (!m_collections.contains(name)) {
-        coll = new ActionCollection(name, this);
-        m_collections[name] = coll;
-        return coll;
-    }
-
-    return m_collections[name];
+    return m_collections.value(name);
 }
 
 

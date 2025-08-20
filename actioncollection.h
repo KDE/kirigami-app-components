@@ -6,28 +6,27 @@
 
 #include <QAbstractListModel>
 #include <QObject>
+#include <fontconfig/fontconfig.h>
 #include <qqmlregistration.h>
 #include <QQmlEngine>
 
+#include "actiondata.h"
 
-class ActionCollectionData : public QObject
+class ActionCollectionAttached : public QObject
 {
     Q_OBJECT
-    QML_NAMED_ELEMENT(ActionCollection)
-    QML_ATTACHED(ActionCollectionData)
-    QML_UNCREATABLE("Cannot create objects of type ActionCollectionData, use it as an attached property")
+    // QML_NAMED_ELEMENT(ActionCollection)
+    // QML_ATTACHED(ActionCollectionAttached)
+    // QML_UNCREATABLE("Cannot create objects of type ActionCollectionAttached, use it as an attached property")
 
     Q_PROPERTY(QString collection READ collection WRITE setCollection NOTIFY collectionChanged FINAL)
 
 public:
-    explicit ActionCollectionData(QObject *parent = nullptr);
-    ~ActionCollectionData() override;
+    explicit ActionCollectionAttached(QObject *parent = nullptr);
+    ~ActionCollectionAttached() override;
 
     QString collection() const;
     void setCollection(const QString &collection);
-
-    // QML attached property
-    static ActionCollectionData *qmlAttachedProperties(QObject *object);
 
 Q_SIGNALS:
     void collectionChanged();
@@ -37,55 +36,64 @@ private:
     QString m_collection;
 };
 
-QML_DECLARE_TYPEINFO(ActionCollectionData, QML_HAS_ATTACHED_PROPERTIES)
 
-
-struct ActionData {
-    QString name;
-    QString text;
-    QString icon;
-    QString defaultShortcut;
-    QString shortcut;
-};
-
-
-// C++ only api
+// Accessible from both C++ and QML
 class ActionCollection : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_ATTACHED(ActionCollectionAttached)
+
+    // FIXME: use just objectName?
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+
+    // Needs a signal? (this only if we want to provide add and remove from c++)
+    Q_PROPERTY(QQmlListProperty<ActionData> actions READ actionsProperty CONSTANT FINAL)
+
+    Q_CLASSINFO("DefaultProperty", "actions")
 
 public:
-    explicit ActionCollection(const QString &name, QObject *parent = nullptr);
+    explicit ActionCollection(QObject *parent = nullptr);
     ~ActionCollection() override;
 
     QString name() const;
+    void setName(const QString &name);
 
-    void addActionInstance(const QString &name, QObject *action);
-    QObject *actionInstance(const QString &name);
 
-    QList<QObject *> actions() const;
-    QList <ActionData> actionDescriptions() const;
+    ActionData *action(const QString &name);
+    // All known actions in this collection
+    QList<ActionData *> actions() const;
+    // All actions in this collections that have an active and working Kirigami.Action instance in this moment
+    QList<ActionData *> activeActions() const;
 
-    // TODO: perhaps on the c++ facing api expose only QKeySequence
-    void setShortcut(const QString &name, const QString &shortcut);
-    QString shortcut(const QString &name) const;
+    QQmlListProperty<ActionData> actionsProperty();
 
-    QString defaultShortcut(const QString &name) const;
+    // QML attached property
+    static ActionCollectionAttached *qmlAttachedProperties(QObject *object);
 
 Q_SIGNALS:
-    void aboutToAddAction(int position, QObject *action);
-    void actionAdded(int position, QObject *action);
-    void aboutToRemoveAction(int position, QObject *action);
-    void actionRemoved(int position, QObject *action);
-    void actionRemoved(QObject *action);
-    void shortcutChanged(const QString &shortcut);
+    void nameChanged(const QString &name);
+    void aboutToAddAction(int position, ActionData *action);
+    void actionAdded(int position, ActionData *action);
+    void aboutToRemoveAction(int position, ActionData *action);
+    void actionRemoved(int position, ActionData *action);
 
 private:
+    //TODO: wonder if all of this should be in a qml-only subclass
+    static void actions_append(QQmlListProperty<ActionData> *prop, ActionData *object);
+    static qsizetype actions_count(QQmlListProperty<ActionData> *prop);
+    static ActionData *actions_at(QQmlListProperty<ActionData> *prop, qsizetype index);
+    static void actions_clear(QQmlListProperty<ActionData> *prop);
+
+    // TODO: dpointer
     QString m_name;
-    QMap<QString, QObject*> m_actions;
-    QHash<QString, ActionData> m_actionData;
+    QHash<QString, ActionData*> m_actionMap;
+    QList<ActionData *>m_actions;
 };
 
+QML_DECLARE_TYPEINFO(ActionCollectionAttached, QML_HAS_ATTACHED_PROPERTIES)
+
+/*
 class ActionsModel : public QAbstractListModel {
     Q_OBJECT
     QML_NAMED_ELEMENT(ActionsModel)
@@ -115,8 +123,9 @@ Q_SIGNALS:
 private:
     QPointer<ActionCollection> m_collection;
 };
+*/
 
-// C++ only api
+// C++ only api TODO: hide all of this behind a single static of ActionCollection
 class ActionCollectionStorage : public QObject
 {
     Q_OBJECT
@@ -127,6 +136,7 @@ public:
 
     static ActionCollectionStorage *self();
 
+    void insertCollection(ActionCollection *collection);
     ActionCollection *collection(const QString &name);
 
 private:

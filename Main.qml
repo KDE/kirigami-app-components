@@ -18,6 +18,28 @@ Kirigami.ApplicationWindow {
         initialPage: testPage
     }
 
+    AC.ActionCollection {
+        name: "org.kde.collection"
+        ActionData {
+            name: "hello"
+            text: "Hello"
+            icon: "document-send"
+            defaultShortcut: "Ctrl+H"
+        }
+        ActionData {
+            name: "copy"
+            text: "Copy"
+            icon: "edit-copy"
+            defaultShortcut: StandardKey.Copy
+        }
+        ActionData {
+            name: "explore-actions"
+            text: "Actions"
+            icon: "view-form-action"
+            defaultShortcut: "Ctrl+I"
+        }
+    }
+
     Kirigami.ScrollablePage {
         id: testPage
         actions: [
@@ -25,6 +47,7 @@ Kirigami.ApplicationWindow {
                 text: "hello"
                 objectName: "hello"
                 AC.ActionCollection.collection: "org.kde.collection"
+                onShortcutChanged: print("short changed", shortcut, (typeof shortcut))
                 onTriggered: {
                     print("hello")
                 }
@@ -51,9 +74,9 @@ Kirigami.ApplicationWindow {
             id: actionsDialog
             contentItem: QQC.ScrollView {
                 ListView {
-                    model: AC.ActionsModel {
+                  /*  model: AC.ActionsModel {
                         name: "org.kde.collection"
-                    }
+                    }*/
                     delegate: QQC.ItemDelegate {
                         required property QtObject actionInstance
                         icon.name: actionInstance.icon.name
@@ -68,10 +91,10 @@ Kirigami.ApplicationWindow {
         }
 
         ListView {
-            model: AC.ShortcutsModel {
+            /*model: AC.ShortcutsModel {
                 id: collectionModel
                 name: "org.kde.collection"
-            }
+            }*/
             delegate: RowLayout {
                 Kirigami.Icon {
                     source: model.iconName
