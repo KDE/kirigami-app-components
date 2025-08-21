@@ -101,10 +101,18 @@ class ActionsModel : public QAbstractListModel {
     QML_NAMED_ELEMENT(ActionsModel)
     // TODO: this should be able to have multiple collections? or just a KConcatenateProxyModel?
     Q_PROPERTY(QString collectionName READ collectionName WRITE setCollectionName NOTIFY collectionNameChanged FINAL)
+    Q_PROPERTY(ShownActions shownActions READ shownActions WRITE setShownActions NOTIFY shownActionsChanged FINAL)
 
 public:
+    enum ShownActions {
+        AllActions = 0,
+        ActiveActions
+    };
+    Q_ENUM(ShownActions);
+
     enum Role {
-        ActionInstanceRole = Qt::UserRole + 1
+        ActionDescriptionRole = Qt::UserRole + 1,
+        ActionInstanceRole
     };
 
     explicit ActionsModel(QObject *parent = nullptr);
@@ -112,6 +120,9 @@ public:
 
     QString collectionName() const;
     void setCollectionName(const QString &name);
+
+    ShownActions shownActions() const;
+    void setShownActions(ShownActions shown);
 
     ActionCollection *collection() const;
 
@@ -121,9 +132,11 @@ public:
 
 Q_SIGNALS:
     void collectionNameChanged(const QString &name);
+    void shownActionsChanged(ShownActions shown);
 
 private:
     QPointer<ActionCollection> m_collection;
+    ShownActions m_shownActions = AllActions;
 };
 
 

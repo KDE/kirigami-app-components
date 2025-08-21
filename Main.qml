@@ -33,7 +33,7 @@ Kirigami.ApplicationWindow {
             icon: "edit-copy"
             defaultShortcut: StandardKey.Copy
         }
-        ActionData {
+        ActionData {id: bah
             name: "explore-actions"
             text: "Actions"
             icon: "view-form-action"
@@ -45,7 +45,6 @@ Kirigami.ApplicationWindow {
         id: testPage
         actions: [
             Kirigami.Action {
-                text: "hello"
                 objectName: "hello"
                 AC.ActionCollection.collection: "org.kde.collection"
                 onTriggered: {
@@ -53,7 +52,6 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                text: "Copy"
                 objectName: "copy"
                 AC.ActionCollection.collection: "org.kde.collection"
                 onTriggered: {
@@ -89,7 +87,8 @@ Kirigami.ApplicationWindow {
                         id: actionsList
                         model: KSortFilterProxyModel {
                             sourceModel: AC.ActionsModel {
-                                collection: "org.kde.collection"
+                                collectionName: "org.kde.collection"
+                                shownActions: AC.ActionsModel.ActiveActions
                             }
                             sortRole: Qt.DisplayRole
                             sortCaseSensitivity: Qt.CaseInsensitive
@@ -113,27 +112,29 @@ Kirigami.ApplicationWindow {
         }
 
         ListView {
-            /*model: AC.ShortcutsModel {
-                id: collectionModel
-                name: "org.kde.collection"
-            }*/
+            model: AC.ActionsModel {
+                collectionName: "org.kde.collection"
+                shownActions: AC.ActionsModel.AllActions
+            }
             delegate: RowLayout {
+                required property string display
+                required property AC.ActionData actionDescription
                 Kirigami.Icon {
-                    source: model.iconName
+                    source: actionDescription.icon
                 }
                 QQC.Label {
-                    text: model.display
+                    text: display
                 }
                 QQC.Label {
-                    text: model.defaultShortcut
+                    text: actionDescription.defaultShortcut
                 }
                 KQ.KeySequenceItem {
-                    keySequence: model.shortcut
+                    keySequence: actionDescription.shortcut
                     onKeySequenceModified: {
                         if (keySequence == "") {
-                            keySequence = model.defaultShortcut
+                            keySequence = actionDescription.defaultShortcut
                         }
-                        collectionModel.setShortcut(model.actionName, keySequence);
+                        actionDescription.shortcut = keySequence
                     }
                 }
             }

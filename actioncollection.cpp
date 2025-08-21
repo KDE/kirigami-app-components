@@ -5,14 +5,10 @@
 #include "actioncollection.h"
 #include "actiondata.h"
 
-#include <QSettings>
+#include <QtQml/qqmlinfo.h>
 #include <QKeySequence>
+#include <QQmlContext>
 #include <QQmlProperty>
-
-#include <KConfig>
-#include <KSharedConfig>
-#include <KConfigGroup>
-#include <KLocalizedString>
 
 Q_GLOBAL_STATIC(ActionCollectionStorage, s_actionCollectionStorage)
 
@@ -41,7 +37,6 @@ void ActionCollectionAttached::setCollection(const QString &collection)
 
     if (coll && !name.isEmpty()) {
         ActionData *ad = coll->action(name);
-        qWarning()<<ad;
         if (ad) {
             ad->setAction(parent());
         }
@@ -67,27 +62,7 @@ QString decodeStandardShortcut(const QString &shortcut)
 
 ActionCollection::ActionCollection(QObject *parent)
     : QObject(parent)
-{
-    /*
-    KSharedConfig::Ptr config = KSharedConfig::openConfig(QStringLiteral(":/actionsrc"));
-    KConfigGroup rootCg(config, name);
-    KConfigGroup savedShortcutsCg(KSharedConfig::openConfig(), "Shortcuts");
-
-    int i = 0;
-    for (const QString &grp : rootCg.groupList()) {
-        KConfigGroup cg(&rootCg, grp);
-        ActionData ad;
-        ad.name = grp;
-        ad.text = cg.readEntry("text", i18n("Action %1", i));
-        ad.icon = cg.readEntry("icon", QString());
-        ad.defaultShortcut = cg.readEntry("shortcut", QString());
-        ad.shortcut = savedShortcutsCg.readEntry(grp, ad.defaultShortcut);
-
-        m_actionData[grp] = ad;
-        qWarning() << grp << ad.icon << ad.shortcut;
-        ++i;
-    }*/
-}
+{}
 
 ActionCollection::~ActionCollection()
 {}
@@ -141,7 +116,15 @@ void ActionCollection::actions_append(QQmlListProperty<ActionData> *prop, Action
 
     const QString name = action->name();
     if (coll->m_actionMap.contains(name)) {
-        qmlEngine(coll)->throwError(i18n("Action name %1 not unique.", name));
+        QQmlError error;
+        error.setDescription(QStringLiteral("ActionData name ") % name % QStringLiteral(" is not unique"));
+        error.setMessageType(QtFatalMsg);
+        QQmlContext *context = qmlContext(coll);
+        if (context) {
+            error.setUrl(context->baseUrl());
+        }
+        qmlWarning(nullptr, error);
+        qFatal();
     }
     coll->m_actions.append(action);
     coll->m_actionMap[name] = action;
@@ -256,28 +239,54 @@ void ActionsModel::setCollectionName(const QString &name)
 
     connect(m_collection, &ActionCollection::aboutToAddActionInstance,
             this, [this](int position, QObject *action) {
-                Q_UNUSED(position);
+                if (m_shownActions != ActiveActions) {
+                    return;
+                }
                 beginInsertRows(QModelIndex(), position, position);
             });
     connect(m_collection, &ActionCollection::actionInstanceAdded,
             this, [this](int position, QObject *action) {
-                Q_UNUSED(position);
-                Q_UNUSED(action);
+                if (m_shownActions != ActiveActions) {
+                    return;
+                }
                 endInsertRows();
             });
     connect(m_collection, &ActionCollection::aboutToRemoveActionInstance,
             this, [this](int position, QObject *action) {
-                Q_UNUSED(position);
+                if (m_shownActions != ActiveActions) {
+                    return;
+                }
                 beginRemoveRows(QModelIndex(), position, position);
             });
     connect(m_collection, &ActionCollection::actionInstanceRemoved,
             this, [this](int position, QObject *action) {
                 Q_UNUSED(position);
                 Q_UNUSED(action);
+                if (m_shownActions != ActiveActions) {
+                    return;
+                }
                 endRemoveRows();
             });
 
     Q_EMIT collectionNameChanged(m_collection ? name : QString());
+}
+
+ActionsModel::ShownActions ActionsModel::shownActions() const
+{
+    return m_shownActions;
+}
+
+void ActionsModel::setShownActions(ShownActions shown)
+{
+    if (shown == m_shownActions) {
+        return;
+    }
+
+    beginResetModel();
+    m_shownActions = shown;
+    endResetModel();
+
+    Q_EMIT shownActionsChanged(shown);
 }
 
 ActionCollection *ActionsModel::collection() const
@@ -291,7 +300,10 @@ int ActionsModel::rowCount(const QModelIndex &parent) const
         return 0;
     }
 
-    return m_collection->activeActions().count();
+    if (m_shownActions == ActiveActions) {
+        return m_collection->activeActions().count();
+    }
+    return m_collection->actions().count();
 }
 
 QVariant ActionsModel::data(const QModelIndex &index, int role) const
@@ -302,11 +314,18 @@ QVariant ActionsModel::data(const QModelIndex &index, int role) const
         return {};
     }
 
-    ActionData *action = m_collection->activeActions()[index.row()];
+    ActionData *action;
+    if (m_shownActions == ActiveActions) {
+        action = m_collection->activeActions()[index.row()];
+    } else {
+        action = m_collection->actions()[index.row()];
+    }
 
     switch (role) {
     case Qt::DisplayRole:
         return action->text();
+    case ActionDescriptionRole:
+        return QVariant::fromValue(action);
     case ActionInstanceRole:
         return QVariant::fromValue(action->action());
     }
@@ -318,6 +337,7 @@ QHash<int, QByteArray> ActionsModel::roleNames() const
 {
     return {
         { Qt::DisplayRole, "display" },
+        { ActionDescriptionRole, "actionDescription" },
         { ActionInstanceRole, "actionInstance" }
     };
 }

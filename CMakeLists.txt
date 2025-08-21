@@ -15,14 +15,7 @@ qt_standard_project_setup(REQUIRES 6.5)
 qt_add_executable(appactioncollection
     actioncollection.cpp
     actiondata.cpp
-    #shortcutsmodel.cpp
     main.cpp
-)
-
-qt_add_resources(appactioncollection "resources"
-    PREFIX "/"
-    FILES
-        actionsrc
 )
 
 qt_add_qml_module(appactioncollection
