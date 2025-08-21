@@ -7,6 +7,7 @@ import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
 import actioncollection as AC
 import org.kde.kquickcontrols as KQ
+import org.kde.kitemmodels
 
 Kirigami.ApplicationWindow {
     width: 640
@@ -47,7 +48,6 @@ Kirigami.ApplicationWindow {
                 text: "hello"
                 objectName: "hello"
                 AC.ActionCollection.collection: "org.kde.collection"
-                onShortcutChanged: print("short changed", shortcut, (typeof shortcut))
                 onTriggered: {
                     print("hello")
                 }
@@ -72,18 +72,40 @@ Kirigami.ApplicationWindow {
 
         QQC.Dialog {
             id: actionsDialog
-            contentItem: QQC.ScrollView {
-                ListView {
-                  /*  model: AC.ActionsModel {
-                        name: "org.kde.collection"
-                    }*/
-                    delegate: QQC.ItemDelegate {
-                        required property QtObject actionInstance
-                        icon.name: actionInstance.icon.name
-                        text: actionInstance.text + " " + actionInstance.shortcut
-                        onClicked: {
-                            actionInstance.trigger()
-                            actionsDialog.close()
+            onVisibleChanged: {
+                if (!visible) {
+                    actionSearchField.text = "";
+                }
+            }
+            contentItem: ColumnLayout {
+                implicitHeight: actionsList.contentHeight
+                Kirigami.SearchField {
+                    id: actionSearchField
+                    Layout.fillWidth: true
+                }
+                QQC.ScrollView {
+                    Layout.fillWidth: true
+                    ListView {
+                        id: actionsList
+                        model: KSortFilterProxyModel {
+                            sourceModel: AC.ActionsModel {
+                                collection: "org.kde.collection"
+                            }
+                            sortRole: Qt.DisplayRole
+                            sortCaseSensitivity: Qt.CaseInsensitive
+                            filterRole: Qt.DisplayRole
+                            filterString: actionSearchField.text
+                            filterCaseSensitivity: Qt.CaseInsensitive
+                        }
+                        delegate: QQC.ItemDelegate {
+                            width: actionsList.width
+                            required property QtObject actionInstance
+                            icon.name: actionInstance.icon.name
+                            text: actionInstance.text + " " + actionInstance.shortcut
+                            onClicked: {
+                                actionInstance.trigger()
+                                actionsDialog.close()
+                            }
                         }
                     }
                 }

@@ -73,10 +73,11 @@ public:
 
 Q_SIGNALS:
     void nameChanged(const QString &name);
-    void aboutToAddAction(int position, ActionData *action);
-    void actionAdded(int position, ActionData *action);
-    void aboutToRemoveAction(int position, ActionData *action);
-    void actionRemoved(int position, ActionData *action);
+
+    void aboutToAddActionInstance(int position, ActionData *action);
+    void actionInstanceAdded(int position, ActionData *action);
+    void aboutToRemoveActionInstance(int position, ActionData *action);
+    void actionInstanceRemoved(int position, ActionData *action);
 
 private:
     //TODO: wonder if all of this should be in a qml-only subclass
@@ -89,16 +90,17 @@ private:
     QString m_name;
     QHash<QString, ActionData*> m_actionMap;
     QList<ActionData *>m_actions;
+    QList<ActionData *>m_activeActions;
 };
 
 QML_DECLARE_TYPEINFO(ActionCollectionAttached, QML_HAS_ATTACHED_PROPERTIES)
 
-/*
+
 class ActionsModel : public QAbstractListModel {
     Q_OBJECT
     QML_NAMED_ELEMENT(ActionsModel)
-    // TODO: this should be able to have multiple names and multiple collections
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
+    // TODO: this should be able to have multiple collections? or just a KConcatenateProxyModel?
+    Q_PROPERTY(QString collectionName READ collectionName WRITE setCollectionName NOTIFY collectionNameChanged FINAL)
 
 public:
     enum Role {
@@ -108,8 +110,8 @@ public:
     explicit ActionsModel(QObject *parent = nullptr);
     ~ActionsModel() override;
 
-    QString name() const;
-    void setName(const QString &name);
+    QString collectionName() const;
+    void setCollectionName(const QString &name);
 
     ActionCollection *collection() const;
 
@@ -118,12 +120,12 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 Q_SIGNALS:
-    void nameChanged(const QString &name);
+    void collectionNameChanged(const QString &name);
 
 private:
     QPointer<ActionCollection> m_collection;
 };
-*/
+
 
 // C++ only api TODO: hide all of this behind a single static of ActionCollection
 class ActionCollectionStorage : public QObject

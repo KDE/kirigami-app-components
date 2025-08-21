@@ -151,6 +151,31 @@ void ActionCollection::actions_append(QQmlListProperty<ActionData> *prop, Action
         coll->m_actions.removeAll(action);
     });
 
+
+    if (action->action()) {
+        Q_ASSERT(!coll->m_activeActions.contains(action));
+        const int pos = coll->m_activeActions.count();
+        Q_EMIT coll->aboutToAddActionInstance(pos, action);
+        coll->m_activeActions.append(action);
+        Q_EMIT coll->actionInstanceAdded(pos, action);
+    }
+
+    connect(action, &ActionData::actionChanged, coll, [coll, action] (QObject *actionInstance) {
+        if (actionInstance) {
+            Q_ASSERT(!coll->m_activeActions.contains(action));
+            const int pos = coll->m_activeActions.count();
+            Q_EMIT coll->aboutToAddActionInstance(pos, action);
+            coll->m_activeActions.append(action);
+            Q_EMIT coll->actionInstanceAdded(pos, action);
+        } else {
+            const int pos = coll->m_activeActions.indexOf(action);
+            Q_ASSERT(pos >= 0);
+            Q_EMIT coll->aboutToRemoveActionInstance(pos, action);
+            coll->m_activeActions.removeAll(action);
+            Q_EMIT coll->actionInstanceRemoved(pos, action);
+        }
+    });
+
     action->setParent(coll);
 }
 
@@ -199,7 +224,7 @@ QQmlListProperty<ActionData> ActionCollection::actionsProperty()
 }
 
 /////////////////////////////////
-/*
+
 ActionsModel::ActionsModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -208,7 +233,7 @@ ActionsModel::ActionsModel(QObject *parent)
 ActionsModel::~ActionsModel()
 {}
 
-QString ActionsModel::name() const
+QString ActionsModel::collectionName() const
 {
     if (m_collection) {
         return m_collection->name();
@@ -217,41 +242,45 @@ QString ActionsModel::name() const
     return {};
 }
 
-void ActionsModel::setName(const QString &name)
+void ActionsModel::setCollectionName(const QString &name)
 {
     if (m_collection && name == m_collection->name()) {
         return;
     }
 
+    if (m_collection) {
+        disconnect(m_collection, nullptr, this, nullptr);
+    }
+
     m_collection = ActionCollectionStorage::self()->collection(name);
 
-    connect(m_collection, &ActionCollection::aboutToAddAction,
+    connect(m_collection, &ActionCollection::aboutToAddActionInstance,
             this, [this](int position, QObject *action) {
                 Q_UNUSED(position);
                 beginInsertRows(QModelIndex(), position, position);
             });
-    connect(m_collection, &ActionCollection::actionAdded,
+    connect(m_collection, &ActionCollection::actionInstanceAdded,
             this, [this](int position, QObject *action) {
                 Q_UNUSED(position);
                 Q_UNUSED(action);
                 endInsertRows();
             });
-    connect(m_collection, &ActionCollection::aboutToRemoveAction,
+    connect(m_collection, &ActionCollection::aboutToRemoveActionInstance,
             this, [this](int position, QObject *action) {
                 Q_UNUSED(position);
                 beginRemoveRows(QModelIndex(), position, position);
             });
-    connect(m_collection, &ActionCollection::actionAdded,
+    connect(m_collection, &ActionCollection::actionInstanceRemoved,
             this, [this](int position, QObject *action) {
                 Q_UNUSED(position);
                 Q_UNUSED(action);
                 endRemoveRows();
             });
 
-    Q_EMIT nameChanged(m_collection ? name : QString());
+    Q_EMIT collectionNameChanged(m_collection ? name : QString());
 }
 
-ActionCollection *collModel::collection() const
+ActionCollection *ActionsModel::collection() const
 {
     return m_collection;
 }
@@ -262,7 +291,7 @@ int ActionsModel::rowCount(const QModelIndex &parent) const
         return 0;
     }
 
-    return m_collection->actionDescriptions().count();
+    return m_collection->activeActions().count();
 }
 
 QVariant ActionsModel::data(const QModelIndex &index, int role) const
@@ -273,13 +302,13 @@ QVariant ActionsModel::data(const QModelIndex &index, int role) const
         return {};
     }
 
-    QObject *action = m_collection->actions()[index.row()];
+    ActionData *action = m_collection->activeActions()[index.row()];
 
     switch (role) {
     case Qt::DisplayRole:
-        return action->property("text");
+        return action->text();
     case ActionInstanceRole:
-        return QVariant::fromValue(action);
+        return QVariant::fromValue(action->action());
     }
 
     return {};
@@ -292,7 +321,7 @@ QHash<int, QByteArray> ActionsModel::roleNames() const
         { ActionInstanceRole, "actionInstance" }
     };
 }
-*/
+
 /////////////////////////////////
 
 ActionCollectionStorage::ActionCollectionStorage(QObject *parent)
