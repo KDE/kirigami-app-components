@@ -141,15 +141,15 @@ private:
 
 
 // C++ only api TODO: hide all of this behind a single static of ActionCollection
-class ActionCollectionStorage : public QObject
+class ActionCollections : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ActionCollectionStorage(QObject *parent = nullptr);
-    ~ActionCollectionStorage() override;
+    explicit ActionCollections(QObject *parent = nullptr);
+    ~ActionCollections() override;
 
-    static ActionCollectionStorage *self();
+    static ActionCollections *self();
 
     void insertCollection(ActionCollection *collection);
     ActionCollection *collection(const QString &name);

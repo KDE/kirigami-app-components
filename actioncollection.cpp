@@ -10,7 +10,7 @@
 #include <QQmlContext>
 #include <QQmlProperty>
 
-Q_GLOBAL_STATIC(ActionCollectionStorage, s_actionCollectionStorage)
+Q_GLOBAL_STATIC(ActionCollections, s_actionCollectionStorage)
 
 ActionCollectionAttached::ActionCollectionAttached(QObject *parent)
     : QObject(parent)
@@ -32,7 +32,7 @@ void ActionCollectionAttached::setCollection(const QString &collection)
 
     m_collection = collection;
 
-    ActionCollection *coll = ActionCollectionStorage::self()->collection(collection);
+    ActionCollection *coll = ActionCollections::self()->collection(collection);
     const QString name = parent()->objectName();
 
     if (coll && !name.isEmpty()) {
@@ -80,7 +80,7 @@ void ActionCollection::setName(const QString &name)
 
     m_name = name;
 
-    ActionCollectionStorage::self()->insertCollection(this);
+    ActionCollections::self()->insertCollection(this);
 
     Q_EMIT nameChanged(name);
 }
@@ -235,7 +235,7 @@ void ActionsModel::setCollectionName(const QString &name)
         disconnect(m_collection, nullptr, this, nullptr);
     }
 
-    m_collection = ActionCollectionStorage::self()->collection(name);
+    m_collection = ActionCollections::self()->collection(name);
 
     connect(m_collection, &ActionCollection::aboutToAddActionInstance,
             this, [this](int position, QObject *action) {
@@ -344,24 +344,24 @@ QHash<int, QByteArray> ActionsModel::roleNames() const
 
 /////////////////////////////////
 
-ActionCollectionStorage::ActionCollectionStorage(QObject *parent)
+ActionCollections::ActionCollections(QObject *parent)
     : QObject(parent)
 {}
 
-ActionCollectionStorage::~ActionCollectionStorage()
+ActionCollections::~ActionCollections()
 {}
 
-ActionCollectionStorage *ActionCollectionStorage::self()
+ActionCollections *ActionCollections::self()
 {
     return s_actionCollectionStorage;
 }
 
-void ActionCollectionStorage::insertCollection(ActionCollection *collection)
+void ActionCollections::insertCollection(ActionCollection *collection)
 {
     m_collections.insert(collection->name(), collection);
 }
 
-ActionCollection *ActionCollectionStorage::collection(const QString &name)
+ActionCollection *ActionCollections::collection(const QString &name)
 {
     return m_collections.value(name);
 }
