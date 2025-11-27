@@ -1,0 +1,20 @@
+description: Kirigami addon module to define action collections with configurable shortcuts
+tier: 1
+type: functional
+platforms:
+    - name: Linux
+    - name: FreeBSD
+    - name: Android
+    - name: iOS
+    - name: Windows
+    - name: macOS
+public_lib: true
+deprecated: false
+release: true
+libraries:
+    - cmake: KF6::KirigamiActionCollection
+cmakename: KF6KirigamiActionCollection
+irc: kde-kirigami
+mailinglist: plasma-devel
+group: Frameworks
+subgroup: Tier 2
