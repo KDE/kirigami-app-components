@@ -5,16 +5,17 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.actioncollection as AC
 import org.kde.kitemmodels
 
 Kirigami.SearchDialog {
     id: root
 
     model: KSortFilterProxyModel {
-        sourceModel: ActionModel {
+        sourceModel: AC.ActionModel {
             id: actionModel
             // TODO: this should just fetch all actions of all collections
-            collectionName: "tokodon_actions"
+            collectionName: "org.kde.collection"
             shownActions: ActionModel.ActiveActions
         }
         sortRole: Qt.DisplayRole

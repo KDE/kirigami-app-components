@@ -68,47 +68,9 @@ Kirigami.ApplicationWindow {
             }
         ]
 
-        QQC.Dialog {
+        AC.KQuickCommandBarPage {
             id: actionsDialog
-            onVisibleChanged: {
-                if (!visible) {
-                    actionSearchField.text = "";
-                }
-            }
-            contentItem: ColumnLayout {
-                implicitHeight: actionsList.contentHeight
-                Kirigami.SearchField {
-                    id: actionSearchField
-                    Layout.fillWidth: true
-                }
-                QQC.ScrollView {
-                    Layout.fillWidth: true
-                    ListView {
-                        id: actionsList
-                        model: KSortFilterProxyModel {
-                            sourceModel: AC.ActionModel {
-                                collectionName: "org.kde.collection"
-                                shownActions: AC.ActionsModel.ActiveActions
-                            }
-                            sortRole: Qt.DisplayRole
-                            sortCaseSensitivity: Qt.CaseInsensitive
-                            filterRole: Qt.DisplayRole
-                            filterString: actionSearchField.text
-                            filterCaseSensitivity: Qt.CaseInsensitive
-                        }
-                        delegate: QQC.ItemDelegate {
-                            width: actionsList.width
-                            required property QtObject actionInstance
-                            icon.name: actionInstance.icon.name
-                            text: actionInstance.text + " " + actionInstance.shortcut
-                            onClicked: {
-                                actionInstance.trigger()
-                                actionsDialog.close()
-                            }
-                        }
-                    }
-                }
-            }
+
         }
 
         ListView {
