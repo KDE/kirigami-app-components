@@ -5,7 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
-import actioncollection as AC
+import org.kde.kirigami.actioncollection as AC
 import org.kde.kquickcontrols as KQ
 import org.kde.kitemmodels
 
@@ -21,22 +21,22 @@ Kirigami.ApplicationWindow {
 
     AC.ActionCollection {
         name: "org.kde.collection"
-        ActionData {
+        AC.ActionData {
             name: "hello"
             text: "Hello"
-            icon: "document-send"
+            icon.name: "document-send"
             defaultShortcut: "Ctrl+H"
         }
-        ActionData {
+        AC.ActionData {
             name: "copy"
             text: "Copy"
-            icon: "edit-copy"
+            icon.name: "edit-copy"
             defaultShortcut: StandardKey.Copy
         }
-        ActionData {id: bah
+        AC.ActionData {id: bah
             name: "explore-actions"
             text: "Actions"
-            icon: "view-form-action"
+            icon.name: "view-form-action"
             defaultShortcut: "Ctrl+I"
         }
     }
@@ -86,7 +86,7 @@ Kirigami.ApplicationWindow {
                     ListView {
                         id: actionsList
                         model: KSortFilterProxyModel {
-                            sourceModel: AC.ActionsModel {
+                            sourceModel: AC.ActionModel {
                                 collectionName: "org.kde.collection"
                                 shownActions: AC.ActionsModel.ActiveActions
                             }
@@ -112,7 +112,7 @@ Kirigami.ApplicationWindow {
         }
 
         ListView {
-            model: AC.ActionsModel {
+            model: AC.ActionModel {
                 collectionName: "org.kde.collection"
                 shownActions: AC.ActionsModel.AllActions
             }
