@@ -10,6 +10,7 @@ import org.kde.kquickcontrols as KQ
 import org.kde.kitemmodels
 
 Kirigami.ApplicationWindow {
+    id: root
     width: 640
     height: 480
     visible: true
@@ -33,11 +34,16 @@ Kirigami.ApplicationWindow {
             icon.name: "edit-copy"
             defaultShortcut: StandardKey.Copy
         }
-        AC.ActionData {id: bah
+        AC.ActionData {
             name: "explore-actions"
             text: "Actions"
             icon.name: "view-form-action"
             defaultShortcut: "Ctrl+I"
+        }
+        AC.ActionData {
+            name: "configure-shortcuts"
+            text: "Shortcuts"
+            icon.name: "configure-shortcuts"
         }
     }
 
@@ -65,12 +71,25 @@ Kirigami.ApplicationWindow {
                     print("explore")
                     actionsDialog.open()
                 }
+            },
+            Kirigami.Action {
+                objectName: "configure-shortcuts"
+                AC.ActionCollection.collection: "org.kde.collection"
+                onTriggered: {
+                    print("configure")
+                    root.pageStack.push(shortcutsEditor)
+                }
             }
         ]
 
         AC.KQuickCommandBarPage {
             id: actionsDialog
+        }
 
+        Component {
+            id: shortcutsEditor
+            AC.ShortcutsEditor {
+            }
         }
 
         ListView {
