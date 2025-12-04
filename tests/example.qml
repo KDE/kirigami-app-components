@@ -47,6 +47,20 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    AC.ActionCollection {
+        name: "org.kde.collection2"
+        text: Qt.application.name
+        AC.ActionData {
+            name: "lorem"
+            text: "Lorem Ipsum"
+        }
+        AC.ActionData {
+            name: "dolor"
+            text: "Dolor Sit Amet"
+            defaultShortcut: "Ctrl+D"
+        }
+    }
+
     Kirigami.ScrollablePage {
         id: testPage
         actions: [
@@ -78,6 +92,13 @@ Kirigami.ApplicationWindow {
                 onTriggered: {
                     print("configure")
                     root.pageStack.push(shortcutsEditor)
+                }
+            },
+            Kirigami.Action {
+                objectName: "lorem"
+                AC.ActionCollection.collection: "org.kde.collection2"
+                onTriggered: {
+                    onTriggered: print("Lorem Ipsum triggered")
                 }
             }
         ]

@@ -18,6 +18,7 @@ public:
     qsizetype collectionPosition(ActionCollection *collection) const;
 
     ActionModel *q;
+    QString m_collectionName;
     ActionModel::ShownActions m_shownActions = ActionModel::AllActions;
 };
 
@@ -99,25 +100,19 @@ ActionModel::~ActionModel()
 
 QString ActionModel::collectionName() const
 {
-    if (m_collection) {
-        return m_collection->name();
-    }
-
-    return {};
+    return d->m_collectionName;
 }
 
 void ActionModel::setCollectionName(const QString &name)
 {
     return;
-    if (m_collection && name == m_collection->name()) {
+    if (d->m_collectionName == name) {
         return;
     }
 
-    if (m_collection) {
-        disconnect(m_collection, nullptr, this, nullptr);
-    }
+    d->m_collectionName = name;
 
-    m_collection = ActionCollections::self()->collection(name);
+    Q_EMIT collectionNameChanged(name);
 }
 
 ActionModel::ShownActions ActionModel::shownActions() const
@@ -182,6 +177,9 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
             actualRow -= coll->actions().count();
         }
     }
+    if (!collection) {
+        return {};
+    }
     action = collection->activeActions()[actualRow];
     switch (role) {
     case Qt::DisplayRole:
@@ -190,6 +188,8 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
         return QVariant::fromValue(action);
     case ActionInstanceRole:
         return QVariant::fromValue(action->action());
+    case ActionCollectionRole:
+        return collection->text();
     }
 
     return {};
@@ -197,7 +197,7 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
 
 QHash<int, QByteArray> ActionModel::roleNames() const
 {
-    return {{Qt::DisplayRole, "display"}, {ActionDescriptionRole, "actionDescription"}, {ActionInstanceRole, "actionInstance"}};
+    return {{Qt::DisplayRole, "display"}, {ActionDescriptionRole, "actionDescription"}, {ActionInstanceRole, "actionInstance"}, {ActionCollectionRole, "actionCollection"}};
 }
 
 #include "moc_actionmodel.cpp"

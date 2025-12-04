@@ -250,7 +250,6 @@ void ActionData::setVariantShortcut(const QVariant &shortcut)
 
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
     cg = KConfigGroup(&cg, m_collection->name());
-    qWarning() << "AAA" << shortcut << m_defaultShortcut << (shortcut == m_defaultShortcut);
     if (shortcut != m_defaultShortcut) {
         cg.writeEntry(m_name, variantToKeySequence(shortcut).toString());
     } else {

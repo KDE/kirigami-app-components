@@ -28,8 +28,10 @@ public:
 
     enum Role {
         ActionDescriptionRole = Qt::UserRole + 1,
-        ActionInstanceRole
+        ActionInstanceRole,
+        ActionCollectionRole
     };
+    Q_ENUM(Role);
 
     explicit ActionModel(QObject *parent = nullptr);
     ~ActionModel() override;
@@ -51,7 +53,6 @@ Q_SIGNALS:
     void shownActionsChanged(ShownActions shown);
 
 private:
-    QPointer<ActionCollection> m_collection;
     ActionModelPrivate *d = nullptr;
     friend class ActionModelPrivate;
 };

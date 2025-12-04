@@ -44,6 +44,7 @@ class ActionCollection : public QObject
 
     // FIXME: use just objectName?
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged FINAL)
 
     // Needs a signal? (this only if we want to provide add and remove from c++)
     Q_PROPERTY(QQmlListProperty<ActionData> actions READ actionsProperty CONSTANT FINAL)
@@ -56,6 +57,9 @@ public:
 
     QString name() const;
     void setName(const QString &name);
+
+    QString text() const;
+    void setText(const QString &text);
 
     Q_INVOKABLE ActionData *action(const QString &name);
     // All known actions in this collection
@@ -70,6 +74,7 @@ public:
 
 Q_SIGNALS:
     void nameChanged(const QString &name);
+    void textChanged(const QString &text);
 
     void aboutToAddActionInstance(int position, ActionData *action);
     void actionInstanceAdded(int position, ActionData *action);
@@ -85,6 +90,7 @@ private:
 
     // TODO: dpointer
     QString m_name;
+    QString m_text;
     QHash<QString, ActionData *> m_actionMap;
     QList<ActionData *> m_actions;
     QList<ActionData *> m_activeActions;

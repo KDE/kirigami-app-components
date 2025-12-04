@@ -87,6 +87,28 @@ void ActionCollection::setName(const QString &name)
     Q_EMIT nameChanged(name);
 }
 
+QString ActionCollection::text() const
+{
+    if (m_text.isEmpty()) {
+        return m_name;
+    }
+
+    return m_text;
+}
+
+void ActionCollection::setText(const QString &text)
+{
+    if (text == m_text) {
+        return;
+    }
+
+    m_text = text;
+
+    ActionCollections::self()->insertCollection(this);
+
+    Q_EMIT textChanged(text);
+}
+
 ActionData *ActionCollection::action(const QString &name)
 {
     return m_actionMap.value(name);
