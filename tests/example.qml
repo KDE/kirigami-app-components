@@ -61,6 +61,10 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    AC.StandardActionCollection {
+
+    }
+
     Kirigami.ScrollablePage {
         id: testPage
         actions: [
@@ -99,6 +103,13 @@ Kirigami.ApplicationWindow {
                 AC.ActionCollection.collection: "org.kde.collection2"
                 onTriggered: {
                     onTriggered: print("Lorem Ipsum triggered")
+                }
+            },
+            Kirigami.Action {
+                objectName: "settings"
+                AC.ActionCollection.collection: "org.kde.standardactions"
+                onTriggered: {
+                    onTriggered: print("Settings triggered")
                 }
             }
         ]

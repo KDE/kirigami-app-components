@@ -4,6 +4,9 @@
 #include "actioncollection.h"
 #include "actiondata.h"
 
+#include <KLocalizedString>
+#include <KStandardShortcut>
+#include <QCoreApplication>
 #include <QKeySequence>
 #include <QQmlContext>
 #include <QQmlProperty>
@@ -112,6 +115,51 @@ void ActionCollection::setText(const QString &text)
 ActionData *ActionCollection::action(const QString &name)
 {
     return m_actionMap.value(name);
+}
+
+void ActionCollection::insertAction(ActionData *action)
+{
+    if (!action) {
+        return;
+    }
+    const QString name = action->name();
+    if (m_actionMap.contains(name)) {
+        return;
+    }
+
+    m_actions.append(action);
+    m_actionMap[name] = action;
+
+    connect(action, &QObject::destroyed, this, [this, action, name]() {
+        m_actionMap.remove(name);
+        m_actions.removeAll(action);
+    });
+
+    if (action->action()) {
+        Q_ASSERT(!m_activeActions.contains(action));
+        const int pos = m_activeActions.count();
+        Q_EMIT aboutToAddActionInstance(pos, action);
+        m_activeActions.append(action);
+        Q_EMIT actionInstanceAdded(pos, action);
+    }
+
+    connect(action, &ActionData::actionChanged, this, [this, action](QObject *actionInstance) {
+        if (actionInstance) {
+            Q_ASSERT(!m_activeActions.contains(action));
+            const int pos = m_activeActions.count();
+            Q_EMIT aboutToAddActionInstance(pos, action);
+            m_activeActions.append(action);
+            Q_EMIT actionInstanceAdded(pos, action);
+        } else {
+            const int pos = m_activeActions.indexOf(action);
+            Q_ASSERT(pos >= 0);
+            Q_EMIT aboutToRemoveActionInstance(pos, action);
+            m_activeActions.removeAll(action);
+            Q_EMIT actionInstanceRemoved(pos, action);
+        }
+    });
+
+    action->setParent(this);
 }
 
 QList<ActionData *> ActionCollection::actions() const
@@ -261,5 +309,31 @@ QList<ActionCollection *> ActionCollections::collections()
 {
     return m_collections.values();
 }
+
+
+
+StandardActionCollection::StandardActionCollection(QObject *parent)
+    : ActionCollection(parent)
+{
+    setName(QStringLiteral("org.kde.standardactions"));
+    ActionData *a = new ActionData();
+    a->setName(QStringLiteral("settings"));
+    a->icon()->setName(QStringLiteral("settings-configure"));
+    a->setText(i18nc("Configure [application name]", "Configure %1…", QCoreApplication::applicationName()));
+    auto shortcuts = KStandardShortcut::shortcut(KStandardShortcut::Preferences);
+    if (!shortcuts.isEmpty()) {
+        a->setShortcut(shortcuts.first());
+    }
+    shortcuts = KStandardShortcut::hardcodedDefaultShortcut(KStandardShortcut::Preferences);
+    if (!shortcuts.isEmpty()) {
+        a->setDefaultShortcut(shortcuts.first());
+    }
+    insertAction(a);
+}
+
+StandardActionCollection::~StandardActionCollection()
+{}
+
+
 
 #include "moc_actioncollection.cpp"

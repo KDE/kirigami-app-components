@@ -36,7 +36,7 @@ set_target_properties(KirigamiActionCollection PROPERTIES
 
 target_include_directories(KirigamiActionCollection PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-target_link_libraries(KirigamiActionCollection PRIVATE Qt6::Quick Qt6::QuickControls2 KF6::ConfigCore)
+target_link_libraries(KirigamiActionCollection PRIVATE Qt6::Quick Qt6::QuickControls2 KF6::ConfigCore KF6::ConfigGui KF6::I18n)
 
 ecm_finalize_qml_module(KirigamiActionCollection EXPORT KirigamiTargets)
 

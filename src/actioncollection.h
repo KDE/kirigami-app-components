@@ -62,6 +62,7 @@ public:
     void setText(const QString &text);
 
     Q_INVOKABLE ActionData *action(const QString &name);
+    void insertAction(ActionData *action);
     // All known actions in this collection
     QList<ActionData *> actions() const;
     // All actions in this collections that have an active and working Kirigami.Action instance in this moment
@@ -120,6 +121,16 @@ Q_SIGNALS:
 private:
     // QMap as we want a deterministic order
     QMap<QString, ActionCollection *> m_collections;
+};
+
+class StandardActionCollection: public ActionCollection {
+    Q_OBJECT
+    QML_ELEMENT
+
+public:
+    StandardActionCollection(QObject *parent = nullptr);
+    ~StandardActionCollection();
+
 };
 
 #endif
