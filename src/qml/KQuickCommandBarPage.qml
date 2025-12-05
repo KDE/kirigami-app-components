@@ -12,7 +12,6 @@ import org.kde.kitemmodels
 Kirigami.SearchDialog {
     id: root
 
-    width: Math.min(implicitWidth, Window.window.width - Kirigami.Units.largeSpacing * 2)
     model: KSortFilterProxyModel {
         sourceModel: AC.ActionModel {
             id: actionModel

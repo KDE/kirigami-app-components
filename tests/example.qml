@@ -62,12 +62,43 @@ Kirigami.ApplicationWindow {
     }
 
     AC.StandardActionCollection {
-
+        id: standardActions
     }
+
+
 
     Kirigami.ScrollablePage {
         id: testPage
         actions: [
+            Kirigami.Action {
+                objectName: "Preferences"
+                AC.ActionCollection.collection: "org.kde.standardactions"
+                onTriggered: {
+
+                }
+            },
+            Kirigami.Action {
+                objectName: "ReportBug"
+                AC.ActionCollection.collection: "org.kde.standardactions"
+                onTriggered: Qt.openUrlExternally("https://bugs.kde.org/enter_bug.cgi?format=guided&product=" + Qt.application.name + "&version=" + AboutData.version)
+            },
+            Kirigami.Action {
+                objectName: "Donate"
+                AC.ActionCollection.collection: "org.kde.standardactions"
+                onTriggered: Qt.openUrlExternally("https://kde.org/donate/?app=" + Qt.application.name)
+            },
+            Kirigami.Action {
+                objectName: "AboutApp"
+                AC.ActionCollection.collection: "org.kde.standardactions"
+                onTriggered: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"))
+            },
+            Kirigami.Action {
+                objectName: "AboutKDE"
+                AC.ActionCollection.collection: "org.kde.standardactions"
+                onTriggered: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"))
+            }
+        ]
+        /*[
             Kirigami.Action {
                 objectName: "hello"
                 AC.ActionCollection.collection: "org.kde.collection"
@@ -113,7 +144,7 @@ Kirigami.ApplicationWindow {
                     onTriggered: print("Settings triggered")
                 }
             }
-        ]
+        ]*/
 
         AC.KQuickCommandBarPage {
             id: actionsDialog
