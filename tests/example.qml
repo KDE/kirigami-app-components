@@ -109,6 +109,7 @@ Kirigami.ApplicationWindow {
                 objectName: "settings"
                 AC.ActionCollection.collection: "org.kde.standardactions"
                 onTriggered: {
+                    print(this, text)
                     onTriggered: print("Settings triggered")
                 }
             }
@@ -124,7 +125,7 @@ Kirigami.ApplicationWindow {
             }
         }
 
-        ListView {
+      /*  ListView {
             model: AC.ActionModel {
                 collectionName: "org.kde.collection"
                 shownActions: AC.ActionsModel.AllActions
@@ -151,6 +152,6 @@ Kirigami.ApplicationWindow {
                     }
                 }
             }
-        }
+        }*/
     }
 }

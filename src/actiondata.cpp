@@ -315,12 +315,18 @@ void ActionData::setAction(QObject *action)
 void ActionData::syncDown()
 {
     if (m_action) {
-        m_action->setProperty("text", text());
-        // QQmlProperty property(m_action, QStringLiteral("icon.name"));
-        // property.write(m_icon);
-        m_action->setProperty("shortcut", m_shortcut);
-        m_action->setProperty("checkable", isCheckable());
-        m_action->setProperty("checked", isChecked());
+        QQmlProperty property(m_action, QStringLiteral("text"));
+        property.write(text());
+        property = QQmlProperty(m_action, QStringLiteral("icon.name"));
+        property.write(m_icon->name());
+        property = QQmlProperty(m_action, QStringLiteral("icon.source"));
+        property.write(m_icon->source());
+        property = QQmlProperty(m_action, QStringLiteral("shortcut"));
+        property.write(m_shortcut);
+        property = QQmlProperty(m_action, QStringLiteral("checkable"));
+        property.write(isCheckable());
+        property = QQmlProperty(m_action, QStringLiteral("checked"));
+        property.write(isChecked());
     }
 }
 
