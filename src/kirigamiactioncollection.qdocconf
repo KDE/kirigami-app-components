@@ -1,0 +1,34 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = KirigamiActionCollection
+
+description = Action Collections
+
+documentationinheaders = true
+
+headerdirs += .
+sourcedirs += .
+examples += ../examples/snippets
+
+navigation.landingpage = "KirigamiActionCollection"
+
+depends = kde qtcore qtquick qtquickcontrols KirigamiActionCollectioncontrols
+
+imagedirs = ../docs/pics \
+            ../examples/snippets
+
+qhp.projects            = KirigamiActionCollection
+
+qhp.KirigamiActionCollection.file                = KirigamiActionCollection.qhp
+qhp.KirigamiActionCollection.namespace           = org.kde.KirigamiActionCollection.$QT_VERSION_TAG
+qhp.KirigamiActionCollection.virtualFolder       = KirigamiActionCollection
+qhp.KirigamiActionCollection.indexTitle          = KirigamiActionCollection
+qhp.KirigamiActionCollection.indexRoot           =
+
+qhp.KirigamiActionCollection.subprojects         = qmltypes
+qhp.KirigamiActionCollection.subprojects.qmltypes.title = QML Types
+qhp.KirigamiActionCollection.subprojects.qmltypes.indexTitle = KirigamiActionCollection QML Types
+qhp.KirigamiActionCollection.subprojects.qmltypes.selectors = qmltype
+qhp.KirigamiActionCollection.subprojects.qmltypes.sortPages = true
+
+tagfile = KirigamiActionCollection.tags

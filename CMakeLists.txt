@@ -1,37 +1,80 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(actioncollection VERSION 0.1 LANGUAGES CXX)
-set(KF_DEP_VERSION "6.17.0") # handled by release scripts
+set(KF_VERSION "6.21.0") # handled by release scripts
+set(KF_DEP_VERSION "6.20.0") # handled by release scripts
 
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_AUTOMOC ON)
-set(AUTOMOC_MOC_OPTIONS -Muri=org.kde.kirigami.actioncollection)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-find_package(ECM 6.17.0 REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+project(KirigamiActionCollection VERSION ${KF_VERSION})
 
 include(FeatureSummary)
-include(KDEInstallDirs)
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Widgets QuickControls2)
-find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS Config KirigamiPlatform I18n)
-
+find_package(ECM 6.20.0 NO_MODULE)
 set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://commits.kde.org/extra-cmake-modules")
+feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
-include(ECMGenerateExportHeader)
-include(ECMSetupVersion)
-include(ECMGenerateHeaders)
-include(CMakePackageConfigHelpers)
-include(ECMPoQmTools)
-include(ECMFindQmlModule)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake )
+
 include(KDEInstallDirs)
+include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 include(KDEGitCommitHooks)
+
+include(ECMGenerateExportHeader)
+
+include(ECMAddTests)
+include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
-include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
-include(KDEPackageAppTemplates)
 include(ECMQmlModule)
 include(ECMDeprecationSettings)
 include(ECMGenerateQDoc)
 
+option(BUILD_EXAMPLES "Build example applications" OFF)
+
+set(REQUIRED_QT_VERSION 6.8.0)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Widgets QuickControls2)
+find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS Config KirigamiPlatform I18n)
+
+set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
+
+ecm_set_disabled_deprecation_versions(
+    QT 6.10.0
+)
+
+ecm_setup_version(
+    PROJECT
+    VARIABLE_PREFIX KF6KirigamiActionCollection
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigamiactioncollection_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfigVersion.cmake"
+    SOVERSION 1
+)
 
 add_subdirectory(src)
+
+# TODO
+# if(BUILD_EXAMPLES)
+#     add_subdirectory(examples)
+# endif()
+#
+# if(BUILD_TESTING)
+#     add_subdirectory(autotests)
+# endif()
+
+configure_package_config_file(
+    "KF6KirigamiActionCollectionConfig.cmake.in"
+    "KF6KirigamiActionCollectionConfig.cmake"
+    INSTALL_DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection
+)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfigVersion.cmake"
+    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection
+    COMPONENT Devel
+)
+
+install(EXPORT KF6KirigamiActionCollectionTargets DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection"
+        FILE KF6KirigamiActionCollectionTargets.cmake NAMESPACE KF6:: COMPONENT Devel)
+
+include(ECMFeatureSummary)
+ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+
