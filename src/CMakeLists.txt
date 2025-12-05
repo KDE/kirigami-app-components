@@ -16,6 +16,7 @@ target_sources(KirigamiActionCollection PRIVATE
     actioncollection.cpp
     actiondata.cpp
     actionmodel.cpp
+    standardactioncollection.cpp
 )
 
 ecm_qt_declare_logging_category(KirigamiActionCollection

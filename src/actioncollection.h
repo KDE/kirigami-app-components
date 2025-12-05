@@ -123,14 +123,4 @@ private:
     QMap<QString, ActionCollection *> m_collections;
 };
 
-class StandardActionCollection: public ActionCollection {
-    Q_OBJECT
-    QML_ELEMENT
-
-public:
-    StandardActionCollection(QObject *parent = nullptr);
-    ~StandardActionCollection();
-
-};
-
 #endif
