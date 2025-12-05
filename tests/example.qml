@@ -106,7 +106,7 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                objectName: "settings"
+                objectName: "Preferences"
                 AC.ActionCollection.collection: "org.kde.standardactions"
                 onTriggered: {
                     print(this, text)
