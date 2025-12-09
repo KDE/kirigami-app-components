@@ -16,6 +16,8 @@ QString iconName(KStandardShortcut::StandardShortcut id)
     switch (id) {
     case KStandardShortcut::Preferences:
         return u"settings-configure"_s;
+    case KStandardShortcut::KeyBindings:
+        return u"configure-shortcuts"_s;
     case KStandardShortcut::ReportBug:
         return u"tools-report-bug"_s;
     case KStandardShortcut::Donate:
@@ -34,15 +36,26 @@ QString iconName(KStandardShortcut::StandardShortcut id)
 StandardActionCollection::StandardActionCollection(QObject *parent)
     : ActionCollection(parent)
 {
-    setName(QStringLiteral("org.kde.standardactions"));
+    setName(u"org.kde.standardactions"_s);
+
+    ActionData *a = new ActionData(this);
+    a->classBegin();
+    a->setName(u"FindAction"_s);
+    a->setText(i18nc("Opens the actions search dialog", "Find Action…"));
+    a->icon()->setName(u"search"_s);
+    a->setDefaultShortcut(QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_I));
+    insertAction(a);
+    a->componentComplete();
 
     const QList<KStandardShortcut::StandardShortcut> standardShortcuts = {KStandardShortcut::Preferences,
+                                                                          KStandardShortcut::KeyBindings,
                                                                           KStandardShortcut::ReportBug,
                                                                           KStandardShortcut::Donate,
                                                                           KStandardShortcut::AboutApp,
                                                                           KStandardShortcut::AboutKDE};
     for (const auto id : standardShortcuts) {
-        ActionData *a = new ActionData();
+        ActionData *a = new ActionData(this);
+        a->classBegin();
         a->setName(KStandardShortcut::name(id));
         a->icon()->setName(iconName(id));
         a->setText(KStandardShortcut::label(id));
@@ -55,15 +68,16 @@ StandardActionCollection::StandardActionCollection(QObject *parent)
             a->setDefaultShortcut(shortcuts.first());
         }
         insertAction(a);
+        a->componentComplete();
     }
 
-    auto *act = action(QStringLiteral("Preferences"));
-    Q_ASSERT(act);
-    act->setText(i18nc("Configure [application name]", "Configure %1…", QGuiApplication::applicationDisplayName()));
+    a = action(u"Preferences"_s);
+    Q_ASSERT(a);
+    a->setText(i18nc("Configure [application name]", "Configure %1…", QGuiApplication::applicationDisplayName()));
 
-    act = action(QStringLiteral("AboutApp"));
-    Q_ASSERT(act);
-    act->setText(i18nc("About [application name]", "About %1…", QGuiApplication::applicationDisplayName()));
+    a = action(u"AboutApp"_s);
+    Q_ASSERT(a);
+    a->setText(i18nc("About [application name]", "About %1…", QGuiApplication::applicationDisplayName()));
 }
 
 StandardActionCollection::~StandardActionCollection()

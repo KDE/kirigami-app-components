@@ -358,6 +358,7 @@ void ActionData::componentComplete()
     if (!m_collection) {
         return;
     }
+    qWarning() << "m_collection";
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
     cg = KConfigGroup(&cg, m_collection->name());
     QString shortcut = variantToKeySequence(m_defaultShortcut).toString();

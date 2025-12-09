@@ -21,7 +21,7 @@ Kirigami.ApplicationWindow {
     }
 
     AC.ActionCollection {
-        name: "org.kde.collection"
+        name: "org.kde.examplecollection"
         AC.ActionData {
             name: "hello"
             text: "Hello"
@@ -48,7 +48,7 @@ Kirigami.ApplicationWindow {
     }
 
     AC.ActionCollection {
-        name: "org.kde.collection2"
+        name: "org.kde.examplecollection2"
         text: Qt.application.name
         AC.ActionData {
             name: "lorem"
@@ -71,28 +71,67 @@ Kirigami.ApplicationWindow {
         id: testPage
         actions: [
             Kirigami.Action {
-                objectName: "Preferences"
-                AC.ActionCollection.collection: "org.kde.standardactions"
+                objectName: "hello"
+                AC.ActionCollection.collection: "org.kde.examplecollection"
                 onTriggered: {
-
+                    print("hello triggered")
                 }
             },
             Kirigami.Action {
+                objectName: "copy"
+                AC.ActionCollection.collection: "org.kde.examplecollection"
+                onTriggered: {
+                    print("copy triggered")
+                }
+            },
+            Kirigami.Action {
+                displayHint: Kirigami.DisplayHint.AlwaysHide
+                objectName: "Preferences"
+                AC.ActionCollection.collection: "org.kde.standardactions"
+                onTriggered: {
+                    print("configure triggered")
+                }
+            },
+            Kirigami.Action {
+                displayHint: Kirigami.DisplayHint.AlwaysHide
+                objectName: "KeyBindings"
+                AC.ActionCollection.collection: "org.kde.standardactions"
+                onTriggered: {
+                    root.pageStack.pushDialogLayer(shortcutsEditor)
+                }
+            },
+            Kirigami.Action {
+                displayHint: Kirigami.DisplayHint.AlwaysHide
+                objectName: "FindAction"
+                AC.ActionCollection.collection: "org.kde.standardactions"
+                onTriggered: {
+                    actionsDialog.open()
+                }
+            },
+            Kirigami.Action {
+                displayHint: Kirigami.DisplayHint.AlwaysHide
+                separator: true
+            },
+            Kirigami.Action {
+                displayHint: Kirigami.DisplayHint.AlwaysHide
                 objectName: "ReportBug"
                 AC.ActionCollection.collection: "org.kde.standardactions"
                 onTriggered: Qt.openUrlExternally("https://bugs.kde.org/enter_bug.cgi?format=guided&product=" + Qt.application.name + "&version=" + AboutData.version)
             },
             Kirigami.Action {
+                displayHint: Kirigami.DisplayHint.AlwaysHide
                 objectName: "Donate"
                 AC.ActionCollection.collection: "org.kde.standardactions"
                 onTriggered: Qt.openUrlExternally("https://kde.org/donate/?app=" + Qt.application.name)
             },
             Kirigami.Action {
+                displayHint: Kirigami.DisplayHint.AlwaysHide
                 objectName: "AboutApp"
                 AC.ActionCollection.collection: "org.kde.standardactions"
                 onTriggered: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"))
             },
             Kirigami.Action {
+                displayHint: Kirigami.DisplayHint.AlwaysHide
                 objectName: "AboutKDE"
                 AC.ActionCollection.collection: "org.kde.standardactions"
                 onTriggered: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"))
@@ -101,21 +140,21 @@ Kirigami.ApplicationWindow {
         /*[
             Kirigami.Action {
                 objectName: "hello"
-                AC.ActionCollection.collection: "org.kde.collection"
+                AC.ActionCollection.collection: "org.kde.examplecollection"
                 onTriggered: {
                     print("hello")
                 }
             },
             Kirigami.Action {
                 objectName: "copy"
-                AC.ActionCollection.collection: "org.kde.collection"
+                AC.ActionCollection.collection: "org.kde.examplecollection"
                 onTriggered: {
                     print("copy")
                 }
             },
             Kirigami.Action {
                 objectName: "explore-actions"
-                AC.ActionCollection.collection: "org.kde.collection"
+                AC.ActionCollection.collection: "org.kde.examplecollection"
                 onTriggered: {
                     print("explore")
                     actionsDialog.open()
@@ -123,7 +162,7 @@ Kirigami.ApplicationWindow {
             },
             Kirigami.Action {
                 objectName: "configure-shortcuts"
-                AC.ActionCollection.collection: "org.kde.collection"
+                AC.ActionCollection.collection: "org.kde.examplecollection"
                 onTriggered: {
                     print("configure")
                     root.pageStack.push(shortcutsEditor)
@@ -131,7 +170,7 @@ Kirigami.ApplicationWindow {
             },
             Kirigami.Action {
                 objectName: "lorem"
-                AC.ActionCollection.collection: "org.kde.collection2"
+                AC.ActionCollection.collection: "org.kde.examplecollection2"
                 onTriggered: {
                     onTriggered: print("Lorem Ipsum triggered")
                 }
@@ -158,7 +197,7 @@ Kirigami.ApplicationWindow {
 
       /*  ListView {
             model: AC.ActionModel {
-                collectionName: "org.kde.collection"
+                collectionName: "org.kde.examplecollection"
                 shownActions: AC.ActionsModel.AllActions
             }
             delegate: RowLayout {
