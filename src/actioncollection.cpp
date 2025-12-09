@@ -3,6 +3,7 @@
 
 #include "actioncollection.h"
 #include "actiondata.h"
+#include "standardactioncollection.h"
 
 #include <KLocalizedString>
 #include <KStandardShortcut>
@@ -11,6 +12,8 @@
 #include <QQmlContext>
 #include <QQmlProperty>
 #include <QtQml/qqmlinfo.h>
+
+using namespace Qt::StringLiterals;
 
 Q_GLOBAL_STATIC(ActionCollections, s_actionCollectionStorage)
 
@@ -106,8 +109,6 @@ void ActionCollection::setText(const QString &text)
     }
 
     m_text = text;
-
-    ActionCollections::self()->insertCollection(this);
 
     Q_EMIT textChanged(text);
 }
@@ -290,6 +291,25 @@ ActionCollections *ActionCollections::self()
 
 void ActionCollections::insertCollection(ActionCollection *collection)
 {
+    if (m_collections.contains(collection->name())) {
+        QQmlError error;
+        error.setDescription(QStringLiteral("Error: collection name %1 already present.").arg(collection->name()));
+        error.setMessageType(QtFatalMsg);
+        QQmlContext *context = qmlContext(this);
+        if (context) {
+            error.setUrl(context->baseUrl());
+        }
+        qmlWarning(nullptr, error);
+        qFatal();
+    }
+
+    // This can happen when renaming a collection
+    const QStringList keys = m_collections.keys(collection);
+    Q_ASSERT(keys.length() < 2);
+    if (keys.length() > 0) {
+        m_collections.remove(keys.first());
+    }
+
     m_collections.insert(collection->name(), collection);
 
     connect(collection, &QObject::destroyed, this, [this, collection]() {
