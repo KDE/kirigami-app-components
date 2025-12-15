@@ -12,6 +12,8 @@ import org.kde.kitemmodels
 Kirigami.SearchDialog {
     id: root
 
+    parent: QQC.Overlay
+
     model: KSortFilterProxyModel {
         sourceModel: AC.ActionModel {
             id: actionModel
