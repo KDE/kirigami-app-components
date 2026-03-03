@@ -20,6 +20,11 @@ Kirigami.ApplicationWindow {
         initialPage: testPage
     }
 
+    AC.ActionCollectionManager {
+        id: manager
+        pageRow: pageStack
+    }
+
     AC.ActionCollection {
         name: "org.kde.examplecollection"
         AC.ActionData {
@@ -60,10 +65,10 @@ Kirigami.ApplicationWindow {
             defaultShortcut: "Ctrl+D"
         }
     }
-
+/*
     AC.StandardActionCollection {
         id: standardActions
-    }
+    }*/
 
 
 
@@ -96,17 +101,17 @@ Kirigami.ApplicationWindow {
                 displayHint: Kirigami.DisplayHint.AlwaysHide
                 objectName: "KeyBindings"
                 AC.ActionCollection.collection: "org.kde.standardactions"
-                onTriggered: {
+               /* onTriggered: {
                     root.pageStack.pushDialogLayer(shortcutsEditor)
-                }
+                }*/
             },
             Kirigami.Action {
                 displayHint: Kirigami.DisplayHint.AlwaysHide
                 objectName: "FindAction"
                 AC.ActionCollection.collection: "org.kde.standardactions"
-                onTriggered: {
+             /*   onTriggered: {
                     actionsDialog.open()
-                }
+                }*/
             },
             Kirigami.Action {
                 displayHint: Kirigami.DisplayHint.AlwaysHide

@@ -3,7 +3,7 @@
 
 import QtQuick
 import QtQuick.Window
-import QtQuick.Controls as QQC2
+import QtQuick.Controls as QQC
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.actioncollection as AC
@@ -11,8 +11,6 @@ import org.kde.kitemmodels
 
 Kirigami.SearchDialog {
     id: root
-
-    parent: QQC.Overlay
 
     model: KSortFilterProxyModel {
         sourceModel: AC.ActionModel {
@@ -45,7 +43,7 @@ Kirigami.SearchDialog {
         }
     }
 
-    delegate: QQC2.ItemDelegate {
+    delegate: QQC.ItemDelegate {
         id: commandDelegate
 
         width: ListView.view.width
@@ -65,12 +63,12 @@ Kirigami.SearchDialog {
                 source: actionDescription.icon.name || actionDescription.icon.source
             }
 
-            QQC2.Label {
+            QQC.Label {
                 Layout.fillWidth: true
                 text: actionDescription.text
             }
 
-            QQC2.Label {
+            QQC.Label {
                 text: actionDescription?.shortcut ?? ""
                 color: Kirigami.Theme.disabledTextColor
             }
