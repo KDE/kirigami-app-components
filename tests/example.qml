@@ -65,11 +65,6 @@ Kirigami.ApplicationWindow {
             defaultShortcut: "Ctrl+D"
         }
     }
-/*
-    AC.StandardActionCollection {
-        id: standardActions
-    }*/
-
 
 
     Kirigami.ScrollablePage {
@@ -101,17 +96,11 @@ Kirigami.ApplicationWindow {
                 displayHint: Kirigami.DisplayHint.AlwaysHide
                 objectName: "KeyBindings"
                 AC.ActionCollection.collection: "org.kde.standardactions"
-               /* onTriggered: {
-                    root.pageStack.pushDialogLayer(shortcutsEditor)
-                }*/
             },
             Kirigami.Action {
                 displayHint: Kirigami.DisplayHint.AlwaysHide
                 objectName: "FindAction"
                 AC.ActionCollection.collection: "org.kde.standardactions"
-             /*   onTriggered: {
-                    actionsDialog.open()
-                }*/
             },
             Kirigami.Action {
                 displayHint: Kirigami.DisplayHint.AlwaysHide
@@ -142,53 +131,6 @@ Kirigami.ApplicationWindow {
                 onTriggered: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"))
             }
         ]
-        /*[
-            Kirigami.Action {
-                objectName: "hello"
-                AC.ActionCollection.collection: "org.kde.examplecollection"
-                onTriggered: {
-                    print("hello")
-                }
-            },
-            Kirigami.Action {
-                objectName: "copy"
-                AC.ActionCollection.collection: "org.kde.examplecollection"
-                onTriggered: {
-                    print("copy")
-                }
-            },
-            Kirigami.Action {
-                objectName: "explore-actions"
-                AC.ActionCollection.collection: "org.kde.examplecollection"
-                onTriggered: {
-                    print("explore")
-                    actionsDialog.open()
-                }
-            },
-            Kirigami.Action {
-                objectName: "configure-shortcuts"
-                AC.ActionCollection.collection: "org.kde.examplecollection"
-                onTriggered: {
-                    print("configure")
-                    root.pageStack.push(shortcutsEditor)
-                }
-            },
-            Kirigami.Action {
-                objectName: "lorem"
-                AC.ActionCollection.collection: "org.kde.examplecollection2"
-                onTriggered: {
-                    onTriggered: print("Lorem Ipsum triggered")
-                }
-            },
-            Kirigami.Action {
-                objectName: "Preferences"
-                AC.ActionCollection.collection: "org.kde.standardactions"
-                onTriggered: {
-                    print(this, text)
-                    onTriggered: print("Settings triggered")
-                }
-            }
-        ]*/
 
         AC.KQuickCommandBarPage {
             id: actionsDialog
@@ -199,34 +141,5 @@ Kirigami.ApplicationWindow {
             AC.ShortcutsEditor {
             }
         }
-
-      /*  ListView {
-            model: AC.ActionModel {
-                collectionName: "org.kde.examplecollection"
-                shownActions: AC.ActionsModel.AllActions
-            }
-            delegate: RowLayout {
-                required property string display
-                required property AC.ActionData actionDescription
-                Kirigami.Icon {
-                    source: actionDescription.icon
-                }
-                QQC.Label {
-                    text: display
-                }
-                QQC.Label {
-                    text: actionDescription.defaultShortcut
-                }
-                KQ.KeySequenceItem {
-                    keySequence: actionDescription.shortcut
-                    onKeySequenceModified: {
-                        if (keySequence == "") {
-                            keySequence = actionDescription.defaultShortcut
-                        }
-                        actionDescription.shortcut = keySequence
-                    }
-                }
-            }
-        }*/
     }
 }
