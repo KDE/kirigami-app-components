@@ -43,6 +43,16 @@ Kirigami.ScrollablePage {
             filterCaseSensitivity: Qt.CaseInsensitive
         }
 
+        section {
+            property: "actionCollection"
+            criteria: ViewSection.FullString
+            delegate: Kirigami.ListSectionHeader {
+                required property string section
+                text: section
+                width: ListView.view.width
+            }
+        }
+
         delegate: QQC2.ItemDelegate {
             id: shortcutDelegate
 

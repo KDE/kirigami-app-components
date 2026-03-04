@@ -15,8 +15,6 @@ Kirigami.SearchDialog {
     model: KSortFilterProxyModel {
         sourceModel: AC.ActionModel {
             id: actionModel
-            // TODO: this should just fetch all actions of all collections
-            collectionName: "org.kde.collection"
             shownActions: ActionModel.ActiveActions
         }
 

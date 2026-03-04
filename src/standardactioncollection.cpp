@@ -20,12 +20,17 @@ QString iconName(KStandardShortcut::StandardShortcut id)
         return u"configure-shortcuts"_s;
     case KStandardShortcut::ReportBug:
         return u"tools-report-bug"_s;
-    case KStandardShortcut::Donate:
+    case KStandardShortcut::Donate: {
+        const QString currencyCode = QLocale().currencySymbol(QLocale::CurrencyIsoCode).toLower();
+        if (!currencyCode.isEmpty()) {
+            return QStringLiteral("help-donate-%1").arg(currencyCode);
+        }
         return u"help-donate"_s;
+    }
     case KStandardShortcut::AboutApp:
         return QGuiApplication::windowIcon().name().isEmpty() ? u"help-about"_s : QGuiApplication::windowIcon().name();
     case KStandardShortcut::AboutKDE:
-        return u"settings-configure"_s;
+        return u"kde"_s;
     default:
         return {};
     }
@@ -37,6 +42,7 @@ StandardActionCollection::StandardActionCollection(QObject *parent)
     : ActionCollection(parent)
 {
     setName(u"org.kde.standardactions"_s);
+    setText(QGuiApplication::applicationDisplayName());
 
     ActionData *a = new ActionData(this);
     a->classBegin();
