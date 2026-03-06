@@ -210,26 +210,6 @@ void ActionData::setName(const QString &name)
     Q_EMIT nameChanged(name);
 }
 
-// QString ActionData::text() const
-// {
-//     return m_text;
-// }
-//
-// void ActionData::setText(const QString &text)
-// {
-//     if (m_text == text) {
-//         return;
-//     }
-//
-//     m_text = text;
-//
-//     if (m_action) {
-//         m_action->setProperty("text", text);
-//     }
-//
-//     Q_EMIT textChanged(text);
-// }
-
 IconGroup *ActionData::icon() const
 {
     return m_icon;
@@ -250,10 +230,11 @@ void ActionData::setVariantShortcut(const QVariant &shortcut)
 
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
     cg = KConfigGroup(&cg, m_collection->name());
+    cg = KConfigGroup(&cg, m_name);
     if (shortcut != m_defaultShortcut) {
-        cg.writeEntry(m_name, variantToKeySequence(shortcut).toString());
+        cg.writeEntry(QStringLiteral("Shortcut"), variantToKeySequence(shortcut).toString());
     } else {
-        cg.deleteEntry(m_name);
+        cg.deleteEntry(QStringLiteral("Shortcut"));
     }
 
     if (m_action) {
@@ -263,30 +244,29 @@ void ActionData::setVariantShortcut(const QVariant &shortcut)
     Q_EMIT shortcutChanged(shortcut);
 }
 
-QVariantList ActionData::variantAlternateShortcuts() const
+QVariant ActionData::variantAlternateShortcut() const
 {
-    return m_alternateShortcuts;
+    return m_alternateShortcut;
 }
 
-void ActionData::setVariantAlternateShortcuts(const QVariantList &shortcuts)
+void ActionData::setVariantAlternateShortcut(const QVariant &shortcut)
 {
-    if (m_alternateShortcuts == shortcuts) {
+    if (m_alternateShortcut == shortcut) {
         return;
     }
 
-    m_alternateShortcuts = shortcuts;
-
-    QStringList stringShortcuts;
-
-    for (const auto shortcut : std::as_const(m_alternateShortcuts)) {
-        stringShortcuts << variantToKeySequence(shortcut).toString();
-    }
+    m_alternateShortcut = shortcut;
 
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
     cg = KConfigGroup(&cg, m_collection->name());
-    cg.writeEntry(m_name, stringShortcuts.join(QStringLiteral(",")));
+    cg = KConfigGroup(&cg, m_name);
+    if (shortcut != m_defaultAlternateShortcut) {
+        cg.writeEntry(QStringLiteral("AlternateShortcut"), variantToKeySequence(shortcut).toString());
+    } else {
+        cg.deleteEntry(QStringLiteral("AlternateShortcut"));
+    }
 
-    Q_EMIT alternateShortcutsChanged();
+    Q_EMIT alternateShortcutChanged(shortcut);
 }
 
 QVariant ActionData::defaultShortcut() const
@@ -303,6 +283,22 @@ void ActionData::setDefaultShortcut(const QVariant &shortcut)
     m_defaultShortcut = shortcut;
 
     Q_EMIT defaultShortcutChanged(shortcut);
+}
+
+QVariant ActionData::defaultAlternateShortcut() const
+{
+    return m_defaultAlternateShortcut;
+}
+
+void ActionData::setDefaultAlternateShortcut(const QVariant &shortcut)
+{
+    if (m_defaultAlternateShortcut == shortcut) {
+        return;
+    }
+
+    m_defaultAlternateShortcut = shortcut;
+
+    Q_EMIT defaultAlternateShortcutChanged(shortcut);
 }
 
 void ActionData::setActionGroupNotify(QActionGroup *group)
@@ -394,13 +390,25 @@ void ActionData::componentComplete()
     }
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
     cg = KConfigGroup(&cg, m_collection->name());
+    cg = KConfigGroup(&cg, m_name);
     QString shortcut = variantToKeySequence(m_defaultShortcut).toString();
-    shortcut = cg.readEntry(m_name, shortcut);
+    shortcut = cg.readEntry(QStringLiteral("Shortcut"), shortcut);
 
     if (shortcut != m_shortcut.toString()) {
         m_shortcut = shortcut;
         Q_EMIT shortcutChanged(m_shortcut);
     }
+
+    shortcut = variantToKeySequence(m_defaultAlternateShortcut).toString();
+    shortcut = cg.readEntry(QStringLiteral("AlternateShortcut"), shortcut);
+
+    if (shortcut != m_alternateShortcut.toString()) {
+        m_alternateShortcut = shortcut;
+        Q_EMIT alternateShortcutChanged(m_alternateShortcut);
+    }
+
+    setShortcuts({variantToKeySequence(m_shortcut), variantToKeySequence(m_alternateShortcut)});
+
     syncDown();
 }
 

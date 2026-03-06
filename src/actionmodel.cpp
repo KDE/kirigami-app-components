@@ -141,6 +141,9 @@ void ActionModel::save()
         if (!it.value().first.isEmpty()) {
             it.key()->setVariantShortcut(it.value().first);
         }
+        if (!it.value().first.isEmpty()) {
+            it.key()->setVariantAlternateShortcut(it.value().second);
+        }
     }
     d->m_pendingChanges.clear();
 }
@@ -224,6 +227,11 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
             return d->m_pendingChanges[action].first;
         }
         return action->variantShortcut();
+    case AlternateShortcutRole:
+        if (d->m_pendingChanges.contains(action)) {
+            return d->m_pendingChanges[action].second;
+        }
+        return action->variantAlternateShortcut();
     }
 
     return {};
@@ -231,7 +239,7 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
 
 bool ActionModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (!index.isValid() || role != ShortcutRole) {
+    if (!index.isValid() || (role != ShortcutRole && role != AlternateShortcutRole)) {
         return false;
     }
     ActionData *action = data(index, ActionDescriptionRole).value<ActionData *>();
@@ -239,7 +247,11 @@ bool ActionModel::setData(const QModelIndex &index, const QVariant &value, int r
         return false;
     }
     const QKeySequence seq = value.value<QKeySequence>();
-    d->m_pendingChanges[action].first = seq;
+    if (role == ShortcutRole) {
+        d->m_pendingChanges[action].first = seq;
+    } else {
+        d->m_pendingChanges[action].second = seq;
+    }
     Q_EMIT dataChanged(index, index, {role});
     return true;
 }
@@ -261,7 +273,8 @@ QHash<int, QByteArray> ActionModel::roleNames() const
             {ActionDescriptionRole, "actionDescription"},
             {ActionInstanceRole, "actionInstance"},
             {ActionCollectionRole, "actionCollection"},
-            {ShortcutRole, "shortcut"}};
+            {ShortcutRole, "shortcut"},
+            {AlternateShortcutRole, "alternateShortcut"}};
 }
 
 #include "moc_actionmodel.cpp"

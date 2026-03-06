@@ -81,7 +81,7 @@ class ActionData : public QAction, public QQmlParserStatus
     Q_PROPERTY(QVariant defaultShortcut READ defaultShortcut WRITE setDefaultShortcut NOTIFY defaultShortcutChanged FINAL)
     // TODO: maybe those can be hidden from QML
     Q_PROPERTY(QVariant shortcut READ variantShortcut WRITE setVariantShortcut NOTIFY shortcutChanged FINAL)
-    Q_PROPERTY(QVariantList alternateShortcuts READ variantAlternateShortcuts WRITE setVariantAlternateShortcuts NOTIFY alternateShortcutsChanged FINAL)
+    Q_PROPERTY(QVariant alternateShortcut READ variantAlternateShortcut WRITE setVariantAlternateShortcut NOTIFY alternateShortcutChanged FINAL)
     // Q_PROPERTY(QList<QKeySequence> alternateShortcuts READ alternateShortcuts WRITE setShortcuts NOTIFY alternateShortcutsChanged)
     Q_PROPERTY(QObject *action READ action() WRITE setAction NOTIFY actionChanged)
     Q_PROPERTY(QActionGroup *actionGroup READ actionGroup WRITE setActionGroupNotify NOTIFY actionGroupChanged)
@@ -94,14 +94,18 @@ public:
 
     IconGroup *icon() const;
 
+    // TODO: all of thgose might hopefully be completely internal api
     QVariant variantShortcut() const;
     void setVariantShortcut(const QVariant &shortcut);
 
-    QVariantList variantAlternateShortcuts() const;
-    void setVariantAlternateShortcuts(const QVariantList &shortcuts);
+    QVariant variantAlternateShortcut() const;
+    void setVariantAlternateShortcut(const QVariant &shortcut);
 
     QVariant defaultShortcut() const;
     void setDefaultShortcut(const QVariant &shortcut);
+
+    QVariant defaultAlternateShortcut() const;
+    void setDefaultAlternateShortcut(const QVariant &shortcut);
 
     void setActionGroupNotify(QActionGroup *group);
 
@@ -116,8 +120,9 @@ Q_SIGNALS:
     void textChanged(const QString &text);
     void iconChanged(const QString &icon);
     void shortcutChanged(const QVariant &shortcut);
-    void alternateShortcutsChanged();
+    void alternateShortcutChanged(const QVariant &shortcut);
     void defaultShortcutChanged(const QVariant &defaultShortcut);
+    void defaultAlternateShortcutChanged(const QVariant &defaultShortcut);
     void actionGroupChanged(QActionGroup *group);
     void actionChanged(QObject *action);
 
@@ -131,8 +136,9 @@ private:
     QString m_name;
     QString m_text;
     QVariant m_shortcut = QString();
-    QVariantList m_alternateShortcuts;
+    QVariant m_alternateShortcut;
     QVariant m_defaultShortcut;
+    QVariant m_defaultAlternateShortcut;
     QPointer<QObject> m_action;
     ActionCollection *m_collection;
 };
