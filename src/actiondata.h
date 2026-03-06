@@ -79,9 +79,10 @@ class ActionData : public QAction, public QQmlParserStatus
     // Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged FINAL)
     Q_PROPERTY(IconGroup *icon READ icon CONSTANT FINAL)
     Q_PROPERTY(QVariant defaultShortcut READ defaultShortcut WRITE setDefaultShortcut NOTIFY defaultShortcutChanged FINAL)
+    // TODO: maybe those can be hidden from QML
     Q_PROPERTY(QVariant shortcut READ variantShortcut WRITE setVariantShortcut NOTIFY shortcutChanged FINAL)
+    Q_PROPERTY(QVariantList alternateShortcuts READ variantAlternateShortcuts WRITE setVariantAlternateShortcuts NOTIFY alternateShortcutsChanged FINAL)
     // Q_PROPERTY(QList<QKeySequence> alternateShortcuts READ alternateShortcuts WRITE setShortcuts NOTIFY alternateShortcutsChanged)
-    //  TODO: checkable? other Action properties to proxy? proxy trigger and triggered? at this poing might well be a QAction?
     Q_PROPERTY(QObject *action READ action() WRITE setAction NOTIFY actionChanged)
     Q_PROPERTY(QActionGroup *actionGroup READ actionGroup WRITE setActionGroupNotify NOTIFY actionGroupChanged)
 public:
@@ -91,14 +92,13 @@ public:
     QString name() const;
     void setName(const QString &name);
 
-    // QString text() const;
-    // void setText(const QString &text);
-
-    // TODO: replace with the usual grouped property
     IconGroup *icon() const;
 
     QVariant variantShortcut() const;
     void setVariantShortcut(const QVariant &shortcut);
+
+    QVariantList variantAlternateShortcuts() const;
+    void setVariantAlternateShortcuts(const QVariantList &shortcuts);
 
     QVariant defaultShortcut() const;
     void setDefaultShortcut(const QVariant &shortcut);
@@ -131,6 +131,7 @@ private:
     QString m_name;
     QString m_text;
     QVariant m_shortcut = QString();
+    QVariantList m_alternateShortcuts;
     QVariant m_defaultShortcut;
     QPointer<QObject> m_action;
     ActionCollection *m_collection;

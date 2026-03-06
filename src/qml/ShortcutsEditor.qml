@@ -57,13 +57,14 @@ Kirigami.ScrollablePage {
             id: shortcutDelegate
 
             required property int index
-            required property QtObject actionDescription
-            required property QtObject actionInstance
+            required property var shortcut
+            // Bind model in order to have editing work
+            required property var model
 
             width: ListView.view.width
-            text: actionDescription.text//actionName.replace('&', '')
+            text: model.actionDescription.text//actionName.replace('&', '')
 
-            Accessible.description: actionDescription.shortcut
+            Accessible.description: model.actionDescription.shortcut
 
             contentItem: RowLayout {
                 spacing: Kirigami.Units.smallSpacing
@@ -71,26 +72,27 @@ Kirigami.ScrollablePage {
                 Kirigami.Icon {
                     implicitWidth: Kirigami.Units.iconSizes.small
                     implicitHeight: implicitWidth
-                    source: actionDescription.icon.name || actionDescription.icon.source
+                    source: model.actionDescription.icon.name || model.actionDescription.icon.source
                 }
 
                 QQC2.Label {
-                    text: actionDescription.text
+                    text: model.actionDescription.text
                     Layout.fillWidth: true
                     Accessible.ignored: true
                 }
 
                 QQC2.Label {
-                    text: actionDescription?.shortcut
+                    text: model.shortcut
                     Accessible.ignored: true
                 }
             }
 
             onClicked: {
-                shortcutDialog.title = i18ndc("kirigami-addons6", "@title:window", "Shortcut: %1",  actionDescription.text);
-                shortcutDialog.actionDescription = actionDescription;
-                shortcutDialog.keySequence = actionDescription.shortcut;
+                shortcutDialog.title = i18ndc("kirigami-addons6", "@title:window", "Shortcut: %1",  model.actionDescription.text);
+                shortcutDialog.actionDescription = model.actionDescription;
+                shortcutDialog.keySequence = model.shortcut;
                 shortcutDialog.index = shortcutDelegate.index;
+                shortcutDialog.shortcutDelegate = shortcutDelegate
                 //shortcutDialog.alternateShortcuts = shortcutDelegate.alternateShortcuts;
                 shortcutDialog.open()
             }
@@ -102,6 +104,7 @@ Kirigami.ScrollablePage {
             property ActionData actionDescription
             property alias keySequence: keySequenceItem.keySequence
             property var alternateShortcuts
+            property Item shortcutDelegate
             property int index: -1
 
             parent: root.QQC2.Overlay.overlay
@@ -109,9 +112,11 @@ Kirigami.ScrollablePage {
             KeySequenceItem {
                 id: keySequenceItem
 
+                defaultKeySequence: shortcutDialog.actionDescription.defaultShortcut
+
                 label: i18ndc("kirigami-addons6", "@label", "Shortcut:")
                 onKeySequenceModified: {
-                    shortcutDialog.actionDescription.shortcut = keySequence;
+                    shortcutDialog.shortcutDelegate.model.shortcut = keySequence;
                 }
 
                 onErrorOccurred: (title, message) => {
@@ -219,7 +224,10 @@ Kirigami.ScrollablePage {
                     Layout.fillWidth: true
                     standardButtons: QQC2.DialogButtonBox.Close | QQC2.DialogButtonBox.Reset
                     onRejected: shortcutDialog.close();
-                    onReset: shortcutDialog.alternateShortcuts = root.model.reset(shortcutDialog.index)
+                    onReset: {
+                        root.model.reset(listView.model.mapToSource(listView.model.index(shortcutDialog.index, 0)))
+                        shortcutDialog.keySequence = shortcutDialog.shortcutDelegate.model.shortcut
+                    }
                     leftPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
                     topPadding: Kirigami.Units.smallSpacing
                     rightPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing

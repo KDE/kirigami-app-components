@@ -6,6 +6,7 @@
 #include "actiondata.h"
 
 #include <QKeySequence>
+#include <QPersistentModelIndex>
 #include <QQmlContext>
 #include <QQmlProperty>
 #include <QtQml/qqmlinfo.h>
@@ -19,6 +20,7 @@ public:
 
     ActionModel *q;
     QString m_collectionName;
+    QHash<ActionData *, QPair<QKeySequence, QKeySequence>> m_pendingChanges;
     ActionModel::ShownActions m_shownActions = ActionModel::AllActions;
 };
 
@@ -133,6 +135,33 @@ void ActionModel::setShownActions(ShownActions shown)
     Q_EMIT shownActionsChanged(shown);
 }
 
+void ActionModel::save()
+{
+    for (auto it = d->m_pendingChanges.constBegin(); it != d->m_pendingChanges.constEnd(); ++it) {
+        if (!it.value().first.isEmpty()) {
+            it.key()->setVariantShortcut(it.value().first);
+        }
+    }
+    d->m_pendingChanges.clear();
+}
+
+void ActionModel::reset(const QModelIndex &index)
+{
+    ActionData *action = index.data(ActionDescriptionRole).value<ActionData *>();
+    if (!action) {
+        return;
+    }
+    d->m_pendingChanges.remove(action);
+    Q_EMIT dataChanged(index, index, {ShortcutRole, AlternateShortcutRole});
+}
+
+void ActionModel::resetAll()
+{
+    beginResetModel();
+    d->m_pendingChanges.clear();
+    endResetModel();
+}
+
 int ActionModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
@@ -190,14 +219,49 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
         return QVariant::fromValue(action->action());
     case ActionCollectionRole:
         return collection->text();
+    case ShortcutRole:
+        if (d->m_pendingChanges.contains(action)) {
+            return d->m_pendingChanges[action].first;
+        }
+        return action->variantShortcut();
     }
 
     return {};
 }
 
+bool ActionModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (!index.isValid() || role != ShortcutRole) {
+        return false;
+    }
+    ActionData *action = data(index, ActionDescriptionRole).value<ActionData *>();
+    if (!action) {
+        return false;
+    }
+    const QKeySequence seq = value.value<QKeySequence>();
+    d->m_pendingChanges[action].first = seq;
+    Q_EMIT dataChanged(index, index, {role});
+    return true;
+}
+
+Qt::ItemFlags ActionModel::flags(const QModelIndex &index) const
+{
+    auto f = QAbstractListModel::flags(index);
+
+    if (index.isValid()) {
+        f |= Qt::ItemIsEditable;
+    }
+
+    return f;
+}
+
 QHash<int, QByteArray> ActionModel::roleNames() const
 {
-    return {{Qt::DisplayRole, "display"}, {ActionDescriptionRole, "actionDescription"}, {ActionInstanceRole, "actionInstance"}, {ActionCollectionRole, "actionCollection"}};
+    return {{Qt::DisplayRole, "display"},
+            {ActionDescriptionRole, "actionDescription"},
+            {ActionInstanceRole, "actionInstance"},
+            {ActionCollectionRole, "actionCollection"},
+            {ShortcutRole, "shortcut"}};
 }
 
 #include "moc_actionmodel.cpp"

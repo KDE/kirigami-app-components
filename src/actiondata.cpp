@@ -263,6 +263,32 @@ void ActionData::setVariantShortcut(const QVariant &shortcut)
     Q_EMIT shortcutChanged(shortcut);
 }
 
+QVariantList ActionData::variantAlternateShortcuts() const
+{
+    return m_alternateShortcuts;
+}
+
+void ActionData::setVariantAlternateShortcuts(const QVariantList &shortcuts)
+{
+    if (m_alternateShortcuts == shortcuts) {
+        return;
+    }
+
+    m_alternateShortcuts = shortcuts;
+
+    QStringList stringShortcuts;
+
+    for (const auto shortcut : std::as_const(m_alternateShortcuts)) {
+        stringShortcuts << variantToKeySequence(shortcut).toString();
+    }
+
+    KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
+    cg = KConfigGroup(&cg, m_collection->name());
+    cg.writeEntry(m_name, stringShortcuts.join(QStringLiteral(",")));
+
+    Q_EMIT alternateShortcutsChanged();
+}
+
 QVariant ActionData::defaultShortcut() const
 {
     return m_defaultShortcut;
@@ -316,18 +342,25 @@ void ActionData::setAction(QObject *action)
 void ActionData::syncDown()
 {
     if (m_action) {
-        QQmlProperty property(m_action, QStringLiteral("text"));
-        property.write(text());
-        property = QQmlProperty(m_action, QStringLiteral("icon.name"));
-        property.write(m_icon->name());
-        property = QQmlProperty(m_action, QStringLiteral("icon.source"));
-        property.write(m_icon->source());
-        property = QQmlProperty(m_action, QStringLiteral("shortcut"));
-        property.write(m_shortcut);
-        property = QQmlProperty(m_action, QStringLiteral("checkable"));
-        property.write(isCheckable());
-        property = QQmlProperty(m_action, QStringLiteral("checked"));
-        property.write(isChecked());
+        QQmlProperty property(m_action, QStringLiteral("fromQAction"));
+        if (property.isValid() && property.isWritable()) {
+            qWarning() << "It's a kirigami action";
+            property.write(QVariant::fromValue(this));
+        } else {
+            // It's a plain Templates action
+            property = QQmlProperty(m_action, QStringLiteral("text"));
+            property.write(text());
+            property = QQmlProperty(m_action, QStringLiteral("icon.name"));
+            property.write(m_icon->name());
+            property = QQmlProperty(m_action, QStringLiteral("icon.source"));
+            property.write(m_icon->source());
+            property = QQmlProperty(m_action, QStringLiteral("shortcut"));
+            property.write(m_shortcut);
+            property = QQmlProperty(m_action, QStringLiteral("checkable"));
+            property.write(isCheckable());
+            property = QQmlProperty(m_action, QStringLiteral("checked"));
+            property.write(isChecked());
+        }
     }
 }
 
@@ -359,7 +392,6 @@ void ActionData::componentComplete()
     if (!m_collection) {
         return;
     }
-    qWarning() << "m_collection";
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
     cg = KConfigGroup(&cg, m_collection->name());
     QString shortcut = variantToKeySequence(m_defaultShortcut).toString();

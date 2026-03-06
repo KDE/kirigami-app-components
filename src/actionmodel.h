@@ -29,7 +29,9 @@ public:
     enum Role {
         ActionDescriptionRole = Qt::UserRole + 1,
         ActionInstanceRole,
-        ActionCollectionRole
+        ActionCollectionRole,
+        ShortcutRole,
+        AlternateShortcutRole,
     };
     Q_ENUM(Role);
 
@@ -42,10 +44,16 @@ public:
     ShownActions shownActions() const;
     void setShownActions(ShownActions shown);
 
+    Q_INVOKABLE void save();
+    Q_INVOKABLE void reset(const QModelIndex &index);
+    Q_INVOKABLE void resetAll();
+
     ActionCollection *collection() const;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
     QHash<int, QByteArray> roleNames() const override;
 
 Q_SIGNALS:

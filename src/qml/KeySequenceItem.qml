@@ -26,6 +26,7 @@ FormCard.AbstractFormDelegate {
     property alias modifierlessAllowed: helper.modifierlessAllowed
     property alias multiKeyShortcutsAllowed: helper.multiKeyShortcutsAllowed
     property alias keySequence: helper.currentKeySequence
+    property string defaultKeySequence
 
     /**
      * This property controls which types of shortcuts are checked for conflicts when the keySequence
@@ -200,6 +201,16 @@ FormCard.AbstractFormDelegate {
                 QQC2.ToolTip.visible: hovered
                 QQC2.ToolTip.text: Accessible.name
                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+            }
+        }
+
+        QQC2.Button {
+            Layout.fillWidth: true
+            text: i18ndc("kirigami-addons6", "Clicking on the button resets default shortcut", "Reset Default: %1", root.defaultKeySequence)
+            visible: root.defaultKeySequence.length > 0 && helper.keySequenceNativeText(root.keySequence) !== root.defaultKeySequence
+            onClicked: {
+                root.keySequence = root.defaultKeySequence;
+                root.keySequenceModified();
             }
         }
     }
