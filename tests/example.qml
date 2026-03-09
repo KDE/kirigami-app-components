@@ -23,46 +23,46 @@ Kirigami.ApplicationWindow {
     AC.ActionCollectionManager {
         id: manager
         pageRow: pageStack
-    }
 
-    AC.ActionCollection {
-        name: "org.kde.examplecollection"
-        AC.ActionData {
-            name: "hello"
-            text: "Hello"
-            icon.name: "document-send"
-            defaultShortcut: "Ctrl+H"
+        AC.ActionCollection {
+            name: "org.kde.examplecollection"
+            AC.ActionData {
+                name: "hello"
+                text: "Hello"
+                icon.name: "document-send"
+                defaultShortcut: "Ctrl+H"
+            }
+            AC.ActionData {
+                name: "copy"
+                text: "Copy"
+                icon.name: "edit-copy"
+                defaultShortcut: StandardKey.Copy
+            }
+            AC.ActionData {
+                name: "explore-actions"
+                text: "Actions"
+                icon.name: "view-form-action"
+                defaultShortcut: "Ctrl+I"
+            }
+            AC.ActionData {
+                name: "configure-shortcuts"
+                text: "Shortcuts"
+                icon.name: "configure-shortcuts"
+            }
         }
-        AC.ActionData {
-            name: "copy"
-            text: "Copy"
-            icon.name: "edit-copy"
-            defaultShortcut: StandardKey.Copy
-        }
-        AC.ActionData {
-            name: "explore-actions"
-            text: "Actions"
-            icon.name: "view-form-action"
-            defaultShortcut: "Ctrl+I"
-        }
-        AC.ActionData {
-            name: "configure-shortcuts"
-            text: "Shortcuts"
-            icon.name: "configure-shortcuts"
-        }
-    }
 
-    AC.ActionCollection {
-        name: "org.kde.examplecollection2"
-        text: Qt.application.name
-        AC.ActionData {
-            name: "lorem"
-            text: "Lorem Ipsum"
-        }
-        AC.ActionData {
-            name: "dolor"
-            text: "Dolor Sit Amet"
-            defaultShortcut: "Ctrl+D"
+        AC.ActionCollection {
+            name: "org.kde.examplecollection2"
+            text: Qt.application.name
+            AC.ActionData {
+                name: "lorem"
+                text: "Lorem Ipsum"
+            }
+            AC.ActionData {
+                name: "dolor"
+                text: "Dolor Sit Amet"
+                defaultShortcut: "Ctrl+D"
+            }
         }
     }
 
@@ -131,15 +131,5 @@ Kirigami.ApplicationWindow {
                 onTriggered: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"))
             }
         ]
-
-        AC.KQuickCommandBarPage {
-            id: actionsDialog
-        }
-
-        Component {
-            id: shortcutsEditor
-            AC.ShortcutsEditor {
-            }
-        }
     }
 }

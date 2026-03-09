@@ -20,7 +20,8 @@ public:
 
     ActionModel *q;
     QString m_collectionName;
-    QHash<ActionData *, QPair<QKeySequence, QKeySequence>> m_pendingChanges;
+    QHash<ActionData *, QKeySequence> m_pendingShortcuts;
+    QHash<ActionData *, QKeySequence> m_pendingAlternateShortcuts;
     ActionModel::ShownActions m_shownActions = ActionModel::AllActions;
 };
 
@@ -137,15 +138,16 @@ void ActionModel::setShownActions(ShownActions shown)
 
 void ActionModel::save()
 {
-    for (auto it = d->m_pendingChanges.constBegin(); it != d->m_pendingChanges.constEnd(); ++it) {
-        if (!it.value().first.isEmpty()) {
-            it.key()->setVariantShortcut(it.value().first);
-        }
-        if (!it.value().first.isEmpty()) {
-            it.key()->setVariantAlternateShortcut(it.value().second);
-        }
+    for (auto it = d->m_pendingShortcuts.constBegin(); it != d->m_pendingShortcuts.constEnd(); ++it) {
+        it.key()->setVariantShortcut(it.value());
     }
-    d->m_pendingChanges.clear();
+
+    for (auto it = d->m_pendingAlternateShortcuts.constBegin(); it != d->m_pendingAlternateShortcuts.constEnd(); ++it) {
+        it.key()->setVariantAlternateShortcut(it.value());
+    }
+
+    d->m_pendingShortcuts.clear();
+    d->m_pendingAlternateShortcuts.clear();
 }
 
 void ActionModel::reset(const QModelIndex &index)
@@ -154,14 +156,32 @@ void ActionModel::reset(const QModelIndex &index)
     if (!action) {
         return;
     }
-    d->m_pendingChanges.remove(action);
-    Q_EMIT dataChanged(index, index, {ShortcutRole, AlternateShortcutRole});
+
+    bool found = false;
+    auto it = d->m_pendingShortcuts.constFind(action);
+    if (it != d->m_pendingShortcuts.constEnd()) {
+        d->m_pendingShortcuts.erase(it);
+        found = true;
+    }
+    it = d->m_pendingAlternateShortcuts.constFind(action);
+    if (it != d->m_pendingAlternateShortcuts.constEnd()) {
+        d->m_pendingAlternateShortcuts.erase(it);
+        found = true;
+    }
+
+    if (found) {
+        Q_EMIT dataChanged(index, index, {ShortcutRole, AlternateShortcutRole});
+    }
 }
 
 void ActionModel::resetAll()
 {
+    if (d->m_pendingShortcuts.isEmpty() && d->m_pendingAlternateShortcuts.isEmpty()) {
+        return;
+    }
     beginResetModel();
-    d->m_pendingChanges.clear();
+    d->m_pendingShortcuts.clear();
+    d->m_pendingAlternateShortcuts.clear();
     endResetModel();
 }
 
@@ -223,13 +243,13 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
     case ActionCollectionRole:
         return collection->text();
     case ShortcutRole:
-        if (d->m_pendingChanges.contains(action)) {
-            return d->m_pendingChanges[action].first;
+        if (auto it = d->m_pendingShortcuts.constFind(action); it != d->m_pendingShortcuts.constEnd()) {
+            return it.value();
         }
         return action->variantShortcut();
     case AlternateShortcutRole:
-        if (d->m_pendingChanges.contains(action)) {
-            return d->m_pendingChanges[action].second;
+        if (auto it = d->m_pendingAlternateShortcuts.constFind(action); it != d->m_pendingAlternateShortcuts.constEnd()) {
+            return it.value();
         }
         return action->variantAlternateShortcut();
     }
@@ -248,9 +268,9 @@ bool ActionModel::setData(const QModelIndex &index, const QVariant &value, int r
     }
     const QKeySequence seq = value.value<QKeySequence>();
     if (role == ShortcutRole) {
-        d->m_pendingChanges[action].first = seq;
+        d->m_pendingShortcuts[action] = seq;
     } else {
-        d->m_pendingChanges[action].second = seq;
+        d->m_pendingAlternateShortcuts[action] = seq;
     }
     Q_EMIT dataChanged(index, index, {role});
     return true;

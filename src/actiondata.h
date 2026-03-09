@@ -136,7 +136,7 @@ private:
     QString m_name;
     QString m_text;
     QVariant m_shortcut = QString();
-    QVariant m_alternateShortcut;
+    QVariant m_alternateShortcut = QString();
     QVariant m_defaultShortcut;
     QVariant m_defaultAlternateShortcut;
     QPointer<QObject> m_action;

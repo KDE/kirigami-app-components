@@ -328,7 +328,6 @@ void ActionData::setAction(QObject *action)
         m_action->setProperty("checked", checked);
     });
     connect(m_action, SIGNAL(toggled()), this, SLOT(syncUp()));
-    connect(m_action, SIGNAL(triggered()), this, SIGNAL(triggered()));
 
     syncDown();
 

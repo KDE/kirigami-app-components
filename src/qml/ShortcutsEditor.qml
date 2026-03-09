@@ -57,7 +57,6 @@ Kirigami.ScrollablePage {
             id: shortcutDelegate
 
             required property int index
-            required property var shortcut
             // Bind model in order to have editing work
             required property var model
 
@@ -83,6 +82,15 @@ Kirigami.ScrollablePage {
 
                 QQC2.Label {
                     text: model.shortcut
+                    Accessible.ignored: true
+                }
+                Kirigami.Separator {
+                    visible: model.alternateShortcut.length > 0
+                    Layout.fillHeight: true
+                }
+                QQC2.Label {
+                    visible: model.alternateShortcut.length > 0
+                    text: model.alternateShortcut
                     Accessible.ignored: true
                 }
             }
@@ -162,9 +170,9 @@ Kirigami.ScrollablePage {
             KeySequenceItem {
                 id: alternateKeySequenceItem
 
-                label: alternateRepeater.count === 0 ? i18ndc("kirigami-actioncollection", "@label", "Alternative:") : ''
+                label: i18ndc("kirigami-actioncollection", "@label", "Alternative:")
 
-                onKeySequenceModified: {
+                onKeySequenceModified: {print("blah",keySequence)
                     shortcutDialog.shortcutDelegate.model.alternateShortcut = keySequence;
                 }
 
