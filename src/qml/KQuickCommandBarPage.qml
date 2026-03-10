@@ -48,6 +48,8 @@ Kirigami.SearchDialog {
         required property int index
         required property QtObject actionDescription
         required property QtObject actionInstance
+        required property string shortcut
+        required property string alternateShortcut
 
         icon.name: actionDescription.icon.name
         text: actionDescription.text
@@ -67,7 +69,16 @@ Kirigami.SearchDialog {
             }
 
             QQC.Label {
-                text: actionDescription?.shortcut ?? ""
+                text: shortcut
+                color: Kirigami.Theme.disabledTextColor
+            }
+            Kirigami.Separator {
+                visible: alternateShortcut.length > 0
+                Layout.fillHeight: true
+            }
+            QQC.Label {
+                visible: alternateShortcut.length > 0
+                text: alternateShortcut
                 color: Kirigami.Theme.disabledTextColor
             }
         }
