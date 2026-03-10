@@ -4,6 +4,9 @@ set_target_properties(KirigamiActionCollection PROPERTIES
     SOVERSION ${KF6KirigamiActionCollection_SOVERSION}
     VERSION ${KF6KirigamiActionCollection_VERSION}
 )
+
+target_compile_definitions(KirigamiActionCollection PRIVATE -DTRANSLATION_DOMAIN=\"kirigami-actioncollection\")
+
 ecm_add_qml_module(KirigamiActionCollection
     URI "org.kde.kirigami.actioncollection"
     VERSION 1.0
@@ -16,6 +19,7 @@ target_sources(KirigamiActionCollection PRIVATE
     actioncollection.cpp
     actiondata.cpp
     actionmodel.cpp
+    keysequencehelper.cpp
     standardactioncollection.cpp
 )
 
@@ -62,6 +66,7 @@ PRIVATE
     Qt6::QuickControls2
     KF6::ConfigCore
     KF6::ConfigGui
+    KF6::GuiAddons
     KF6::I18n
 )
 

@@ -2,14 +2,12 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import QtQuick
-import QtQuick.Controls as QQC2
+import QtQuick.Controls as QQC
 import QtQuick.Layouts
 
 import org.kde.kitemmodels
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.actioncollection as AC
-import org.kde.kirigamiaddons.formcard as FormCard
-import org.kde.kirigamiaddons.components as Components
 
 Kirigami.ScrollablePage {
     id: root
@@ -53,7 +51,7 @@ Kirigami.ScrollablePage {
             }
         }
 
-        delegate: QQC2.ItemDelegate {
+        delegate: QQC.ItemDelegate {
             id: shortcutDelegate
 
             required property int index
@@ -74,13 +72,13 @@ Kirigami.ScrollablePage {
                     source: model.actionDescription.icon.name || model.actionDescription.icon.source
                 }
 
-                QQC2.Label {
+                QQC.Label {
                     text: model.actionDescription.text
                     Layout.fillWidth: true
                     Accessible.ignored: true
                 }
 
-                QQC2.Label {
+                QQC.Label {
                     text: model.shortcut
                     Accessible.ignored: true
                 }
@@ -88,7 +86,7 @@ Kirigami.ScrollablePage {
                     visible: model.alternateShortcut.length > 0
                     Layout.fillHeight: true
                 }
-                QQC2.Label {
+                QQC.Label {
                     visible: model.alternateShortcut.length > 0
                     text: model.alternateShortcut
                     Accessible.ignored: true
@@ -106,94 +104,102 @@ Kirigami.ScrollablePage {
             }
         }
 
-        FormCard.FormCardDialog {
+        QQC.Dialog {
             id: shortcutDialog
 
+            width: Math.max(implicitWidth, Kirigami.Units.gridUnit * 20)
             property ActionData actionDescription
             property alias keySequence: keySequenceItem.keySequence
             property alias alternateKeySequence: alternateKeySequenceItem.keySequence
             property Item shortcutDelegate
             property int index: -1
+            modal: true
 
-            parent: root.QQC2.Overlay.overlay
+            parent: root.QQC.Overlay.overlay
 
-            KeySequenceItem {
-                id: keySequenceItem
-
-                defaultKeySequence: shortcutDialog.actionDescription.defaultShortcut
-
-                label: i18ndc("kirigami-actioncollection", "@label", "Shortcut:")
-                onKeySequenceModified: {
-                    shortcutDialog.shortcutDelegate.model.shortcut = keySequence;
-                }
-
-                onErrorOccurred: (title, message) => {
-                    root.QQC2.ApplicationWindow.showPassiveNotification(title + '\n' + message);
-                }
-
-                onShowStealStandardShortcutDialog: (title, message, sequence) => {
-                    stealStandardShortcutDialog.title = title
-                    stealStandardShortcutDialog.message = message;
-                    stealStandardShortcutDialog.sequence = sequence;
-                    stealStandardShortcutDialog.parent = root.QQC2.Overlay.overlay;
-                    stealStandardShortcutDialog.sequenceItem = this;
-                    stealStandardShortcutDialog.openDialog();
-                }
-            }
-
-            Components.MessageDialog {
-                id: stealStandardShortcutDialog
-
-                property string message
-                property var sequence
-                property KeySequenceItem sequenceItem
-
-                dialogType: Components.MessageDialog.Warning
-                dontShowAgainName: "stealStandardShortcutDialog"
-
-                QQC2.Label {
-                    text: stealStandardShortcutDialog.message
+            contentItem: ColumnLayout {
+                spacing: 0
+                KeySequenceItem {
+                    id: keySequenceItem
                     Layout.fillWidth: true
-                    wrapMode: Text.WordWrap
+
+                    defaultKeySequence: shortcutDialog.actionDescription?.defaultShortcut
+
+                    label: i18ndc("kirigami-actioncollection", "@label", "Shortcut:")
+                    onKeySequenceModified: {
+                        shortcutDialog.shortcutDelegate.model.shortcut = keySequence;
+                    }
+
+                    onErrorOccurred: (title, message) => {
+                        root.QQC.ApplicationWindow.showPassiveNotification(title + '\n' + message);
+                    }
+
+                    onShowStealStandardShortcutDialog: (title, message, sequence) => {
+                        stealStandardShortcutDialog.title = title
+                        stealStandardShortcutDialog.message = message;
+                        stealStandardShortcutDialog.sequence = sequence;
+                        stealStandardShortcutDialog.parent = root.QQC.Overlay.overlay;
+                        stealStandardShortcutDialog.sequenceItem = this;
+                        stealStandardShortcutDialog.open();
+                    }
                 }
 
-                standardButtons: Kirigami.PromptDialog.Apply | Kirigami.PromptDialog.Cancel
+                KeySequenceItem {
+                    id: alternateKeySequenceItem
+                    Layout.fillWidth: true
 
-                onApplied: {
-                    sequenceItem.stealStandardShortcut(sequence);
-                    close();
+                    defaultKeySequence: shortcutDialog.actionDescription?.defaultAlternateShortcut
+
+                    label: i18ndc("kirigami-actioncollection", "@label", "Alternative:")
+
+                    onKeySequenceModified: {
+                        shortcutDialog.shortcutDelegate.model.alternateShortcut = keySequence;
+                    }
+
+                    onErrorOccurred: (title, message) => {
+                        root.QQC.ApplicationWindow.showPassiveNotification(title + '\n' + message);
+                    }
+
+                    onShowStealStandardShortcutDialog: (title, message, sequence) => {
+                        stealStandardShortcutDialog.title = title
+                        stealStandardShortcutDialog.message = message;
+                        stealStandardShortcutDialog.sequence = sequence;
+                        stealStandardShortcutDialog.parent = root.QQC.Overlay.overlay;
+                        stealStandardShortcutDialog.sequenceItem = this;
+                        stealStandardShortcutDialog.open();
+                    }
                 }
 
-                onRejected: close()
-            }
+                QQC.Dialog {
+                    id: stealStandardShortcutDialog
 
-            KeySequenceItem {
-                id: alternateKeySequenceItem
+                    property string message
+                    property var sequence
+                    property KeySequenceItem sequenceItem
 
-                label: i18ndc("kirigami-actioncollection", "@label", "Alternative:")
+                    modal: true
 
-                onKeySequenceModified: {print("blah",keySequence)
-                    shortcutDialog.shortcutDelegate.model.alternateShortcut = keySequence;
-                }
+                    contentItem: QQC.Label {
+                        text: stealStandardShortcutDialog.message
+                        Layout.fillWidth: true
+                        wrapMode: Text.WordWrap
+                    }
 
-                onErrorOccurred: (title, message) => {
-                    root.QQC2.ApplicationWindow.showPassiveNotification(title + '\n' + message);
-                }
+                    standardButtons: Kirigami.PromptDialog.Apply | Kirigami.PromptDialog.Cancel
 
-                onShowStealStandardShortcutDialog: (title, message, sequence) => {
-                    stealStandardShortcutDialog.title = title
-                    stealStandardShortcutDialog.message = message;
-                    stealStandardShortcutDialog.sequence = sequence;
-                    stealStandardShortcutDialog.parent = root.QQC2.Overlay.overlay;
-                    stealStandardShortcutDialog.sequenceItem = this;
-                    stealStandardShortcutDialog.openDialog();
+                    onApplied: {
+                        sequenceItem.stealStandardShortcut(sequence);
+                        close();
+                    }
+
+                    onRejected: close()
                 }
             }
 
             footer: RowLayout {
-                QQC2.DialogButtonBox {
+                QQC.DialogButtonBox {
                     Layout.fillWidth: true
-                    standardButtons: QQC2.DialogButtonBox.Close | QQC2.DialogButtonBox.Reset
+                    standardButtons: QQC.DialogButtonBox.Close | QQC.DialogButtonBox.Reset
                     onRejected: shortcutDialog.close();
                     onReset: {
                         root.model.reset(listView.model.mapToSource(listView.model.index(shortcutDialog.index, 0)));
@@ -216,12 +222,12 @@ Kirigami.ScrollablePage {
         }
     }
 
-    footer: QQC2.ToolBar {
+    footer: QQC.ToolBar {
         padding: 0
 
-        contentItem: QQC2.DialogButtonBox {
+        contentItem: QQC.DialogButtonBox {
             padding: Kirigami.Units.largeSpacing
-            standardButtons: QQC2.Dialog.Save | QQC2.Dialog.Reset
+            standardButtons: QQC.Dialog.Save | QQC.Dialog.Reset
 
             onAccepted: {
                 root.model.save()
