@@ -81,10 +81,6 @@ StandardActionCollection::StandardActionCollection(QObject *parent)
     Q_ASSERT(a);
     a->setText(i18nc("Configure [application name]", "Configure %1…", QGuiApplication::applicationDisplayName()));
 
-    a = action(u"KeyBindings"_s);
-    Q_ASSERT(a);
-    a->setText(i18nc("Open keyboard shortcut config dialog", "Configure Keyboard Shortcuts…"));
-
     a = action(u"AboutApp"_s);
     Q_ASSERT(a);
     a->setText(i18nc("About [application name]", "About %1…", QGuiApplication::applicationDisplayName()));
