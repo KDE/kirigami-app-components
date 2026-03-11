@@ -72,63 +72,63 @@ Kirigami.ApplicationWindow {
         id: testPage
         actions: [
             Kirigami.Action {
-                objectName: "hello"
                 AC.ActionCollection.collection: "org.kde.examplecollection"
+                AC.ActionCollection.action: "hello"
                 onTriggered: {
                     print("hello triggered")
                 }
             },
             Kirigami.Action {
-                objectName: "copy"
                 AC.ActionCollection.collection: "org.kde.examplecollection"
+                AC.ActionCollection.action: "copy"
                 onTriggered: {
                     print("copy triggered")
                 }
             },
             Kirigami.Action {
-                displayHint: Kirigami.DisplayHint.AlwaysHide
-                objectName: "Preferences"
                 AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.action: "Preferences"
+                displayHint: Kirigami.DisplayHint.AlwaysHide
                 onTriggered: {
                     print("configure triggered")
                 }
             },
             Kirigami.Action {
-                displayHint: Kirigami.DisplayHint.AlwaysHide
-                objectName: "KeyBindings"
                 AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.action: "KeyBindings"
+                displayHint: Kirigami.DisplayHint.AlwaysHide
             },
             Kirigami.Action {
-                displayHint: Kirigami.DisplayHint.AlwaysHide
-                objectName: "FindAction"
                 AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.action: "FindAction"
+                displayHint: Kirigami.DisplayHint.AlwaysHide
             },
             Kirigami.Action {
                 displayHint: Kirigami.DisplayHint.AlwaysHide
                 separator: true
             },
             Kirigami.Action {
-                displayHint: Kirigami.DisplayHint.AlwaysHide
-                objectName: "ReportBug"
                 AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.action: "ReportBug"
+                displayHint: Kirigami.DisplayHint.AlwaysHide
                 onTriggered: Qt.openUrlExternally("https://bugs.kde.org/enter_bug.cgi?format=guided&product=" + Qt.application.name + "&version=" + AboutData.version)
             },
             Kirigami.Action {
-                displayHint: Kirigami.DisplayHint.AlwaysHide
-                objectName: "Donate"
                 AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.action: "Donate"
+                displayHint: Kirigami.DisplayHint.AlwaysHide
                 onTriggered: Qt.openUrlExternally("https://kde.org/donate/?app=" + Qt.application.name)
             },
             Kirigami.Action {
-                displayHint: Kirigami.DisplayHint.AlwaysHide
-                objectName: "AboutApp"
                 AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.action: "AboutApp"
+                displayHint: Kirigami.DisplayHint.AlwaysHide
                 onTriggered: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"))
             },
             Kirigami.Action {
-                displayHint: Kirigami.DisplayHint.AlwaysHide
-                objectName: "AboutKDE"
                 AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.action: "AboutKDE"
+                displayHint: Kirigami.DisplayHint.AlwaysHide
                 onTriggered: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"))
             }
         ]

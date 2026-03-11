@@ -14,11 +14,9 @@
 class ActionCollectionAttached : public QObject
 {
     Q_OBJECT
-    // QML_NAMED_ELEMENT(ActionCollection)
-    // QML_ATTACHED(ActionCollectionAttached)
-    // QML_UNCREATABLE("Cannot create objects of type ActionCollectionAttached, use it as an attached property")
 
     Q_PROPERTY(QString collection READ collection WRITE setCollection NOTIFY collectionChanged FINAL)
+    Q_PROPERTY(QString action READ action WRITE setAction NOTIFY actionChanged FINAL)
 
 public:
     explicit ActionCollectionAttached(QObject *parent = nullptr);
@@ -27,12 +25,20 @@ public:
     QString collection() const;
     void setCollection(const QString &collection);
 
+    QString action() const;
+    void setAction(const QString &actionName);
+
 Q_SIGNALS:
     void collectionChanged();
+    void actionChanged();
     void shortcutChanged();
 
 private:
+    void rebindActionData();
+
     QString m_collection;
+    QString m_actionName;
+    QPointer<ActionData> m_action;
 };
 
 // Accessible from both C++ and QML
@@ -42,7 +48,6 @@ class ActionCollection : public QObject
     QML_ELEMENT
     QML_ATTACHED(ActionCollectionAttached)
 
-    // FIXME: use just objectName?
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged FINAL)
 

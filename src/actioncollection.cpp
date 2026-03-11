@@ -38,17 +38,45 @@ void ActionCollectionAttached::setCollection(const QString &collection)
 
     m_collection = collection;
 
-    ActionCollection *coll = ActionCollections::self()->collection(collection);
-    const QString name = parent()->objectName();
-
-    if (coll && !name.isEmpty()) {
-        ActionData *ad = coll->action(name);
-        if (ad) {
-            ad->setAction(parent());
-        }
-    }
+    rebindActionData();
 
     Q_EMIT collectionChanged();
+}
+
+QString ActionCollectionAttached::action() const
+{
+    return m_actionName;
+}
+
+void ActionCollectionAttached::setAction(const QString &actionName)
+{
+    if (m_actionName == actionName)
+        return;
+
+    m_actionName = actionName;
+
+    rebindActionData();
+
+    Q_EMIT actionChanged();
+}
+
+void ActionCollectionAttached::rebindActionData()
+{
+    if (m_action) {
+        m_action->setAction(nullptr);
+        m_action.clear();
+    }
+
+    ActionCollection *coll = ActionCollections::self()->collection(m_collection);
+    if (!coll) {
+        return;
+    }
+    m_action = coll->action(m_actionName);
+    if (!m_action) {
+        return;
+    }
+
+    m_action->setAction(parent());
 }
 
 //////////////////////////////////
