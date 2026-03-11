@@ -132,6 +132,7 @@ QQC.Control {
                             currentKeySequence = root.__previousSequence;
                         }
                         mainButton.checked = false;
+                        root.keySequence = currentKeySequence;
                         root.keySequenceModified();
                     }
 

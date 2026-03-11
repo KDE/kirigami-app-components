@@ -111,6 +111,7 @@ Kirigami.ScrollablePage {
             property ActionData actionDescription
             property alias keySequence: keySequenceItem.keySequence
             property alias alternateKeySequence: alternateKeySequenceItem.keySequence
+            // Needs to access shortcutDelegate.model for doing setData on the model
             property Item shortcutDelegate
             property int index: -1
             modal: true
@@ -123,7 +124,7 @@ Kirigami.ScrollablePage {
                     id: keySequenceItem
                     Layout.fillWidth: true
 
-                    defaultKeySequence: shortcutDialog.actionDescription?.defaultShortcut
+                    defaultKeySequence: shortcutDialog.actionDescription?.defaultShortcut ?? ""
 
                     label: i18ndc("kirigami-actioncollection", "@label", "Shortcut:")
                     onKeySequenceModified: {
@@ -148,7 +149,7 @@ Kirigami.ScrollablePage {
                     id: alternateKeySequenceItem
                     Layout.fillWidth: true
 
-                    defaultKeySequence: shortcutDialog.actionDescription?.defaultAlternateShortcut
+                    defaultKeySequence: shortcutDialog.actionDescription?.defaultAlternateShortcut ?? ""
 
                     label: i18ndc("kirigami-actioncollection", "@label", "Alternative:")
 
