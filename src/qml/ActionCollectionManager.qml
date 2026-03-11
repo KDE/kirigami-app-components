@@ -90,7 +90,7 @@ Item {
 
     Component {
         id: actionsDialog
-        AC.KQuickCommandBarPage {
+        AC.ActionsExplorer {
             onClosed: {
                 this.destroy();
             }

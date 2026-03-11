@@ -26,6 +26,7 @@ Kirigami.ApplicationWindow {
 
         AC.ActionCollection {
             name: "org.kde.examplecollection"
+            text: i18n("Example Collection")
             AC.ActionData {
                 name: "hello"
                 text: "Hello"
@@ -53,7 +54,7 @@ Kirigami.ApplicationWindow {
 
         AC.ActionCollection {
             name: "org.kde.examplecollection2"
-            text: Qt.application.name
+            text: i18n("Other Actions")
             AC.ActionData {
                 name: "lorem"
                 text: "Lorem Ipsum"

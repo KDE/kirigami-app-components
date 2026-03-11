@@ -79,6 +79,7 @@ class ActionData : public QAction, public QQmlParserStatus
     // Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged FINAL)
     Q_PROPERTY(IconGroup *icon READ icon CONSTANT FINAL)
     Q_PROPERTY(QVariant defaultShortcut READ defaultShortcut WRITE setDefaultShortcut NOTIFY defaultShortcutChanged FINAL)
+    Q_PROPERTY(QVariant defaultAlternateShortcut READ defaultAlternateShortcut WRITE setDefaultAlternateShortcut NOTIFY defaultAlternateShortcut FINAL)
     // TODO: maybe those can be hidden from QML
     Q_PROPERTY(QVariant shortcut READ variantShortcut WRITE setVariantShortcut NOTIFY shortcutChanged FINAL)
     Q_PROPERTY(QVariant alternateShortcut READ variantAlternateShortcut WRITE setVariantAlternateShortcut NOTIFY alternateShortcutChanged FINAL)
