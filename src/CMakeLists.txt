@@ -34,7 +34,7 @@ ecm_qt_declare_logging_category(KirigamiActionCollection
 
 ecm_target_qml_sources(KirigamiActionCollection SOURCES
     qml/ActionCollectionManager.qml
-    qml/KQuickCommandBarPage.qml
+    qml/ActionsExplorer.qml
     qml/KeySequenceItem.qml
     qml/ShortcutsEditor.qml
 )
