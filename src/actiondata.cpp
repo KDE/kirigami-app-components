@@ -185,7 +185,7 @@ ActionData::ActionData(QObject *parent)
     : QAction(parent)
 {
     m_icon = new IconGroup(this);
-    connect(this, &ActionData::textChanged, this, &ActionData::syncDown);
+    connect(this, &ActionData::changed, this, &ActionData::syncDown);
     connect(this, &ActionData::checkableChanged, this, &ActionData::syncDown);
     connect(this, &ActionData::toggled, this, &ActionData::syncDown);
 }
@@ -217,21 +217,30 @@ IconGroup *ActionData::icon() const
 
 QVariant ActionData::variantShortcut() const
 {
-    return m_shortcut;
+    return shortcut();
 }
 
 void ActionData::setVariantShortcut(const QVariant &shortcut)
 {
-    if (m_shortcut == shortcut) {
+    // TODO: react to QAction::change
+    const auto seq = shortcut.value<QKeySequence>();
+
+    if (seq == QAction::shortcut()) {
         return;
     }
 
-    m_shortcut = shortcut;
+    auto scuts = shortcuts();
+    if (scuts.isEmpty()) {
+        setShortcut(seq);
+    } else {
+        scuts[0] = seq;
+        setShortcuts(scuts);
+    }
 
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
     cg = KConfigGroup(&cg, m_collection->name());
     cg = KConfigGroup(&cg, m_name);
-    if (shortcut != m_defaultShortcut) {
+    if (seq != m_defaultShortcut) {
         cg.writeEntry(QStringLiteral("Shortcut"), variantToKeySequence(shortcut).toString());
     } else {
         cg.deleteEntry(QStringLiteral("Shortcut"));
@@ -246,16 +255,32 @@ void ActionData::setVariantShortcut(const QVariant &shortcut)
 
 QVariant ActionData::variantAlternateShortcut() const
 {
-    return m_alternateShortcut;
+    const auto &scuts = shortcuts();
+    if (scuts.length() >= 2) {
+        return scuts[1];
+    }
+    return QKeySequence();
 }
 
 void ActionData::setVariantAlternateShortcut(const QVariant &shortcut)
 {
-    if (m_alternateShortcut == shortcut) {
+    const auto seq = shortcut.value<QKeySequence>();
+    auto scuts = shortcuts();
+
+    if (scuts.length() > 1 && scuts[1] == seq) {
         return;
     }
 
-    m_alternateShortcut = shortcut;
+    if (scuts.isEmpty()) {
+        scuts.append(QKeySequence());
+    }
+    if (scuts.length() < 2) {
+        scuts.append(seq);
+    } else {
+        scuts[1] = seq;
+    }
+
+    setShortcuts(scuts);
 
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
     cg = KConfigGroup(&cg, m_collection->name());
@@ -280,7 +305,7 @@ void ActionData::setDefaultShortcut(const QVariant &shortcut)
         return;
     }
 
-    m_defaultShortcut = shortcut;
+    m_defaultShortcut = variantToKeySequence(shortcut);
 
     Q_EMIT defaultShortcutChanged(shortcut);
 }
@@ -296,7 +321,7 @@ void ActionData::setDefaultAlternateShortcut(const QVariant &shortcut)
         return;
     }
 
-    m_defaultAlternateShortcut = shortcut;
+    m_defaultAlternateShortcut = variantToKeySequence(shortcut);
 
     Q_EMIT defaultAlternateShortcutChanged(shortcut);
 }
@@ -339,7 +364,6 @@ void ActionData::syncDown()
     if (m_action) {
         QQmlProperty property(m_action, QStringLiteral("fromQAction"));
         if (property.isValid() && property.isWritable()) {
-            qWarning() << "It's a kirigami action";
             property.write(QVariant::fromValue(this));
         } else {
             // It's a plain Templates action
@@ -350,7 +374,7 @@ void ActionData::syncDown()
             property = QQmlProperty(m_action, QStringLiteral("icon.source"));
             property.write(m_icon->source());
             property = QQmlProperty(m_action, QStringLiteral("shortcut"));
-            property.write(m_shortcut);
+            property.write(shortcut());
             property = QQmlProperty(m_action, QStringLiteral("checkable"));
             property.write(isCheckable());
             property = QQmlProperty(m_action, QStringLiteral("checked"));
@@ -390,23 +414,29 @@ void ActionData::componentComplete()
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
     cg = KConfigGroup(&cg, m_collection->name());
     cg = KConfigGroup(&cg, m_name);
-    QString shortcut = variantToKeySequence(m_defaultShortcut).toString();
-    shortcut = cg.readEntry(QStringLiteral("Shortcut"), shortcut);
-
-    if (shortcut != m_shortcut.toString()) {
-        m_shortcut = shortcut;
-        Q_EMIT shortcutChanged(m_shortcut);
+    QKeySequence shortcut;
+    if (cg.hasKey("Shortcut")) {
+        shortcut = cg.readEntry(QStringLiteral("Shortcut"), QString());
+    } else {
+        shortcut = variantToKeySequence(m_defaultShortcut).toString();
     }
 
-    shortcut = variantToKeySequence(m_defaultAlternateShortcut).toString();
-    shortcut = cg.readEntry(QStringLiteral("AlternateShortcut"), shortcut);
-
-    if (shortcut != m_alternateShortcut.toString()) {
-        m_alternateShortcut = shortcut;
-        Q_EMIT alternateShortcutChanged(m_alternateShortcut);
+    QKeySequence alternateShortcut;
+    if (cg.hasKey("AlternateShortcut")) {
+        alternateShortcut = cg.readEntry(QStringLiteral("AlternateShortcut"), QString());
+    } else {
+        alternateShortcut = variantToKeySequence(m_defaultAlternateShortcut).toString();
     }
 
-    setShortcuts({variantToKeySequence(m_shortcut), variantToKeySequence(m_alternateShortcut)});
+    setShortcuts({shortcut, alternateShortcut});
+
+    if (!shortcuts().first().isEmpty()) {
+        Q_EMIT shortcutChanged(shortcut);
+    }
+
+    if (!shortcuts().last().isEmpty()) {
+        Q_EMIT alternateShortcutChanged(alternateShortcut);
+    }
 
     syncDown();
 }

@@ -24,7 +24,7 @@ QQC.Control {
     property alias modifierOnlyAllowed: helper.modifierOnlyAllowed
     property alias modifierlessAllowed: helper.modifierlessAllowed
     property alias multiKeyShortcutsAllowed: helper.multiKeyShortcutsAllowed
-    property var keySequence
+    property string keySequence
     property string defaultKeySequence
 
     /**
@@ -103,11 +103,9 @@ QQC.Control {
                     root.keySequenceModified();
                 }
             }
-            contentItem: QQC.Label {
-                text: helper.keySequenceIsEmpty(root.defaultKeySequence)
-                        ? i18ndc("kirigami-actioncollection", "Default shortcut label when there is no shortcut", "Default: None")
-                        : i18ndc("kirigami-actioncollection", "Default shortcut label", "Default: %1", root.defaultKeySequence)
-            }
+            text: helper.keySequenceIsEmpty(root.defaultKeySequence)
+                ? i18ndc("kirigami-actioncollection", "Default shortcut label when there is no shortcut", "Default: None")
+                : i18ndc("kirigami-actioncollection", "Default shortcut label", "Default: %1", root.defaultKeySequence)
         }
         QQC.RadioDelegate {
             id: customDelegate

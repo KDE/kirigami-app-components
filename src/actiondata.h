@@ -76,14 +76,12 @@ class ActionData : public QAction, public QQmlParserStatus
     QML_ELEMENT
 
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
-    // Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged FINAL)
     Q_PROPERTY(IconGroup *icon READ icon CONSTANT FINAL)
     Q_PROPERTY(QVariant defaultShortcut READ defaultShortcut WRITE setDefaultShortcut NOTIFY defaultShortcutChanged FINAL)
     Q_PROPERTY(QVariant defaultAlternateShortcut READ defaultAlternateShortcut WRITE setDefaultAlternateShortcut NOTIFY defaultAlternateShortcutChanged FINAL)
-    // TODO: maybe those can be hidden from QML
+    // TODO: maybe those can be hidden from C++
     Q_PROPERTY(QVariant shortcut READ variantShortcut WRITE setVariantShortcut NOTIFY shortcutChanged FINAL)
     Q_PROPERTY(QVariant alternateShortcut READ variantAlternateShortcut WRITE setVariantAlternateShortcut NOTIFY alternateShortcutChanged FINAL)
-    // Q_PROPERTY(QList<QKeySequence> alternateShortcuts READ alternateShortcuts WRITE setShortcuts NOTIFY alternateShortcutsChanged)
     Q_PROPERTY(QObject *action READ action() WRITE setAction NOTIFY actionChanged)
     Q_PROPERTY(QActionGroup *actionGroup READ actionGroup WRITE setActionGroupNotify NOTIFY actionGroupChanged)
 public:
@@ -118,7 +116,6 @@ public:
 
 Q_SIGNALS:
     void nameChanged(const QString &name);
-    void textChanged(const QString &text);
     void iconChanged(const QString &icon);
     void shortcutChanged(const QVariant &shortcut);
     void alternateShortcutChanged(const QVariant &shortcut);
@@ -135,11 +132,8 @@ private:
     void syncDown();
     IconGroup *m_icon;
     QString m_name;
-    QString m_text;
-    QVariant m_shortcut = QString();
-    QVariant m_alternateShortcut = QString();
-    QVariant m_defaultShortcut;
-    QVariant m_defaultAlternateShortcut;
+    QKeySequence m_defaultShortcut;
+    QKeySequence m_defaultAlternateShortcut;
     QPointer<QObject> m_action;
     ActionCollection *m_collection;
 };

@@ -83,11 +83,11 @@ Kirigami.ScrollablePage {
                     Accessible.ignored: true
                 }
                 Kirigami.Separator {
-                    visible: model.alternateShortcut.length > 0
+                    //visible: model.alternateShortcut.length > 0
                     Layout.fillHeight: true
                 }
                 QQC.Label {
-                    visible: model.alternateShortcut.length > 0
+                   // visible: model.alternateShortcut.length > 0
                     text: model.alternateShortcut
                     Accessible.ignored: true
                 }
