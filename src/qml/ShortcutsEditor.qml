@@ -59,7 +59,7 @@ Kirigami.ScrollablePage {
             required property var model
 
             width: ListView.view.width
-            text: model.actionDescription.text//actionName.replace('&', '')
+            text: model.actionDescription.text
 
             Accessible.description: model.actionDescription.shortcut
 
@@ -79,15 +79,17 @@ Kirigami.ScrollablePage {
                 }
 
                 QQC.Label {
+                    id: shortcutLabel
                     text: model.shortcut
                     Accessible.ignored: true
                 }
                 Kirigami.Separator {
-                    //visible: model.alternateShortcut.length > 0
+                    visible: alternateShortcutLabel.text.length > 0 && shortcutLabel.text.length > 0
                     Layout.fillHeight: true
                 }
                 QQC.Label {
-                   // visible: model.alternateShortcut.length > 0
+                    id: alternateShortcutLabel
+                    visible: text.length > 0
                     text: model.alternateShortcut
                     Accessible.ignored: true
                 }

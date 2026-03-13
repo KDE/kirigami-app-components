@@ -69,15 +69,17 @@ Kirigami.SearchDialog {
             }
 
             QQC.Label {
+                id: shortcutLabel
                 text: shortcut
                 color: Kirigami.Theme.disabledTextColor
             }
             Kirigami.Separator {
-                visible: alternateShortcut.length > 0
+                visible: alternateShortcutLabel.text.length > 0 && shortcutLabel.text.length > 0
                 Layout.fillHeight: true
             }
             QQC.Label {
-                visible: alternateShortcut.length > 0
+                id: alternateShortcutLabel
+                visible: text.length > 0
                 text: alternateShortcut
                 color: Kirigami.Theme.disabledTextColor
             }
