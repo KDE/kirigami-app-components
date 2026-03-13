@@ -20,6 +20,7 @@ target_sources(KirigamiActionCollection PRIVATE
     actiondata.cpp
     actionmodel.cpp
     keysequencehelper.cpp
+    qmlactiondata.cpp
     standardactioncollection.cpp
 )
 

@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2025 Marco Martin <notmart@gmail.com>
 
 #include "standardactioncollection.h"
-#include "actiondata.h"
+#include "qmlactiondata_p.h"
 
 #include <KLocalizedString>
 #include <KStandardShortcut>
@@ -44,7 +44,7 @@ StandardActionCollection::StandardActionCollection(QObject *parent)
     setName(u"org.kde.standardactions"_s);
     setText(QGuiApplication::applicationDisplayName());
 
-    ActionData *a = new ActionData(this);
+    QmlActionData *a = new QmlActionData(this);
     a->classBegin();
     a->setName(u"FindAction"_s);
     a->setText(i18nc("Opens the actions search dialog", "Find Action…"));
@@ -60,7 +60,7 @@ StandardActionCollection::StandardActionCollection(QObject *parent)
                                                                           KStandardShortcut::AboutApp,
                                                                           KStandardShortcut::AboutKDE};
     for (const auto id : standardShortcuts) {
-        ActionData *a = new ActionData(this);
+        QmlActionData *a = new QmlActionData(this);
         a->classBegin();
         a->setName(KStandardShortcut::name(id));
         a->icon()->setName(iconName(id));
