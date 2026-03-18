@@ -61,6 +61,20 @@ void ActionCollection::setText(const QString &text)
     Q_EMIT textChanged(text);
 }
 
+QAction *ActionCollection::createAction(const QString &name, const QString &iconName, const QString &text)
+{
+    if (d->m_actionMap.contains(name)) {
+        return nullptr;
+    }
+
+    auto action = new ActionData(this);
+    action->setName(name);
+    action->icon()->setName(iconName);
+    action->setText(text);
+
+    return action;
+}
+
 QAction *ActionCollection::action(const QString &name)
 {
     return d->m_actionMap.value(name);

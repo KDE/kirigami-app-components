@@ -58,10 +58,24 @@ public:
     void setText(const QString &text);
 
     /*!
+     * Creates a new action and inserts it in this collection.
+     *
+     * \a name The unique name for the new action. No actions with that name should exist.
+     * \a iconName Name for the icon: should be a name present in the current icon theme.
+     * \a text The user readable text label for the new action.
+     *
+     * Recturns the newly created QAction, or nullptr if an action with the same name was already present.
+     */
+    QAction *createAction(const QString &name, const QString &iconName, const QString &text);
+
+    /*!
      * Returns an action given its unique name.
      * If no action with that name exist, the function will return nullptr
+     *
+     * \a name The unique name fir the action.
      */
     Q_INVOKABLE QAction *action(const QString &name);
+
     /*!
      * All known actions in this collection.
      * */

@@ -41,6 +41,14 @@ public:
     static ActionCollections *self();
 
     /*!
+     * Creates a new collection identified by the given unique name,
+     * and the given user readable text label.
+     * Returns the created collection, or nullptr if a collection with the
+     * given name was already present.
+     */
+    ActionCollection *createCollection(const QString &name, const QString &text);
+
+    /*!
      * Returns the ActionCollection instance uniquely identified by the provided name.
      * If no collection with this name exists, nullptr will be returned.
      */

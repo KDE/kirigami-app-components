@@ -73,6 +73,19 @@ ActionCollection *ActionCollections::collection(const QString &name)
     return d->m_collections.value(name);
 }
 
+ActionCollection *ActionCollections::createCollection(const QString &name, const QString &text)
+{
+    if (d->m_collections.contains(name)) {
+        return nullptr;
+    }
+
+    QmlActionCollection *ac = new QmlActionCollection(this);
+    ac->setName(name);
+    ac->setText(text);
+    d->m_collections[name] = ac;
+    return ac;
+}
+
 QList<ActionCollection *> ActionCollections::collections()
 {
     QList<ActionCollection *> colls;
