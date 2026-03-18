@@ -1,7 +1,10 @@
-// SPDX-License-Identifier: GPL-2.0-or-later
+// SPDX-License-Identifier: LGPL-2.1-or-later
 // SPDX-FileCopyrightText: 2025 Marco Martin <notmart@gmail.com>
 
 #include "actioncollection.h"
+#include "actioncollection_p.h"
+#include "actioncollections.h"
+#include "actioncollections_p.h"
 #include "actiondata.h"
 #include "standardactioncollection.h"
 
@@ -15,87 +18,17 @@
 
 using namespace Qt::StringLiterals;
 
-Q_GLOBAL_STATIC(ActionCollections, s_actionCollectionStorage)
-
-ActionCollectionAttached::ActionCollectionAttached(QObject *parent)
-    : QObject(parent)
+ActionCollectionPrivate::ActionCollectionPrivate()
 {
 }
 
-ActionCollectionAttached::~ActionCollectionAttached()
+ActionCollectionPrivate::~ActionCollectionPrivate()
 {
-}
-
-QString ActionCollectionAttached::collection() const
-{
-    return m_collection;
-}
-
-void ActionCollectionAttached::setCollection(const QString &collection)
-{
-    if (m_collection == collection)
-        return;
-
-    m_collection = collection;
-
-    rebindActionData();
-
-    Q_EMIT collectionChanged();
-}
-
-QString ActionCollectionAttached::action() const
-{
-    return m_actionName;
-}
-
-void ActionCollectionAttached::setAction(const QString &actionName)
-{
-    if (m_actionName == actionName)
-        return;
-
-    m_actionName = actionName;
-
-    rebindActionData();
-
-    Q_EMIT actionChanged();
-}
-
-void ActionCollectionAttached::rebindActionData()
-{
-    if (m_action) {
-        m_action->setAction(nullptr);
-        m_action.clear();
-    }
-
-    ActionCollection *coll = ActionCollections::self()->collection(m_collection);
-    if (!coll) {
-        return;
-    }
-    m_action = coll->action(m_actionName);
-    if (!m_action) {
-        return;
-    }
-
-    m_action->setAction(parent());
-}
-
-//////////////////////////////////
-
-QString decodeStandardShortcut(const QString &shortcut)
-{
-    // Is the default shortcut a named one, such as "Copy", "Back" etc ?
-    QMetaEnum me = QMetaEnum::fromType<QKeySequence::StandardKey>();
-    for (int i = 0; i < me.keyCount(); ++i) {
-        if (QString::fromUtf8(me.key(i)).toLower() == shortcut) {
-            return QKeySequence(QKeySequence::StandardKey(me.value(i))).toString();
-        }
-    }
-
-    return shortcut;
 }
 
 ActionCollection::ActionCollection(QObject *parent)
     : QObject(parent)
+    , d(std::make_unique<ActionCollectionPrivate>())
 {
 }
 
@@ -105,257 +38,39 @@ ActionCollection::~ActionCollection()
 
 QString ActionCollection::name() const
 {
-    return m_name;
-}
-
-void ActionCollection::setName(const QString &name)
-{
-    if (name == m_name) {
-        return;
-    }
-
-    m_name = name;
-
-    ActionCollections::self()->insertCollection(this);
-
-    Q_EMIT nameChanged(name);
+    return d->m_name;
 }
 
 QString ActionCollection::text() const
 {
-    if (m_text.isEmpty()) {
-        return m_name;
+    if (d->m_text.isEmpty()) {
+        return d->m_name;
     }
 
-    return m_text;
+    return d->m_text;
 }
 
 void ActionCollection::setText(const QString &text)
 {
-    if (text == m_text) {
+    if (text == d->m_text) {
         return;
     }
 
-    m_text = text;
+    d->m_text = text;
 
     Q_EMIT textChanged(text);
 }
 
-ActionData *ActionCollection::action(const QString &name)
+QAction *ActionCollection::action(const QString &name)
 {
-    return m_actionMap.value(name);
+    return d->m_actionMap.value(name);
 }
 
-void ActionCollection::insertAction(ActionData *action)
+QList<QAction *> ActionCollection::actions() const
 {
-    if (!action) {
-        return;
-    }
-    const QString name = action->name();
-    if (m_actionMap.contains(name)) {
-        return;
-    }
-
-    m_actions.append(action);
-    m_actionMap[name] = action;
-
-    connect(action, &QObject::destroyed, this, [this, action, name]() {
-        m_actionMap.remove(name);
-        m_actions.removeAll(action);
-    });
-
-    if (action->action()) {
-        Q_ASSERT(!m_activeActions.contains(action));
-        const int pos = m_activeActions.count();
-        Q_EMIT aboutToAddActionInstance(pos, action);
-        m_activeActions.append(action);
-        Q_EMIT actionInstanceAdded(pos, action);
-    }
-
-    connect(action, &ActionData::actionChanged, this, [this, action](QObject *actionInstance) {
-        if (actionInstance) {
-            Q_ASSERT(!m_activeActions.contains(action));
-            const int pos = m_activeActions.count();
-            Q_EMIT aboutToAddActionInstance(pos, action);
-            m_activeActions.append(action);
-            Q_EMIT actionInstanceAdded(pos, action);
-        } else {
-            const int pos = m_activeActions.indexOf(action);
-            Q_ASSERT(pos >= 0);
-            Q_EMIT aboutToRemoveActionInstance(pos, action);
-            m_activeActions.removeAll(action);
-            Q_EMIT actionInstanceRemoved(pos, action);
-        }
-    });
-
-    action->setParent(this);
-}
-
-QList<ActionData *> ActionCollection::actions() const
-{
-    return m_actions;
-}
-
-QList<ActionData *> ActionCollection::activeActions() const
-{
-    // TODO
-    return m_actions;
-}
-
-ActionCollectionAttached *ActionCollection::qmlAttachedProperties(QObject *object)
-{
-    return new ActionCollectionAttached(object);
-}
-
-void ActionCollection::actions_append(QQmlListProperty<ActionData> *prop, ActionData *action)
-{
-    // This can only be called from QML
-    ActionCollection *coll = static_cast<ActionCollection *>(prop->object);
-    if (!coll) {
-        return;
-    }
-
-    const QString name = action->name();
-    if (coll->m_actionMap.contains(name) && !name.isEmpty()) { // FIXME: name should be checked later
-        QQmlError error;
-        error.setDescription(QStringLiteral("ActionData name ") % name % QStringLiteral(" is not unique"));
-        error.setMessageType(QtFatalMsg);
-        QQmlContext *context = qmlContext(coll);
-        if (context) {
-            error.setUrl(context->baseUrl());
-        }
-        qmlWarning(nullptr, error);
-        qFatal();
-    }
-    coll->m_actions.append(action);
-    coll->m_actionMap[name] = action;
-
-    connect(action, &QObject::destroyed, coll, [coll, action, name]() {
-        coll->m_actionMap.remove(name);
-        coll->m_actions.removeAll(action);
-    });
-
-    if (action->action()) {
-        Q_ASSERT(!coll->m_activeActions.contains(action));
-        const int pos = coll->m_activeActions.count();
-        Q_EMIT coll->aboutToAddActionInstance(pos, action);
-        coll->m_activeActions.append(action);
-        Q_EMIT coll->actionInstanceAdded(pos, action);
-    }
-
-    connect(action, &ActionData::actionChanged, coll, [coll, action](QObject *actionInstance) {
-        if (actionInstance) {
-            Q_ASSERT(!coll->m_activeActions.contains(action));
-            const int pos = coll->m_activeActions.count();
-            Q_EMIT coll->aboutToAddActionInstance(pos, action);
-            coll->m_activeActions.append(action);
-            Q_EMIT coll->actionInstanceAdded(pos, action);
-        } else {
-            const int pos = coll->m_activeActions.indexOf(action);
-            Q_ASSERT(pos >= 0);
-            Q_EMIT coll->aboutToRemoveActionInstance(pos, action);
-            coll->m_activeActions.removeAll(action);
-            Q_EMIT coll->actionInstanceRemoved(pos, action);
-        }
-    });
-
-    action->setParent(coll);
-}
-
-qsizetype ActionCollection::actions_count(QQmlListProperty<ActionData> *prop)
-{
-    ActionCollection *coll = static_cast<ActionCollection *>(prop->object);
-    if (!coll) {
-        return 0;
-    }
-
-    return coll->m_actions.count();
-}
-
-ActionData *ActionCollection::actions_at(QQmlListProperty<ActionData> *prop, qsizetype index)
-{
-    ActionCollection *coll = static_cast<ActionCollection *>(prop->object);
-    if (!coll) {
-        return nullptr;
-    }
-
-    if (index < 0 || index >= coll->m_actions.count()) {
-        return nullptr;
-    }
-    return coll->m_actions.value(index);
-}
-
-void ActionCollection::actions_clear(QQmlListProperty<ActionData> *prop)
-{
-    ActionCollection *coll = static_cast<ActionCollection *>(prop->object);
-    if (!coll) {
-        return;
-    }
-
-    coll->m_actionMap.clear();
-    coll->m_actions.clear();
-}
-
-QQmlListProperty<ActionData> ActionCollection::actionsProperty()
-{
-    return QQmlListProperty<ActionData>(this, nullptr, actions_append, actions_count, actions_at, actions_clear);
-}
-
-///////////////////////////////////
-
-ActionCollections::ActionCollections(QObject *parent)
-    : QObject(parent)
-{
-}
-
-ActionCollections::~ActionCollections()
-{
-}
-
-ActionCollections *ActionCollections::self()
-{
-    return s_actionCollectionStorage;
-}
-
-void ActionCollections::insertCollection(ActionCollection *collection)
-{
-    if (m_collections.contains(collection->name())) {
-        QQmlError error;
-        error.setDescription(QStringLiteral("Error: collection name %1 already present.").arg(collection->name()));
-        error.setMessageType(QtFatalMsg);
-        QQmlContext *context = qmlContext(this);
-        if (context) {
-            error.setUrl(context->baseUrl());
-        }
-        qmlWarning(nullptr, error);
-        qFatal();
-    }
-
-    // This can happen when renaming a collection
-    const QStringList keys = m_collections.keys(collection);
-    Q_ASSERT(keys.length() < 2);
-    if (keys.length() > 0) {
-        m_collections.remove(keys.first());
-    }
-
-    m_collections.insert(collection->name(), collection);
-
-    connect(collection, &QObject::destroyed, this, [this, collection]() {
-        m_collections.remove(collection->name());
-        Q_EMIT collectionRemoved(collection);
-    });
-
-    Q_EMIT collectionInserted(collection);
-}
-
-ActionCollection *ActionCollections::collection(const QString &name)
-{
-    return m_collections.value(name);
-}
-
-QList<ActionCollection *> ActionCollections::collections()
-{
-    return m_collections.values();
+    QList<QAction *> qActions;
+    std::copy(d->m_actions.constBegin(), d->m_actions.constEnd(), std::back_inserter(qActions));
+    return qActions;
 }
 
 #include "moc_actioncollection.cpp"

@@ -21,7 +21,7 @@ include(KDECMakeSettings)
 include(KDEGitCommitHooks)
 
 include(ECMGenerateExportHeader)
-
+include(ECMGenerateHeaders)
 include(ECMAddTests)
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
@@ -41,14 +41,6 @@ ecm_set_disabled_deprecation_versions(
     QT 6.10.0
 )
 
-ecm_setup_version(
-    PROJECT
-    VARIABLE_PREFIX KF6KirigamiActionCollection
-    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigamiactioncollection_version.h"
-    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfigVersion.cmake"
-    SOVERSION 1
-)
-
 add_subdirectory(src)
 
 # TODO
@@ -60,18 +52,7 @@ add_subdirectory(src)
 #     add_subdirectory(autotests)
 # endif()
 
-configure_package_config_file(
-    "KF6KirigamiActionCollectionConfig.cmake.in"
-    "KF6KirigamiActionCollectionConfig.cmake"
-    INSTALL_DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection
-)
 
-install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfigVersion.cmake"
-    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection
-    COMPONENT Devel
-)
 
 install(EXPORT KF6KirigamiActionCollectionTargets DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection"
         FILE KF6KirigamiActionCollectionTargets.cmake NAMESPACE KF6:: COMPONENT Devel)
