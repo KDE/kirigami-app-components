@@ -30,7 +30,7 @@ class KIRIGAMIACTIONCOLLECTION_EXPORT ActionCollection : public QObject
 {
     Q_OBJECT
     /*!
-     * \qmlproperty bool ActionCollection::text
+     * \qmlproperty string ActionCollection::text
      *
      * User-readable label for this collection.
      * This will be visible in the shortcut configuration page.

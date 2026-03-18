@@ -42,15 +42,77 @@ private:
     QPointer<ActionData> m_action;
 };
 
-// Accessible from both C++ and QML
+/*!
+ * \qmltype ActionCollection
+ * \inqmlmodule org.kde.kirigami.actioncollection
+ * \nativetype ActionCollection
+ *
+ * \brief ActionCollection manages a set of ActionData objects.
+ *
+ * It allows them to be grouped for organized presentation of configuration to the user and
+ * saving + loading of shortcuts configuration.
+ *
+ * \code
+ * import org.kde.kirigami.actioncollection as AC
+ * ...
+ * AC.ActionCollection {
+ *     name: "EditActions"
+ *     AC.ActionData {
+ *        name: "exampleAction"
+ *        icon.name: "edit-copy"
+ *        text: "Copy"
+ *        defaultShortcut: StandardKey.Copy
+ *     }
+ *     ...
+ * }
+ * ...
+ * Kirigami.Action {
+ *   id: copyAction
+ *   AC.ActionCollection.collection: "EditActions"
+ *   AC.ActionCollection.action: "exampleAction"
+ *   onTriggered: {
+ *       ...
+ *   }
+ * }
+ * \endcode
+ */
 class QmlActionCollection : public ActionCollection
 {
     Q_OBJECT
     QML_NAMED_ELEMENT(ActionCollection)
     QML_ATTACHED(ActionCollectionAttached)
 
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    /*!
+     * \qmlproperty string name
+     *
+     * The unique name of the collection within the whole application.
+     * It is required and should be set only once
+     */
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL REQUIRED)
 
+    /*!
+     * \qmlproperty list<ActionData> actions
+     *
+     * All the actions this collection contains.
+     * It's the default property, so actionData instances can be declared just as children.
+     * \code
+     * AC.ActionCollection {
+     *     name: "EditActions"
+     *     AC.ActionData {
+     *        name: "exampleAction"
+     *        icon.name: "edit-copy"
+     *        text: "Copy"
+     *        defaultShortcut: StandardKey.Copy
+     *     }
+     *     AC.ActionData {
+     *        name: "backAction"
+     *        icon.name: "go previous"
+     *        text: "Back"
+     *     }
+     *     ...
+     * }
+     * \endcode
+     */
     Q_PROPERTY(QQmlListProperty<ActionData> actions READ actionsProperty CONSTANT FINAL)
 
     Q_CLASSINFO("DefaultProperty", "actions")
