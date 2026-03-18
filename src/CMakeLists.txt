@@ -1,5 +1,6 @@
 
 add_library(KirigamiActionCollection)
+add_library(KF6::KirigamiActionCollection ALIAS KirigamiActionCollection)
 set_target_properties(KirigamiActionCollection PROPERTIES
     SOVERSION ${KF6KirigamiActionCollection_SOVERSION}
     VERSION ${KF6KirigamiActionCollection_VERSION}
@@ -17,9 +18,11 @@ ecm_add_qml_module(KirigamiActionCollection
 
 target_sources(KirigamiActionCollection PRIVATE
     actioncollection.cpp
+    actioncollections.cpp
     actiondata.cpp
     actionmodel.cpp
     keysequencehelper.cpp
+    qmlactioncollection.cpp
     standardactioncollection.cpp
 )
 
@@ -68,6 +71,54 @@ PRIVATE
     KF6::ConfigGui
     KF6::GuiAddons
     KF6::I18n
+)
+
+ecm_setup_version(
+    PROJECT
+    VARIABLE_PREFIX KF6KirigamiActionCollection
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigamiactioncollection_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfigVersion.cmake"
+    SOVERSION 1
+)
+
+
+configure_package_config_file(
+    "KF6KirigamiActionCollectionConfig.cmake.in"
+    "KF6KirigamiActionCollectionConfig.cmake"
+    INSTALL_DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection
+)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfigVersion.cmake"
+    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection
+    COMPONENT Devel
+)
+
+ecm_generate_headers(KirigamiActionCollection_CamelCase_HEADERS
+    HEADER_NAMES
+    ActionCollection
+    ActionCollections
+    REQUIRED_HEADERS KirigamiActionCollection_HEADERS
+)
+
+install(EXPORT KF6KirigamiActionCollectionTargets
+    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection
+    FILE KF6KirigamiActionCollectionTargets.cmake
+    NAMESPACE KF6::
+)
+
+install(FILES
+    ${KirigamiActionCollection_HEADERS}
+    ${CMAKE_CURRENT_BINARY_DIR}/kirigamiactioncollection_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/kirigamiactioncollection_version.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami/ActionCollection # prefix matching C++ namespace
+    COMPONENT Devel
+)
+install(FILES
+    ${KirigamiActionCollection_CamelCase_HEADERS}
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami/ActionCollection # prefix matching C++ namespace
+    COMPONENT Devel
 )
 
 ecm_finalize_qml_module(KirigamiActionCollection DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KF6KirigamiActionCollectionTargets)

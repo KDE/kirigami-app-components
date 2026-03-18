@@ -1,8 +1,8 @@
-// SPDX-License-Identifier: GPL-2.0-or-later
+// SPDX-License-Identifier: LGPL-2.1-or-later
 // SPDX-FileCopyrightText: 2025 Marco Martin <notmart@gmail.com>
 
 #include "actiondata.h"
-#include "actioncollection.h"
+#include "qmlactioncollection_p.h"
 
 #include <QKeySequence>
 #include <QQmlContext>
@@ -392,7 +392,7 @@ void ActionData::syncUp()
 
 void ActionData::classBegin()
 {
-    m_collection = qobject_cast<ActionCollection *>(parent());
+    m_collection = qobject_cast<QmlActionCollection *>(parent());
     if (!m_collection) {
         QQmlError error;
         error.setDescription(QStringLiteral("ActionData must be a child of ActionCollection."));

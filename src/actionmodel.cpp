@@ -1,9 +1,10 @@
-// SPDX-License-Identifier: GPL-2.0-or-later
+// SPDX-License-Identifier: LGPL-2.1-or-later
 // SPDX-FileCopyrightText: 2025 Marco Martin <notmart@gmail.com>
 
 #include "actionmodel.h"
-#include "actioncollection.h"
+#include "actioncollections_p.h"
 #include "actiondata.h"
+#include "qmlactioncollection_p.h"
 
 #include <QKeySequence>
 #include <QPersistentModelIndex>
@@ -15,8 +16,9 @@ class ActionModelPrivate
 {
 public:
     ActionModelPrivate(ActionModel *model);
-    void connectCollection(ActionCollection *collection);
-    qsizetype collectionPosition(ActionCollection *collection) const;
+    void connectCollection(QmlActionCollection *collection);
+    qsizetype collectionPosition(QmlActionCollection *collection) const;
+    QList<QmlActionCollection *> collections() const;
 
     ActionModel *q;
     QString m_collectionName;
@@ -30,28 +32,32 @@ ActionModelPrivate::ActionModelPrivate(ActionModel *model)
 {
 }
 
-void ActionModelPrivate::connectCollection(ActionCollection *collection)
+void ActionModelPrivate::connectCollection(QmlActionCollection *collection)
 {
-    QObject::connect(collection, &ActionCollection::aboutToAddActionInstance, q, [this, collection](int position, QObject *action) {
+    QObject::connect(collection, &QmlActionCollection::aboutToAddActionInstance, q, [this, collection](int position, QObject *action) {
+        Q_UNUSED(action)
         if (m_shownActions != ActionModel::ActiveActions) {
             return;
         }
         const int cp = collectionPosition(collection);
         q->beginInsertRows(QModelIndex(), cp + position, cp + position);
     });
-    QObject::connect(collection, &ActionCollection::actionInstanceAdded, q, [this](int position, QObject *action) {
+    QObject::connect(collection, &QmlActionCollection::actionInstanceAdded, q, [this](int position, QObject *action) {
+        Q_UNUSED(position)
+        Q_UNUSED(action)
         if (m_shownActions != ActionModel::ActiveActions) {
             return;
         }
         q->endInsertRows();
     });
-    QObject::connect(collection, &ActionCollection::aboutToRemoveActionInstance, q, [this](int position, QObject *action) {
+    QObject::connect(collection, &QmlActionCollection::aboutToRemoveActionInstance, q, [this](int position, QObject *action) {
+        Q_UNUSED(action)
         if (m_shownActions != ActionModel::ActiveActions) {
             return;
         }
         q->beginRemoveRows(QModelIndex(), position, position);
     });
-    QObject::connect(collection, &ActionCollection::actionInstanceRemoved, q, [this](int position, QObject *action) {
+    QObject::connect(collection, &QmlActionCollection::actionInstanceRemoved, q, [this](int position, QObject *action) {
         Q_UNUSED(position);
         Q_UNUSED(action);
         if (m_shownActions != ActionModel::ActiveActions) {
@@ -61,11 +67,11 @@ void ActionModelPrivate::connectCollection(ActionCollection *collection)
     });
 }
 
-qsizetype ActionModelPrivate::collectionPosition(ActionCollection *collection) const
+qsizetype ActionModelPrivate::collectionPosition(QmlActionCollection *collection) const
 {
     qsizetype collectionPosition = 0;
 
-    const QList<ActionCollection *> collections = ActionCollections::self()->collections();
+    const QList<QmlActionCollection *> &collections = ActionCollections::self()->d->m_collections.values();
 
     for (auto *coll : collections) {
         if (coll == collection) {
@@ -81,19 +87,24 @@ qsizetype ActionModelPrivate::collectionPosition(ActionCollection *collection) c
     return collectionPosition;
 }
 
+QList<QmlActionCollection *> ActionModelPrivate::collections() const
+{
+    return ActionCollections::self()->d->m_collections.values();
+}
+
 ////////////////////////////////////////
 
 ActionModel::ActionModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new ActionModelPrivate(this))
 {
-    const QList<ActionCollection *> collections = ActionCollections::self()->collections();
+    const QList<QmlActionCollection *> &collections = d->collections();
 
     for (auto *coll : collections) {
         d->connectCollection(coll);
     }
     connect(ActionCollections::self(), &ActionCollections::collectionInserted, this, [this](ActionCollection *collection) {
-        d->connectCollection(collection);
+        d->connectCollection(qobject_cast<QmlActionCollection *>(collection));
     });
 }
 
@@ -191,15 +202,15 @@ int ActionModel::rowCount(const QModelIndex &parent) const
         return 0;
     }
 
-    const QList<ActionCollection *> collections = ActionCollections::self()->collections();
+    const QList<QmlActionCollection *> &collections = d->collections();
 
     if (d->m_shownActions == ActiveActions) {
-        return std::accumulate(collections.constBegin(), collections.constEnd(), 0, [](int sum, ActionCollection *coll) {
+        return std::accumulate(collections.constBegin(), collections.constEnd(), 0, [](int sum, QmlActionCollection *coll) {
             return sum + coll->actions().count();
         });
     }
 
-    return std::accumulate(collections.constBegin(), collections.constEnd(), 0, [](int sum, ActionCollection *coll) {
+    return std::accumulate(collections.constBegin(), collections.constEnd(), 0, [](int sum, QmlActionCollection *coll) {
         return sum + coll->actions().count();
     });
 }
@@ -209,9 +220,9 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
     Q_ASSERT(checkIndex(index, QAbstractItemModel::CheckIndexOption::IndexIsValid));
 
     qsizetype actualRow = index.row();
-    ActionCollection *collection = nullptr;
+    QmlActionCollection *collection = nullptr;
     ActionData *action;
-    const QList<ActionCollection *> collections = ActionCollections::self()->collections();
+    const QList<QmlActionCollection *> &collections = d->collections();
     if (d->m_shownActions == ActiveActions) {
         for (auto *coll : collections) {
             if (coll->activeActions().count() > actualRow) {

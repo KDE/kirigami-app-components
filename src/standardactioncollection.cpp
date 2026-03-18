@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0-or-later
+// SPDX-License-Identifier: LGPL-2.1-or-later
 // SPDX-FileCopyrightText: 2025 Marco Martin <notmart@gmail.com>
 
 #include "standardactioncollection.h"
@@ -39,7 +39,7 @@ QString iconName(KStandardShortcut::StandardShortcut id)
 }
 
 StandardActionCollection::StandardActionCollection(QObject *parent)
-    : ActionCollection(parent)
+    : QmlActionCollection(parent)
 {
     setName(u"org.kde.standardactions"_s);
     setText(QGuiApplication::applicationDisplayName());
@@ -77,15 +77,15 @@ StandardActionCollection::StandardActionCollection(QObject *parent)
         a->componentComplete();
     }
 
-    a = action(u"KeyBindings"_s);
+    a = qobject_cast<ActionData *>(action(u"KeyBindings"_s));
     Q_ASSERT(a);
     a->setText(i18nc("Open keyboard shortcut config dialog", "Configure Keyboard Shortcuts…"));
 
-    a = action(u"Preferences"_s);
+    a = qobject_cast<ActionData *>(action(u"Preferences"_s));
     Q_ASSERT(a);
     a->setText(i18nc("Configure [application name]", "Configure %1…", QGuiApplication::applicationDisplayName()));
 
-    a = action(u"AboutApp"_s);
+    a = qobject_cast<ActionData *>(action(u"AboutApp"_s));
     Q_ASSERT(a);
     a->setText(i18nc("About [application name]", "About %1…", QGuiApplication::applicationDisplayName()));
 }
