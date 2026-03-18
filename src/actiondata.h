@@ -154,7 +154,7 @@ class ActionData : public QAction, public QQmlParserStatus
      * or it can be described with a string containing a sequence of up to four
      * key presses that are needed to trigger the shortcut.
      * This will be the shortcut of the action in the app, unless the user explicitly
-     * confugured to use another one.
+     * configured to use another one.
 
      * \code
      * ActionData {
@@ -165,22 +165,25 @@ class ActionData : public QAction, public QQmlParserStatus
     Q_PROPERTY(QVariant defaultAlternateShortcut READ defaultAlternateShortcut WRITE setDefaultAlternateShortcut NOTIFY defaultAlternateShortcutChanged FINAL)
 
     /*!
-     * \qmlproperty keysequence defaultShortcut
-
-     * This property holds the action's default shortcut. The key sequence can be set
-     * to one of the \l{QKeySequence::StandardKey}{standard keyboard shortcuts},
-     * or it can be described with a string containing a sequence of up to four
-     * key presses that are needed to trigger the shortcut.
-     * This will be the shortcut of the action in the app, unless the user explicitly
-     * confugured to use another one.
-
-     * \code
-     * ActionData {
-     *     defaultShortcut: "Ctrl+E,Ctrl+W"
-     * }
-     * \endcode
+     * \qmlproperty keysequence shortcut
+     *
+     * TODO: this property is mostly internal used by the shortcut config UI: could this be removed?
+     * This property holds the action's current shortcut. It will be the same as defaultShortcut if
+     * no custom one has been set.
+     * Writing that property will write the new shortcut on a config file, and will be restored on the next
+     * application startup.
      */
     Q_PROPERTY(QVariant shortcut READ variantShortcut WRITE setVariantShortcut NOTIFY shortcutChanged FINAL)
+
+    /*!
+     * \qmlproperty keysequence alternateShortcut
+     *
+     * TODO: like above
+     * This property holds the action's current alternate shortcut. It will be the same as defaultShortcut if
+     * no custom one has been set.
+     * Writing that property will write the new shortcut on a config file, and will be restored on the next
+     * application startup.
+     */
     Q_PROPERTY(QVariant alternateShortcut READ variantAlternateShortcut WRITE setVariantAlternateShortcut NOTIFY alternateShortcutChanged FINAL)
 
     /*!
