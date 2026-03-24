@@ -46,7 +46,12 @@ void ActionCollectionsPrivate::insertCollection(QmlActionCollection *collection)
     m_collections.insert(collection->name(), collection);
 
     QObject::connect(collection, &QObject::destroyed, q, [this, collection]() {
-        m_collections.remove(collection->name());
+        for (auto it = m_collections.begin(); it != m_collections.end(); ++it) {
+            if (it.value() == collection) {
+                m_collections.erase(it);
+                break;
+            }
+        }
         Q_EMIT q->collectionRemoved(collection);
     });
 
