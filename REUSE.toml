@@ -1,0 +1,20 @@
+version = 1
+SPDX-PackageName = "ActionCollection"
+SPDX-PackageSupplier = "Marco Martin <mart@kde.org>"
+SPDX-PackageDownloadLocation = "https://invent.kde.org/libraries/actioncollection"
+
+[[annotations]]
+path = ["README.md", "src/autotests/data/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Marco Martin <mart@kde.org>"
+SPDX-License-Identifier = "CC0-1.0"
+
+path = ["src/KF6KirigamiActionCollectionConfig.cmake.in"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Marco Martin <mart@kde.org>"
+SPDX-License-Identifier = "BSD-3-Clause"
+
+path = ["src/kirigamiactioncollection.qdocconf"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Marco Martin <mart@kde.org>"
+SPDX-License-Identifier = "FSFAP"
