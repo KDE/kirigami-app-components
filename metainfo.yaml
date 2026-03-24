@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: FSFAP
+# SPDX-FileCopyrightText: 2026 Marco Martin <notmart@gmail.com>
 description: Kirigami addon module to define action collections with configurable shortcuts
 tier: 1
 type: functional

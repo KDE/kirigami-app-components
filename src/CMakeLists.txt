@@ -1,4 +1,5 @@
-
+# SPDX-FileCopyrightText: 2026 Marco Martin <notmart@gmail.com>
+# SPDX-License-Identifier: BSD-3-Clause
 add_library(KirigamiActionCollection)
 add_library(KF6::KirigamiActionCollection ALIAS KirigamiActionCollection)
 set_target_properties(KirigamiActionCollection PROPERTIES

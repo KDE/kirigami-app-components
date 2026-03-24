@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Marco Martin <notmart@gmail.com>
+# SPDX-License-Identifier: BSD-3-Clause
 cmake_minimum_required(VERSION 3.16)
 
 set(KF_VERSION "6.21.0") # handled by release scripts
