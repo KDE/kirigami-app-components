@@ -111,25 +111,21 @@ Kirigami.ApplicationWindow {
                 AC.ActionCollection.collection: "org.kde.standardactions"
                 AC.ActionCollection.action: "ReportBug"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
-                onTriggered: Qt.openUrlExternally("https://bugs.kde.org/enter_bug.cgi?format=guided&product=" + Qt.application.name + "&version=" + AboutData.version)
             },
             Kirigami.Action {
                 AC.ActionCollection.collection: "org.kde.standardactions"
                 AC.ActionCollection.action: "Donate"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
-                onTriggered: Qt.openUrlExternally("https://kde.org/donate/?app=" + Qt.application.name)
             },
             Kirigami.Action {
                 AC.ActionCollection.collection: "org.kde.standardactions"
                 AC.ActionCollection.action: "AboutApp"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
-                onTriggered: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"))
             },
             Kirigami.Action {
                 AC.ActionCollection.collection: "org.kde.standardactions"
                 AC.ActionCollection.action: "AboutKDE"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
-                onTriggered: root.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"))
             }
         ]
     }

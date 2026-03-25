@@ -62,6 +62,10 @@ ecm_generate_qdoc(KirigamiActionCollection kirigamiactioncollection.qdocconf)
 
 target_include_directories(KirigamiActionCollection PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
+target_include_directories(KirigamiActionCollection
+    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami;${KDE_INSTALL_INCLUDEDIR_KF}/Kirigami/ActionCollection>"
+)
+
 target_link_libraries(KirigamiActionCollection PUBLIC
     Qt6::Core
     Qt6::Qml

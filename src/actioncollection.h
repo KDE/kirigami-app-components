@@ -4,12 +4,11 @@
 #ifndef ACTIONCOLLECTION_H
 #define ACTIONCOLLECTION_H
 
+#include <QAction>
 #include <QObject>
 #include <QQmlEngine>
 #include <fontconfig/fontconfig.h>
 #include <qqmlregistration.h>
-
-#include "actiondata.h"
 
 #include "kirigamiactioncollection_export.h"
 

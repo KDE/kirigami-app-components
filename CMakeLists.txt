@@ -28,6 +28,7 @@ include(ECMAddTests)
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
 include(ECMQmlModule)
+include(ECMPoQmTools)
 include(ECMDeprecationSettings)
 include(ECMGenerateQDoc)
 
