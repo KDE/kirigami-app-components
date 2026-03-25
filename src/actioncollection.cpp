@@ -13,7 +13,6 @@
 #include <QCoreApplication>
 #include <QKeySequence>
 #include <QQmlContext>
-#include <QQmlProperty>
 #include <QtQml/qqmlinfo.h>
 
 using namespace Qt::StringLiterals;

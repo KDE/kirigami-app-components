@@ -88,7 +88,8 @@ class QmlActionCollection : public ActionCollection
      * The unique name of the collection within the whole application.
      * It is required and should be set only once
      */
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL REQUIRED)
+    // FIXME: this should be REQUIRED but not in standardactioncollection
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
 
     /*!
      * \qmlproperty list<ActionData> actions

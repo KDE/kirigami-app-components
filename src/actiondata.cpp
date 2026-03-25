@@ -301,11 +301,23 @@ QVariant ActionData::defaultShortcut() const
 
 void ActionData::setDefaultShortcut(const QVariant &shortcut)
 {
-    if (m_defaultShortcut == shortcut) {
+    QKeySequence seq = variantToKeySequence(shortcut);
+    if (m_defaultShortcut == seq) {
         return;
     }
 
-    m_defaultShortcut = variantToKeySequence(shortcut);
+    KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("Shortcuts"));
+    cg = KConfigGroup(&cg, m_collection->name());
+    cg = KConfigGroup(&cg, m_name);
+    QKeySequence savedShortcut = cg.readEntry(QStringLiteral("Shortcut"), m_defaultShortcut.toString());
+
+    const bool wasDefault = savedShortcut == m_defaultShortcut;
+
+    m_defaultShortcut = seq;
+
+    if (wasDefault) {
+        setVariantShortcut(m_defaultShortcut);
+    }
 
     Q_EMIT defaultShortcutChanged(shortcut);
 }

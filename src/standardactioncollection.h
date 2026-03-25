@@ -12,6 +12,7 @@ class StandardActionCollection : public QmlActionCollection
 {
     Q_OBJECT
     QML_ELEMENT
+    Q_PROPERTY(QString name READ name CONSTANT OVERRIDE)
 
 public:
     StandardActionCollection(QObject *parent = nullptr);
