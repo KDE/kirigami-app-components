@@ -28,7 +28,7 @@ public:
 
     enum Role {
         ActionDescriptionRole = Qt::UserRole + 1,
-        ActionInstanceRole,
+        ActionInstancesRole,
         ActionCollectionRole,
         ShortcutRole,
         AlternateShortcutRole,

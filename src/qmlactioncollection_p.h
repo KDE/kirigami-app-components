@@ -17,7 +17,7 @@ class ActionCollectionAttached : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QString collection READ collection WRITE setCollection NOTIFY collectionChanged FINAL)
-    Q_PROPERTY(QString action READ action WRITE setAction NOTIFY actionChanged FINAL)
+    Q_PROPERTY(QVariant action READ action WRITE setAction NOTIFY actionChanged FINAL)
 
 public:
     explicit ActionCollectionAttached(QObject *parent = nullptr);
@@ -26,8 +26,8 @@ public:
     QString collection() const;
     void setCollection(const QString &collection);
 
-    QString action() const;
-    void setAction(const QString &actionName);
+    QVariant action() const;
+    void setAction(const QVariant &actionName);
 
 Q_SIGNALS:
     void collectionChanged();
@@ -89,7 +89,7 @@ class QmlActionCollection : public ActionCollection
      * It is required and should be set only once
      */
     // FIXME: this should be REQUIRED but not in standardactioncollection
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 
     /*!
      * \qmlproperty list<ActionData> actions

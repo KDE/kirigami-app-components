@@ -18,70 +18,74 @@ Item {
 
     default property list<AC.ActionCollection> collections
 
-    AC.StandardActionCollection {
+    AC.ActionCollection {
         id: standardActions
-    }
-
-    Connections {
-        target: standardActions.action("KeyBindings")
-        function onTriggered() {
-            root.pageRow.pushDialogLayer(shortcutsEditor)
+        name: "org.kde.globalactions"
+        text: CoreAddons.AboutData.displayName
+        AC.StandardActionData {
+            standardAction: AC.StandardActionData.Preferences
+            text: i18ndc("kirigami-actioncollection", "Configure application menu entry", "Configure %1…", CoreAddons.AboutData.displayName)
+        }
+        AC.StandardActionData {
+            standardAction: AC.StandardActionData.KeyBindings
+            onTriggered: {
+                root.pageRow.pushDialogLayer(shortcutsEditor)
+            }
+        }
+        AC.ActionData {
+            name: "FindAction"
+            text: i18nc("Opens the actions search dialog", "Find Action…")
+            icon.name: "search"
+            defaultShortcut: "Ctrl+Alt+I"
+            onTriggered: {
+                let dialog = actionsDialog.createObject(root.pageRow.parent);
+                dialog.open()
+            }
+        }
+        AC.StandardActionData {
+            standardAction: AC.StandardActionData.ReportBug
+            onTriggered: {
+                Qt.openUrlExternally("https://bugs.kde.org/enter_bug.cgi?format=guided&product=" + Qt.application.name + "&version=" + CoreAddons.AboutData.version)
+            }
+        }
+        AC.StandardActionData {
+            standardAction: AC.StandardActionData.Donate
+            onTriggered: {
+                Qt.openUrlExternally("https://kde.org/donate/?app=" + Qt.application.name)
+            }
+        }
+        AC.StandardActionData {
+            standardAction: AC.StandardActionData.AboutApp
+            onTriggered: {
+                // TODO: port to new forms
+                const openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"), {
+                    width: root.width
+                }, {
+                    width: Kirigami.Units.gridUnit * 30,
+                    height: Kirigami.Units.gridUnit * 30,
+                    title: i18ndc("kirigami-actioncollection", "@title:window", "About %1", CoreAddons.AboutData.displayName),
+                });
+                openDialogWindow.Keys.escapePressed.connect(function() {
+                    openDialogWindow.closeDialog();
+                });
+            }
+        }
+        AC.StandardActionData {
+            standardAction: AC.StandardActionData.AboutKDE
+            onTriggered: {
+                const openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"), {
+                    width: root.width
+                }, {
+                    width: Kirigami.Units.gridUnit * 30,
+                    height: Kirigami.Units.gridUnit * 30,
+                    title: i18ndc("kirigami-actioncollection", "@title:window", "About KDE"),
+                });
+                openDialogWindow.Keys.escapePressed.connect(function() {
+                    openDialogWindow.closeDialog();
+                });
+            }
         }
     }
-    Connections {
-        target: standardActions.action("FindAction")
-        function onTriggered() {
-            let dialog = actionsDialog.createObject(root.pageRow.parent);
-            dialog.open()
-        }
-    }
-    Connections {
-        target: standardActions.action("AboutApp")
-        function onTriggered(): void {
-            // TODO: port to new forms
-            const openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"), {
-                width: root.width
-            }, {
-                width: Kirigami.Units.gridUnit * 30,
-                height: Kirigami.Units.gridUnit * 30,
-                title: i18ndc("kirigami-addons6", "@title:window", "About %1", CoreAddons.AboutData.displayName),
-            });
-            openDialogWindow.Keys.escapePressed.connect(function() {
-                openDialogWindow.closeDialog();
-            });
-        }
-    }
-
-    Connections {
-        target: standardActions.action("AboutKDE")
-        function onTriggered(): void {
-            const openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"), {
-                width: root.width
-            }, {
-                width: Kirigami.Units.gridUnit * 30,
-                height: Kirigami.Units.gridUnit * 30,
-                title: i18ndc("kirigami-addons6", "@title:window", "About KDE"),
-            });
-            openDialogWindow.Keys.escapePressed.connect(function() {
-                openDialogWindow.closeDialog();
-            });
-        }
-    }
-
-    Connections {
-        target: standardActions.action("Donate")
-        function onTriggered(): void {
-            Qt.openUrlExternally("https://kde.org/donate/?app=" + Qt.application.name)
-        }
-    }
-
-    Connections {
-        target: standardActions.action("ReportBug")
-        function onTriggered(): void {
-            Qt.openUrlExternally("https://bugs.kde.org/enter_bug.cgi?format=guided&product=" + Qt.application.name + "&version=" + CoreAddons.AboutData.version)
-        }
-    }
-
 
     Component {
         id: shortcutsEditor

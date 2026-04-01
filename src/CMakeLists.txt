@@ -24,7 +24,7 @@ target_sources(KirigamiActionCollection PRIVATE
     actionmodel.cpp
     keysequencehelper.cpp
     qmlactioncollection.cpp
-    standardactioncollection.cpp
+    standardactiondata.cpp
 )
 
 ecm_qt_declare_logging_category(KirigamiActionCollection

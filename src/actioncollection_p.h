@@ -4,9 +4,11 @@
 #ifndef ACTIONCOLLECTION_P_H
 #define ACTIONCOLLECTION_P_H
 
+#include <KStandardActions>
 #include <QHash>
 #include <QString>
 
+using namespace Qt::StringLiterals;
 class ActionData;
 
 class ActionCollectionPrivate
@@ -19,6 +21,16 @@ public:
     QHash<QString, ActionData *> m_actionMap;
     QList<ActionData *> m_actions;
     QList<ActionData *> m_activeActions;
+};
+
+// Copied from kstandardactions_p.h
+struct StandardActionsInfo {
+    KStandardActions::StandardAction id;
+    KStandardShortcut::StandardShortcut shortcut;
+    const QString name;
+    const char *text;
+    const char *tooltip;
+    const QString iconName;
 };
 
 #endif

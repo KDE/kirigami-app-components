@@ -4,6 +4,7 @@
 #ifndef ACTIONCOLLECTION_H
 #define ACTIONCOLLECTION_H
 
+#include <KStandardActions>
 #include <QAction>
 #include <QObject>
 #include <QQmlEngine>
@@ -65,7 +66,10 @@ public:
      *
      * Recturns the newly created QAction, or nullptr if an action with the same name was already present.
      */
+    // TODO: remove those two?
     QAction *createAction(const QString &name, const QString &iconName, const QString &text);
+
+    QAction *createAction(KStandardActions::StandardAction standardAction);
 
     /*!
      * Returns an action given its unique name.
@@ -74,6 +78,8 @@ public:
      * \a name The unique name fir the action.
      */
     Q_INVOKABLE QAction *action(const QString &name);
+
+    QAction *action(KStandardActions::StandardAction standardAction);
 
     /*!
      * All known actions in this collection.
@@ -85,6 +91,18 @@ Q_SIGNALS:
      * Emitted when the user-reabable text label for this collection has changed.
      */
     void textChanged(const QString &text);
+
+    /*!
+     * Emitted when a new action has been inserted in this collection
+     * \a action the new action
+     */
+    void actionInserted(QAction *action);
+
+    /*!
+     * Emitted when an action has been removed from this collection
+     * \a action the old action
+     */
+    void actionRemoved(QAction *action);
 
 protected:
     explicit ActionCollection(QObject *parent = nullptr);

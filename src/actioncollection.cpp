@@ -6,14 +6,16 @@
 #include "actioncollections.h"
 #include "actioncollections_p.h"
 #include "actiondata.h"
-#include "standardactioncollection.h"
 
 #include <KLocalizedString>
+#include <KStandardActions>
 #include <KStandardShortcut>
 #include <QCoreApplication>
 #include <QKeySequence>
 #include <QQmlContext>
 #include <QtQml/qqmlinfo.h>
+
+#include <kstandardactions_p.h>
 
 using namespace Qt::StringLiterals;
 
@@ -70,13 +72,52 @@ QAction *ActionCollection::createAction(const QString &name, const QString &icon
     action->setName(name);
     action->icon()->setName(iconName);
     action->setText(text);
+    d->m_actionMap[name] = action;
+    d->m_actions.append(action);
+    Q_EMIT actionInserted(action);
 
+    return action;
+}
+
+QAction *ActionCollection::createAction(KStandardActions::StandardAction standardAction)
+{
+    const KStandardActions::KStandardActionsInfo *info = infoPtr(standardAction);
+    if (!info) {
+        return nullptr;
+    }
+
+    const QString name = info->psName.toString();
+    if (d->m_actionMap.contains(info->psName.toString())) {
+        return nullptr;
+    }
+
+    auto action = new ActionData(this);
+    action->classBegin();
+    action->setName(name);
+    action->icon()->setName(info->psIconName.toString());
+    action->setText(QCoreApplication::translate("KStandardActions", info->psLabel));
+    action->setToolTip(QCoreApplication::translate("KStandardActions", info->psToolTip));
+    action->setDefaultShortcut(KStandardShortcut::shortcut(info->idAccel).first());
+    action->componentComplete();
+    d->m_actionMap[name] = action;
+    d->m_actions.append(action);
+    Q_EMIT actionInserted(action);
     return action;
 }
 
 QAction *ActionCollection::action(const QString &name)
 {
     return d->m_actionMap.value(name);
+}
+
+QAction *ActionCollection::action(KStandardActions::StandardAction standardAction)
+{
+    const KStandardActions::KStandardActionsInfo *info = infoPtr(standardAction);
+    if (!info) {
+        return nullptr;
+    }
+
+    return d->m_actionMap.value(info->psName.toString());
 }
 
 QList<QAction *> ActionCollection::actions() const

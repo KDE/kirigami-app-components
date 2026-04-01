@@ -249,8 +249,8 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
         return action->text();
     case ActionDescriptionRole:
         return QVariant::fromValue(action);
-    case ActionInstanceRole:
-        return QVariant::fromValue(action->action());
+    case ActionInstancesRole:
+        return QVariant::fromValue(action->kirigamiActions());
     case ActionCollectionRole:
         return collection->text();
     case ShortcutRole:
@@ -302,7 +302,7 @@ QHash<int, QByteArray> ActionModel::roleNames() const
 {
     return {{Qt::DisplayRole, "display"},
             {ActionDescriptionRole, "actionDescription"},
-            {ActionInstanceRole, "actionInstance"},
+            {ActionInstancesRole, "actionInstances"},
             {ActionCollectionRole, "actionCollection"},
             {ShortcutRole, "shortcut"},
             {AlternateShortcutRole, "alternateShortcut"}};
