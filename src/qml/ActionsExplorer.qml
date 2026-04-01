@@ -20,9 +20,9 @@ Kirigami.SearchDialog {
         }
 
         filterRowCallback: function (source_row, source_parent) {
-            let instance = sourceModel.data(sourceModel.index(source_row, 0, source_parent), AC.ActionModel.ActionInstanceRole);
+            let instances = sourceModel.data(sourceModel.index(source_row, 0, source_parent), AC.ActionModel.ActionInstancesRole);
             let text = sourceModel.data(sourceModel.index(source_row, 0, source_parent))
-            return instance !== null && text.toUpperCase().indexOf(root.text.toUpperCase()) !== -1;
+            return instances !== null && instances.length > 0 && text.toUpperCase().indexOf(root.text.toUpperCase()) !== -1;
         }
 
         sortRole: Qt.DisplayRole
@@ -48,7 +48,7 @@ Kirigami.SearchDialog {
         width: ListView.view.width
         required property int index
         required property QtObject actionDescription
-        required property QtObject actionInstance
+        required property var actionInstances
         required property string shortcut
         required property string alternateShortcut
 
@@ -87,7 +87,7 @@ Kirigami.SearchDialog {
         }
 
         onClicked: {
-            actionInstance.trigger()
+            actionInstances[0].trigger()
             root.close()
         }
     }

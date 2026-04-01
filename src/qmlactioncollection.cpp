@@ -5,7 +5,9 @@
 #include "actioncollections_p.h"
 #include "actiondata.h"
 #include "qmlactioncollection_p.h"
-#include "standardactioncollection.h"
+#include "standardactiondata.h"
+
+#include <kstandardactions_p.h>
 
 #include <KLocalizedString>
 #include <KStandardShortcut>
@@ -38,22 +40,34 @@ void ActionCollectionAttached::setCollection(const QString &collection)
 
     m_collection = collection;
 
+    QmlActionCollection *coll = qobject_cast<QmlActionCollection *>(ActionCollections::self()->collection(m_collection));
+    if (coll) {
+        connect(coll, &ActionCollection::actionInserted, this, [this]() {
+            rebindActionData();
+        });
+    }
+
     rebindActionData();
 
     Q_EMIT collectionChanged();
 }
 
-QString ActionCollectionAttached::action() const
+QVariant ActionCollectionAttached::action() const
 {
     return m_actionName;
 }
 
-void ActionCollectionAttached::setAction(const QString &actionName)
+void ActionCollectionAttached::setAction(const QVariant &action)
 {
-    if (m_actionName == actionName)
-        return;
-
-    m_actionName = actionName;
+    if (action.value<StandardActionData::StandardAction>() == StandardActionData::ActionNone) {
+        m_actionName = action.toString();
+    } else {
+        StandardActionData::StandardAction standardAction = action.value<StandardActionData::StandardAction>();
+        const KStandardActions::KStandardActionsInfo *info = infoPtr(KStandardActions::StandardAction(standardAction));
+        if (info) {
+            m_actionName = info->psName.toString();
+        }
+    }
 
     rebindActionData();
 
@@ -67,16 +81,22 @@ void ActionCollectionAttached::rebindActionData()
         m_action.clear();
     }
 
+    if (m_actionName.isEmpty()) {
+        return;
+    }
+
     QmlActionCollection *coll = qobject_cast<QmlActionCollection *>(ActionCollections::self()->collection(m_collection));
     if (!coll) {
         return;
     }
+
     m_action = qobject_cast<ActionData *>(coll->action(m_actionName));
+
     if (!m_action) {
         return;
     }
 
-    m_action->setAction(parent());
+    m_action->addKirigamiAction(parent());
 }
 
 /////////////////////////////////////
@@ -123,7 +143,7 @@ void QmlActionCollection::insertAction(ActionData *action)
         d->m_actions.removeAll(action);
     });
 
-    if (action->action()) {
+    if (!action->kirigamiActions().isEmpty()) {
         Q_ASSERT(!d->m_activeActions.contains(action));
         const int pos = d->m_activeActions.count();
         Q_EMIT aboutToAddActionInstance(pos, action);
@@ -180,37 +200,48 @@ void QmlActionCollection::actions_append(QQmlListProperty<ActionData> *prop, Act
         qmlWarning(nullptr, error);
         qFatal();
     }
-    coll->d->m_actions.append(action);
-    coll->d->m_actionMap[name] = action;
 
-    connect(action, &QObject::destroyed, coll, [coll, action, name]() {
-        coll->d->m_actionMap.remove(name);
-        coll->d->m_actions.removeAll(action);
-    });
+    auto setupAction = [coll, action, name]() {
+        coll->d->m_actions.append(action);
+        coll->d->m_actionMap[action->name()] = action;
 
-    if (action->action()) {
-        Q_ASSERT(!coll->d->m_activeActions.contains(action));
-        const int pos = coll->d->m_activeActions.count();
-        Q_EMIT coll->aboutToAddActionInstance(pos, action);
-        coll->d->m_activeActions.append(action);
-        Q_EMIT coll->actionInstanceAdded(pos, action);
-    }
+        connect(action, &QObject::destroyed, coll, [coll, action, name]() {
+            coll->d->m_actionMap.remove(name);
+            coll->d->m_actions.removeAll(action);
+        });
 
-    connect(action, &ActionData::actionChanged, coll, [coll, action](QObject *actionInstance) {
-        if (actionInstance) {
+        if (!action->kirigamiActions().isEmpty()) {
             Q_ASSERT(!coll->d->m_activeActions.contains(action));
             const int pos = coll->d->m_activeActions.count();
             Q_EMIT coll->aboutToAddActionInstance(pos, action);
             coll->d->m_activeActions.append(action);
             Q_EMIT coll->actionInstanceAdded(pos, action);
-        } else {
-            const int pos = coll->d->m_activeActions.indexOf(action);
-            Q_ASSERT(pos >= 0);
-            Q_EMIT coll->aboutToRemoveActionInstance(pos, action);
-            coll->d->m_activeActions.removeAll(action);
-            Q_EMIT coll->actionInstanceRemoved(pos, action);
         }
-    });
+
+        connect(action, &ActionData::actionChanged, coll, [coll, action](QObject *actionInstance) {
+            if (actionInstance) {
+                Q_ASSERT(!coll->d->m_activeActions.contains(action));
+                const int pos = coll->d->m_activeActions.count();
+                Q_EMIT coll->aboutToAddActionInstance(pos, action);
+                coll->d->m_activeActions.append(action);
+                Q_EMIT coll->actionInstanceAdded(pos, action);
+            } else {
+                const int pos = coll->d->m_activeActions.indexOf(action);
+                Q_ASSERT(pos >= 0);
+                Q_EMIT coll->aboutToRemoveActionInstance(pos, action);
+                coll->d->m_activeActions.removeAll(action);
+                Q_EMIT coll->actionInstanceRemoved(pos, action);
+            }
+        });
+
+        Q_EMIT coll->actionInserted(action);
+    };
+
+    if (name.isEmpty()) {
+        connect(action, &ActionData::nameChanged, action, setupAction, Qt::SingleShotConnection);
+    } else {
+        setupAction();
+    }
 
     action->setParent(coll);
 }

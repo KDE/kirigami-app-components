@@ -13,6 +13,8 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 
+using namespace Qt::StringLiterals;
+
 static QKeySequence variantToKeySequence(const QVariant &var)
 {
     if (var.metaType().id() == QMetaType::Int) {
@@ -246,8 +248,8 @@ void ActionData::setVariantShortcut(const QVariant &shortcut)
         cg.deleteEntry(QStringLiteral("Shortcut"));
     }
 
-    if (m_action) {
-        m_action->setProperty("shortcut", shortcut);
+    for (auto action : std::as_const(m_allActions)) {
+        action->setProperty("shortcut", shortcut);
     }
 
     Q_EMIT shortcutChanged(shortcut);
@@ -358,47 +360,65 @@ void ActionData::setAction(QObject *action)
     if (m_action) {
         disconnect(m_action, nullptr, this, nullptr);
         disconnect(this, nullptr, m_action, nullptr);
+        m_allActions.removeAll(m_action);
     }
     m_action = action;
-
-    connect(this, &ActionData::toggled, m_action, [this](bool checked) {
-        m_action->setProperty("checked", checked);
-    });
-    connect(m_action, SIGNAL(toggled()), this, SLOT(syncUp()));
-
-    syncDown();
+    addKirigamiAction(action);
 
     Q_EMIT actionChanged(action);
 }
 
+QList<QObject *> ActionData::kirigamiActions() const
+{
+    return m_allActions;
+}
+
+void ActionData::addKirigamiAction(QObject *action)
+{
+    if (!action) {
+        return;
+    }
+
+    connect(this, &ActionData::toggled, action, [this, action](bool checked) {
+        action->setProperty("checked", checked);
+    });
+    connect(
+        action,
+        &QObject::destroyed,
+        this,
+        [this]() {
+            m_allActions.removeAll(sender());
+        },
+        Qt::SingleShotConnection);
+
+    if (!m_allActions.contains(action)) {
+        m_allActions.append(action);
+    }
+
+    syncDown();
+}
+
 void ActionData::syncDown()
 {
-    if (m_action) {
-        QQmlProperty property(m_action, QStringLiteral("fromQAction"));
+    for (auto action : std::as_const(m_allActions)) {
+        QQmlProperty property(action, QStringLiteral("fromQAction"));
         if (property.isValid() && property.isWritable()) {
             property.write(QVariant::fromValue(this));
         } else {
             // It's a plain Templates action
-            property = QQmlProperty(m_action, QStringLiteral("text"));
+            property = QQmlProperty(action, QStringLiteral("text"));
             property.write(text());
-            property = QQmlProperty(m_action, QStringLiteral("icon.name"));
+            property = QQmlProperty(action, QStringLiteral("icon.name"));
             property.write(m_icon->name());
-            property = QQmlProperty(m_action, QStringLiteral("icon.source"));
+            property = QQmlProperty(action, QStringLiteral("icon.source"));
             property.write(m_icon->source());
-            property = QQmlProperty(m_action, QStringLiteral("shortcut"));
+            property = QQmlProperty(action, QStringLiteral("shortcut"));
             property.write(shortcut());
-            property = QQmlProperty(m_action, QStringLiteral("checkable"));
+            property = QQmlProperty(action, QStringLiteral("checkable"));
             property.write(isCheckable());
-            property = QQmlProperty(m_action, QStringLiteral("checked"));
+            property = QQmlProperty(action, QStringLiteral("checked"));
             property.write(isChecked());
         }
-    }
-}
-
-void ActionData::syncUp()
-{
-    if (m_action) {
-        setChecked(m_action->property("checked").toBool());
     }
 }
 

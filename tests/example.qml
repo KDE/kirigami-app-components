@@ -33,11 +33,8 @@ Kirigami.ApplicationWindow {
                 icon.name: "document-send"
                 defaultShortcut: "Ctrl+H"
             }
-            AC.ActionData {
-                name: "copy"
-                text: "Copy"
-                icon.name: "edit-copy"
-                defaultShortcut: StandardKey.Copy
+            AC.StandardActionData {
+                standardAction: AC.StandardActionData.Copy
             }
             AC.ActionData {
                 name: "explore-actions"
@@ -80,13 +77,13 @@ Kirigami.ApplicationWindow {
             },
             Kirigami.Action {
                 AC.ActionCollection.collection: "org.kde.examplecollection"
-                AC.ActionCollection.action: "copy"
+                AC.ActionCollection.action: "edit_copy"
                 onTriggered: {
                     print("copy triggered")
                 }
             },
             Kirigami.Action {
-                AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.collection: "org.kde.globalactions"
                 AC.ActionCollection.action: "Preferences"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
                 onTriggered: {
@@ -94,12 +91,12 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
-                AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.collection: "org.kde.globalactions"
                 AC.ActionCollection.action: "KeyBindings"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
             },
             Kirigami.Action {
-                AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.collection: "org.kde.globalactions"
                 AC.ActionCollection.action: "FindAction"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
             },
@@ -108,22 +105,22 @@ Kirigami.ApplicationWindow {
                 separator: true
             },
             Kirigami.Action {
-                AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.collection: "org.kde.globalactions"
                 AC.ActionCollection.action: "ReportBug"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
             },
             Kirigami.Action {
-                AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.collection: "org.kde.globalactions"
                 AC.ActionCollection.action: "Donate"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
             },
             Kirigami.Action {
-                AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.collection: "org.kde.globalactions"
                 AC.ActionCollection.action: "AboutApp"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
             },
             Kirigami.Action {
-                AC.ActionCollection.collection: "org.kde.standardactions"
+                AC.ActionCollection.collection: "org.kde.globalactions"
                 AC.ActionCollection.action: "AboutKDE"
                 displayHint: Kirigami.DisplayHint.AlwaysHide
             }

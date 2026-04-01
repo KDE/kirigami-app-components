@@ -5,12 +5,11 @@
 
 #include <QAction>
 #include <QActionGroup>
+#include <QKeySequence>
 #include <QQmlEngine>
 #include <QVariant>
 #include <qnamespace.h>
 #include <qqmlregistration.h>
-
-#include <QKeySequence>
 
 class QmlActionCollection;
 class ActionData;
@@ -112,8 +111,9 @@ class ActionData : public QAction, public QQmlParserStatus
      *
      * The unique name of the action within its collection.
      * It is required and should be set only once
+     *FIXME: this should be REQUIRED but not in StandardActionData
      */
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL REQUIRED)
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
 
     /*!
      * Description for the icon to use, which can be specified by name or path
@@ -276,6 +276,9 @@ public:
     QObject *action() const;
     void setAction(QObject *action);
 
+    QList<QObject *> kirigamiActions() const;
+    void addKirigamiAction(QObject *action);
+
     void classBegin() override;
     void componentComplete() override;
 
@@ -289,9 +292,6 @@ Q_SIGNALS:
     void actionGroupChanged(QActionGroup *group);
     void actionChanged(QObject *action);
 
-private Q_SLOTS:
-    void syncUp();
-
 private:
     // TODO: dpointer
     void syncDown();
@@ -299,6 +299,14 @@ private:
     QString m_name;
     QKeySequence m_defaultShortcut;
     QKeySequence m_defaultAlternateShortcut;
+    // Why both an m_action and an action list properties?
+    // we want to support setting the action as it was a simple
+    // property for the single case where the action collection and the
+    // kirigami actions are in the same QML file, but we also want to be able to support multiple
+    // action instances per action data, because we can have different pages
+    // completely disconnetted from one to another that want to use that same action, like
+    // a very common one such as "Copy"
     QPointer<QObject> m_action;
+    QList<QObject *> m_allActions;
     QmlActionCollection *m_collection;
 };
