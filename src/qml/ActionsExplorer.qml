@@ -22,7 +22,15 @@ Kirigami.SearchDialog {
         filterRowCallback: function (source_row, source_parent) {
             let instances = sourceModel.data(sourceModel.index(source_row, 0, source_parent), AC.ActionModel.ActionInstancesRole);
             let text = sourceModel.data(sourceModel.index(source_row, 0, source_parent))
-            return instances !== null && instances.length > 0 && text.toUpperCase().indexOf(root.text.toUpperCase()) !== -1;
+            if (!instances || instances.length === 0|| text.toUpperCase().indexOf(root.text.toUpperCase()) === -1) {
+                return false;
+            }
+            for (let action of instances) {
+                if (action.visible && action.enabled) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         sortRole: Qt.DisplayRole
