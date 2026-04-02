@@ -59,7 +59,7 @@ Kirigami.ScrollablePage {
             required property var model
 
             width: ListView.view.width
-            text: model.actionDescription.text
+            text: model.actionDescription.text.replace(/&([^&])/g, "$1").replace("&&", "&")
 
             Accessible.description: model.actionDescription.shortcut
 
@@ -73,7 +73,7 @@ Kirigami.ScrollablePage {
                 }
 
                 QQC.Label {
-                    text: model.actionDescription.text
+                    text: shortcutDelegate.text
                     Layout.fillWidth: true
                     Accessible.ignored: true
                 }

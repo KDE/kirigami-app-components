@@ -66,7 +66,10 @@ Kirigami.SearchDialog {
 
             QQC.Label {
                 Layout.fillWidth: true
-                text: actionDescription.text
+                text: {
+                    let stripped = actionDescription.text.replace(/&([^&])/g, "$1").replace("&&", "&");
+                    return stripped;
+                }
             }
 
             QQC.Label {
