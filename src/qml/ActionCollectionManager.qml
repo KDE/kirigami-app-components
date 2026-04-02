@@ -37,8 +37,13 @@ Item {
             text: i18nc("Opens the actions search dialog", "Find Action…")
             icon.name: "search"
             defaultShortcut: "Ctrl+Alt+I"
+            property AC.ActionsExplorer dialog
             onTriggered: {
-                let dialog = actionsDialog.createObject(root.pageRow.parent);
+                if (dialog) {
+                    dialog.close();
+                    return;
+                }
+                dialog = actionsDialog.createObject(root.pageRow.parent);
                 dialog.open()
             }
         }
@@ -56,9 +61,14 @@ Item {
         }
         AC.StandardActionData {
             standardAction: AC.StandardActionData.AboutApp
+            property QtObject openDialogWindow
             onTriggered: {
                 // TODO: port to new forms
-                const openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"), {
+                if (openDialogWindow) {
+                    pageStack.closeDialog();
+                    return;
+                }
+                openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"), {
                     width: root.width
                 }, {
                     width: Kirigami.Units.gridUnit * 30,
@@ -72,8 +82,13 @@ Item {
         }
         AC.StandardActionData {
             standardAction: AC.StandardActionData.AboutKDE
+            property QtObject openDialogWindow
             onTriggered: {
-                const openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"), {
+                if (openDialogWindow) {
+                    pageStack.closeDialog();
+                    return;
+                }
+                openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"), {
                     width: root.width
                 }, {
                     width: Kirigami.Units.gridUnit * 30,
@@ -89,6 +104,7 @@ Item {
 
     Component {
         id: shortcutsEditor
+
         ShortcutsEditor {}
     }
 
