@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "actiondata.h"
+#include "actiondata_p.h"
 
 /*!
  * \qmltype StandardActionData

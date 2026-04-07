@@ -8,7 +8,7 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
-#include "keysequencehelper.h"
+#include "keysequencehelper_p.h"
 
 #include <QDebug>
 #include <QHash>
@@ -225,4 +225,4 @@ QWindow *KeySequenceHelper::renderWindow(QQuickWindow *quickWindow)
     return window;
 }
 
-#include "moc_keysequencehelper.cpp"
+#include "moc_keysequencehelper_p.cpp"

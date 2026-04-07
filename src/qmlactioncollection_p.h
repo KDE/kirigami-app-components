@@ -10,7 +10,7 @@
 #include <qqmlregistration.h>
 
 #include "actioncollection.h"
-#include "actiondata.h"
+#include "actiondata_p.h"
 
 class ActionCollectionAttached : public QObject
 {

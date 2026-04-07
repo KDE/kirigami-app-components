@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 // SPDX-FileCopyrightText: 2025 Marco Martin <notmart@gmail.com>
 
-#include "actiondata.h"
+#include "actiondata_p.h"
 #include "qmlactioncollection_p.h"
 
 #include <QKeySequence>
@@ -473,4 +473,4 @@ void ActionData::componentComplete()
     syncDown();
 }
 
-#include "moc_actiondata.cpp"
+#include "moc_actiondata_p.cpp"

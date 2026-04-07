@@ -3,7 +3,7 @@
 
 #include "actioncollections.h"
 #include "actioncollections_p.h"
-#include "actiondata.h"
+#include "actiondata_p.h"
 
 #include <KLocalizedString>
 #include <KStandardShortcut>

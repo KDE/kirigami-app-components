@@ -7,7 +7,7 @@
 #include <QAbstractListModel>
 #include <qqmlregistration.h>
 
-#include "actiondata.h"
+#include "actiondata_p.h"
 
 class ActionModelPrivate;
 

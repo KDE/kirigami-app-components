@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 // SPDX-FileCopyrightText: 2025 Marco Martin <notmart@gmail.com>
 
-#include "standardactiondata.h"
 #include "qmlactioncollection_p.h"
+#include "standardactiondata_p.h"
 
 #include "actioncollection_p.h"
 
@@ -60,4 +60,4 @@ void StandardActionData::setStandardAction(StandardActionData::StandardAction st
     Q_EMIT standardActionChanged(standardAction);
 }
 
-#include "moc_standardactiondata.cpp"
+#include "moc_standardactiondata_p.cpp"

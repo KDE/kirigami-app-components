@@ -3,9 +3,9 @@
 
 #include "actioncollection_p.h"
 #include "actioncollections_p.h"
-#include "actiondata.h"
+#include "actiondata_p.h"
 #include "qmlactioncollection_p.h"
-#include "standardactiondata.h"
+#include "standardactiondata_p.h"
 
 #include <kstandardactions_p.h>
 

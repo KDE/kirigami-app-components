@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 // SPDX-FileCopyrightText: 2025 Marco Martin <notmart@gmail.com>
 
-#include "actionmodel.h"
 #include "actioncollections_p.h"
-#include "actiondata.h"
+#include "actiondata_p.h"
+#include "actionmodel_p.h"
 #include "qmlactioncollection_p.h"
 
 #include <QKeySequence>
@@ -308,4 +308,4 @@ QHash<int, QByteArray> ActionModel::roleNames() const
             {AlternateShortcutRole, "alternateShortcut"}};
 }
 
-#include "moc_actionmodel.cpp"
+#include "moc_actionmodel_p.cpp"
