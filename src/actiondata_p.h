@@ -168,28 +168,6 @@ class ActionData : public QAction, public QQmlParserStatus
     Q_PROPERTY(QVariant defaultAlternateShortcut READ defaultAlternateShortcut WRITE setDefaultAlternateShortcut NOTIFY defaultAlternateShortcutChanged FINAL)
 
     /*!
-     * \qmlproperty keysequence shortcut
-     *
-     * TODO: this property is mostly internal used by the shortcut config UI: could this be removed?
-     * This property holds the action's current shortcut. It will be the same as defaultShortcut if
-     * no custom one has been set.
-     * Writing that property will write the new shortcut on a config file, and will be restored on the next
-     * application startup.
-     */
-    Q_PROPERTY(QVariant shortcut READ variantShortcut WRITE setVariantShortcut NOTIFY shortcutChanged FINAL)
-
-    /*!
-     * \qmlproperty keysequence alternateShortcut
-     *
-     * TODO: like above
-     * This property holds the action's current alternate shortcut. It will be the same as defaultShortcut if
-     * no custom one has been set.
-     * Writing that property will write the new shortcut on a config file, and will be restored on the next
-     * application startup.
-     */
-    Q_PROPERTY(QVariant alternateShortcut READ variantAlternateShortcut WRITE setVariantAlternateShortcut NOTIFY alternateShortcutChanged FINAL)
-
-    /*!
      * \qmlproperty action QtQuick.Templates::Action
      *
      * This property holds the QML Action this ActionData is associated to, if any.
