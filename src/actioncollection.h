@@ -64,11 +64,18 @@ public:
      * \a iconName Name for the icon: should be a name present in the current icon theme.
      * \a text The user readable text label for the new action.
      *
-     * Recturns the newly created QAction, or nullptr if an action with the same name was already present.
+     * Returns the newly created QAction, or nullptr if an action with the same name was already present.
      */
-    // TODO: remove those two?
     QAction *createAction(const QString &name, const QString &iconName, const QString &text);
 
+    /*!
+     * Creates a new action and inserts it in this collection.
+     *
+     * \a standardAction The KStandardActions::StandardAction we want to add: text and icon of the action
+     *                   will be automatically set
+     *
+     * Returns the newly created QAction, or nullptr if an action with the same name was already present.
+     */
     QAction *createAction(KStandardActions::StandardAction standardAction);
 
     /*!
@@ -79,6 +86,13 @@ public:
      */
     Q_INVOKABLE QAction *action(const QString &name);
 
+    /*!
+     * Returns an action based on the given standardAction
+     * IF no action based of the standardAction is present, the function will
+     * return nullptr
+     *
+     * \a standardAction the standard action we want to search in the collection
+     */
     QAction *action(KStandardActions::StandardAction standardAction);
 
     /*!
