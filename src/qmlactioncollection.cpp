@@ -43,6 +43,7 @@ void ActionCollectionAttached::setCollection(const QString &collection)
 
     QmlActionCollection *coll = qobject_cast<QmlActionCollection *>(ActionCollections::self()->collection(m_collection));
     if (coll) {
+        // TODO: similar connection when the *collection* gets created
         connect(coll, &ActionCollection::actionInserted, this, [this]() {
             rebindActionData();
         });
