@@ -2,7 +2,11 @@
 SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
 SPDX-License-Identifier: FSFAP
 -->
-# Kirigami ActionCollection
+# KirigamiAppComponents
+
+This project contains Kirigami addons and modules necessary to do a full featured KDE application, such as integration with configurable keyboard shortcuts and standard actions for About application About KDE, Donate etc.
+
+## Kirigami ActionCollection
 
 Kirigami module to define sets of actions with used-configurable shortcuts, alongside the configuration UI.
 
