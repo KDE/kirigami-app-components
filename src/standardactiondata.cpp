@@ -10,6 +10,8 @@
 
 #include <kstandardactions_p.h>
 
+using namespace KirigamiActions;
+
 StandardActionData::StandardActionData(QObject *parent)
     : ActionData(parent)
 {

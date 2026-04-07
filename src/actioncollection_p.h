@@ -9,6 +9,10 @@
 #include <QString>
 
 using namespace Qt::StringLiterals;
+
+namespace KirigamiActions
+{
+
 class ActionData;
 
 class ActionCollectionPrivate
@@ -32,5 +36,7 @@ struct StandardActionsInfo {
     const char *tooltip;
     const QString iconName;
 };
+
+}
 
 #endif

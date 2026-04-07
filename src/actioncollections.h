@@ -11,6 +11,9 @@
 
 #include "kirigamiactioncollection_export.h"
 
+namespace KirigamiActions
+{
+
 class ActionCollection;
 class ActionCollectionsPrivate;
 
@@ -76,5 +79,7 @@ private:
     friend class ActionModelPrivate;
     friend class QmlActionCollection;
 };
+
+}
 
 #endif

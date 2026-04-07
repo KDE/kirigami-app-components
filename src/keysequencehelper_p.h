@@ -13,8 +13,12 @@
 #include <QKeySequence>
 #include <QQuickItem>
 
-class KeySequenceHelperPrivate;
 class QQuickWindow;
+
+namespace KirigamiActions
+{
+
+class KeySequenceHelperPrivate;
 
 class KeySequenceHelper : public KKeySequenceRecorder
 {
@@ -65,5 +69,7 @@ private:
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KeySequenceHelper::ShortcutTypes)
+
+}
 
 #endif // KEYSEQUENCEHELPER_H

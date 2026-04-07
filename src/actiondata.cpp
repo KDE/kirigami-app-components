@@ -14,6 +14,7 @@
 #include <KSharedConfig>
 
 using namespace Qt::StringLiterals;
+using namespace KirigamiActions;
 
 static QKeySequence variantToKeySequence(const QVariant &var)
 {
@@ -28,7 +29,7 @@ ActionGroup::ActionGroup(QObject *parent)
 {
 }
 
-class IconGroupPrivate
+class KirigamiActions::IconGroupPrivate
 {
 public:
     IconGroupPrivate(IconGroup *group)

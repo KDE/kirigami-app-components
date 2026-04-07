@@ -14,6 +14,7 @@
 #include <QtQml/qqmlinfo.h>
 
 using namespace Qt::StringLiterals;
+using namespace KirigamiActions;
 
 Q_GLOBAL_STATIC(ActionCollections, s_actionCollectionStorage)
 

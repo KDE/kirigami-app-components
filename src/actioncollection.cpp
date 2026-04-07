@@ -18,6 +18,7 @@
 #include <kstandardactions_p.h>
 
 using namespace Qt::StringLiterals;
+using namespace KirigamiActions;
 
 ActionCollectionPrivate::ActionCollectionPrivate()
 {

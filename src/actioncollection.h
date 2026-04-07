@@ -13,6 +13,9 @@
 
 #include "kirigamiactioncollection_export.h"
 
+namespace KirigamiActions
+{
+
 class ActionCollectionPrivate;
 
 /*!
@@ -127,5 +130,7 @@ private:
 };
 
 class ActionCollectionsPrivate;
+
+}
 
 #endif

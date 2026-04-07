@@ -12,7 +12,9 @@
 #include <QQmlProperty>
 #include <QtQml/qqmlinfo.h>
 
-class ActionModelPrivate
+using namespace KirigamiActions;
+
+class KirigamiActions::ActionModelPrivate
 {
 public:
     ActionModelPrivate(ActionModel *model);

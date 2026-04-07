@@ -12,6 +12,9 @@
 #include "actioncollection.h"
 #include "actiondata_p.h"
 
+namespace KirigamiActions
+{
+
 class ActionCollectionAttached : public QObject
 {
     Q_OBJECT
@@ -147,6 +150,8 @@ private:
     static void actions_clear(QQmlListProperty<ActionData> *prop);
 };
 
-QML_DECLARE_TYPEINFO(ActionCollectionAttached, QML_HAS_ATTACHED_PROPERTIES)
+}
+
+QML_DECLARE_TYPEINFO(KirigamiActions::ActionCollectionAttached, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif

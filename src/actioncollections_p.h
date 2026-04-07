@@ -10,6 +10,9 @@
 #include <QMap>
 #include <QString>
 
+namespace KirigamiActions
+{
+
 class ActionCollectionsPrivate
 {
 public:
@@ -19,5 +22,7 @@ public:
     ActionCollections *q = nullptr;
     QMap<QString, QmlActionCollection *> m_collections;
 };
+
+}
 
 #endif

@@ -5,6 +5,9 @@
 
 #include "actiondata_p.h"
 
+namespace KirigamiActions
+{
+
 /*!
  * \qmltype StandardActionData
  * \inqmlmodule org.kde.kirigami.actioncollection
@@ -137,3 +140,5 @@ Q_SIGNALS:
 private:
     StandardAction m_standardAction = ActionNone;
 };
+
+}

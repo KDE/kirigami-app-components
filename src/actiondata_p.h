@@ -11,6 +11,9 @@
 #include <qnamespace.h>
 #include <qqmlregistration.h>
 
+namespace KirigamiActions
+{
+
 class QmlActionCollection;
 class ActionData;
 class IconGroupPrivate;
@@ -310,3 +313,5 @@ private:
     QList<QObject *> m_allActions;
     QmlActionCollection *m_collection;
 };
+
+}

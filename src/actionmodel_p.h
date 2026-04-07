@@ -9,6 +9,9 @@
 
 #include "actiondata_p.h"
 
+namespace KirigamiActions
+{
+
 class ActionModelPrivate;
 
 class ActionModel : public QAbstractListModel
@@ -64,5 +67,7 @@ private:
     ActionModelPrivate *d = nullptr;
     friend class ActionModelPrivate;
 };
+
+}
 
 #endif

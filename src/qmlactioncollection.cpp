@@ -18,6 +18,7 @@
 #include <QtQml/qqmlinfo.h>
 
 using namespace Qt::StringLiterals;
+using namespace KirigamiActions;
 
 ActionCollectionAttached::ActionCollectionAttached(QObject *parent)
     : QObject(parent)

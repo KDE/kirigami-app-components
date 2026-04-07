@@ -25,7 +25,9 @@
 #include <KGlobalShortcutInfo>
 #endif
 
-class KeySequenceHelperPrivate
+using namespace KirigamiActions;
+
+class KirigamiActions::KeySequenceHelperPrivate
 {
 public:
     KeySequenceHelperPrivate(KeySequenceHelper *qq);
