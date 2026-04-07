@@ -72,6 +72,7 @@ QQC.Control {
         interval: 200
         onTriggered: {
             helper.currentKeySequence = sequence;
+            root.keySequence = sequence;
             root.keySequenceModified();
         }
     }
