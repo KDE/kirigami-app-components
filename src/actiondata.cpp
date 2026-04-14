@@ -387,8 +387,8 @@ void ActionData::addKirigamiAction(QObject *action)
         action,
         &QObject::destroyed,
         this,
-        [this]() {
-            m_allActions.removeAll(sender());
+        [this, action]() {
+            m_allActions.removeAll(action);
         },
         Qt::SingleShotConnection);
 
