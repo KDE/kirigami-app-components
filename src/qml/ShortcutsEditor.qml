@@ -130,6 +130,7 @@ Kirigami.ScrollablePage {
 
                     label: i18ndc("kirigami-actioncollection", "@label", "Shortcut:")
                     onKeySequenceModified: {
+                        print("SETTING", keySequence)
                         shortcutDialog.shortcutDelegate.model.shortcut = keySequence;
                     }
 
@@ -137,13 +138,13 @@ Kirigami.ScrollablePage {
                         root.QQC.ApplicationWindow.showPassiveNotification(title + '\n' + message);
                     }
 
-                    onShowStealStandardShortcutDialog: (title, message, sequence) => {
-                        stealStandardShortcutDialog.title = title
-                        stealStandardShortcutDialog.message = message;
-                        stealStandardShortcutDialog.sequence = sequence;
-                        stealStandardShortcutDialog.parent = root.QQC.Overlay.overlay;
-                        stealStandardShortcutDialog.sequenceItem = this;
-                        stealStandardShortcutDialog.open();
+                    onShowStealShortcutDialog: (title, message, sequence) => {
+                        stealShortcutDialog.title = title
+                        stealShortcutDialog.message = message;
+                        stealShortcutDialog.sequence = sequence;
+                        stealShortcutDialog.parent = root.QQC.Overlay.overlay;
+                        stealShortcutDialog.sequenceItem = this;
+                        stealShortcutDialog.open();
                     }
                 }
 
@@ -163,18 +164,18 @@ Kirigami.ScrollablePage {
                         root.QQC.ApplicationWindow.showPassiveNotification(title + '\n' + message);
                     }
 
-                    onShowStealStandardShortcutDialog: (title, message, sequence) => {
-                        stealStandardShortcutDialog.title = title
-                        stealStandardShortcutDialog.message = message;
-                        stealStandardShortcutDialog.sequence = sequence;
-                        stealStandardShortcutDialog.parent = root.QQC.Overlay.overlay;
-                        stealStandardShortcutDialog.sequenceItem = this;
-                        stealStandardShortcutDialog.open();
+                    onShowStealShortcutDialog: (title, message, sequence) => {
+                        stealShortcutDialog.title = title
+                        stealShortcutDialog.message = message;
+                        stealShortcutDialog.sequence = sequence;
+                        stealShortcutDialog.parent = root.QQC.Overlay.overlay;
+                        stealShortcutDialog.sequenceItem = this;
+                        stealShortcutDialog.open();
                     }
                 }
 
                 QQC.Dialog {
-                    id: stealStandardShortcutDialog
+                    id: stealShortcutDialog
 
                     property string message
                     property var sequence
@@ -183,7 +184,7 @@ Kirigami.ScrollablePage {
                     modal: true
 
                     contentItem: QQC.Label {
-                        text: stealStandardShortcutDialog.message
+                        text: stealShortcutDialog.message
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
                     }

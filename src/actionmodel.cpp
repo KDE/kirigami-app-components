@@ -275,6 +275,17 @@ bool ActionModel::setData(const QModelIndex &index, const QVariant &value, int r
     if (!index.isValid() || (role != ShortcutRole && role != AlternateShortcutRole)) {
         return false;
     }
+
+    for (int i = 0; i < rowCount(); ++i) {
+        QModelIndex idx = ActionModel::index(i, 0);
+        ActionData *action = data(idx, ActionDescriptionRole).value<ActionData *>();
+        Q_ASSERT(action);
+        if (action->variantShortcut().value<QKeySequence>() == QKeySequence(value.toString())) {
+            d->m_pendingShortcuts[action] = QKeySequence();
+            Q_EMIT dataChanged(idx, idx, {role});
+        }
+    }
+
     ActionData *action = data(index, ActionDescriptionRole).value<ActionData *>();
     if (!action) {
         return false;

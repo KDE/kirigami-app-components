@@ -50,7 +50,7 @@ QQC.Control {
 
     signal errorOccurred(title: string, message: string)
 
-    signal showStealStandardShortcutDialog(title: string, message: string, sequence: var)
+    signal showStealShortcutDialog(title: string, message: string, sequence: var)
 
     /**
      * Start capturing a key sequence. This equivalent to the user clicking on the main button of the item.
@@ -72,6 +72,7 @@ QQC.Control {
         interval: 200
         onTriggered: {
             helper.currentKeySequence = sequence;
+            root.keySequence = sequence;
             root.keySequenceModified();
         }
     }
@@ -138,8 +139,8 @@ QQC.Control {
                         root.errorOccurred(title, message);
                     }
 
-                    onShowStealStandardShortcutDialog: (title, message, seq) => {
-                        root.showStealStandardShortcutDialog(title, message, seq);
+                    onShowStealShortcutDialog: (title, message, seq) => {
+                        root.showStealShortcutDialog(title, message, seq);
                     }
                 }
 

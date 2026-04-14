@@ -33,6 +33,7 @@ public:
         None = 0x00, //!< No checking for conflicts
         StandardShortcuts = 0x01, //!< Check against standard shortcuts. @see KStandardShortcut
         GlobalShortcuts = 0x02, //!< Check against global shortcuts. @see KGlobalAccel
+        OwnShortcuts = 0x04, //!< Check against our own shortcuts.
     };
     Q_DECLARE_FLAGS(ShortcutTypes, ShortcutType)
     Q_FLAG(ShortcutTypes)
@@ -59,7 +60,7 @@ public:
 Q_SIGNALS:
     void checkAgainstShortcutTypesChanged();
     void errorOccurred(const QString &title, const QString &message);
-    void showStealStandardShortcutDialog(const QString &title, const QString &message, const QKeySequence &key);
+    void showStealShortcutDialog(const QString &title, const QString &message, const QKeySequence &key);
 
 private:
     friend class KeySequenceHelperPrivate;

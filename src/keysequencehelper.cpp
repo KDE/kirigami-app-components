@@ -8,6 +8,8 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
+#include "actioncollection.h"
+#include "actioncollections.h"
 #include "keysequencehelper_p.h"
 
 #include <QDebug>
@@ -44,6 +46,11 @@ public:
      */
     bool conflictWithGlobalShortcuts(const QKeySequence &seq);
 
+    /*
+     * Shortcut already used somewhere else in the app?
+     */
+    bool conflictWithOwnShortcuts(const QKeySequence &seq);
+
     /**
      * Get permission to steal the shortcut @seq from the standard shortcut @a std.
      */
@@ -59,6 +66,11 @@ public:
         return checkAgainstShortcutTypes & KeySequenceHelper::GlobalShortcuts;
     }
 
+    bool checkAgainstOwnShortcuts() const
+    {
+        return checkAgainstShortcutTypes & KeySequenceHelper::OwnShortcuts;
+    }
+
     // members
     KeySequenceHelper *const q;
 
@@ -68,7 +80,7 @@ public:
 
 KeySequenceHelperPrivate::KeySequenceHelperPrivate(KeySequenceHelper *qq)
     : q(qq)
-    , checkAgainstShortcutTypes(KeySequenceHelper::StandardShortcuts | KeySequenceHelper::GlobalShortcuts)
+    , checkAgainstShortcutTypes(KeySequenceHelper::StandardShortcuts | KeySequenceHelper::GlobalShortcuts | KeySequenceHelper::OwnShortcuts)
 {
 }
 
@@ -94,6 +106,9 @@ bool KeySequenceHelper::isKeySequenceAvailable(const QKeySequence &keySequence) 
     }
     if (d->checkAgainstShortcutTypes.testFlag(StandardShortcuts)) {
         conflict |= d->conflictWithStandardShortcuts(keySequence);
+    }
+    if (d->checkAgainstShortcutTypes.testFlag(OwnShortcuts)) {
+        conflict |= d->conflictWithOwnShortcuts(keySequence);
     }
     return !conflict;
 }
@@ -189,6 +204,33 @@ bool KeySequenceHelperPrivate::conflictWithStandardShortcuts(const QKeySequence 
     return false;
 }
 
+bool KeySequenceHelperPrivate::conflictWithOwnShortcuts(const QKeySequence &keySequence)
+{
+    if (!checkAgainstOwnShortcuts()) {
+        return false;
+    }
+
+    const auto collections = ActionCollections::self()->collections();
+    for (auto coll : collections) {
+        const auto actions = coll->actions();
+        for (auto a : actions) {
+            if (a->shortcuts().contains(keySequence)) {
+                const QString title = i18nc("@title:dialog", "Conflict with existing Shortcut");
+                const QString message = i18nc("@info",
+                                              "The '%1' key combination is already used for the action "
+                                              "\"%2\".\n"
+                                              "Do you really want to use the shortcut here instead??",
+                                              keySequence.toString(QKeySequence::NativeText),
+                                              a->text());
+                Q_EMIT q->showStealShortcutDialog(title, message, keySequence);
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 bool KeySequenceHelperPrivate::stealStandardShortcut(KStandardShortcut::StandardShortcut std, const QKeySequence &seq)
 {
 #ifndef Q_OS_ANDROID
@@ -200,7 +242,7 @@ bool KeySequenceHelperPrivate::stealStandardShortcut(KStandardShortcut::Standard
                                   seq.toString(QKeySequence::NativeText),
                                   KStandardShortcut::label(std));
 
-    Q_EMIT q->showStealStandardShortcutDialog(title, message, seq);
+    Q_EMIT q->showStealShortcutDialog(title, message, seq);
 #endif
     return false;
 }
