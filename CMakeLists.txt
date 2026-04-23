@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: BSD-3-Clause
 cmake_minimum_required(VERSION 3.16)
 
-set(KF_VERSION "6.21.0") # handled by release scripts
-set(KF_DEP_VERSION "6.20.0") # handled by release scripts
+set(KIRIGAMIAPPCOMPONENTS_CURRENT_VERSION "1.0.0")
+project(KirigamiAppComponents VERSION ${KIRIGAMIAPPCOMPONENTS_CURRENT_VERSION})
 
-project(KirigamiActionCollection VERSION ${KF_VERSION})
+set(KF_DEP_VERSION "6.22.0") # handled by release scripts
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -48,26 +48,34 @@ ecm_set_disabled_deprecation_versions(
     QT 6.10.0
 )
 
-add_subdirectory(src)
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiAppComponents")
 
-# TODO
-# if(BUILD_EXAMPLES)
-#     add_subdirectory(examples)
-# endif()
-#
-# if(BUILD_TESTING)
-#     add_subdirectory(autotests)
-# endif()
+configure_package_config_file(
+    "KirigamiAppComponentsConfig.cmake.in"
+    "KF6KirigamiAppComponentsConfig.cmake"
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+add_subdirectory(src)
 
 if (BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
 
-install(EXPORT KF6KirigamiActionCollectionTargets DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection"
-        FILE KF6KirigamiActionCollectionTargets.cmake NAMESPACE KF6:: COMPONENT Devel)
+ecm_generate_qdoc(KirigamiActionCollection kirigamiactioncollection.qdocconf)
 
 include(ECMFeatureSummary)
 ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiAppComponentsConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiAppComponentsConfig.cmake"
+    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+    COMPONENT Devel
+)
+
+install(EXPORT KirigamiAppComponentsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        FILE KirigamiAppComponentsTargets.cmake NAMESPACE KF6:: COMPONENT Devel)
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 

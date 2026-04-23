@@ -51,14 +51,12 @@ set_target_properties(KirigamiActionCollection PROPERTIES
 
 ecm_generate_export_header(KirigamiActionCollection
     BASE_NAME KirigamiActionCollection
-    GROUP_BASE_NAME KF
-    VERSION ${KF_VERSION}
+    GROUP_BASE_NAME KAC
+    VERSION ${KIRIGAMIAPPCOMPONENTS_CURRENT_VERSION}
     DEPRECATED_BASE_VERSION 0
     DEPRECATION_VERSIONS
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
-
-ecm_generate_qdoc(KirigamiActionCollection kirigamiactioncollection.qdocconf)
 
 target_include_directories(KirigamiActionCollection PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
@@ -86,31 +84,11 @@ ecm_setup_version(
     SOVERSION 1
 )
 
-
-configure_package_config_file(
-    "KF6KirigamiActionCollectionConfig.cmake.in"
-    "KF6KirigamiActionCollectionConfig.cmake"
-    INSTALL_DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection
-)
-
-install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiActionCollectionConfigVersion.cmake"
-    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection
-    COMPONENT Devel
-)
-
 ecm_generate_headers(KirigamiActionCollection_CamelCase_HEADERS
     HEADER_NAMES
     ActionCollection
     ActionCollections
     REQUIRED_HEADERS KirigamiActionCollection_HEADERS
-)
-
-install(EXPORT KF6KirigamiActionCollectionTargets
-    DESTINATION ${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6KirigamiActionCollection
-    FILE KF6KirigamiActionCollectionTargets.cmake
-    NAMESPACE KF6::
 )
 
 install(FILES
@@ -126,6 +104,6 @@ install(FILES
     COMPONENT Devel
 )
 
-ecm_finalize_qml_module(KirigamiActionCollection DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KF6KirigamiActionCollectionTargets)
+ecm_finalize_qml_module(KirigamiActionCollection DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiAppComponentsTargets)
 
-install(TARGETS KirigamiActionCollection EXPORT KF6KirigamiActionCollectionTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
+install(TARGETS KirigamiActionCollection EXPORT KirigamiAppComponentsTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
