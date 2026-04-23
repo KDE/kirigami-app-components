@@ -1,12 +1,13 @@
 # SPDX-FileCopyrightText: None
 # SPDX-License-Identifier: CC0-1.0
 Dependencies:
-  - 'on': ['Linux', 'FreeBSD']
+  - 'on': ['Linux', 'FreeBSD', 'Windows', 'Android', 'iOS']
     'require':
       'frameworks/extra-cmake-modules': '@latest-kf6'
       'frameworks/ki18n': '@latest-kf6'
       'frameworks/kirigami': '@latest-kf6'
       'frameworks/kconfig': '@latest-kf6'
+      'frameworks/coreaddons': '@latest-kf6'
       'frameworks/kguiaddons': '@latest-kf6'
       'frameworks/kiconthemes': '@latest-kf6'
       'frameworks/kitemmodels': '@latest-kf6'
