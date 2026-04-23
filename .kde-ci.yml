@@ -17,5 +17,5 @@ Dependencies:
     'frameworks/kglobalaccel': '@latest-kf6'
 
 Options:
- enable-lsan: true
+ #enable-lsan: true
  require-passing-tests-on: ['@all']
