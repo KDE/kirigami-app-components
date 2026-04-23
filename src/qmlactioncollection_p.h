@@ -6,7 +6,6 @@
 
 #include <QObject>
 #include <QQmlEngine>
-#include <fontconfig/fontconfig.h>
 #include <qqmlregistration.h>
 
 #include "actioncollection.h"
