@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Marco Martin <notmart@gmail.com>
+# SPDX-License-Identifier: BSD-3-Clause
 if(NOT TARGET Qt6::QuickTest)
     message(STATUS "Qt6QuickTest not found, autotests will not be built.")
     return()
