@@ -13,8 +13,8 @@ Dependencies:
       'frameworks/kitemmodels': '@latest-kf6'
 
 - 'on': ['Linux', 'FreeBSD']
-  'require':
-    'frameworks/kglobalaccel': '@latest-kf6'
+    'require':
+      'frameworks/kglobalaccel': '@latest-kf6'
 
 Options:
   enable-lsan: True
