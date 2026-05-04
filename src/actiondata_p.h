@@ -230,6 +230,13 @@ class ActionData : public QAction, public QQmlParserStatus
      *TODO :perhaps this can be removed
      */
     Q_PROPERTY(QActionGroup *actionGroup READ actionGroup WRITE setActionGroupNotify NOTIFY actionGroupChanged)
+
+    /*!
+     * \qmlproperty QVariant data
+     * Any extra data payload that can be put on the action
+     */
+    Q_PROPERTY(QVariant data READ data WRITE setData NOTIFY changed)
+
 public:
     explicit ActionData(QObject *parent = nullptr);
     ~ActionData() override;
