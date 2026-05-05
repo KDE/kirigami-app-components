@@ -12,7 +12,7 @@ import org.kde.kirigami.actioncollection as AC
 Kirigami.ScrollablePage {
     id: root
 
-    property alias model: searchFilterProxyModel.sourceModel
+    property alias model: actionModel
 
     title: i18ndc("kirigami-actioncollection", "@title:window", "Shortcuts")
 
