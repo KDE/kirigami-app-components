@@ -2,8 +2,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import QtQuick
-import QtQuick.Controls as QQC
-import QtQuick.Layouts
 
 import org.kde.coreaddons as CoreAddons
 import org.kde.kirigami as Kirigami
