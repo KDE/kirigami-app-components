@@ -55,7 +55,7 @@ Kirigami.SearchDialog {
 
         width: ListView.view.width
         required property int index
-        required property QtObject actionDescription
+        required property AC.ActionData actionDescription
         required property var actionInstances
         required property string shortcut
         required property string alternateShortcut
