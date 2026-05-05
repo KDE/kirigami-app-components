@@ -16,7 +16,7 @@ Kirigami.SearchDialog {
     model: KSortFilterProxyModel {
         sourceModel: AC.ActionModel {
             id: actionModel
-            shownActions: ActionModel.ActiveActions
+            shownActions: AC.ActionModel.ActiveActions
         }
 
         filterRowCallback: function (source_row, source_parent) {

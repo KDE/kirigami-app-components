@@ -34,7 +34,7 @@ Kirigami.ScrollablePage {
                 id: actionModel
                 // TODO: this should just fetch all actions of all collections
                 collectionName: "org.kde.collection"
-                shownActions: ActionModel.ActiveActions
+                shownActions: AC.ActionModel.ActiveActions
             }
 
             filterRoleName: 'actionName'
@@ -110,7 +110,7 @@ Kirigami.ScrollablePage {
             id: shortcutDialog
 
             width: Math.max(implicitWidth, Kirigami.Units.gridUnit * 20)
-            property ActionData actionDescription
+            property AC.ActionData actionDescription
             property alias keySequence: keySequenceItem.keySequence
             property alias alternateKeySequence: alternateKeySequenceItem.keySequence
             // Needs to access shortcutDelegate.model for doing setData on the model
