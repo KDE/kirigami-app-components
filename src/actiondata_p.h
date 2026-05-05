@@ -18,12 +18,12 @@ class QmlActionCollection;
 class ActionData;
 class IconGroupPrivate;
 
-class ActionGroup : public QActionGroup
+class ActionDataGroup : public QActionGroup
 {
     Q_OBJECT
     QML_ELEMENT
 public:
-    ActionGroup(QObject *parent = nullptr);
+    ActionDataGroup(QObject *parent = nullptr);
 };
 
 class IconGroup : public QObject

@@ -24,7 +24,7 @@ static QKeySequence variantToKeySequence(const QVariant &var)
     return QKeySequence::fromString(var.toString());
 }
 
-ActionGroup::ActionGroup(QObject *parent)
+ActionDataGroup::ActionDataGroup(QObject *parent)
     : QActionGroup(parent)
 {
 }
