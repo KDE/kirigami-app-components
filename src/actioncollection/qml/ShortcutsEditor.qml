@@ -51,7 +51,7 @@ Kirigami.ScrollablePage {
             }
         }
 
-        delegate: QQC.ItemDelegate {
+        component ShortcutDelegate : QQC.ItemDelegate {
             id: shortcutDelegate
 
             required property int index
@@ -106,6 +106,8 @@ Kirigami.ScrollablePage {
             }
         }
 
+        delegate: ShortcutDelegate { }
+
         QQC.Dialog {
             id: shortcutDialog
 
@@ -114,7 +116,7 @@ Kirigami.ScrollablePage {
             property alias keySequence: keySequenceItem.keySequence
             property alias alternateKeySequence: alternateKeySequenceItem.keySequence
             // Needs to access shortcutDelegate.model for doing setData on the model
-            property Item shortcutDelegate
+            property ShortcutDelegate shortcutDelegate
             property int index: -1
             modal: true
 
