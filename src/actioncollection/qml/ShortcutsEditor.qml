@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2024 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC
@@ -69,7 +70,7 @@ Kirigami.ScrollablePage {
                 Kirigami.Icon {
                     implicitWidth: Kirigami.Units.iconSizes.small
                     implicitHeight: implicitWidth
-                    source: model.actionDescription.icon.name || model.actionDescription.icon.source
+                    source: shortcutDelegate.model.actionDescription.icon.name || shortcutDelegate.model.actionDescription.icon.source
                 }
 
                 QQC.Label {
@@ -80,7 +81,7 @@ Kirigami.ScrollablePage {
 
                 QQC.Label {
                     id: shortcutLabel
-                    text: model.shortcut
+                    text: shortcutDelegate.model.shortcut
                     Accessible.ignored: true
                 }
                 Kirigami.Separator {
@@ -90,7 +91,7 @@ Kirigami.ScrollablePage {
                 QQC.Label {
                     id: alternateShortcutLabel
                     visible: text.length > 0
-                    text: model.alternateShortcut
+                    text: shortcutDelegate.model.alternateShortcut
                     Accessible.ignored: true
                 }
             }

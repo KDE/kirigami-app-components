@@ -69,20 +69,20 @@ Kirigami.SearchDialog {
             Kirigami.Icon {
                 implicitWidth: Kirigami.Units.iconSizes.small
                 implicitHeight: implicitWidth
-                source: actionDescription.icon.name || actionDescription.icon.source
+                source: commandDelegate.actionDescription.icon.name || commandDelegate.actionDescription.icon.source
             }
 
             QQC.Label {
                 Layout.fillWidth: true
                 text: {
-                    let stripped = actionDescription.text.replace(/&([^&])/g, "$1").replace("&&", "&");
+                    let stripped = commandDelegate.actionDescription.text.replace(/&([^&])/g, "$1").replace("&&", "&");
                     return stripped;
                 }
             }
 
             QQC.Label {
                 id: shortcutLabel
-                text: shortcut
+                text: commandDelegate.shortcut
                 color: Kirigami.Theme.disabledTextColor
             }
             Kirigami.Separator {
@@ -92,7 +92,7 @@ Kirigami.SearchDialog {
             QQC.Label {
                 id: alternateShortcutLabel
                 visible: text.length > 0
-                text: alternateShortcut
+                text: commandDelegate.alternateShortcut
                 color: Kirigami.Theme.disabledTextColor
             }
         }
