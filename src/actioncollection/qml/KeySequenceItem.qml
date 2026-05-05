@@ -211,7 +211,7 @@ QQC.Control {
 
                     hoverEnabled: true
                     // icon name determines the direction of the arrow, NOT the direction of the app layout
-                    icon.name: Qt.application.layoutDirection === Qt.LeftToRight ? "edit-clear-locationbar-rtl" : "edit-clear-locationbar-ltr"
+                    icon.name: Application.layoutDirection === Qt.LeftToRight ? "edit-clear-locationbar-rtl" : "edit-clear-locationbar-ltr"
 
                     display: QQC.Button.IconOnly
                     text: i18ndc("kirigami-actioncollection", "@info:tooltip", "Clear Key Sequence")
