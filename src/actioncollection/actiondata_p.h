@@ -129,7 +129,7 @@ class ActionData : public QAction, public QQmlParserStatus
      * \qmlproperty color icon.color
      * \qmlproperty bool icon.cache
      */
-    Q_PROPERTY(IconGroup *icon READ icon CONSTANT FINAL)
+    Q_PROPERTY(KirigamiActions::IconGroup *icon READ icon CONSTANT FINAL)
 
     /*!
      * \qmlproperty keysequence defaultShortcut

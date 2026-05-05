@@ -116,7 +116,7 @@ class QmlActionCollection : public ActionCollection
      * }
      * \endcode
      */
-    Q_PROPERTY(QQmlListProperty<ActionData> actions READ actionsProperty CONSTANT FINAL)
+    Q_PROPERTY(QQmlListProperty<KirigamiActions::ActionData> actions READ actionsProperty CONSTANT FINAL)
 
     Q_CLASSINFO("DefaultProperty", "actions")
 
