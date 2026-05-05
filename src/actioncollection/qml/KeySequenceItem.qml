@@ -120,7 +120,7 @@ QQC.Control {
                 }
             }
             contentItem: RowLayout {
-                enabled: parent.checked
+                enabled: customDelegate.checked
                 Layout.fillWidth: true
 
                 KeySequenceHelper {
