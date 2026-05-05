@@ -29,6 +29,7 @@ public:
 class IconGroup : public QObject
 {
     Q_OBJECT
+    QML_ANONYMOUS
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
     Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY widthChanged)
