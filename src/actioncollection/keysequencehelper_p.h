@@ -20,6 +20,12 @@ namespace KirigamiActions
 
 class KeySequenceHelperPrivate;
 
+struct KeySequenceForeign {
+    Q_GADGET
+    QML_ANONYMOUS
+    QML_FOREIGN(QKeySequence)
+};
+
 class KeySequenceHelper : public KKeySequenceRecorder
 {
     Q_OBJECT
