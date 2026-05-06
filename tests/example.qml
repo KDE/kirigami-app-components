@@ -14,7 +14,7 @@ Kirigami.ApplicationWindow {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Hello World")
+    title: "Hello World"
 
     pageStack {
         initialPage: testPage
@@ -26,7 +26,7 @@ Kirigami.ApplicationWindow {
 
         AC.ActionCollection {
             name: "org.kde.examplecollection"
-            text: i18n("Example Collection")
+            text: "Example Collection"
             AC.ActionData {
                 name: "hello"
                 text: "Hello"
@@ -51,7 +51,7 @@ Kirigami.ApplicationWindow {
 
         AC.ActionCollection {
             name: "org.kde.examplecollection2"
-            text: i18n("Other Actions")
+            text: "Other Actions"
             AC.ActionData {
                 name: "lorem"
                 text: "Lorem Ipsum"
