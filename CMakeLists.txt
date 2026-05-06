@@ -31,6 +31,7 @@ include(ECMQmlModule)
 include(ECMPoQmTools)
 include(ECMDeprecationSettings)
 include(ECMGenerateQDoc)
+include(ECMFindQmlModule)
 
 option(BUILD_EXAMPLES "Build example applications" OFF)
 
@@ -41,6 +42,8 @@ find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS Config GuiAddons Kirigami
 if (BUILD_TESTING)
     find_package(Qt6QuickTest ${REQUIRED_QT_VERSION} CONFIG QUIET)
 endif()
+
+ecm_find_qmlmodule(org.kde.ki18n REQUIRED)
 
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
