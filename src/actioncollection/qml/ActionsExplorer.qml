@@ -2,6 +2,8 @@
 // SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
 // SPDX-License-Identifier:  LGPL-2.1-or-later OR LicenseRef-KDE-Accepted-LGPL
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls as QQC
