@@ -9,9 +9,15 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.actioncollection as AC
 import org.kde.kitemmodels
+import org.kde.ki18n
 
 Kirigami.SearchDialog {
     id: root
+
+    KI18nContext {
+        id: _tr
+        translationDomain: "kirigami-actioncollection"
+    }
 
     model: KSortFilterProxyModel {
         sourceModel: AC.ActionModel {
@@ -103,5 +109,5 @@ Kirigami.SearchDialog {
         }
     }
 
-    emptyText: i18ndc("kirigami-addons6", "@info:placeholder", "No results found")
+    emptyText: _tr.i18nc("@info:placeholder", "No results found")
 }

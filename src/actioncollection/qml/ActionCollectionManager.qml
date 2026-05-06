@@ -6,6 +6,7 @@ import QtQuick
 import org.kde.coreaddons as CoreAddons
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.actioncollection as AC
+import org.kde.ki18n
 
 Item {
     id: root
@@ -16,13 +17,18 @@ Item {
 
     default property list<AC.ActionCollection> collections
 
+    KI18nContext {
+        id: _tr
+        translationDomain: "kirigami-actioncollection"
+    }
+
     AC.ActionCollection {
         id: standardActions
         name: "org.kde.globalactions"
         text: CoreAddons.AboutData.displayName
         AC.StandardActionData {
             standardAction: AC.StandardActionData.Preferences
-            text: i18ndc("kirigami-actioncollection", "Configure application menu entry", "Configure %1…", CoreAddons.AboutData.displayName)
+            text: _tr.i18ndc("kirigami-actioncollection", "Configure application menu entry", "Configure %1…", CoreAddons.AboutData.displayName)
         }
         AC.StandardActionData {
             standardAction: AC.StandardActionData.KeyBindings
@@ -32,7 +38,7 @@ Item {
         }
         AC.ActionData {
             name: "FindAction"
-            text: i18nc("Opens the actions search dialog", "Find Action…")
+            text: _tr.i18nc("Opens the actions search dialog", "Find Action…")
             icon.name: "search"
             defaultShortcut: "Ctrl+Alt+I"
             property AC.ActionsExplorer dialog
@@ -71,7 +77,7 @@ Item {
                 }, {
                     width: Kirigami.Units.gridUnit * 30,
                     height: Kirigami.Units.gridUnit * 30,
-                    title: i18ndc("kirigami-actioncollection", "@title:window", "About %1", CoreAddons.AboutData.displayName),
+                    title: _tr.i18ndc("kirigami-actioncollection", "@title:window", "About %1", CoreAddons.AboutData.displayName),
                 });
                 openDialogWindow.Keys.escapePressed.connect(function() {
                     openDialogWindow.closeDialog();
@@ -91,7 +97,7 @@ Item {
                 }, {
                     width: Kirigami.Units.gridUnit * 30,
                     height: Kirigami.Units.gridUnit * 30,
-                    title: i18ndc("kirigami-actioncollection", "@title:window", "About KDE"),
+                    title: _tr.i18ndc("kirigami-actioncollection", "@title:window", "About KDE"),
                 });
                 openDialogWindow.Keys.escapePressed.connect(function() {
                     openDialogWindow.closeDialog();
