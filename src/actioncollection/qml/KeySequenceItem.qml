@@ -12,6 +12,7 @@ import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 import org.kde.ki18n
+import org.kde.kirigami.actioncollection as AC
 
 /**
  * @internal
@@ -129,15 +130,15 @@ QQC.Control {
                 enabled: customDelegate.checked
                 Layout.fillWidth: true
 
-                KeySequenceHelper {
+                AC.KeySequenceHelper {
                     id: helper
                     //currentKeySequence: root.keySequence !== root.defaultKeySequence ? root.keySequence : ""
                     onGotKeySequence: keySequence => {
-                        if (!isKeySequenceAvailable(keySequence)) {
-                            currentKeySequence = root.__previousSequence;
+                        if (!helper.isKeySequenceAvailable(keySequence)) {
+                            helper.currentKeySequence = root.__previousSequence;
                         }
                         mainButton.checked = false;
-                        root.keySequence = currentKeySequence;
+                        root.keySequence = helper.currentKeySequence;
                         root.keySequenceModified();
                     }
 

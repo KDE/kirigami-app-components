@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import QtQuick
-
+import QtQuick.Templates as QT
 import org.kde.coreaddons as CoreAddons
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.actioncollection as AC
@@ -65,14 +65,14 @@ Item {
         }
         AC.StandardActionData {
             standardAction: AC.StandardActionData.AboutApp
-            property QtObject openDialogWindow
+            property QT.Page openDialogWindow
             onTriggered: {
                 // TODO: port to new forms
                 if (openDialogWindow) {
-                    pageStack.closeDialog();
+                    root.pageRow.closeDialog();
                     return;
                 }
-                openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"), {
+                openDialogWindow = root.pageRow.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"), {
                     width: root.width
                 }, {
                     width: Kirigami.Units.gridUnit * 30,
@@ -86,7 +86,7 @@ Item {
         }
         AC.StandardActionData {
             standardAction: AC.StandardActionData.AboutKDE
-            property QtObject openDialogWindow
+            property QT.Page openDialogWindow
             onTriggered: {
                 if (openDialogWindow) {
                     pageStack.closeDialog();

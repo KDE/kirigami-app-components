@@ -36,6 +36,7 @@ class IconGroup : public QObject
     Q_PROPERTY(qreal height READ height WRITE setHeight NOTIFY heightChanged)
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
     Q_PROPERTY(bool cache READ cache WRITE setCache NOTIFY cacheChanged)
+    QML_ANONYMOUS
 
 public:
     IconGroup(ActionData *parent = nullptr);

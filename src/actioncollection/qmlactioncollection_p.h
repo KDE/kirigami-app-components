@@ -130,7 +130,7 @@ public:
     // All actions in this collections that have an active and working Kirigami.Action instance in this moment
     QList<ActionData *> activeActions() const;
 
-    QQmlListProperty<ActionData> actionsProperty();
+    QQmlListProperty<KirigamiActions::ActionData> actionsProperty();
 
     // QML attached property
     static ActionCollectionAttached *qmlAttachedProperties(QObject *object);
