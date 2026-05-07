@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2024 Carl Schwan <carlschwan@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
-pragma ComponentBehavior: Bound
+pragma ComponentBehavior: Bound;
 
 import QtQuick
 import QtQuick.Controls as QQC
@@ -103,7 +103,7 @@ Kirigami.ScrollablePage {
             }
 
             onClicked: {
-                shortcutDialog.title = _tr.i18ndc("kirigami-actioncollection", "@title:window", "Shortcut: %1",  model.actionDescription.text);
+                shortcutDialog.title = _tr.i18ndc("kirigami-actioncollection", "@title:window", "Shortcut: %1",  shortcutDelegate.text);
                 shortcutDialog.actionDescription = model.actionDescription;
                 shortcutDialog.keySequence = model.shortcut;
                 shortcutDialog.alternateKeySequence = model.alternateShortcut;
