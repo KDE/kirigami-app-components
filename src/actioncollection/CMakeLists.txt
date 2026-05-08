@@ -7,7 +7,7 @@ set_target_properties(KirigamiActionCollection PROPERTIES
     VERSION ${KF6KirigamiActionCollection_VERSION}
 )
 
-target_compile_definitions(KirigamiActionCollection PRIVATE -DTRANSLATION_DOMAIN=\"kirigami-actioncollection\")
+target_compile_definitions(KirigamiActionCollection PRIVATE -DTRANSLATION_DOMAIN=\"kirigami-app-components\")
 
 ecm_add_qml_module(KirigamiActionCollection
     URI "org.kde.kirigami.actioncollection"
