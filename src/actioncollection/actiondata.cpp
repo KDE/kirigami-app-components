@@ -463,11 +463,12 @@ void ActionData::componentComplete()
 
     setShortcuts({shortcut, alternateShortcut});
 
-    if (!shortcuts().first().isEmpty()) {
+    const auto &shorts = shortcuts();
+    if (!shorts.first().isEmpty()) {
         Q_EMIT shortcutChanged(shortcut);
     }
 
-    if (!shortcuts().last().isEmpty()) {
+    if (!shorts.last().isEmpty()) {
         Q_EMIT alternateShortcutChanged(alternateShortcut);
     }
 

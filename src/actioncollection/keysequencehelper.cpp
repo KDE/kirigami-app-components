@@ -187,6 +187,8 @@ bool KeySequenceHelperPrivate::conflictWithGlobalShortcuts(const QKeySequence &k
     // most likely the first action that is done in the slot
     // listening to keySequenceChanged().
     KGlobalAccel::stealShortcutSystemwide(keySequence);
+#else
+    Q_UNUSED(keySequence)
 #endif
     return false;
 }

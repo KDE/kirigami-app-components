@@ -61,7 +61,7 @@ public:
 
 Q_SIGNALS:
     void collectionNameChanged(const QString &name);
-    void shownActionsChanged(ShownActions shown);
+    void shownActionsChanged(KirigamiActions::ActionModel::ShownActions shown);
 
 private:
     ActionModelPrivate *d = nullptr;

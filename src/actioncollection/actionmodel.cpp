@@ -245,7 +245,7 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
     if (!collection) {
         return {};
     }
-    action = collection->activeActions()[actualRow];
+    action = collection->activeActions().at(actualRow);
     switch (role) {
     case Qt::DisplayRole:
         return action->text();

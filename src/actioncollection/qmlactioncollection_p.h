@@ -137,10 +137,10 @@ public:
 
 Q_SIGNALS:
     void nameChanged(const QString &name);
-    void aboutToAddActionInstance(int position, ActionData *action);
-    void actionInstanceAdded(int position, ActionData *action);
-    void aboutToRemoveActionInstance(int position, ActionData *action);
-    void actionInstanceRemoved(int position, ActionData *action);
+    void aboutToAddActionInstance(int position, KirigamiActions::ActionData *action);
+    void actionInstanceAdded(int position, KirigamiActions::ActionData *action);
+    void aboutToRemoveActionInstance(int position, KirigamiActions::ActionData *action);
+    void actionInstanceRemoved(int position, KirigamiActions::ActionData *action);
 
 private:
     static void actions_append(QQmlListProperty<ActionData> *prop, ActionData *object);

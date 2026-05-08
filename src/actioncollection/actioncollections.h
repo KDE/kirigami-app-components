@@ -65,13 +65,13 @@ Q_SIGNALS:
     /*!
      * Emitted when a new ActionCollection instance has been created.
      */
-    void collectionInserted(ActionCollection *collection);
+    void collectionInserted(KirigamiActions::ActionCollection *collection);
 
     /*!
      * Emitted when an ActionCollection instance is being destroyed or
      * made otherwise unavailable.
      */
-    void collectionRemoved(ActionCollection *collection);
+    void collectionRemoved(KirigamiActions::ActionCollection *collection);
 
 private:
     std::unique_ptr<ActionCollectionsPrivate> d;

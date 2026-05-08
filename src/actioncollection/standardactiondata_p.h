@@ -135,7 +135,7 @@ public:
     void setStandardAction(StandardAction standardAction);
 
 Q_SIGNALS:
-    void standardActionChanged(StandardAction standardAction);
+    void standardActionChanged(KirigamiActions::StandardActionData::StandardAction standardAction);
 
 private:
     StandardAction m_standardAction = ActionNone;
