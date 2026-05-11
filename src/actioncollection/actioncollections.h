@@ -17,7 +17,7 @@ class ActionCollection;
 class ActionCollectionsPrivate;
 
 /*!
- * \class Kirigami::ActionCollection::ActionCollections
+ * \class KirigamiActions::ActionCollections
  * \inheaderfile Kirigami/ActionCollection/ActionCollections
  * \inmodule ActionCollection
  *

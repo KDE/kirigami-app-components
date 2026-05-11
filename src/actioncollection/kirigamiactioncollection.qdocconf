@@ -7,14 +7,15 @@ documentationinheaders = true
 
 headerdirs += .
 sourcedirs += . ../../docs/includes
-imagedirs = . ../../docs/pics
-exampledirs = . ../../examples primitives/examples
+imagedirs = . 
+#../../docs/pics
+#exampledirs = . ../../examples
 
 depends = kde qtcore qtqml qtquick qtquickcontrols kcoreaddons kconfig
 
 excludedirs = platform
 
-navigation.landingpage  = "KirigamiActionCollectionActionCollection"
+navigation.landingpage  = "KirigamiActionCollection"
 
 qhp.projects            = KirigamiActionCollection
 
