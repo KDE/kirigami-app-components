@@ -1,0 +1,27 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = KirigamiActionCollection
+description = Components for user configurable keyboard shortcuts in QML apps
+
+documentationinheaders = true
+
+headerdirs += .
+sourcedirs += . ../../docs/includes
+imagedirs = . ../../docs/pics
+exampledirs = . ../../examples primitives/examples
+
+depends = kde qtcore qtqml qtquick qtquickcontrols kcoreaddons kconfig
+
+excludedirs = platform
+
+navigation.landingpage  = "KirigamiActionCollectionActionCollection"
+
+qhp.projects            = KirigamiActionCollection
+
+qhp.KirigamiActionCollection.file          = KirigamiActionCollection.qhp
+qhp.KirigamiActionCollection.namespace     = org.kde.KirigamiActionCollection.$QT_VERSION_TAG
+qhp.KirigamiActionCollection.virtualFolder = KirigamiActionCollection
+qhp.KirigamiActionCollection.indexTitle    = KirigamiActionCollection
+qhp.KirigamiActionCollection.indexRoot     =
+
+tagfile = KirigamiActionCollection.tags
