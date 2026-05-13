@@ -14,7 +14,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.ki18n
 import org.kde.kirigami.actioncollection as AC
 
-/**
+/*
  * @internal
  */
 QQC.Control {
@@ -29,7 +29,7 @@ QQC.Control {
     property string keySequence
     property string defaultKeySequence
 
-    /**
+    /*
      * This property controls which types of shortcuts are checked for conflicts when the keySequence
      * is set. If a conflict is detected, a messagebox will be shown asking the user to confirm their
      * input. Valid values are combinations of the following flags:
@@ -43,7 +43,7 @@ QQC.Control {
 
     property string __previousSequence: ""
 
-    /**
+    /*
      * Emitted whenever the key sequence is modified by the user interacting with the component
      *
      * Either by interacting capturing a key sequence or pressing the clear button.
@@ -54,7 +54,7 @@ QQC.Control {
 
     signal showStealShortcutDialog(title: string, message: string, sequence: var)
 
-    /**
+    /*
      * Start capturing a key sequence. This equivalent to the user clicking on the main button of the item.
      */
     function startCapturing() {

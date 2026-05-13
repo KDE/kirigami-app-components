@@ -47,7 +47,7 @@ private:
 /*!
  * \qmltype ActionCollection
  * \inqmlmodule org.kde.kirigami.actioncollection
- * \nativetype ActionCollection
+ * \nativetype KirigamiActions::ActionCollection
  *
  * \brief ActionCollection manages a set of ActionData objects.
  *
@@ -85,7 +85,7 @@ class QmlActionCollection : public ActionCollection
     QML_ATTACHED(ActionCollectionAttached)
 
     /*!
-     * \qmlproperty string name
+     * \qmlproperty string ActionCollection::name
      *
      * The unique name of the collection within the whole application.
      * It is required and should be set only once
@@ -94,7 +94,7 @@ class QmlActionCollection : public ActionCollection
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 
     /*!
-     * \qmlproperty list<ActionData> actions
+     * \qmlproperty list<ActionData> ActionCollection::actions
      *
      * All the actions this collection contains.
      * It's the default property, so actionData instances can be declared just as children.

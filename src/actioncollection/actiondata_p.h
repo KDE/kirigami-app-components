@@ -18,6 +18,12 @@ class QmlActionCollection;
 class ActionData;
 class IconGroupPrivate;
 
+/*!
+ * \qmltype ActionDataGroup
+ * \inqmlmodule org.kde.kirigami.actioncollection
+ *
+ * \brief A QActionGroup to group ActionData together in auto-exclusive groups.
+ */
 class ActionDataGroup : public QActionGroup
 {
     Q_OBJECT
@@ -77,7 +83,7 @@ private:
  * \nativetype QAction
  *
  * \brief Declarative representation for a named action within the application
- * with user-configurable shortcuts
+ * with user-configurable shortcuts.
  *
  * This element needs to always be declared as a child of ActionCollection
  *
@@ -111,7 +117,7 @@ class ActionData : public QAction, public QQmlParserStatus
     QML_ELEMENT
 
     /*!
-     * \qmlproperty string name
+     * \qmlproperty string ActionData::name
      *
      * The unique name of the action within its collection.
      * It is required and should be set only once
@@ -122,25 +128,27 @@ class ActionData : public QAction, public QQmlParserStatus
     /*!
      * Description for the icon to use, which can be specified by name or path
      *
-     * \qmlproperty string icon.name
-     * \qmlproperty url icon.source
-     * \qmlproperty int icon.width
-     * \qmlproperty int icon.height
-     * \qmlproperty color icon.color
-     * \qmlproperty bool icon.cache
+     * \qmlproperty string ActionData::icon.name
+     * \qmlproperty string ActionData::icon.source
+     * \qmlproperty real ActionData::icon.width
+     * \qmlproperty real ActionData::icon.height
+     * \qmlproperty color ActionData::icon.color
+     * \qmlproperty bool ActionData::icon.cache
+     *
+     * \include icongroup.qdocinc grouped-properties
      */
     Q_PROPERTY(KirigamiActions::IconGroup *icon READ icon CONSTANT FINAL)
 
     /*!
-     * \qmlproperty keysequence defaultShortcut
-
+     * \qmlproperty keysequence ActionData::defaultShortcut
+     *
      * This property holds the action's default shortcut. The key sequence can be set
      * to one of the \l{QKeySequence::StandardKey}{standard keyboard shortcuts},
      * or it can be described with a string containing a sequence of up to four
      * key presses that are needed to trigger the shortcut.
      * This will be the shortcut of the action in the app, unless the user explicitly
      * confugured to use another one.
-
+     *
      * \code
      * ActionData {
      *     defaultShortcut: "Ctrl+E,Ctrl+W"
@@ -150,7 +158,7 @@ class ActionData : public QAction, public QQmlParserStatus
     Q_PROPERTY(QVariant defaultShortcut READ defaultShortcut WRITE setDefaultShortcut NOTIFY defaultShortcutChanged FINAL)
 
     /*!
-     * \qmlproperty keysequence defaultAlternateShortcut
+     * \qmlproperty keysequence ActionData::defaultAlternateShortcut
      *
      * This property holds the action's default alternate secondary shortcut.
      * The key sequence can be set
@@ -159,7 +167,7 @@ class ActionData : public QAction, public QQmlParserStatus
      * key presses that are needed to trigger the shortcut.
      * This will be the shortcut of the action in the app, unless the user explicitly
      * configured to use another one.
-
+     *
      * \code
      * ActionData {
      *     defaultAlternateShortcut: "Ctrl+E,Ctrl+W"
@@ -169,7 +177,7 @@ class ActionData : public QAction, public QQmlParserStatus
     Q_PROPERTY(QVariant defaultAlternateShortcut READ defaultAlternateShortcut WRITE setDefaultAlternateShortcut NOTIFY defaultAlternateShortcutChanged FINAL)
 
     /*!
-     * \qmlproperty action QtQuick.Templates::Action
+     * \qmlproperty QtQuick.Controls::Action ActionData::action
      *
      * This property holds the QML Action this ActionData is associated to, if any.
      * Since ActionData is just a description of an action, in order to be an active
@@ -227,13 +235,12 @@ class ActionData : public QAction, public QQmlParserStatus
     Q_PROPERTY(QObject *action READ action() WRITE setAction NOTIFY actionChanged)
 
     /*!
-     * \qmlproperty QActionGroup actionGroup
-     *TODO :perhaps this can be removed
+     * \qmlproperty ActionDataGroup ActionData::actionGroup
      */
     Q_PROPERTY(QActionGroup *actionGroup READ actionGroup WRITE setActionGroupNotify NOTIFY actionGroupChanged)
 
     /*!
-     * \qmlproperty QVariant data
+     * \qmlproperty variant ActionData::data
      * Any extra data payload that can be put on the action
      */
     Q_PROPERTY(QVariant data READ data WRITE setData NOTIFY changed)

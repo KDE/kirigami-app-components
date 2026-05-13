@@ -8,13 +8,34 @@ import org.kde.kirigami as Kirigami
 import org.kde.kirigami.actioncollection as AC
 import org.kde.ki18n
 
+/*!
+  \qmltype ActionCollectionManager
+  \inqmlmodule org.kde.kirigami.actioncollection
+
+  \brief Central class to instantiate in the application root qml file.
+
+  Instantiate this class in the root qml file of the application to init shortcut configuration
+  and as central repository for action collections.
+  It also provides a ready made collection called "org.kde.globalactions" which includes actions for configuring shortcuts,
+  finding actions and the usual about app/about KDE actions.
+ */
 Item {
     id: root
 
     readonly property alias standardCollection: standardActions
     //FIXME: shouldn't require the app being based on pagerow
+    /*!
+      \qmlproperty Kirigami.PageRow pageRow
+
+      The central pageRow for this application: it will be used to create the shortcut configuration dialog
+     */
     required property Kirigami.PageRow pageRow
 
+    /*!
+      \qmlproperty list<ActionCollection> collections
+
+      All the collections used in the application, define them just in this central place
+     */
     default property list<AC.ActionCollection> collections
 
     KI18nContext {

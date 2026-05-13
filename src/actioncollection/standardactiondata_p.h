@@ -11,10 +11,9 @@ namespace KirigamiActions
 /*!
  * \qmltype StandardActionData
  * \inqmlmodule org.kde.kirigami.actioncollection
- * \nativetype QAction
  *
  * \brief Declarative representation for a named action derivarive from
- * KStandardActions
+ * KStandardActions.
  *
  * This element needs to always be declared as a child of ActionCollection
  *
@@ -44,6 +43,10 @@ class StandardActionData : public ActionData
     Q_OBJECT
     QML_ELEMENT
 
+    /*!
+     * \qmlproperty StandardAction StandardActionData::standardAction
+     * The standard action this StandardActionData rapresents
+     */
     Q_PROPERTY(StandardAction standardAction READ standardAction WRITE setStandardAction NOTIFY standardActionChanged FINAL REQUIRED)
 
 public:

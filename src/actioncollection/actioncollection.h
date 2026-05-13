@@ -53,9 +53,12 @@ public:
      * This will be visible in the shortcut configuration page.
      */
     QString text() const;
+
     /*!
      * Sets the user readable text label for this collection.
      * This will be visible in the shortcut configuration page.
+     *
+     * \a text The new text label for the collection
      */
     void setText(const QString &text);
 
@@ -105,6 +108,8 @@ public:
 Q_SIGNALS:
     /*!
      * Emitted when the user-reabable text label for this collection has changed.
+     *
+     * \a text The new text label for the collection
      */
     void textChanged(const QString &text);
 

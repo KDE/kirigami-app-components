@@ -19,10 +19,22 @@ navigation.landingpage  = "KirigamiActionCollection"
 
 qhp.projects            = KirigamiActionCollection
 
-qhp.KirigamiActionCollection.file          = KirigamiActionCollection.qhp
+qhp.KirigamiActionCollection.file          = kirigamiactioncollection.qhp
 qhp.KirigamiActionCollection.namespace     = org.kde.KirigamiActionCollection.$QT_VERSION_TAG
-qhp.KirigamiActionCollection.virtualFolder = KirigamiActionCollection
+qhp.KirigamiActionCollection.virtualFolder = kirigamiactioncollection
 qhp.KirigamiActionCollection.indexTitle    = KirigamiActionCollection
 qhp.KirigamiActionCollection.indexRoot     =
 
-tagfile = KirigamiActionCollection.tags
+qhp.KirigamiActionCollection.subprojects = qmltypes classes
+
+qhp.KirigamiActionCollection.subprojects.qmltypes.title = QML Types
+qhp.KirigamiActionCollection.subprojects.qmltypes.indexTitle = KirigamiActionCollection QML Types
+qhp.KirigamiActionCollection.subprojects.qmltypes.selectors = qmlclass
+qhp.KirigamiActionCollection.subprojects.qmltypes.sortPages = true
+
+qhp.KirigamiActionCollection.subprojects.classes.title = C++ Classes
+qhp.KirigamiActionCollection.subprojects.classes.indexTitle = KirigamiActionCollection C++ Classes
+qhp.KirigamiActionCollection.subprojects.classes.selectors = class fake:headerfile
+qhp.KirigamiActionCollection.subprojects.classes.sortPages = true
+
+tagfile = kirigamiactioncollection.tags

@@ -1,0 +1,18 @@
+/*!
+    \page kirigamiactioncollection-index.html
+    \title Kirigami Action Collection
+
+    Kirigami Action Collection is a set of components to define semantic collections of actions in the QML applications whith user configurable keyboard shortcuts,
+    alongside the UI components for the configuration.
+
+    A list of additional QML learning resources is available in the \l {https://community.kde.org/Get_Involved/development/Learn#QtQuick/QML} {Community Wiki}. If you are not familiar with QML at all, the \l {https://www.qt.io/product/qt6/qml-book} {QML book} should be a good head start.
+
+    If you have any questions about Kirigami, feel free to drop by the \l {https://go.kde.org/matrix/#/#kirigami:kde.org} {Kirigami group on Matrix}.
+
+    \section1 API Reference
+
+    \list
+        \li \l{KirigamiActionCollection QML Types}
+        \li \l{KirigamiActionCollection C++ Classes}
+    \endlist
+*/

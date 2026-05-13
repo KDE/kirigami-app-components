@@ -32,6 +32,7 @@ public:
     /*!
      * This shouldn't be explicitly called, rather the single global
      * instance accessed with ActionCollections::self()
+     * \a parent Any QObject to be used as parent
      */
     explicit ActionCollections(QObject *parent = nullptr);
     ~ActionCollections() override;
@@ -47,12 +48,17 @@ public:
      * and the given user readable text label.
      * Returns the created collection, or nullptr if a collection with the
      * given name was already present.
+     *
+     * \a name The name for the new collection
+     * \a text The text label for the new collection
      */
     ActionCollection *createCollection(const QString &name, const QString &text);
 
     /*!
      * Returns the ActionCollection instance uniquely identified by the provided name.
      * If no collection with this name exists, nullptr will be returned.
+     *
+     * \a name The collection name we are searching for
      */
     ActionCollection *collection(const QString &name);
 
@@ -64,12 +70,16 @@ public:
 Q_SIGNALS:
     /*!
      * Emitted when a new ActionCollection instance has been created.
+     *
+     * \a collection The new collection that has been created
      */
     void collectionInserted(KirigamiActions::ActionCollection *collection);
 
     /*!
      * Emitted when an ActionCollection instance is being destroyed or
      * made otherwise unavailable.
+     *
+     * \a collection The collection that has just been removed
      */
     void collectionRemoved(KirigamiActions::ActionCollection *collection);
 

@@ -1,0 +1,21 @@
+/*!
+    \qmlmodule org.kde.kirigami.actioncollection
+    \title KirigamiActionCollection QML Types
+    \brief Actions and Configurable Shortcuts Components.
+*/
+
+/*!
+    \module KirigamiActionCollection
+    \title KirigamiActionCollection C++ Classes
+    \ingroup modules
+    \cmakepackage KF6
+    \cmakecomponent KirigamiActionCollection
+
+    \brief Actions and Configurable Shortcuts Components.
+*/
+
+/*!
+ * \namespace KirigamiActions
+ * \inmodule KirigamiActionCollection
+ */
+

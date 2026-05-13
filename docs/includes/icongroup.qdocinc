@@ -29,18 +29,5 @@
 
       The icon is tinted with the specified color, unless the color is set to "transparent".
 
-\row
-    \li fromControlsIcon
-    \li Bind this icon to all matching properties of a Controls icon group.
-
-      This function automatically binds all properties to matching properties
-      of a controls icon group, since we cannot just reuse the Controls icon
-      group.
-
-      To use it, you can assign the result to an IconPropertiesGroup, like so:
-      \qml
-      icon: icon.fromControlsIcon(control.icon).
-      \endqml
-
 \endtable
 //! [grouped-properties]
