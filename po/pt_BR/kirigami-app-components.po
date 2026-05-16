@@ -1,0 +1,216 @@
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the kirigami-app-components package.
+#
+# SPDX-FileCopyrightText: 2026 Marcus Gama <marcus.gama@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: kirigami-app-components\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-05-15 00:43+0000\n"
+"PO-Revision-Date: 2026-05-15 04:55-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 26.04.1\n"
+
+#: actioncollection/keysequencehelper.cpp:134
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Reserved Shortcut"
+msgstr "Atalho reservado"
+
+#: actioncollection/keysequencehelper.cpp:136
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The F12 key is reserved on Windows, so cannot be used for a global "
+"shortcut.\n"
+"Please choose another one."
+msgstr ""
+"A tecla F12 está reservada no Windows e, por isso, não pode ser usada como "
+"atalho global.\n"
+"Escolha outra tecla."
+
+#: actioncollection/keysequencehelper.cpp:160
+#, kde-format
+msgctxt ""
+"@title:dialog This happen when a global shortcut is already defined with the "
+"same shortcut"
+msgid "Global Shortcut Shadowing"
+msgstr "Sobreposição de atalhos globais"
+
+#: actioncollection/keysequencehelper.cpp:163
+#, kde-format
+msgctxt "@info"
+msgid "The '%1' key combination is shadowed by following global actions:\n"
+msgstr ""
+"A combinação de teclas '%1' é sobreposta pelas seguintes ações globais:\n"
+
+#: actioncollection/keysequencehelper.cpp:165
+#: actioncollection/keysequencehelper.cpp:171
+#, kde-format
+msgctxt "@info"
+msgid "Action '%1' in context '%2'\n"
+msgstr "Ação '%1' no contexto '%2'\n"
+
+#: actioncollection/keysequencehelper.cpp:169
+#, kde-format
+msgctxt "@info"
+msgid "The '%1' key combination shadows following global actions:\n"
+msgstr "A combinação de teclas '%1' se sobrepõe às seguintes ações globais:\n"
+
+#: actioncollection/keysequencehelper.cpp:220
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Conflict with existing Shortcut"
+msgstr "Conflito com atalho existente"
+
+#: actioncollection/keysequencehelper.cpp:222
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The '%1' key combination is already used for the action \"%2\".\n"
+"Do you really want to use the shortcut here instead??"
+msgstr ""
+"A combinação de teclas '%1' já está sendo usada para a ação \"%2\".\n"
+"Você realmente deseja usar o atalho aqui?"
+
+#: actioncollection/keysequencehelper.cpp:239
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Conflict with Standard Application Shortcut"
+msgstr "Conflito com o atalho padrão do aplicativo"
+
+#: actioncollection/keysequencehelper.cpp:241
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The '%1' key combination is also used for the standard action \"%2\" that "
+"some applications use.\n"
+"Do you really want to use it as a global shortcut as well?"
+msgstr ""
+"A combinação de teclas '%1' está atribuída para a ação padrão \"%2\", usada "
+"por alguns aplicativos.\n"
+"Deseja realmente usá-la como um atalho global?"
+
+#: actioncollection/qml/ActionCollectionManager.qml:52
+#, kde-format
+msgctxt "Configure application menu entry"
+msgid "Configure %1…"
+msgstr "Configurar %1…"
+
+#: actioncollection/qml/ActionCollectionManager.qml:62
+#, kde-format
+msgctxt "Opens the actions search dialog"
+msgid "Find Action…"
+msgstr "Encontrar ação…"
+
+#: actioncollection/qml/ActionCollectionManager.qml:101
+#, kde-format
+msgctxt "@title:window"
+msgid "About %1"
+msgstr "Sobre o %1"
+
+#: actioncollection/qml/ActionCollectionManager.qml:121
+#, kde-format
+msgctxt "@title:window"
+msgid "About KDE"
+msgstr "Sobre o KDE"
+
+#: actioncollection/qml/ActionsExplorer.qml:114
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "No results found"
+msgstr "Nenhum resultado foi encontrado"
+
+#: actioncollection/qml/KeySequenceItem.qml:115
+#, kde-format
+msgctxt "Default shortcut label when there is no shortcut"
+msgid "Default: None"
+msgstr "Padrão: Nenhum"
+
+#: actioncollection/qml/KeySequenceItem.qml:116
+#, kde-format
+msgctxt "Default shortcut label"
+msgid "Default: %1"
+msgstr "Padrão: %1"
+
+#: actioncollection/qml/KeySequenceItem.qml:171
+#, kde-format
+msgctxt "What the user inputs now will be taken as the new shortcut"
+msgid "Input"
+msgstr "Entrada"
+
+#: actioncollection/qml/KeySequenceItem.qml:172
+#, kde-format
+msgctxt "No shortcut defined"
+msgid "None"
+msgstr "Nenhum"
+
+#: actioncollection/qml/KeySequenceItem.qml:183
+#, kde-format
+msgid ""
+"Click on the button, then enter the shortcut like you would in the program.\n"
+"Example for Ctrl+A: hold the Ctrl key and press A."
+msgstr ""
+"Clique no botão e depois informe o atalho como você faria no programa.\n"
+"Exemplo para o Ctrl+A: mantenha pressionada a tecla Ctrl e pressione a tecla "
+"A."
+
+#: actioncollection/qml/KeySequenceItem.qml:224
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Clear Key Sequence"
+msgstr "Limpar sequencia de teclas"
+
+#: actioncollection/qml/KeySequenceItem.qml:240
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Cancel Key Sequence Recording"
+msgstr "Cancelar gravação de sequência de teclas"
+
+#: actioncollection/qml/ShortcutsEditor.qml:19
+#, kde-format
+msgctxt "@title:window"
+msgid "Shortcuts"
+msgstr "Atalhos"
+
+#: actioncollection/qml/ShortcutsEditor.qml:23
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Filter…"
+msgstr "Filtrar…"
+
+#: actioncollection/qml/ShortcutsEditor.qml:106
+#, kde-format
+msgctxt "@title:window"
+msgid "Shortcut: %1"
+msgstr "Atalho: %1"
+
+#: actioncollection/qml/ShortcutsEditor.qml:140
+#, kde-format
+msgctxt "@label"
+msgid "Shortcut:"
+msgstr "Atalho:"
+
+#: actioncollection/qml/ShortcutsEditor.qml:166
+#, kde-format
+msgctxt "@label"
+msgid "Alternative:"
+msgstr "Alternativa:"
+
+#: actioncollection/qml/ShortcutsEditor.qml:233
+#, kde-format
+msgctxt "Placeholder message"
+msgid "No shortcuts found"
+msgstr "Nenhum atalho encontrado"
+
+#: actioncollection/standardactiondata.cpp:46
+#, kde-format
+msgctxt "About [application name]"
+msgid "About %1…"
+msgstr "Sobre o %1…"
