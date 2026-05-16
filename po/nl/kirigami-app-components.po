@@ -1,0 +1,216 @@
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the kirigami-app-components package.
+#
+# SPDX-FileCopyrightText: 2026 Freek de Kruijf <freekdekruijf@kde.nl>
+msgid ""
+msgstr ""
+"Project-Id-Version: kirigami-app-components\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-05-15 02:38+0000\n"
+"PO-Revision-Date: 2026-05-15 18:46+0200\n"
+"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 26.04.1\n"
+
+#: actioncollection/keysequencehelper.cpp:134
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Reserved Shortcut"
+msgstr "Gereserveerde snelkoppeling"
+
+#: actioncollection/keysequencehelper.cpp:136
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The F12 key is reserved on Windows, so cannot be used for a global "
+"shortcut.\n"
+"Please choose another one."
+msgstr ""
+"De F12-toets is gereserveerd in Windows, en kan dus niet gebruikt worden "
+"voor een globale sneltoets.\n"
+"Graag een andere kiezen."
+
+#: actioncollection/keysequencehelper.cpp:160
+#, kde-format
+msgctxt ""
+"@title:dialog This happen when a global shortcut is already defined with the "
+"same shortcut"
+msgid "Global Shortcut Shadowing"
+msgstr "Globaal schaduwen van sneltoets"
+
+#: actioncollection/keysequencehelper.cpp:163
+#, kde-format
+msgctxt "@info"
+msgid "The '%1' key combination is shadowed by following global actions:\n"
+msgstr ""
+"De toetsencombinatie '%1' wordt geschaduwd door de volgende globale acties:\n"
+
+#: actioncollection/keysequencehelper.cpp:165
+#: actioncollection/keysequencehelper.cpp:171
+#, kde-format
+msgctxt "@info"
+msgid "Action '%1' in context '%2'\n"
+msgstr "Actie '%1' in context '%2'\n"
+
+#: actioncollection/keysequencehelper.cpp:169
+#, kde-format
+msgctxt "@info"
+msgid "The '%1' key combination shadows following global actions:\n"
+msgstr "De toetscombinatie '%1' schaduwt de volgende globale acties:\n"
+
+#: actioncollection/keysequencehelper.cpp:220
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Conflict with existing Shortcut"
+msgstr "Conflict met bestaande sneltoets"
+
+#: actioncollection/keysequencehelper.cpp:222
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The '%1' key combination is already used for the action \"%2\".\n"
+"Do you really want to use the shortcut here instead??"
+msgstr ""
+"De toetsencombinatie '%1' wordt al gebruikt voor de actie '%2'.\n"
+"Wilt u in plaats daarvan hier de sneltoets gebruiken?"
+
+#: actioncollection/keysequencehelper.cpp:239
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Conflict with Standard Application Shortcut"
+msgstr "Conflict met standaard-sneltoets van de toepassing"
+
+#: actioncollection/keysequencehelper.cpp:241
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The '%1' key combination is also used for the standard action \"%2\" that "
+"some applications use.\n"
+"Do you really want to use it as a global shortcut as well?"
+msgstr ""
+"De toetscombinatie '%1' is reeds toegewezen aan de standaardactie \"%2\". "
+"Deze actie wordt door enkele programma's gebruikt.\n"
+"Wilt u de combinatie ook gebruiken als globale toetsencombinatie?"
+
+#: actioncollection/qml/ActionCollectionManager.qml:52
+#, kde-format
+msgctxt "Configure application menu entry"
+msgid "Configure %1…"
+msgstr "%1 configureren…"
+
+#: actioncollection/qml/ActionCollectionManager.qml:62
+#, kde-format
+msgctxt "Opens the actions search dialog"
+msgid "Find Action…"
+msgstr "Actie zoeken…"
+
+#: actioncollection/qml/ActionCollectionManager.qml:101
+#, kde-format
+msgctxt "@title:window"
+msgid "About %1"
+msgstr "Info over %1"
+
+#: actioncollection/qml/ActionCollectionManager.qml:121
+#, kde-format
+msgctxt "@title:window"
+msgid "About KDE"
+msgstr "Over KDE"
+
+#: actioncollection/qml/ActionsExplorer.qml:114
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "No results found"
+msgstr "Geen resultaten gevonden"
+
+#: actioncollection/qml/KeySequenceItem.qml:115
+#, kde-format
+msgctxt "Default shortcut label when there is no shortcut"
+msgid "Default: None"
+msgstr "Standaard: geen"
+
+#: actioncollection/qml/KeySequenceItem.qml:116
+#, kde-format
+msgctxt "Default shortcut label"
+msgid "Default: %1"
+msgstr "Standaard: %1"
+
+#: actioncollection/qml/KeySequenceItem.qml:171
+#, kde-format
+msgctxt "What the user inputs now will be taken as the new shortcut"
+msgid "Input"
+msgstr "Invoer"
+
+#: actioncollection/qml/KeySequenceItem.qml:172
+#, kde-format
+msgctxt "No shortcut defined"
+msgid "None"
+msgstr "Geen"
+
+#: actioncollection/qml/KeySequenceItem.qml:183
+#, kde-format
+msgid ""
+"Click on the button, then enter the shortcut like you would in the program.\n"
+"Example for Ctrl+A: hold the Ctrl key and press A."
+msgstr ""
+"Klik op de knop, voer dan de sneltoets in zoals u zou doen in het "
+"programma.\n"
+"Voorbeeld voor Ctrl+A: houdt de Ctrl-toets in en druk op A."
+
+#: actioncollection/qml/KeySequenceItem.qml:224
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Clear Key Sequence"
+msgstr "Toetsenreeks wissen"
+
+#: actioncollection/qml/KeySequenceItem.qml:240
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Cancel Key Sequence Recording"
+msgstr "Toetsenreeks opnemen annuleren"
+
+#: actioncollection/qml/ShortcutsEditor.qml:19
+#, kde-format
+msgctxt "@title:window"
+msgid "Shortcuts"
+msgstr "Sneltoetsen"
+
+#: actioncollection/qml/ShortcutsEditor.qml:23
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Filter…"
+msgstr "Filter…"
+
+#: actioncollection/qml/ShortcutsEditor.qml:106
+#, kde-format
+msgctxt "@title:window"
+msgid "Shortcut: %1"
+msgstr "Sneltoets: %1"
+
+#: actioncollection/qml/ShortcutsEditor.qml:140
+#, kde-format
+msgctxt "@label"
+msgid "Shortcut:"
+msgstr "Sneltoets:"
+
+#: actioncollection/qml/ShortcutsEditor.qml:166
+#, kde-format
+msgctxt "@label"
+msgid "Alternative:"
+msgstr "Alternatief:"
+
+#: actioncollection/qml/ShortcutsEditor.qml:233
+#, kde-format
+msgctxt "Placeholder message"
+msgid "No shortcuts found"
+msgstr "Geen sneltoetsen gevonden"
+
+#: actioncollection/standardactiondata.cpp:46
+#, kde-format
+msgctxt "About [application name]"
+msgid "About %1…"
+msgstr "Info over %1…"
