@@ -1,29 +1,25 @@
-# Translation of kirigami-app-components.po to Catalan
-# Copyright (C) 2026 This_file_is_part_of_KDE
-# This file is distributed under the license LGPL version 2.1 or
-# version 3 or later versions approved by the membership of KDE e.V.
-#
-# SPDX-FileCopyrightText: 2026 Josep M. Ferrer <txemaq@gmail.com>
+# translation of kirigami-app-components.po to Slovak
+# Roman Paholik <wizzardsk@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-15 02:38+0000\n"
-"PO-Revision-Date: 2026-05-15 08:46+0200\n"
-"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
-"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
-"Language: ca\n"
+"PO-Revision-Date: 2026-05-16 09:00+0200\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: actioncollection/keysequencehelper.cpp:134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Reserved Shortcut"
-msgstr "Drecera reservada"
+msgstr "Vyhradená skratka"
 
 #: actioncollection/keysequencehelper.cpp:136
 #, kde-format
@@ -33,9 +29,9 @@ msgid ""
 "shortcut.\n"
 "Please choose another one."
 msgstr ""
-"La tecla F12 està reservada en el Windows, no es pot usar com a drecera "
-"global.\n"
-"Escolliu-ne una altra."
+"Kláves F12 je vo Windows vyhradený, takže ho nemožno použiť ako globálnu "
+"skratku.\n"
+"Vyberte si prosím iný."
 
 #: actioncollection/keysequencehelper.cpp:160
 #, kde-format
@@ -43,34 +39,33 @@ msgctxt ""
 "@title:dialog This happen when a global shortcut is already defined with the "
 "same shortcut"
 msgid "Global Shortcut Shadowing"
-msgstr "Drecera global ombrejada"
+msgstr "Tienenie globálnej skratky"
 
 #: actioncollection/keysequencehelper.cpp:163
 #, kde-format
 msgctxt "@info"
 msgid "The '%1' key combination is shadowed by following global actions:\n"
 msgstr ""
-"La combinació de tecles «%1» està ombrejada per les accions globals "
-"següents:\n"
+"Klávesová kombinácia '%1' je tienená nasledujúcimi globálnymi akciami:\n"
 
 #: actioncollection/keysequencehelper.cpp:165
 #: actioncollection/keysequencehelper.cpp:171
 #, kde-format
 msgctxt "@info"
 msgid "Action '%1' in context '%2'\n"
-msgstr "Acció «%1» en el context «%2»\n"
+msgstr "Akcia '%1' v kontexte '%2'\n"
 
 #: actioncollection/keysequencehelper.cpp:169
 #, kde-format
 msgctxt "@info"
 msgid "The '%1' key combination shadows following global actions:\n"
-msgstr "La combinació de tecles «%1» ombreja les accions globals següents:\n"
+msgstr "Klávesová kombinácia '%1' tieni nasledujúce globálne akcie:\n"
 
 #: actioncollection/keysequencehelper.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Conflict with existing Shortcut"
-msgstr "Conflicte amb una drecera existent"
+msgstr "Konflikt s existujúcou skratkou"
 
 #: actioncollection/keysequencehelper.cpp:222
 #, kde-format
@@ -79,14 +74,14 @@ msgid ""
 "The '%1' key combination is already used for the action \"%2\".\n"
 "Do you really want to use the shortcut here instead??"
 msgstr ""
-"La combinació de tecles «%1» ja s'utilitza per a l'acció «%2».\n"
-"Segur que voleu utilitzar la drecera aquí??"
+"Klávesová kombinácia '%1' sa už používa pre akciu \"%2\".\n"
+"Naozaj chcete použiť skratku radšej tu?"
 
 #: actioncollection/keysequencehelper.cpp:239
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Conflict with Standard Application Shortcut"
-msgstr "Conflicte amb una drecera estàndard d'aplicació"
+msgstr "Konflikt so štandardnou skratkou aplikácie"
 
 #: actioncollection/keysequencehelper.cpp:241
 #, kde-format
@@ -96,63 +91,63 @@ msgid ""
 "some applications use.\n"
 "Do you really want to use it as a global shortcut as well?"
 msgstr ""
-"La combinació de tecla «%1» ja s'ha assignat a l'acció estàndard «%2» que "
-"usen algunes aplicacions.\n"
-"Esteu segur que també voleu usar-la com a drecera global?"
+"Klávesová kombinácia '%1' sa používa aj pre štandardnú akciu \"%2\", ktorú "
+"používajú niektoré aplikácie.\n"
+"Naozaj ju chcete použiť aj ako globálnu skratku?"
 
 #: actioncollection/qml/ActionCollectionManager.qml:52
 #, kde-format
 msgctxt "Configure application menu entry"
 msgid "Configure %1…"
-msgstr "Configura %1…"
+msgstr "Nastaviť %1…"
 
 #: actioncollection/qml/ActionCollectionManager.qml:62
 #, kde-format
 msgctxt "Opens the actions search dialog"
 msgid "Find Action…"
-msgstr "Cerca una acció…"
+msgstr "Nájsť akciu…"
 
 #: actioncollection/qml/ActionCollectionManager.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
-msgstr "Quant a %1"
+msgstr "O %1"
 
 #: actioncollection/qml/ActionCollectionManager.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "About KDE"
-msgstr "Quant a KDE"
+msgstr "O KDE"
 
 #: actioncollection/qml/ActionsExplorer.qml:114
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No results found"
-msgstr "No s'ha trobat cap resultat"
+msgstr "Nenašli sa žiadne výsledky"
 
 #: actioncollection/qml/KeySequenceItem.qml:115
 #, kde-format
 msgctxt "Default shortcut label when there is no shortcut"
 msgid "Default: None"
-msgstr "Predeterminat: sense"
+msgstr "Predvolené: žiadna"
 
 #: actioncollection/qml/KeySequenceItem.qml:116
 #, kde-format
 msgctxt "Default shortcut label"
 msgid "Default: %1"
-msgstr "Predeterminat: %1"
+msgstr "Predvolené: %1"
 
 #: actioncollection/qml/KeySequenceItem.qml:171
 #, kde-format
 msgctxt "What the user inputs now will be taken as the new shortcut"
 msgid "Input"
-msgstr "Entrada"
+msgstr "Vstup"
 
 #: actioncollection/qml/KeySequenceItem.qml:172
 #, kde-format
 msgctxt "No shortcut defined"
 msgid "None"
-msgstr "Cap"
+msgstr "Žiadne"
 
 #: actioncollection/qml/KeySequenceItem.qml:183
 #, kde-format
@@ -160,60 +155,60 @@ msgid ""
 "Click on the button, then enter the shortcut like you would in the program.\n"
 "Example for Ctrl+A: hold the Ctrl key and press A."
 msgstr ""
-"Cliqueu en el botó, llavors introduïu la drecera com ho faríeu en el "
-"programa.\n"
-"Exemple per a Ctrl+a: manteniu premuda la tecla «Ctrl» mentre premeu la «a»."
+"Kliknite na tlačidlo a potom zadajte skratku tak, ako by ste to urobili v "
+"programe.\n"
+"Príklad pre Ctrl+A: podržte kláves Ctrl a stlačte A."
 
 #: actioncollection/qml/KeySequenceItem.qml:224
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Clear Key Sequence"
-msgstr "Neteja la seqüència de tecles"
+msgstr "Vymazať sekvenciu klávesov"
 
 #: actioncollection/qml/KeySequenceItem.qml:240
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel Key Sequence Recording"
-msgstr "Cancel·la l'enregistrament de la seqüència de tecles"
+msgstr "Zrušiť záznam sekvencie klávesov"
 
 #: actioncollection/qml/ShortcutsEditor.qml:19
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcuts"
-msgstr "Dreceres"
+msgstr "Skratky"
 
 #: actioncollection/qml/ShortcutsEditor.qml:23
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Filter…"
-msgstr "Filtre…"
+msgstr "Filter…"
 
 #: actioncollection/qml/ShortcutsEditor.qml:106
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcut: %1"
-msgstr "Drecera: %1"
+msgstr "Skratka: %1"
 
 #: actioncollection/qml/ShortcutsEditor.qml:140
 #, kde-format
 msgctxt "@label"
 msgid "Shortcut:"
-msgstr "Drecera:"
+msgstr "Skratka:"
 
 #: actioncollection/qml/ShortcutsEditor.qml:166
 #, kde-format
 msgctxt "@label"
 msgid "Alternative:"
-msgstr "Alternativa:"
+msgstr "Alternatívna:"
 
 #: actioncollection/qml/ShortcutsEditor.qml:233
 #, kde-format
 msgctxt "Placeholder message"
 msgid "No shortcuts found"
-msgstr "No s'ha trobat cap drecera"
+msgstr "Nenašli sa žiadne skratky"
 
 #: actioncollection/standardactiondata.cpp:46
 #, kde-format
 msgctxt "About [application name]"
 msgid "About %1…"
-msgstr "Quant a %1…"
+msgstr "O %1…"
