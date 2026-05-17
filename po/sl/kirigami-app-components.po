@@ -1,28 +1,28 @@
 # Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kirigami-app-components package.
 #
-# SPDX-FileCopyrightText: 2026 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2026 Matjaž Jeran <matjaz.jeran@amis.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-15 00:43+0000\n"
-"PO-Revision-Date: 2026-05-15 09:51+0300\n"
-"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: צוות התרגום של KDE ישראל\n"
-"Language: he\n"
+"PO-Revision-Date: 2026-05-16 07:35+0200\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
-"n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Lokalize 26.04.0\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 
 #: actioncollection/keysequencehelper.cpp:134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Reserved Shortcut"
-msgstr "קיצורי מקשים שמורים"
+msgstr "Rezervirana bližnjica"
 
 #: actioncollection/keysequencehelper.cpp:136
 #, kde-format
@@ -32,8 +32,9 @@ msgid ""
 "shortcut.\n"
 "Please choose another one."
 msgstr ""
-"מקש ה־F12 הוא מקש שמור ב־Windows, ולכן אי אפשר להשתמש בו כצירוף מקשים מקיף.\n"
-"נא לבחור באחד אחר."
+"Tipka F12 je rezervirana v sistemu Windows, zato je ni mogoče uporabiti za "
+"globalno bližnjico.\n"
+"Izberite drugo."
 
 #: actioncollection/keysequencehelper.cpp:160
 #, kde-format
@@ -41,32 +42,32 @@ msgctxt ""
 "@title:dialog This happen when a global shortcut is already defined with the "
 "same shortcut"
 msgid "Global Shortcut Shadowing"
-msgstr "האפלת קיצורי מקשים מקיפים"
+msgstr "Globalno senčenje bližnjic"
 
 #: actioncollection/keysequencehelper.cpp:163
 #, kde-format
 msgctxt "@info"
 msgid "The '%1' key combination is shadowed by following global actions:\n"
-msgstr "צירוף המקשים ‚%1’ מואפל על ידי הפעולות המקיפות הבאות:\n"
+msgstr "Kombinacijo tipk '%1' zasenčijo naslednja globalna dejanja:\n"
 
 #: actioncollection/keysequencehelper.cpp:165
 #: actioncollection/keysequencehelper.cpp:171
 #, kde-format
 msgctxt "@info"
 msgid "Action '%1' in context '%2'\n"
-msgstr "הפעולה ‚%1’ בהקשר ‚%2’\n"
+msgstr "Dejanje '%1' v kontekstu '%2'\n"
 
 #: actioncollection/keysequencehelper.cpp:169
 #, kde-format
 msgctxt "@info"
 msgid "The '%1' key combination shadows following global actions:\n"
-msgstr "צירוף המקשים ‚%1’ מאפיל על הפעולות המקיפות הבאות:\n"
+msgstr "Kombinacija tipk '%1' povzroča senco za naslednja globalna dejanja:\n"
 
 #: actioncollection/keysequencehelper.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Conflict with existing Shortcut"
-msgstr "סתירה עם קיצור דרך קיים"
+msgstr "Konflikt z obstoječo bližnjico"
 
 #: actioncollection/keysequencehelper.cpp:222
 #, kde-format
@@ -75,14 +76,14 @@ msgid ""
 "The '%1' key combination is already used for the action \"%2\".\n"
 "Do you really want to use the shortcut here instead??"
 msgstr ""
-"צירוף המקשים ‚%1’ כבר משמש לפעולה „%2”.\n"
-"להשתמש בקיצור המקשים כאן במקום?"
+"Kombinacija tipk '%1' je že uporabljena za dejanje \"%2\".\n"
+"Ali res želite namesto tega uporabiti bližnjico tukaj?"
 
 #: actioncollection/keysequencehelper.cpp:239
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Conflict with Standard Application Shortcut"
-msgstr "סתירה מול קיצור יישום תקני"
+msgstr "Konflikt s standardno bližnjico aplikacije"
 
 #: actioncollection/keysequencehelper.cpp:241
 #, kde-format
@@ -92,62 +93,63 @@ msgid ""
 "some applications use.\n"
 "Do you really want to use it as a global shortcut as well?"
 msgstr ""
-"צירוף המקשים ‚%1’ כבר הוקצה לפעולה השגרתית „%2”, בה משתמשות תוכניות רבות.\n"
-"להשתמש בהם גם בצירוף מקשים מקיף?"
+"Kombinacija tipk '%1' se uporablja tudi za standardno dejanje \"%2\", ki ga "
+"uporabljajo nekatere aplikacije.\n"
+"Ali jo res želite uporabiti tudi kot globalno bližnjico?"
 
 #: actioncollection/qml/ActionCollectionManager.qml:52
 #, kde-format
 msgctxt "Configure application menu entry"
 msgid "Configure %1…"
-msgstr "הגדרת %1…"
+msgstr "Konfiguriraj %1…"
 
 #: actioncollection/qml/ActionCollectionManager.qml:62
 #, kde-format
 msgctxt "Opens the actions search dialog"
 msgid "Find Action…"
-msgstr "איתור פעולה…"
+msgstr "Poišči akcijo…"
 
 #: actioncollection/qml/ActionCollectionManager.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
-msgstr "על %1"
+msgstr "O %1"
 
 #: actioncollection/qml/ActionCollectionManager.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "About KDE"
-msgstr "על KDE"
+msgstr "O KDE"
 
 #: actioncollection/qml/ActionsExplorer.qml:114
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No results found"
-msgstr "לא נמצאו תוצאות"
+msgstr "Ni najdenih rezultatov"
 
 #: actioncollection/qml/KeySequenceItem.qml:115
 #, kde-format
 msgctxt "Default shortcut label when there is no shortcut"
 msgid "Default: None"
-msgstr "ברירת מחדל: ללא"
+msgstr "Privzeto: Brez"
 
 #: actioncollection/qml/KeySequenceItem.qml:116
 #, kde-format
 msgctxt "Default shortcut label"
 msgid "Default: %1"
-msgstr "ברירת מחדל: %1"
+msgstr "Privzeto: %1"
 
 #: actioncollection/qml/KeySequenceItem.qml:171
 #, kde-format
 msgctxt "What the user inputs now will be taken as the new shortcut"
 msgid "Input"
-msgstr "קלט"
+msgstr "Vhod"
 
 #: actioncollection/qml/KeySequenceItem.qml:172
 #, kde-format
 msgctxt "No shortcut defined"
 msgid "None"
-msgstr "ללא"
+msgstr "Brez"
 
 #: actioncollection/qml/KeySequenceItem.qml:183
 #, kde-format
@@ -155,59 +157,59 @@ msgid ""
 "Click on the button, then enter the shortcut like you would in the program.\n"
 "Example for Ctrl+A: hold the Ctrl key and press A."
 msgstr ""
-"יש ללחוץ על הכפתור ואז להקליד את מקשי הקיצור כפי שנהוג ביישום.\n"
-"לדוגמה: Ctrl+A: להחזיק את Ctrl ואז ללחוץ על A."
+"Kliknite gumb in nato vnesite bližnjico, kot bi jo v programu.\n"
+"Primer za Ctrl+A: držite tipko Ctrl in pritisnite A."
 
 #: actioncollection/qml/KeySequenceItem.qml:224
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Clear Key Sequence"
-msgstr "פינוי רצף מקשים"
+msgstr "Počisti zaporedje tipk"
 
 #: actioncollection/qml/KeySequenceItem.qml:240
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel Key Sequence Recording"
-msgstr "ביטול הקלטת רצף מקשים"
+msgstr "Prekliči snemanje zaporedja tipk"
 
 #: actioncollection/qml/ShortcutsEditor.qml:19
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcuts"
-msgstr "מקשי קיצור"
+msgstr "Bližnjice"
 
 #: actioncollection/qml/ShortcutsEditor.qml:23
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Filter…"
-msgstr "סינון…"
+msgstr "Filter…"
 
 #: actioncollection/qml/ShortcutsEditor.qml:106
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcut: %1"
-msgstr "מקשי קיצור: %1"
+msgstr "Bližnjica: %1"
 
 #: actioncollection/qml/ShortcutsEditor.qml:140
 #, kde-format
 msgctxt "@label"
 msgid "Shortcut:"
-msgstr "מקשי קיצור:"
+msgstr "Bližnjica:"
 
 #: actioncollection/qml/ShortcutsEditor.qml:166
 #, kde-format
 msgctxt "@label"
 msgid "Alternative:"
-msgstr "חלופה:"
+msgstr "Alternativa:"
 
 #: actioncollection/qml/ShortcutsEditor.qml:233
 #, kde-format
 msgctxt "Placeholder message"
 msgid "No shortcuts found"
-msgstr "לא נמצאו מקשי קיצור"
+msgstr "Ni najdenih bližnjic"
 
 #: actioncollection/standardactiondata.cpp:46
 #, kde-format
 msgctxt "About [application name]"
 msgid "About %1…"
-msgstr "על %1…"
+msgstr "O %1…"
