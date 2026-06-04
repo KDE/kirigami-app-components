@@ -1,28 +1,29 @@
-# Uyghur translation for kirigami-app-components.
-# Copyright (C) YEAR This file is copyright:
+# Lithuanian translations for kirigami-app-components package.
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kirigami-app-components package.
-# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+# Automatically generated, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-15 00:43+0000\n"
-"PO-Revision-Date: 2026-05-31 18:51-0400\n"
-"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
-"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
-"Language: ug\n"
+"PO-Revision-Date: 2026-06-03 13:16+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && (n%100<11 || n%100>19) ? 0 : n"
+"%10>=2 && n%10<=9 && (n%100<11 || n%100>19) ? 1 : 2);\n"
 "X-Generator: Poedit 3.9\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: actioncollection/keysequencehelper.cpp:134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Reserved Shortcut"
-msgstr "بەلگىلىنىپ بولغان تېزلەتمە"
+msgstr "Rezervuotas spartusis klavišas"
 
 #: actioncollection/keysequencehelper.cpp:136
 #, kde-format
@@ -32,9 +33,9 @@ msgid ""
 "shortcut.\n"
 "Please choose another one."
 msgstr ""
-"F12 بولسا Windows دا بەلگىلىنىپ بولغان، شۇڭا ئومۇمىيەت تېزلەتمىدە ئىشلەتكىلى "
-"بولمايدۇ\n"
-"باشقا كۇنۇپكا تاللاڭ."
+"F12 klavišas yra rezervuotas „Windows“ sistemoje, todėl negali būti "
+"naudojamas visuotiniams spartiesiems klavišams.\n"
+"Pasirinkite kitą."
 
 #: actioncollection/keysequencehelper.cpp:160
 #, kde-format
@@ -42,32 +43,32 @@ msgctxt ""
 "@title:dialog This happen when a global shortcut is already defined with the "
 "same shortcut"
 msgid "Global Shortcut Shadowing"
-msgstr "ئومۇمىيەت تېزلەتمە قاپلاش"
+msgstr "Visuotinio sparčiojo klavišo uždengimas"
 
 #: actioncollection/keysequencehelper.cpp:163
 #, kde-format
 msgctxt "@info"
 msgid "The '%1' key combination is shadowed by following global actions:\n"
-msgstr "«%1» بىرىكمە كۇنۇپكىنى تۆۋەندىكى ئومۇمىيەت مەشغۇلاتى قاپلىۋەتتى:\n"
+msgstr "Klavišų kombinaciją „%1“ uždengia šie visuotiniai veiksmai:\n"
 
 #: actioncollection/keysequencehelper.cpp:165
 #: actioncollection/keysequencehelper.cpp:171
 #, kde-format
 msgctxt "@info"
 msgid "Action '%1' in context '%2'\n"
-msgstr "«%2» مەزمۇندىكى «%1» مەشغۇلات\n"
+msgstr "Veiksmas „%1“, esantis „%2“ kontekste\n"
 
 #: actioncollection/keysequencehelper.cpp:169
 #, kde-format
 msgctxt "@info"
 msgid "The '%1' key combination shadows following global actions:\n"
-msgstr "«%1» بىرىكمە كۇنۇپكا تۆۋەندىكى ئومۇمىيەت مەشغۇلاتىنى قاپلىۋەتتى:\n"
+msgstr "Klavišų kombinaciją „%1“ uždengia šiuos visuotinius veiksmus:\n"
 
 #: actioncollection/keysequencehelper.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Conflict with existing Shortcut"
-msgstr ""
+msgstr "Konfliktas su esamu sparčiuoju klavišu"
 
 #: actioncollection/keysequencehelper.cpp:222
 #, kde-format
@@ -76,12 +77,14 @@ msgid ""
 "The '%1' key combination is already used for the action \"%2\".\n"
 "Do you really want to use the shortcut here instead??"
 msgstr ""
+"Klavišų kombinacija „%1“ jau yra naudojama atlikti veiksmą „%2“.\n"
+"Ar tikrai norite, vietoj to, naudoti tą spartųjį klavišą čia?"
 
 #: actioncollection/keysequencehelper.cpp:239
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Conflict with Standard Application Shortcut"
-msgstr "پىروگراممىنىڭ ئۆلچەملىك تېزلەتمىسى بىلەن توقۇنۇشۇپ قالدى"
+msgstr "Konfliktas su programos standartiniu sparčiuoju klavišu"
 
 #: actioncollection/keysequencehelper.cpp:241
 #, kde-format
@@ -91,63 +94,63 @@ msgid ""
 "some applications use.\n"
 "Do you really want to use it as a global shortcut as well?"
 msgstr ""
-"«%1» بىرىكمە كۇنۇپكا بەزى پىروگراممىدا «%2» ئۆلچەملىك مەشغۇلات ئۈچۈن "
-"بېكىتىلگەن.\n"
-"بۇنى راستتىنلا ئومۇمىيەت تېزلەتمە سۈپىتىدە ئىشلىتەمسىز؟"
+"Klavišų kombinacija „%1“ taip pat yra naudojama standartiniam veiksmui „%2“, "
+"kurį naudoja kai kurios programos.\n"
+"Ar tikrai norite ją taip pat naudoti kaip visuotinį spartųjį klavišą?"
 
 #: actioncollection/qml/ActionCollectionManager.qml:52
 #, kde-format
 msgctxt "Configure application menu entry"
 msgid "Configure %1…"
-msgstr "%1 نى سەپلە…"
+msgstr "Konfigūruoti %1…"
 
 #: actioncollection/qml/ActionCollectionManager.qml:62
 #, kde-format
 msgctxt "Opens the actions search dialog"
 msgid "Find Action…"
-msgstr "مەشغۇلات ئىزدە…"
+msgstr "Rasti veiksmą…"
 
 #: actioncollection/qml/ActionCollectionManager.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
-msgstr "%1 ھەققىدە"
+msgstr "Apie %1"
 
 #: actioncollection/qml/ActionCollectionManager.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "About KDE"
-msgstr "KDE ھەققىدە"
+msgstr "Apie KDE"
 
 #: actioncollection/qml/ActionsExplorer.qml:114
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No results found"
-msgstr "نەتىجە يوق"
+msgstr "Nerasta jokių rezultatų"
 
 #: actioncollection/qml/KeySequenceItem.qml:115
 #, kde-format
 msgctxt "Default shortcut label when there is no shortcut"
 msgid "Default: None"
-msgstr ""
+msgstr "Numatytasis: Nėra"
 
 #: actioncollection/qml/KeySequenceItem.qml:116
 #, kde-format
 msgctxt "Default shortcut label"
 msgid "Default: %1"
-msgstr "كۆڭۈلدىكى: %1"
+msgstr "Numatytasis: %1"
 
 #: actioncollection/qml/KeySequenceItem.qml:171
 #, kde-format
 msgctxt "What the user inputs now will be taken as the new shortcut"
 msgid "Input"
-msgstr "كىرگۈز"
+msgstr "Įvedimas"
 
 #: actioncollection/qml/KeySequenceItem.qml:172
 #, kde-format
 msgctxt "No shortcut defined"
 msgid "None"
-msgstr "يوق"
+msgstr "Nėra"
 
 #: actioncollection/qml/KeySequenceItem.qml:183
 #, kde-format
@@ -155,59 +158,61 @@ msgid ""
 "Click on the button, then enter the shortcut like you would in the program.\n"
 "Example for Ctrl+A: hold the Ctrl key and press A."
 msgstr ""
-"توپچىنى چېكىپ، ئاندىن بۇ پىروگراممىغا تېزلەتمە كىرگۈزۈلىدۇ.\n"
-"مەسىلەن، Ctrl+A يەنى Ctrl كۇنۇپكىسىنى بېسىپ تۇرۇپ ئاندىن A كۇنۇپكا بېسىلىدۇ."
+"Spustelėkite ant mygtuko, tada paspauskite spartųjį klavišą taip, kaip "
+"spaustumėte jį programoje.\n"
+"Pavyzdžiui, kombinacijai Vald+A: laikykite nuspaustą Vald klavišą ir "
+"paspauskite A."
 
 #: actioncollection/qml/KeySequenceItem.qml:224
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Clear Key Sequence"
-msgstr "كۇنۇپكا بېسىلىشىنى تازىلايدۇ"
+msgstr "Išvalyti klavišų seką"
 
 #: actioncollection/qml/KeySequenceItem.qml:240
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel Key Sequence Recording"
-msgstr "كۇنۇپكا بېسىلىشىنى خاتىرىلەشتىن ۋاز كېچىدۇ"
+msgstr "Atsisakyti klavišų sekos įrašymо"
 
 #: actioncollection/qml/ShortcutsEditor.qml:19
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcuts"
-msgstr "تېزلەتمە"
+msgstr "Spartieji klavišai"
 
 #: actioncollection/qml/ShortcutsEditor.qml:23
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Filter…"
-msgstr "سۈزگۈچ…"
+msgstr "Filtruoti…"
 
 #: actioncollection/qml/ShortcutsEditor.qml:106
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcut: %1"
-msgstr ""
+msgstr "Spartusis klavišas: %1"
 
 #: actioncollection/qml/ShortcutsEditor.qml:140
 #, kde-format
 msgctxt "@label"
 msgid "Shortcut:"
-msgstr "تېزلەتمە:"
+msgstr "Spartusis klavišas:"
 
 #: actioncollection/qml/ShortcutsEditor.qml:166
 #, kde-format
 msgctxt "@label"
 msgid "Alternative:"
-msgstr ""
+msgstr "Alternatyvus:"
 
 #: actioncollection/qml/ShortcutsEditor.qml:233
 #, kde-format
 msgctxt "Placeholder message"
 msgid "No shortcuts found"
-msgstr ""
+msgstr "Nerasti jokie spartieji klavišai"
 
 #: actioncollection/standardactiondata.cpp:46
 #, kde-format
 msgctxt "About [application name]"
 msgid "About %1…"
-msgstr ""
+msgstr "Apie %1…"
