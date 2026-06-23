@@ -23,6 +23,11 @@ using namespace KirigamiActions;
 ActionCollectionAttached::ActionCollectionAttached(QObject *parent)
     : QObject(parent)
 {
+    connect(ActionCollections::self(), &ActionCollections::collectionInserted, this, [this](KirigamiActions::ActionCollection *collection) {
+        if (!m_collection.isEmpty() && collection->name() == m_collection) {
+            rebindCollection();
+        }
+    });
 }
 
 ActionCollectionAttached::~ActionCollectionAttached()
@@ -41,17 +46,7 @@ void ActionCollectionAttached::setCollection(const QString &collection)
 
     m_collection = collection;
 
-    QmlActionCollection *coll = qobject_cast<QmlActionCollection *>(ActionCollections::self()->collection(m_collection));
-    if (coll) {
-        // TODO: similar connection when the *collection* gets created
-        connect(coll, &ActionCollection::actionInserted, this, [this]() {
-            rebindActionData();
-        });
-    }
-
-    rebindActionData();
-
-    Q_EMIT collectionChanged();
+    rebindCollection();
 }
 
 QVariant ActionCollectionAttached::action() const
@@ -74,6 +69,20 @@ void ActionCollectionAttached::setAction(const QVariant &action)
     rebindActionData();
 
     Q_EMIT actionChanged();
+}
+
+void ActionCollectionAttached::rebindCollection()
+{
+    QmlActionCollection *coll = qobject_cast<QmlActionCollection *>(ActionCollections::self()->collection(m_collection));
+    if (coll) {
+        connect(coll, &ActionCollection::actionInserted, this, [this]() {
+            rebindActionData();
+        });
+    }
+
+    rebindActionData();
+
+    Q_EMIT collectionChanged();
 }
 
 void ActionCollectionAttached::rebindActionData()
