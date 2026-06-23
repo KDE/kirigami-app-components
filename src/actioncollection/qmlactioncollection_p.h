@@ -37,6 +37,7 @@ Q_SIGNALS:
     void shortcutChanged();
 
 private:
+    void rebindCollection();
     void rebindActionData();
 
     QString m_collection;
