@@ -48,6 +48,9 @@ void StandardActionData::setStandardAction(StandardActionData::StandardAction st
         const QString currencyCode = QLocale().currencySymbol(QLocale::CurrencyIsoCode).toLower();
         icon()->setName(QStringLiteral("help-donate-%1").arg(currencyCode));
         setText(QCoreApplication::translate("KStandardActions", info->psLabel));
+    } else if (standardAction == HelpContents) {
+        icon()->setName(info->psIconName.toString());
+        setText(QCoreApplication::translate("KStandardActions", info->psLabel).arg(QGuiApplication::applicationDisplayName()));
     } else {
         icon()->setName(info->psIconName.toString());
         setText(QCoreApplication::translate("KStandardActions", info->psLabel));
