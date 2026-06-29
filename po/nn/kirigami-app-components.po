@@ -1,6 +1,5 @@
 # Translation of kirigami-app-components to Norwegian Nynorsk
 #
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
