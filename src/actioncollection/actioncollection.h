@@ -84,6 +84,32 @@ public:
     QAction *createAction(KStandardActions::StandardAction standardAction);
 
     /*!
+     * Removesthe action with this name if found
+     *
+     * Only actions that were added via the C++ createAction() API
+     * will actually be removed, those created from QML will be ignored
+     *
+     * Returns true if the action was found and successfully removed,
+     * false otherwise
+     *
+     * \a name The unique name for the new action. No actions with that name should exist.
+     */
+    bool removeAction(const QString &name);
+
+    /*!
+     * Removesthe action with this name if found
+     *
+     * Only actions that were added via the C++ createAction() API
+     * will actually be removed, those created from QML will be ignored
+     *
+     * Returns true if the action was found and successfully removed,
+     * false otherwise
+     *
+     * \a standardAction The KStandardActions::StandardAction we want to remove
+     */
+    bool removeAction(KStandardActions::StandardAction standardAction);
+
+    /*!
      * Returns an action given its unique name.
      * If no action with that name exist, the function will return nullptr
      *

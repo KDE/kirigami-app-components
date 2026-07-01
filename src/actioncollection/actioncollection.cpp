@@ -106,6 +106,45 @@ QAction *ActionCollection::createAction(KStandardActions::StandardAction standar
     return action;
 }
 
+bool ActionCollection::removeAction(const QString &name)
+{
+    auto action = d->m_actionMap.value(name);
+    if (!action) {
+        return false;
+    }
+    if (QQmlEngine::objectOwnership(action) != QQmlEngine::CppOwnership) {
+        return false;
+    }
+
+    d->m_actionMap.remove(name);
+    Q_EMIT actionRemoved(action);
+    delete action;
+
+    return true;
+}
+
+bool ActionCollection::removeAction(KStandardActions::StandardAction standardAction)
+{
+    const KStandardActions::KStandardActionsInfo *info = infoPtr(standardAction);
+    if (!info) {
+        return false;
+    }
+    const QString name = info->psName.toString();
+    auto action = d->m_actionMap.value(name);
+    if (!action) {
+        return false;
+    }
+    if (QQmlEngine::objectOwnership(action) != QQmlEngine::CppOwnership) {
+        return false;
+    }
+
+    d->m_actionMap.remove(name);
+    Q_EMIT actionRemoved(action);
+    delete action;
+
+    return true;
+}
+
 QAction *ActionCollection::action(const QString &name)
 {
     return d->m_actionMap.value(name);
