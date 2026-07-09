@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.16)
 set(KIRIGAMIAPPCOMPONENTS_CURRENT_VERSION "1.0.0")
 project(KirigamiAppComponents VERSION ${KIRIGAMIAPPCOMPONENTS_CURRENT_VERSION})
 
-set(KF_DEP_VERSION "6.29.0") # handled by release scripts
+set(KF_DEP_VERSION "6.22.0") # handled by release scripts
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
