@@ -21,12 +21,12 @@ StandardActionData::~StandardActionData()
 {
 }
 
-StandardActionData::StandardAction StandardActionData::standardAction() const
+KStandardActions::StandardAction StandardActionData::standardAction() const
 {
     return m_standardAction;
 }
 
-void StandardActionData::setStandardAction(StandardActionData::StandardAction standardAction)
+void StandardActionData::setStandardAction(KStandardActions::StandardAction standardAction)
 {
     if (m_standardAction == standardAction) {
         return;
@@ -34,21 +34,21 @@ void StandardActionData::setStandardAction(StandardActionData::StandardAction st
 
     m_standardAction = standardAction;
 
-    const KStandardActions::KStandardActionsInfo *info = infoPtr(KStandardActions::StandardAction(standardAction));
+    const KStandardActions::KStandardActionsInfo *info = infoPtr(standardAction);
     if (!info) {
         return;
     }
 
     setName(info->psName.toString());
 
-    if (standardAction == AboutApp) {
+    if (standardAction == KStandardActions::AboutApp) {
         icon()->setName(QGuiApplication::windowIcon().name().isEmpty() ? u"help-about"_s : QGuiApplication::windowIcon().name());
         setText(i18nc("About [application name]", "About %1…", QGuiApplication::applicationDisplayName()));
-    } else if (standardAction == Donate) {
+    } else if (standardAction == KStandardActions::Donate) {
         const QString currencyCode = QLocale().currencySymbol(QLocale::CurrencyIsoCode).toLower();
         icon()->setName(QStringLiteral("help-donate-%1").arg(currencyCode));
         setText(QCoreApplication::translate("KStandardActions", info->psLabel));
-    } else if (standardAction == HelpContents) {
+    } else if (standardAction == KStandardActions::HelpContents) {
         icon()->setName(info->psIconName.toString());
         setText(QCoreApplication::translate("KStandardActions", info->psLabel).arg(QGuiApplication::applicationDisplayName()));
     } else {

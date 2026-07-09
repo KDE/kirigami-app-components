@@ -4,10 +4,10 @@
 #pragma once
 
 #include "actiondata_p.h"
+#include <KStandardActions>
 
 namespace KirigamiActions
 {
-
 /*!
  * \qmltype StandardActionData
  * \inqmlmodule org.kde.kirigami.actioncollection
@@ -42,106 +42,26 @@ class StandardActionData : public ActionData
 {
     Q_OBJECT
     QML_ELEMENT
+    QML_EXTENDED_NAMESPACE(KStandardActions)
 
     /*!
      * \qmlproperty StandardAction StandardActionData::standardAction
      * The standard action this StandardActionData rapresents
      */
-    Q_PROPERTY(StandardAction standardAction READ standardAction WRITE setStandardAction NOTIFY standardActionChanged FINAL REQUIRED)
+    Q_PROPERTY(KStandardActions::StandardAction standardAction READ standardAction WRITE setStandardAction NOTIFY standardActionChanged FINAL REQUIRED)
 
 public:
-    enum StandardAction {
-        ActionNone,
-        // File Menu
-        New,
-        Open,
-        OpenRecent,
-        Save,
-        SaveAs,
-        Revert,
-        Close,
-        Print,
-        PrintPreview,
-        Mail,
-        Quit,
-        // Edit Menu
-        Undo,
-        Redo,
-        Cut,
-        Copy,
-        Paste,
-        SelectAll,
-        Deselect,
-        Find,
-        FindNext,
-        FindPrev,
-        Replace,
-        // View Menu
-        ActualSize,
-        FitToPage,
-        FitToWidth,
-        FitToHeight,
-        ZoomIn,
-        ZoomOut,
-        Zoom,
-        Redisplay,
-        // Go Menu
-        Up,
-        Back,
-        Forward,
-        Home,
-        Prior,
-        Next,
-        Goto,
-        GotoPage,
-        GotoLine,
-        FirstPage,
-        LastPage,
-        DocumentBack,
-        DocumentForward,
-        // Bookmarks Menu
-        AddBookmark,
-        EditBookmarks,
-        // Tools Menu
-        Spelling,
-        // Settings Menu
-        ShowMenubar,
-        ShowToolbar,
-        ShowStatusbar,
-        KeyBindings,
-        Preferences,
-        ConfigureToolbars,
-        // Help Menu
-        HelpContents,
-        WhatsThis,
-        ReportBug,
-        AboutApp,
-        AboutKDE,
-        // Other standard actions
-        ConfigureNotifications,
-        FullScreen,
-        Clear,
-        SwitchApplicationLanguage,
-        DeleteFile,
-        RenameFile,
-        MoveToTrash,
-        Donate,
-        HamburgerMenu
-        // To keep in sync with KConfigWidgets::KStandardAction
-    };
-    Q_ENUM(StandardAction)
-
     explicit StandardActionData(QObject *parent = nullptr);
     ~StandardActionData() override;
 
-    StandardAction standardAction() const;
-    void setStandardAction(StandardAction standardAction);
+    KStandardActions::StandardAction standardAction() const;
+    void setStandardAction(KStandardActions::StandardAction standardAction);
 
 Q_SIGNALS:
-    void standardActionChanged(KirigamiActions::StandardActionData::StandardAction standardAction);
+    void standardActionChanged(KStandardActions::StandardAction standardAction);
 
 private:
-    StandardAction m_standardAction = ActionNone;
+    KStandardActions::StandardAction m_standardAction = KStandardActions::ActionNone;
 };
 
 }
