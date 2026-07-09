@@ -56,10 +56,10 @@ QVariant ActionCollectionAttached::action() const
 
 void ActionCollectionAttached::setAction(const QVariant &action)
 {
-    if (action.value<KStandardActions::StandardAction>() == KStandardActions::ActionNone) {
+    if (action.value<StandardActionData::StandardAction>() == StandardActionData::ActionNone) {
         m_actionName = action.toString();
     } else {
-        KStandardActions::StandardAction standardAction = action.value<KStandardActions::StandardAction>();
+        StandardActionData::StandardAction standardAction = action.value<StandardActionData::StandardAction>();
         const KStandardActions::KStandardActionsInfo *info = infoPtr(KStandardActions::StandardAction(standardAction));
         if (info) {
             m_actionName = info->psName.toString();
