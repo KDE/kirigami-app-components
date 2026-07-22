@@ -80,5 +80,7 @@ install(FILES
 install(EXPORT KirigamiAppComponentsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         FILE KirigamiAppComponentsTargets.cmake NAMESPACE KF6:: COMPONENT Devel)
 
+ki18n_install(po)
+
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
