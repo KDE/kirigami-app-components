@@ -76,7 +76,7 @@ msgid ""
 "Do you really want to use the shortcut here instead??"
 msgstr ""
 "تركيبة المفاتيح '%1' مستخدمة من قبل للإجراء \"%2\".\n"
-"هل تريد حقًا استخدام الاختصار هنا بدلاً من ذلك؟"
+"هل تريد حقًا استخدام الاختصار هنا بدلًا من ذلك؟"
 
 #: actioncollection/keysequencehelper.cpp:239
 #, kde-format
