@@ -22,7 +22,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Reserved Shortcut"
-msgstr ""
+msgstr "系统保留的快捷键"
 
 #: actioncollection/keysequencehelper.cpp:136
 #, kde-format
@@ -32,6 +32,8 @@ msgid ""
 "shortcut.\n"
 "Please choose another one."
 msgstr ""
+"F12 键是 Windows 的系统保留快捷键，不能用作全局快捷键。\n"
+"请选择另外一个快捷键。"
 
 #: actioncollection/keysequencehelper.cpp:160
 #, kde-format
@@ -39,32 +41,32 @@ msgctxt ""
 "@title:dialog This happen when a global shortcut is already defined with the "
 "same shortcut"
 msgid "Global Shortcut Shadowing"
-msgstr ""
+msgstr "全局快捷键遮蔽"
 
 #: actioncollection/keysequencehelper.cpp:163
 #, kde-format
 msgctxt "@info"
 msgid "The '%1' key combination is shadowed by following global actions:\n"
-msgstr ""
+msgstr "组合键“%1”被以下全局操作遮蔽：\n"
 
 #: actioncollection/keysequencehelper.cpp:165
 #: actioncollection/keysequencehelper.cpp:171
 #, kde-format
 msgctxt "@info"
 msgid "Action '%1' in context '%2'\n"
-msgstr ""
+msgstr "语境“%2”中的操作“%1”\n"
 
 #: actioncollection/keysequencehelper.cpp:169
 #, kde-format
 msgctxt "@info"
 msgid "The '%1' key combination shadows following global actions:\n"
-msgstr ""
+msgstr "组合键“%1”遮蔽了以下全局操作：\n"
 
 #: actioncollection/keysequencehelper.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Conflict with existing Shortcut"
-msgstr ""
+msgstr "与现有快捷键冲突"
 
 #: actioncollection/keysequencehelper.cpp:222
 #, kde-format
@@ -73,12 +75,14 @@ msgid ""
 "The '%1' key combination is already used for the action \"%2\".\n"
 "Do you really want to use the shortcut here instead??"
 msgstr ""
+"“%1”按键/按键组合已在操作“%2”中使用。\n"
+"您确定要改为在此使用该快捷键吗？"
 
 #: actioncollection/keysequencehelper.cpp:239
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Conflict with Standard Application Shortcut"
-msgstr ""
+msgstr "与标准程序快捷键冲突"
 
 #: actioncollection/keysequencehelper.cpp:241
 #, kde-format
@@ -88,60 +92,62 @@ msgid ""
 "some applications use.\n"
 "Do you really want to use it as a global shortcut as well?"
 msgstr ""
+"按键/按键组合“%1”已被其他应用程序的标准操作“%2”占用。\n"
+"您确定还要将它用作全局快捷键吗？"
 
 #: actioncollection/qml/ActionCollectionManager.qml:52
 #, kde-format
 msgctxt "Configure application menu entry"
 msgid "Configure %1…"
-msgstr ""
+msgstr "配置 %1…"
 
 #: actioncollection/qml/ActionCollectionManager.qml:62
 #, kde-format
 msgctxt "Opens the actions search dialog"
 msgid "Find Action…"
-msgstr ""
+msgstr "查找操作…"
 
 #: actioncollection/qml/ActionCollectionManager.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
-msgstr ""
+msgstr "关于 %1"
 
 #: actioncollection/qml/ActionCollectionManager.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "About KDE"
-msgstr ""
+msgstr "关于 KDE"
 
 #: actioncollection/qml/ActionsExplorer.qml:114
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No results found"
-msgstr ""
+msgstr "没有找到结果"
 
 #: actioncollection/qml/KeySequenceItem.qml:115
 #, kde-format
 msgctxt "Default shortcut label when there is no shortcut"
 msgid "Default: None"
-msgstr ""
+msgstr "默认：无"
 
 #: actioncollection/qml/KeySequenceItem.qml:116
 #, kde-format
 msgctxt "Default shortcut label"
 msgid "Default: %1"
-msgstr ""
+msgstr "默认：%1"
 
 #: actioncollection/qml/KeySequenceItem.qml:171
 #, kde-format
 msgctxt "What the user inputs now will be taken as the new shortcut"
 msgid "Input"
-msgstr ""
+msgstr "输入"
 
 #: actioncollection/qml/KeySequenceItem.qml:172
 #, kde-format
 msgctxt "No shortcut defined"
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: actioncollection/qml/KeySequenceItem.qml:183
 #, kde-format
@@ -149,57 +155,59 @@ msgid ""
 "Click on the button, then enter the shortcut like you would in the program.\n"
 "Example for Ctrl+A: hold the Ctrl key and press A."
 msgstr ""
+"单击此按钮，然后输入要在该程序中使用的快捷键。\n"
+"比如 Ctrl+A 就是按住 Ctrl 键不放并按下 A 键。"
 
 #: actioncollection/qml/KeySequenceItem.qml:224
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Clear Key Sequence"
-msgstr ""
+msgstr "清除按键/按键组合序列"
 
 #: actioncollection/qml/KeySequenceItem.qml:240
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel Key Sequence Recording"
-msgstr ""
+msgstr "取消按键/按键组合序列录制"
 
 #: actioncollection/qml/ShortcutsEditor.qml:19
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "快捷键"
 
 #: actioncollection/qml/ShortcutsEditor.qml:23
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Filter…"
-msgstr ""
+msgstr "过滤…"
 
 #: actioncollection/qml/ShortcutsEditor.qml:106
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcut: %1"
-msgstr ""
+msgstr "快捷键：%1"
 
 #: actioncollection/qml/ShortcutsEditor.qml:140
 #, kde-format
 msgctxt "@label"
 msgid "Shortcut:"
-msgstr ""
+msgstr "快捷键："
 
 #: actioncollection/qml/ShortcutsEditor.qml:166
 #, kde-format
 msgctxt "@label"
 msgid "Alternative:"
-msgstr ""
+msgstr "备选快捷键："
 
 #: actioncollection/qml/ShortcutsEditor.qml:233
 #, kde-format
 msgctxt "Placeholder message"
 msgid "No shortcuts found"
-msgstr ""
+msgstr "没有找到快捷键"
 
 #: actioncollection/standardactiondata.cpp:46
 #, kde-format
 msgctxt "About [application name]"
 msgid "About %1…"
-msgstr ""
+msgstr "关于 %1…"
