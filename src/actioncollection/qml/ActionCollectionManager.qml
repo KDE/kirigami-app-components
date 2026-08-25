@@ -40,7 +40,7 @@ Item {
 
     KI18nContext {
         id: _tr
-        translationDomain: "kirigami-actioncollection"
+        translationDomain: "kirigami-app-components"
     }
 
     AC.ActionCollection {
@@ -49,7 +49,7 @@ Item {
         text: CoreAddons.AboutData.displayName
         AC.StandardActionData {
             standardAction: AC.StandardActionData.Preferences
-            text: _tr.i18ndc("kirigami-actioncollection", "Configure application menu entry", "Configure %1…", CoreAddons.AboutData.displayName)
+            text: _tr.i18nc("Configure application menu entry", "Configure %1…", CoreAddons.AboutData.displayName)
         }
         AC.StandardActionData {
             standardAction: AC.StandardActionData.KeyBindings
@@ -98,7 +98,7 @@ Item {
                 }, {
                     width: Kirigami.Units.gridUnit * 30,
                     height: Kirigami.Units.gridUnit * 30,
-                    title: _tr.i18ndc("kirigami-actioncollection", "@title:window", "About %1", CoreAddons.AboutData.displayName),
+                    title: _tr.i18nc("@title:window", "About %1", CoreAddons.AboutData.displayName),
                 });
                 openDialogWindow.Keys.escapePressed.connect(function() {
                     openDialogWindow.closeDialog();
@@ -118,7 +118,7 @@ Item {
                 }, {
                     width: Kirigami.Units.gridUnit * 30,
                     height: Kirigami.Units.gridUnit * 30,
-                    title: _tr.i18ndc("kirigami-actioncollection", "@title:window", "About KDE"),
+                    title: _tr.i18nc("@title:window", "About KDE"),
                 });
                 openDialogWindow.Keys.escapePressed.connect(function() {
                     openDialogWindow.closeDialog();

@@ -68,7 +68,7 @@ QQC.Control {
 
     KI18nContext {
         id: _tr
-        translationDomain: "kirigami-actioncollection"
+        translationDomain: "kirigami-app-components"
     }
 
     Timer {
@@ -112,8 +112,8 @@ QQC.Control {
                 }
             }
             text: helper.keySequenceIsEmpty(root.defaultKeySequence)
-                ? _tr.i18ndc("kirigami-actioncollection", "Default shortcut label when there is no shortcut", "Default: None")
-                : _tr.i18ndc("kirigami-actioncollection", "Default shortcut label", "Default: %1", root.defaultKeySequence)
+                ? _tr.i18nc("Default shortcut label when there is no shortcut", "Default: None")
+                : _tr.i18nc("Default shortcut label", "Default: %1", root.defaultKeySequence)
         }
         QQC.RadioDelegate {
             id: customDelegate
@@ -168,8 +168,8 @@ QQC.Control {
                         const keySequence = helper.currentKeySequence;
                         const text = helper.keySequenceIsEmpty(keySequence)
                             ? (helper.isRecording
-                                ? _tr.i18ndc("kirigami-actioncollection", "What the user inputs now will be taken as the new shortcut", "Input")
-                                : _tr.i18ndc("kirigami-actioncollection", "No shortcut defined", "None"))
+                                ? _tr.i18nc("What the user inputs now will be taken as the new shortcut", "Input")
+                                : _tr.i18nc("No shortcut defined", "None"))
                             // Single ampersand gets interpreted by the button as a mnemonic
                             // and removed; replace it with a double ampersand so that it
                             // will be displayed by the button as a single ampersand, or
@@ -180,7 +180,7 @@ QQC.Control {
                         return " " + text + (helper.isRecording ? " ... " : " ");
                     }
 
-                    Accessible.description: _tr.i18nd("kirigami-actioncollection", "Click on the button, then enter the shortcut like you would in the program.\nExample for Ctrl+A: hold the Ctrl key and press A.")
+                    Accessible.description: _tr.i18nd("kirigami-app-components", "Click on the button, then enter the shortcut like you would in the program.\nExample for Ctrl+A: hold the Ctrl key and press A.")
 
                     QQC.ToolTip.visible: hovered
                     QQC.ToolTip.text: Accessible.description
@@ -221,7 +221,7 @@ QQC.Control {
                     icon.name: Application.layoutDirection === Qt.LeftToRight ? "edit-clear-locationbar-rtl" : "edit-clear-locationbar-ltr"
 
                     display: QQC.Button.IconOnly
-                    text: _tr.i18ndc("kirigami-actioncollection", "@info:tooltip", "Clear Key Sequence")
+                    text: _tr.i18nc("@info:tooltip", "Clear Key Sequence")
 
                     QQC.ToolTip.visible: hovered
                     QQC.ToolTip.text: text
@@ -237,7 +237,7 @@ QQC.Control {
                     icon.name: "dialog-cancel"
 
                     display: QQC.Button.IconOnly
-                    text: _tr.i18ndc("kirigami-actioncollection", "@info:tooltip", "Cancel Key Sequence Recording")
+                    text: _tr.i18nc("@info:tooltip", "Cancel Key Sequence Recording")
 
                     QQC.ToolTip.visible: hovered
                     QQC.ToolTip.text: Accessible.name

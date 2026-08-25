@@ -16,18 +16,18 @@ Kirigami.ScrollablePage {
 
     property alias model: actionModel
 
-    title: _tr.i18ndc("kirigami-actioncollection", "@title:window", "Shortcuts")
+    title: _tr.i18nc("@title:window", "Shortcuts")
 
     actions: Kirigami.Action {
         displayComponent: Kirigami.SearchField {
-            placeholderText: _tr.i18ndc("kirigami-actioncollection", "@label:textbox", "Filter…")
+            placeholderText: _tr.i18nc("@label:textbox", "Filter…")
             onTextChanged: searchFilterProxyModel.setFilterFixedString(text);
         }
     }
 
     KI18nContext {
         id: _tr
-        translationDomain: "kirigami-actioncollection"
+        translationDomain: "kirigami-app-components"
     }
 
     ListView {
@@ -103,7 +103,7 @@ Kirigami.ScrollablePage {
             }
 
             onClicked: {
-                shortcutDialog.title = _tr.i18ndc("kirigami-actioncollection", "@title:window", "Shortcut: %1",  shortcutDelegate.text);
+                shortcutDialog.title = _tr.i18nc("@title:window", "Shortcut: %1",  shortcutDelegate.text);
                 shortcutDialog.actionDescription = model.actionDescription;
                 shortcutDialog.keySequence = model.shortcut;
                 shortcutDialog.alternateKeySequence = model.alternateShortcut;
@@ -137,7 +137,7 @@ Kirigami.ScrollablePage {
 
                     defaultKeySequence: shortcutDialog.actionDescription?.defaultShortcut ?? ""
 
-                    label: _tr.i18ndc("kirigami-actioncollection", "@label", "Shortcut:")
+                    label: _tr.i18nc("@label", "Shortcut:")
                     onKeySequenceModified: {
                         print("SETTING", keySequence)
                         shortcutDialog.shortcutDelegate.model.shortcut = keySequence;
@@ -163,7 +163,7 @@ Kirigami.ScrollablePage {
 
                     defaultKeySequence: shortcutDialog.actionDescription?.defaultAlternateShortcut ?? ""
 
-                    label: _tr.i18ndc("kirigami-actioncollection", "@label", "Alternative:")
+                    label: _tr.i18nc("@label", "Alternative:")
 
                     onKeySequenceModified: {
                         shortcutDialog.shortcutDelegate.model.alternateShortcut = keySequence;
@@ -230,7 +230,7 @@ Kirigami.ScrollablePage {
         Kirigami.PlaceholderMessage {
             width: parent.width - Kirigami.Units.gridUnit * 4
             anchors.centerIn: parent
-            text: _tr.i18ndc("kirigami-actioncollection", "Placeholder message", "No shortcuts found")
+            text: _tr.i18nc("Placeholder message", "No shortcuts found")
             visible: listView.count === 0
         }
     }
