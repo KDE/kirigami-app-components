@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-15 00:43+0000\n"
-"PO-Revision-Date: 2026-05-31 18:51-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -32,9 +32,6 @@ msgid ""
 "shortcut.\n"
 "Please choose another one."
 msgstr ""
-"F12 بولسا Windows دا بەلگىلىنىپ بولغان، شۇڭا ئومۇمىيەت تېزلەتمىدە ئىشلەتكىلى "
-"بولمايدۇ\n"
-"باشقا كۇنۇپكا تاللاڭ."
 
 #: actioncollection/keysequencehelper.cpp:160
 #, kde-format
@@ -91,9 +88,6 @@ msgid ""
 "some applications use.\n"
 "Do you really want to use it as a global shortcut as well?"
 msgstr ""
-"«%1» بىرىكمە كۇنۇپكا بەزى پىروگراممىدا «%2» ئۆلچەملىك مەشغۇلات ئۈچۈن "
-"بېكىتىلگەن.\n"
-"بۇنى راستتىنلا ئومۇمىيەت تېزلەتمە سۈپىتىدە ئىشلىتەمسىز؟"
 
 #: actioncollection/qml/ActionCollectionManager.qml:52
 #, kde-format
@@ -155,8 +149,6 @@ msgid ""
 "Click on the button, then enter the shortcut like you would in the program.\n"
 "Example for Ctrl+A: hold the Ctrl key and press A."
 msgstr ""
-"توپچىنى چېكىپ، ئاندىن بۇ پىروگراممىغا تېزلەتمە كىرگۈزۈلىدۇ.\n"
-"مەسىلەن، Ctrl+A يەنى Ctrl كۇنۇپكىسىنى بېسىپ تۇرۇپ ئاندىن A كۇنۇپكا بېسىلىدۇ."
 
 #: actioncollection/qml/KeySequenceItem.qml:224
 #, kde-format
