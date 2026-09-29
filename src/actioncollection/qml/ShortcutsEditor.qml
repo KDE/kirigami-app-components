@@ -16,6 +16,23 @@ Kirigami.ScrollablePage {
 
     property alias model: actionModel
 
+    /*!
+     * Whether shortcuts without modifiers (single keys such as Space,
+     * Backspace or plain letters) can be recorded. This matches the classic
+     * KShortcutsDialog::LetterShortcutsAllowed behavior.
+     *
+     * Default is false: only key combinations with modifiers (plus special
+     * keys like F1 or cursor keys, which always work) finish recording.
+     *
+     * Applications where single-key shortcuts are standard (e.g. image
+     * viewers) can opt in, for example via the settings module's
+     * initialProperties:
+     * \qml
+     * initialProperties: () => ({ allowModifierlessShortcuts: true })
+     * \endqml
+     */
+    property bool allowModifierlessShortcuts: false
+
     title: _tr.i18nc("@title:window", "Shortcuts")
 
     actions: Kirigami.Action {
@@ -134,6 +151,7 @@ Kirigami.ScrollablePage {
                 KeySequenceItem {
                     id: keySequenceItem
                     Layout.fillWidth: true
+                    modifierlessAllowed: root.allowModifierlessShortcuts
 
                     defaultKeySequence: shortcutDialog.actionDescription?.defaultShortcut ?? ""
 
@@ -160,6 +178,7 @@ Kirigami.ScrollablePage {
                 KeySequenceItem {
                     id: alternateKeySequenceItem
                     Layout.fillWidth: true
+                    modifierlessAllowed: root.allowModifierlessShortcuts
 
                     defaultKeySequence: shortcutDialog.actionDescription?.defaultAlternateShortcut ?? ""
 
