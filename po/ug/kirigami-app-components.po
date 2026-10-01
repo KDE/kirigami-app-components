@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-15 00:43+0000\n"
+"POT-Creation-Date: 2026-10-01 00:44+0000\n"
 "PO-Revision-Date: 2026-09-23 06:56+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -162,37 +162,37 @@ msgctxt "@info:tooltip"
 msgid "Cancel Key Sequence Recording"
 msgstr "كۇنۇپكا بېسىلىشىنى خاتىرىلەشتىن ۋاز كېچىدۇ"
 
-#: actioncollection/qml/ShortcutsEditor.qml:19
+#: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcuts"
 msgstr "تېزلەتمە"
 
-#: actioncollection/qml/ShortcutsEditor.qml:23
+#: actioncollection/qml/ShortcutsEditor.qml:40
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Filter…"
 msgstr "سۈزگۈچ…"
 
-#: actioncollection/qml/ShortcutsEditor.qml:106
+#: actioncollection/qml/ShortcutsEditor.qml:123
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcut: %1"
 msgstr ""
 
-#: actioncollection/qml/ShortcutsEditor.qml:140
+#: actioncollection/qml/ShortcutsEditor.qml:158
 #, kde-format
 msgctxt "@label"
 msgid "Shortcut:"
 msgstr "تېزلەتمە:"
 
-#: actioncollection/qml/ShortcutsEditor.qml:166
+#: actioncollection/qml/ShortcutsEditor.qml:185
 #, kde-format
 msgctxt "@label"
 msgid "Alternative:"
 msgstr ""
 
-#: actioncollection/qml/ShortcutsEditor.qml:233
+#: actioncollection/qml/ShortcutsEditor.qml:252
 #, kde-format
 msgctxt "Placeholder message"
 msgid "No shortcuts found"

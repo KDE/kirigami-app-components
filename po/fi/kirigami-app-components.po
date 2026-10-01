@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-15 00:43+0000\n"
+"POT-Creation-Date: 2026-10-01 00:44+0000\n"
 "PO-Revision-Date: 2026-07-04 12:45+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -171,37 +171,37 @@ msgctxt "@info:tooltip"
 msgid "Cancel Key Sequence Recording"
 msgstr "Peru näppäinsarjan nauhoitus"
 
-#: actioncollection/qml/ShortcutsEditor.qml:19
+#: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcuts"
 msgstr "Pikanäppäimet"
 
-#: actioncollection/qml/ShortcutsEditor.qml:23
+#: actioncollection/qml/ShortcutsEditor.qml:40
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Filter…"
 msgstr "Suodata…"
 
-#: actioncollection/qml/ShortcutsEditor.qml:106
+#: actioncollection/qml/ShortcutsEditor.qml:123
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcut: %1"
 msgstr "Pikanäppäin: %1"
 
-#: actioncollection/qml/ShortcutsEditor.qml:140
+#: actioncollection/qml/ShortcutsEditor.qml:158
 #, kde-format
 msgctxt "@label"
 msgid "Shortcut:"
 msgstr "Pikanäppäin:"
 
-#: actioncollection/qml/ShortcutsEditor.qml:166
+#: actioncollection/qml/ShortcutsEditor.qml:185
 #, kde-format
 msgctxt "@label"
 msgid "Alternative:"
 msgstr "Vaihtoehto:"
 
-#: actioncollection/qml/ShortcutsEditor.qml:233
+#: actioncollection/qml/ShortcutsEditor.qml:252
 #, kde-format
 msgctxt "Placeholder message"
 msgid "No shortcuts found"

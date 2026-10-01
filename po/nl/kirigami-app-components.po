@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-15 00:43+0000\n"
+"POT-Creation-Date: 2026-10-01 00:44+0000\n"
 "PO-Revision-Date: 2026-05-15 14:25+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -172,37 +172,37 @@ msgctxt "@info:tooltip"
 msgid "Cancel Key Sequence Recording"
 msgstr "Toetsenreeks opnemen annuleren"
 
-#: actioncollection/qml/ShortcutsEditor.qml:19
+#: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcuts"
 msgstr "Sneltoetsen"
 
-#: actioncollection/qml/ShortcutsEditor.qml:23
+#: actioncollection/qml/ShortcutsEditor.qml:40
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Filter…"
 msgstr "Filter…"
 
-#: actioncollection/qml/ShortcutsEditor.qml:106
+#: actioncollection/qml/ShortcutsEditor.qml:123
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcut: %1"
 msgstr "Sneltoets: %1"
 
-#: actioncollection/qml/ShortcutsEditor.qml:140
+#: actioncollection/qml/ShortcutsEditor.qml:158
 #, kde-format
 msgctxt "@label"
 msgid "Shortcut:"
 msgstr "Sneltoets:"
 
-#: actioncollection/qml/ShortcutsEditor.qml:166
+#: actioncollection/qml/ShortcutsEditor.qml:185
 #, kde-format
 msgctxt "@label"
 msgid "Alternative:"
 msgstr "Alternatief:"
 
-#: actioncollection/qml/ShortcutsEditor.qml:233
+#: actioncollection/qml/ShortcutsEditor.qml:252
 #, kde-format
 msgctxt "Placeholder message"
 msgid "No shortcuts found"
