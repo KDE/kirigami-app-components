@@ -112,6 +112,7 @@ ActionModel::ActionModel(QObject *parent)
 
 ActionModel::~ActionModel()
 {
+    delete d;
 }
 
 QString ActionModel::collectionName() const
