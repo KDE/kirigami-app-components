@@ -25,7 +25,7 @@ TestCase {
 
         AC.ActionCollectionManager {
             id: manager
-            pageRow: pageStack
+            pageRow: mainWindow.pageStack
             AC.ActionCollection {
                 name: "TestCollection1"
                 AC.ActionData {
