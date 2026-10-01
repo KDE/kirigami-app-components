@@ -1,16 +1,14 @@
-# Spanish translations for kirigami-app-components.po package.
 # Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kirigami-app-components package.
-# Automatically generated, 2026.
 #
 # SPDX-FileCopyrightText: 2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-01 00:44+0000\n"
-"PO-Revision-Date: 2026-05-15 18:06+0100\n"
-"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
+"POT-Creation-Date: 2026-10-01 20:13+0000\n"
+"PO-Revision-Date: 2026-05-15 18:06+0200\n"
+"Last-Translator: Automatically generated\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"

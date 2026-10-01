@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-01 00:44+0000\n"
-"PO-Revision-Date: 2026-05-15 14:25+0200\n"
+"POT-Creation-Date: 2026-10-01 20:13+0000\n"
+"PO-Revision-Date: 2026-05-15 18:46+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -21,7 +21,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Reserved Shortcut"
-msgstr "Gereserveerde sneltoets"
+msgstr "Gereserveerde snelkoppeling"
 
 #: actioncollection/keysequencehelper.cpp:136
 #, kde-format
@@ -31,8 +31,9 @@ msgid ""
 "shortcut.\n"
 "Please choose another one."
 msgstr ""
-"De F12-toets is gereserveerd in Windows en kan daarom niet worden gebruikt "
-"voor een globale sneltoets. Kies een andere sneltoets."
+"De F12-toets is gereserveerd in Windows, en kan dus niet gebruikt worden "
+"voor een globale sneltoets.\n"
+"Graag een andere kiezen."
 
 #: actioncollection/keysequencehelper.cpp:160
 #, kde-format
@@ -118,7 +119,7 @@ msgstr "Info over %1"
 #, kde-format
 msgctxt "@title:window"
 msgid "About KDE"
-msgstr "Info over KDE"
+msgstr "Over KDE"
 
 #: actioncollection/qml/ActionsExplorer.qml:114
 #, kde-format
