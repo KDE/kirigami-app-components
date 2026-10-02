@@ -43,6 +43,13 @@ if (BUILD_TESTING)
     find_package(Qt6QuickTest ${REQUIRED_QT_VERSION} CONFIG QUIET)
 endif()
 
+ecm_setup_version(PROJECT
+    VARIABLE_PREFIX KIRIGAMIAPPCOMPONENTS
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kirigamiappcomponents_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiAppComponentsConfigVersion.cmake"
+    SOVERSION 6
+)
+
 ecm_find_qmlmodule(org.kde.ki18n REQUIRED)
 
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
@@ -72,7 +79,7 @@ ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiAppComponentsConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiAppComponentsConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6KirigamiAppComponentsConfigVersion.cmake"
     DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
     COMPONENT Devel
 )
