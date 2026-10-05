@@ -1,22 +1,21 @@
-# Lithuanian translations for kirigami-app-components package.
 # Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kirigami-app-components package.
-# Automatically generated, 2026.
 #
+# SPDX-FileCopyrightText: 2026 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-01 20:13+0000\n"
-"PO-Revision-Date: 2026-10-01 20:13+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: lt\n"
+"PO-Revision-Date: 2026-10-04 12:37+0200\n"
+"Last-Translator: Kishore G <kishore96@gmail.com>\n"
+"Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
+"Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
-"%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: actioncollection/keysequencehelper.cpp:134
 #, kde-format
@@ -141,7 +140,7 @@ msgstr ""
 #, kde-format
 msgctxt "No shortcut defined"
 msgid "None"
-msgstr ""
+msgstr "ஏதுமில்லை"
 
 #: actioncollection/qml/KeySequenceItem.qml:183
 #, kde-format
@@ -166,13 +165,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "சுருக்குவழிகள்"
 
 #: actioncollection/qml/ShortcutsEditor.qml:40
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Filter…"
-msgstr ""
+msgstr "வடிகட்டு…"
 
 #: actioncollection/qml/ShortcutsEditor.qml:123
 #, kde-format
