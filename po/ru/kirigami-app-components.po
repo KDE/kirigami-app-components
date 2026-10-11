@@ -1,0 +1,215 @@
+# Translation of kirigami-app-components into Russian.
+# This file is distributed under the same license as the kirigami-app-components package.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kirigami-app-components\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-10-01 00:44+0000\n"
+"PO-Revision-Date: 2026-10-10 09:47+0200\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: actioncollection/keysequencehelper.cpp:134
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Reserved Shortcut"
+msgstr "Зарезервированная комбинация клавиш"
+
+#: actioncollection/keysequencehelper.cpp:136
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The F12 key is reserved on Windows, so cannot be used for a global "
+"shortcut.\n"
+"Please choose another one."
+msgstr ""
+"В Windows клавиша F12 зарезервирована, поэтому её нельзя использовать в "
+"глобальных комбинациях клавиш.\n"
+"Выберите другую комбинацию клавиш."
+
+#: actioncollection/keysequencehelper.cpp:160
+#, kde-format
+msgctxt ""
+"@title:dialog This happen when a global shortcut is already defined with the "
+"same shortcut"
+msgid "Global Shortcut Shadowing"
+msgstr "Затенение глобальных комбинаций клавиш"
+
+#: actioncollection/keysequencehelper.cpp:163
+#, kde-format
+msgctxt "@info"
+msgid "The '%1' key combination is shadowed by following global actions:\n"
+msgstr "Комбинация клавиш «%1» затенена следующими глобальными действиями:\n"
+
+#: actioncollection/keysequencehelper.cpp:165
+#: actioncollection/keysequencehelper.cpp:171
+#, kde-format
+msgctxt "@info"
+msgid "Action '%1' in context '%2'\n"
+msgstr "Действие «%1» в контексте «%2»\n"
+
+#: actioncollection/keysequencehelper.cpp:169
+#, kde-format
+msgctxt "@info"
+msgid "The '%1' key combination shadows following global actions:\n"
+msgstr "Комбинация клавиш «%1» затеняет следующие глобальные действия:\n"
+
+#: actioncollection/keysequencehelper.cpp:220
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Conflict with existing Shortcut"
+msgstr "Конфликт с существующей комбинацией клавиш"
+
+# BUGME: double question mark at the end --ayavorsky 2026-10-10
+#: actioncollection/keysequencehelper.cpp:222
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The '%1' key combination is already used for the action \"%2\".\n"
+"Do you really want to use the shortcut here instead??"
+msgstr ""
+"Комбинация клавиш «%1» уже назначена действию «%2».\n"
+"Действительно назначить её здесь?"
+
+#: actioncollection/keysequencehelper.cpp:239
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Conflict with Standard Application Shortcut"
+msgstr "Конфликт со стандартной комбинацией клавиш приложения"
+
+#: actioncollection/keysequencehelper.cpp:241
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The '%1' key combination is also used for the standard action \"%2\" that "
+"some applications use.\n"
+"Do you really want to use it as a global shortcut as well?"
+msgstr ""
+"Комбинация клавиш «%1» уже связана со стандартным действием «%2», "
+"используемым в некоторых приложениях.\n"
+"Действительно использовать эту комбинацию как глобальную?"
+
+#: actioncollection/qml/ActionCollectionManager.qml:52
+#, kde-format
+msgctxt "Configure application menu entry"
+msgid "Configure %1…"
+msgstr "Настроить %1…"
+
+#: actioncollection/qml/ActionCollectionManager.qml:62
+#, kde-format
+msgctxt "Opens the actions search dialog"
+msgid "Find Action…"
+msgstr "Найти действие…"
+
+#: actioncollection/qml/ActionCollectionManager.qml:101
+#, kde-format
+msgctxt "@title:window"
+msgid "About %1"
+msgstr "О программе %1"
+
+#: actioncollection/qml/ActionCollectionManager.qml:121
+#, kde-format
+msgctxt "@title:window"
+msgid "About KDE"
+msgstr "О KDE"
+
+#: actioncollection/qml/ActionsExplorer.qml:114
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "No results found"
+msgstr "Результаты не найдены"
+
+#: actioncollection/qml/KeySequenceItem.qml:115
+#, kde-format
+msgctxt "Default shortcut label when there is no shortcut"
+msgid "Default: None"
+msgstr "По умолчанию: нет"
+
+#: actioncollection/qml/KeySequenceItem.qml:116
+#, kde-format
+msgctxt "Default shortcut label"
+msgid "Default: %1"
+msgstr "По умолчанию: %1"
+
+#: actioncollection/qml/KeySequenceItem.qml:171
+#, kde-format
+msgctxt "What the user inputs now will be taken as the new shortcut"
+msgid "Input"
+msgstr "Ввод"
+
+#: actioncollection/qml/KeySequenceItem.qml:172
+#, kde-format
+msgctxt "No shortcut defined"
+msgid "None"
+msgstr "Нет"
+
+#: actioncollection/qml/KeySequenceItem.qml:183
+#, kde-format
+msgid ""
+"Click on the button, then enter the shortcut like you would in the program.\n"
+"Example for Ctrl+A: hold the Ctrl key and press A."
+msgstr ""
+"Нажмите кнопку и введите комбинацию клавиш.\n"
+"Например, для комбинации клавиш Ctrl+A удерживайте клавишу Ctrl и нажмите A."
+
+#: actioncollection/qml/KeySequenceItem.qml:224
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Clear Key Sequence"
+msgstr "Очистить последовательность клавиш"
+
+#: actioncollection/qml/KeySequenceItem.qml:240
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Cancel Key Sequence Recording"
+msgstr "Отменить запись последовательности клавиш"
+
+#: actioncollection/qml/ShortcutsEditor.qml:36
+#, kde-format
+msgctxt "@title:window"
+msgid "Shortcuts"
+msgstr "Комбинации клавиш"
+
+#: actioncollection/qml/ShortcutsEditor.qml:40
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Filter…"
+msgstr "Фильтр…"
+
+#: actioncollection/qml/ShortcutsEditor.qml:123
+#, kde-format
+msgctxt "@title:window"
+msgid "Shortcut: %1"
+msgstr "Комбинация клавиш: %1"
+
+#: actioncollection/qml/ShortcutsEditor.qml:158
+#, kde-format
+msgctxt "@label"
+msgid "Shortcut:"
+msgstr "Комбинация клавиш:"
+
+#: actioncollection/qml/ShortcutsEditor.qml:185
+#, kde-format
+msgctxt "@label"
+msgid "Alternative:"
+msgstr "Альтернатива:"
+
+#: actioncollection/qml/ShortcutsEditor.qml:252
+#, kde-format
+msgctxt "Placeholder message"
+msgid "No shortcuts found"
+msgstr "Комбинации клавиш не найдены"
+
+#: actioncollection/standardactiondata.cpp:46
+#, kde-format
+msgctxt "About [application name]"
+msgid "About %1…"
+msgstr "О программе %1…"
