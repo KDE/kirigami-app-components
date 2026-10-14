@@ -2,25 +2,27 @@
 # German translation for kirigami-app-components.
 # Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kirigami-app-components package.
+# SPDX-FileCopyrightText: 2026 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-01 20:13+0000\n"
-"PO-Revision-Date: 2026-05-15 09:35+0200\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-10-11 22:55+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #: actioncollection/keysequencehelper.cpp:134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Reserved Shortcut"
-msgstr ""
+msgstr "Reservierter Kurzbefehl"
 
 #: actioncollection/keysequencehelper.cpp:136
 #, kde-format
@@ -30,6 +32,9 @@ msgid ""
 "shortcut.\n"
 "Please choose another one."
 msgstr ""
+"Die Taste „F12“ ist unter Windows reserviert, kann also nicht als globaler "
+"Kurzbefehl verwendet werden.\n"
+"Bitte wählen Sie eine andere Taste."
 
 #: actioncollection/keysequencehelper.cpp:160
 #, kde-format
@@ -37,32 +42,35 @@ msgctxt ""
 "@title:dialog This happen when a global shortcut is already defined with the "
 "same shortcut"
 msgid "Global Shortcut Shadowing"
-msgstr ""
+msgstr "Überschreiben globaler Kurzbefehle"
 
 #: actioncollection/keysequencehelper.cpp:163
 #, kde-format
 msgctxt "@info"
 msgid "The '%1' key combination is shadowed by following global actions:\n"
 msgstr ""
+"Die Tastenkombination „%1“ wird von den folgenden globalen Aktionen "
+"überschrieben:\n"
 
 #: actioncollection/keysequencehelper.cpp:165
 #: actioncollection/keysequencehelper.cpp:171
 #, kde-format
 msgctxt "@info"
 msgid "Action '%1' in context '%2'\n"
-msgstr ""
+msgstr "Aktion „%1“ in Zusammenhang „%2“\n"
 
 #: actioncollection/keysequencehelper.cpp:169
 #, kde-format
 msgctxt "@info"
 msgid "The '%1' key combination shadows following global actions:\n"
 msgstr ""
+"Die Tastenkombination „%1“ überschreibt die folgenden globalen Aktionen:\n"
 
 #: actioncollection/keysequencehelper.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Conflict with existing Shortcut"
-msgstr ""
+msgstr "Konflikt mit existierendem Kurzbefehl"
 
 #: actioncollection/keysequencehelper.cpp:222
 #, kde-format
@@ -71,12 +79,14 @@ msgid ""
 "The '%1' key combination is already used for the action \"%2\".\n"
 "Do you really want to use the shortcut here instead??"
 msgstr ""
+"Die Tastenkombination „%1“ wird bereits für die Aktion „%2“ verwendet.\n"
+"Möchten Sie wirklich stattdessen diesen Kurzbefehl verwenden?"
 
 #: actioncollection/keysequencehelper.cpp:239
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Conflict with Standard Application Shortcut"
-msgstr ""
+msgstr "Konflikt mit Standard-Kurzbefehl der Anwendung"
 
 #: actioncollection/keysequencehelper.cpp:241
 #, kde-format
@@ -86,60 +96,63 @@ msgid ""
 "some applications use.\n"
 "Do you really want to use it as a global shortcut as well?"
 msgstr ""
+"Die Tastenkombination „%1“ ist bereits der Standard-Aktion „%2“ zugeordnet, "
+"die von einigen Anwendungen verwendet wird.\n"
+"Möchten Sie sie wirklich auch als globalen Kurzbefehl verwenden?"
 
 #: actioncollection/qml/ActionCollectionManager.qml:52
 #, kde-format
 msgctxt "Configure application menu entry"
 msgid "Configure %1…"
-msgstr ""
+msgstr "%1 einrichten …"
 
 #: actioncollection/qml/ActionCollectionManager.qml:62
 #, kde-format
 msgctxt "Opens the actions search dialog"
 msgid "Find Action…"
-msgstr ""
+msgstr "Aktion suchen …"
 
 #: actioncollection/qml/ActionCollectionManager.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
-msgstr ""
+msgstr "Über %1"
 
 #: actioncollection/qml/ActionCollectionManager.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "About KDE"
-msgstr ""
+msgstr "Über KDE"
 
 #: actioncollection/qml/ActionsExplorer.qml:114
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No results found"
-msgstr ""
+msgstr "Keine Ergebnisse gefunden"
 
 #: actioncollection/qml/KeySequenceItem.qml:115
 #, kde-format
 msgctxt "Default shortcut label when there is no shortcut"
 msgid "Default: None"
-msgstr ""
+msgstr "Standard: Kein"
 
 #: actioncollection/qml/KeySequenceItem.qml:116
 #, kde-format
 msgctxt "Default shortcut label"
 msgid "Default: %1"
-msgstr ""
+msgstr "Standard: %1"
 
 #: actioncollection/qml/KeySequenceItem.qml:171
 #, kde-format
 msgctxt "What the user inputs now will be taken as the new shortcut"
 msgid "Input"
-msgstr ""
+msgstr "Eingabe"
 
 #: actioncollection/qml/KeySequenceItem.qml:172
 #, kde-format
 msgctxt "No shortcut defined"
 msgid "None"
-msgstr ""
+msgstr "Kein"
 
 #: actioncollection/qml/KeySequenceItem.qml:183
 #, kde-format
@@ -147,57 +160,61 @@ msgid ""
 "Click on the button, then enter the shortcut like you would in the program.\n"
 "Example for Ctrl+A: hold the Ctrl key and press A."
 msgstr ""
+"Klicken Sie auf den Knopf und drücken Sie dann die Tasten für den Kurzbefehl "
+"auf der Tastatur.\n"
+"Beispielsweise für Strg+A: Halten Sie die Strg-Taste gedrückt und drücken "
+"Sie dann „A“."
 
 #: actioncollection/qml/KeySequenceItem.qml:224
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Clear Key Sequence"
-msgstr ""
+msgstr "Tastenfolge leeren"
 
 #: actioncollection/qml/KeySequenceItem.qml:240
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel Key Sequence Recording"
-msgstr ""
+msgstr "Tastenfolgen-Aufnahme abbrechen"
 
 #: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcuts"
-msgstr ""
+msgstr "Kurzbefehle"
 
 #: actioncollection/qml/ShortcutsEditor.qml:40
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Filter…"
-msgstr ""
+msgstr "Filter …"
 
 #: actioncollection/qml/ShortcutsEditor.qml:123
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcut: %1"
-msgstr ""
+msgstr "Kurzbefehl: %1"
 
 #: actioncollection/qml/ShortcutsEditor.qml:158
 #, kde-format
 msgctxt "@label"
 msgid "Shortcut:"
-msgstr ""
+msgstr "Kurzbefehl:"
 
 #: actioncollection/qml/ShortcutsEditor.qml:185
 #, kde-format
 msgctxt "@label"
 msgid "Alternative:"
-msgstr ""
+msgstr "Alternative:"
 
 #: actioncollection/qml/ShortcutsEditor.qml:252
 #, kde-format
 msgctxt "Placeholder message"
 msgid "No shortcuts found"
-msgstr ""
+msgstr "Keine Kurzbefehle gefunden"
 
 #: actioncollection/standardactiondata.cpp:46
 #, kde-format
 msgctxt "About [application name]"
 msgid "About %1…"
-msgstr ""
+msgstr "Über %1 …"
