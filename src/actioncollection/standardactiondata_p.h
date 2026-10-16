@@ -12,7 +12,7 @@ namespace KirigamiActions
  * \qmltype StandardActionData
  * \inqmlmodule org.kde.kirigami.actioncollection
  *
- * \brief Declarative representation for a named action derivarive from
+ * \brief Declarative representation for a named action derived from
  * KStandardActions.
  *
  * This element needs to always be declared as a child of ActionCollection
