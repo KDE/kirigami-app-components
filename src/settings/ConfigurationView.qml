@@ -5,11 +5,11 @@ import QtQuick
 import QtQml
 import org.kde.kirigamiaddons.private
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.settings.private as Private
+import org.kde.kirigami.settings.private as Private
 
 /*!
    \qmltype ConfigurationView
-   \inqmlmodule org.kde.kirigamiaddons.settings
+   \inqmlmodule org.kde.kirigami.settings
    \brief This is an abstract view to display the configuration of an application.
 
    The various configuration modules can be defined by providing ConfigurationModule
@@ -21,7 +21,7 @@ import org.kde.kirigamiaddons.settings.private as Private
 
    \qml
    import QtQuick.Controls as Controls
-   import org.kde.kirigamiaddons.settings as KirigamiSettings
+   import org.kde.kirigami.settings as KirigamiSettings
 
    Controls.Button {
        id: button
@@ -117,7 +117,7 @@ QtObject {
         }
 
         if (Kirigami.Settings.isMobile) {
-            const component = Qt.createComponent('org.kde.kirigamiaddons.settings.private', 'ConfigMobilePage');
+            const component = Qt.createComponent('org.kde.kirigami.settings.private', 'ConfigMobilePage');
             if (component.status === Component.Failed) {
                 console.error(component.errorString());
                 return;
@@ -135,7 +135,7 @@ QtObject {
                 }
             });
         } else {
-            const component = Qt.createComponent('org.kde.kirigamiaddons.settings.private', 'ConfigWindow');
+            const component = Qt.createComponent('org.kde.kirigami.settings.private', 'ConfigWindow');
             if (component.status === Component.Failed) {
                 console.error(component.errorString());
                 return;

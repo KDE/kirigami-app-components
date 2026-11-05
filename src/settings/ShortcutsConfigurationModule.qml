@@ -4,12 +4,12 @@
 import QtQuick
 import org.kde.kirigamiaddons.private
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.settings.private as Private
+import org.kde.kirigami.settings.private as Private
 import org.kde.kirigamiaddons.actions as KirigamiActions
 
 /*!
    \qmltype ShortcutsConfigurationModule
-   \inqmlmodule org.kde.kirigamiaddons.settings
+   \inqmlmodule org.kde.kirigami.settings
    \brief Configuration module for keyboard shortcuts.
 
    \since 1.7.0
@@ -26,7 +26,7 @@ ConfigurationModule {
     moduleId: "shortcuts"
     text: I18n.i18nc("@action:button", "Keyboard Shortcuts")
     icon.name: "input-keyboard-symbolic"
-    page: () => Qt.createComponent("org.kde.kirigamiaddons.statefulapp.private", "ShortcutsEditor")
+    page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "ShortcutsEditor")
     visible: !Kirigami.Settings.isMobile
     keywords: [
         I18n.i18nc("@info:search keyword", "Hotkey"),

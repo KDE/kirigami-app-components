@@ -7,8 +7,8 @@ import QtQuick
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard as FormCard
 import org.kde.kirigamiaddons.formcard.templates as FormTemplates
-import org.kde.kirigamiaddons.settings
-import org.kde.kirigamiaddons.settings.private
+import org.kde.kirigami.settings
+import org.kde.kirigami.settings.private
 
 QtObject {
     id: root

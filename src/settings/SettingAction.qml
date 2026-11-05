@@ -7,7 +7,7 @@ import org.kde.kirigami as Kirigami
 
 /*!
    \qmltype SettingAction
-   \inqmlmodule org.kde.kirigamiaddons.settings
+   \inqmlmodule org.kde.kirigami.settings
    \brief SettingAction defines a settings page, and is typically used by a CategorizedSettings object.
    \deprecated Since 1.3.0, use ConfigurationModule instead.
  */

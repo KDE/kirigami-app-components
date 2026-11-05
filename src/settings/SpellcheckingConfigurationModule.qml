@@ -3,11 +3,11 @@
 
 import QtQuick
 import org.kde.kirigamiaddons.private
-import org.kde.kirigamiaddons.settings.private as Private
+import org.kde.kirigami.settings.private as Private
 
 /*!
    \qmltype SpellcheckingConfigurationModule
-   \inqmlmodule org.kde.kirigamiaddons.settings
+   \inqmlmodule org.kde.kirigami.settings
    \brief Configuration module for spellchecking.
    \since 1.3.0
  */
@@ -15,6 +15,6 @@ ConfigurationModule {
     moduleId: "spellchecking"
     text: I18n.i18nc("@action:button", "Spell Checking")
     icon.name: "tools-check-spelling"
-    page: () => Qt.createComponent("org.kde.kirigamiaddons.settings.private", "SonnetConfigPage")
+    page: () => Qt.createComponent("org.kde.kirigami.settings.private", "SonnetConfigPage")
     visible: Qt.platform.os !== "android" && (Private.Helper.styleName === 'org.kde.desktop' || Private.Helper.styleName === 'breeze')
 }

@@ -1,6 +1,6 @@
 /*!
-   \qmlmodule org.kde.kirigamiaddons.settings
-   \title Kirigami Addons Settings QML Types
+   \qmlmodule org.kde.kirigami.settings
+   \title Kirigami Settings QML Types
    \brief Pages and navigation for application settings.
 
    The Settings module presents an application's configuration pages in a
@@ -8,7 +8,7 @@
    with an alias:
 
    \qml
-   import org.kde.kirigamiaddons.settings as Settings
+   import org.kde.kirigami.settings as Settings
    \endqml
 
    \section1 Organizing settings pages
@@ -37,7 +37,7 @@
    import QtQuick.Controls as Controls
    import org.kde.kirigami as Kirigami
    import org.kde.kirigamiaddons.formcard as FormCard
-   import org.kde.kirigamiaddons.settings as Settings
+   import org.kde.kirigami.settings as Settings
 
    Kirigami.ApplicationWindow {
        id: window

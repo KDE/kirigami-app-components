@@ -10,8 +10,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.private
-import org.kde.kirigamiaddons.delegates as Delegates
-import org.kde.kirigamiaddons.settings
+import org.kde.kirigami.settings
 
 Kirigami.ApplicationWindow {
     id: root
@@ -133,7 +132,7 @@ Kirigami.ApplicationWindow {
                         initDone = true;
                     }
                     model: configurationSearch.filteredModules
-                    delegate: Delegates.RoundedItemDelegate {
+                    delegate: QQC2.ItemDelegate {
                         id: settingDelegate
 
                         required property int index
