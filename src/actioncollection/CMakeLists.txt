@@ -43,6 +43,10 @@ ecm_target_qml_sources(KirigamiActionCollection SOURCES
     qml/ShortcutsEditor.qml
 )
 
+ecm_target_qml_sources(KirigamiActionCollection PATH private SOURCES
+    qml/private/AboutKDEPage.qml
+)
+
 set_target_properties(KirigamiActionCollection PROPERTIES
     VERSION     ${PROJECT_VERSION}
     SOVERSION   6

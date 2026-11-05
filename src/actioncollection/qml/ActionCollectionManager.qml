@@ -7,6 +7,7 @@ import org.kde.coreaddons as CoreAddons
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.actioncollection as AC
 import org.kde.ki18n
+import "private" as P
 
 /*!
   \qmltype ActionCollectionManager
@@ -93,8 +94,9 @@ Item {
                     root.pageRow.closeDialog();
                     return;
                 }
-                openDialogWindow = root.pageRow.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"), {
-                    width: root.width
+                openDialogWindow = root.pageRow.pushDialogLayer(Qt.createComponent("org.kde.kirigami", "AboutPage"), {
+                    width: root.width,
+                    aboutData: CoreAddons.AboutData
                 }, {
                     width: Kirigami.Units.gridUnit * 30,
                     height: Kirigami.Units.gridUnit * 30,
@@ -113,7 +115,7 @@ Item {
                     pageStack.closeDialog();
                     return;
                 }
-                openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"), {
+                openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigami.actioncollection", "AboutKDEPage"), {
                     width: root.width
                 }, {
                     width: Kirigami.Units.gridUnit * 30,
