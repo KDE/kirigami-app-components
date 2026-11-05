@@ -4,15 +4,15 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls as Controls
 import org.kde.kirigamiaddons.private
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.formcard as FormCard
 import org.kde.kirigami.settings
 
-FormCard.FormCardPage {
+Kirigami.ScrollablePage {
     id: root
 
     required property string defaultModule
@@ -59,119 +59,92 @@ FormCard.FormCardPage {
         }
     }
 
-    // search bar
-    FormCard.FormCard {
-        Layout.fillWidth: true
-        Layout.topMargin: Kirigami.Units.gridUnit
+    ColumnLayout {
+        spacing: 0
 
-        FormCard.AbstractFormDelegate {
+        // search bar
+        Kirigami.SearchField {
+            id: searchField
             Layout.fillWidth: true
-            background: null
-
-            topPadding: Kirigami.Units.smallSpacing
-            bottomPadding: Kirigami.Units.smallSpacing
-
-            contentItem: Kirigami.SearchField {
-                id: searchField
-                Layout.fillWidth: true
-                autoAccept: false
-                background: null
-                onAccepted: configurationSearch.acceptFirstResult()
-                Keys.onDownPressed: nextItemInFocusChain(true)?.forceActiveFocus(Qt.TabFocusReason)
-            }
+            Layout.margins: Kirigami.Units.largeSpacing
+            autoAccept: false
+            onAccepted: configurationSearch.acceptFirstResult()
+            Keys.onDownPressed: nextItemInFocusChain(true)?.forceActiveFocus(Qt.TabFocusReason)
         }
-    }
 
-    Repeater {
-        model: {
-            let filteredCategories = new Array();
+        Kirigami.Form {
+            Layout.fillWidth: true
 
-            for (const module of configurationSearch.filteredModules) {
-                const category = filteredCategories.find((category) => category.name === module.category);
-                if (category) {
-                    category.modules.push(module);
-                } else {
-                    filteredCategories.push({
-                        name: module.category,
-                        modules: [module],
-                    });
+            Repeater {
+                model: {
+                    let filteredCategories = new Array();
+
+                    for (const module of configurationSearch.filteredModules) {
+                        const category = filteredCategories.find((category) => category.name === module.category);
+                        if (category) {
+                            category.modules.push(module);
+                        } else {
+                            filteredCategories.push({
+                                name: module.category,
+                                modules: [module],
+                            });
+                        }
+                    }
+                    return filteredCategories;
                 }
-            }
-            return filteredCategories;
-        }
 
-        ColumnLayout {
-            id: categoryDelegate
+                delegate: Kirigami.FormGroup {
+                    id: categoryDelegate
 
-            required property var modelData
+                    required property var modelData
 
-            spacing: 0
+                    title: categoryDelegate.modelData.name === "_main_category" ? root.title : categoryDelegate.modelData.name
 
-            FormCard.FormHeader {
-                title: categoryDelegate.modelData.name === "_main_category" ? root.title : modelData.name
-            }
+                    Repeater {
+                        model: categoryDelegate.modelData.modules
 
-            // settings categories
-            FormCard.FormCard {
-                id: settingsCard
+                        delegate: Kirigami.FormAction {
+                            id: moduleDelegate
 
-                autoSeparators: true
+                            required property ConfigurationModule modelData
 
-                Repeater {
-                    model: categoryDelegate.modelData.modules
-                    delegate: FormCard.AbstractFormDelegate {
-                        id: moduleDelegate
-
-                        required property ConfigurationModule modelData
-
-                        Keys.onUpPressed: nextItemInFocusChain(false)?.forceActiveFocus(Qt.BacktabFocusReason)
-                        Keys.onDownPressed: nextItemInFocusChain(true)?.forceActiveFocus(Qt.TabFocusReason)
-                        Keys.onReturnPressed: clicked()
-                        Keys.onEnterPressed: clicked()
-
-                        onClicked: root.openModule(moduleDelegate.modelData)
-
-                        contentItem: RowLayout {
-                            Kirigami.Icon {
-                                source: moduleDelegate.modelData.icon.name
-                                Layout.rightMargin: Kirigami.Units.largeSpacing
-                                implicitWidth: Kirigami.Units.iconSizes.medium
-                                implicitHeight: Kirigami.Units.iconSizes.medium
-                            }
-
-                            Controls.Label {
-                                Layout.fillWidth: true
+                            action: Kirigami.Action {
                                 text: moduleDelegate.modelData.text
-                                elide: Text.ElideRight
-                            }
-
-                            Kirigami.Icon {
-                                Layout.alignment: Qt.AlignRight
-                                source: "arrow-right"
-                                implicitWidth: Math.round(Kirigami.Units.iconSizes.small * 0.75)
-                                implicitHeight: Math.round(Kirigami.Units.iconSizes.small * 0.75)
+                                icon.name: moduleDelegate.modelData.icon.name
+                                onTriggered: root.openModule(moduleDelegate.modelData)
                             }
                         }
                     }
                 }
             }
-
         }
-    }
 
-    FormCard.FormCard {
-        Layout.topMargin: Kirigami.Units.gridUnit
-        visible: configurationSearch.noResults
-
-        FormCard.FormPlaceholderMessageDelegate {
+        Kirigami.PlaceholderMessage {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.margins: Kirigami.Units.gridUnit
+            visible: configurationSearch.noResults
             text: configurationSearch.indexing
                 ? I18n.i18nc("@info:placeholder", "Searching…")
                 : I18n.i18nc("@info:placeholder", "No matching settings")
         }
     }
 
+    // The static form action can trigger more than once in a row; avoid
+    // pushing the same page twice.
+    property Item _pendingPage: null
+
     function openModule(module: ConfigurationModule): void {
-        root.window.pageStack.layers.push(pageForModule(module));
+        const page = pageForModule(module);
+        if (!page || root._pendingPage === page) {
+            return;
+        }
+        root._pendingPage = page;
+        root.window.pageStack.layers.push(page);
+        Qt.callLater(() => {
+            if (root._pendingPage === page) {
+                root._pendingPage = null;
+            }
+        });
     }
 
     function pageForModule(module: ConfigurationModule, parent = root): var {

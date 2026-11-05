@@ -29,14 +29,13 @@
 
    Set \c window to the application's \c Kirigami.ApplicationWindow
    before calling \c open(). A module's \c page property is a function that
-   returns a \c Component. A \l {FormCardPage} is a convenient root for a
-   settings page:
+   returns a \c Component. A \l {Kirigami::ScrollablePage} hosting a
+   \l {Kirigami::Form} is a convenient root for a settings page:
 
    \qml
    import QtQuick
    import QtQuick.Controls as Controls
    import org.kde.kirigami as Kirigami
-   import org.kde.kirigamiaddons.formcard as FormCard
    import org.kde.kirigami.settings as Settings
 
    Kirigami.ApplicationWindow {
@@ -45,16 +44,18 @@
        Component {
            id: generalPage
 
-           FormCard.FormCardPage {
+           Kirigami.ScrollablePage {
                title: i18nc("@title", "General")
 
-               FormCard.FormHeader {
-                   title: i18nc("@title:group", "Appearance")
-               }
+               Kirigami.Form {
+                   Kirigami.FormGroup {
+                       title: i18nc("@title:group", "Appearance")
 
-               FormCard.FormCard {
-                   FormCard.FormSwitchDelegate {
-                       text: i18nc("@option:check", "Use dark colors")
+                       Kirigami.FormEntry {
+                           contentItem: Controls.CheckBox {
+                               text: i18nc("@option:check", "Use dark colors")
+                           }
+                       }
                    }
                }
            }
