@@ -9,11 +9,6 @@ ecm_add_qml_module(settingsprivateplugin
         org.kde.kirigami
 )
 
-target_sources(settingsprivateplugin PRIVATE
-    helper.cpp
-    helper.h
-)
-
 ecm_target_qml_sources(settingsprivateplugin SOURCES
     ConfigWindow.qml
     ConfigMobilePage.qml
