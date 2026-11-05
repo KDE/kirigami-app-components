@@ -13,9 +13,6 @@ ecm_add_qml_module(settingsplugin
 ecm_generate_qdoc(settingsplugin kirigamisettings.qdocconf)
 
 ecm_target_qml_sources(settingsplugin SOURCES
-    SettingAction.qml # deprecated
-    CategorizedSettings.qml # deprecated
-
     ConfigurationView.qml
     ConfigurationModule.qml
     SpellcheckingConfigurationModule.qml

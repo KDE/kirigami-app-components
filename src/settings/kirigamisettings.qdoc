@@ -120,9 +120,6 @@
    \c application property. Add either type to \c modules alongside your
    own \l ConfigurationModule objects.
 
-   \l CategorizedSettings and \l SettingAction are deprecated. Use
-   \l ConfigurationView and \l ConfigurationModule for new settings pages.
-
    \sa ConfigurationView
    \sa ConfigurationModule
    \sa SpellcheckingConfigurationModule
