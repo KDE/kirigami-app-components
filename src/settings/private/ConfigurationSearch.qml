@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2026 Carl Schwan <carl@carlschwan.eu>
+// SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 pragma ComponentBehavior: Bound

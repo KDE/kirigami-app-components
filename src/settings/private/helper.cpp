@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2024 Carl Schwan <carl@carlschwan.eu>
+// SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 #include "helper.h"
