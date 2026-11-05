@@ -134,6 +134,7 @@ Kirigami.ApplicationWindow {
                     model: configurationSearch.filteredModules
                     delegate: QQC2.ItemDelegate {
                         id: settingDelegate
+                        width: listview.width
 
                         required property int index
                         required property ConfigurationModule modelData
@@ -142,6 +143,7 @@ Kirigami.ApplicationWindow {
                         icon.name: modelData?.icon.name
                         icon.source: modelData?.icon.source
                         checked: root.currentModule === settingDelegate.modelData
+                        highlighted: checked
 
                         Keys.onUpPressed: listview.focusResult(index - 1)
                         Keys.onDownPressed: listview.focusResult(index + 1)

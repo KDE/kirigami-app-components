@@ -47,7 +47,7 @@ QtObject {
        Whether this module can appear in search results.
 
        Set this to false for pages that do not contain searchable settings.
-       Built-in FormCard About pages are excluded automatically.
+       Built-in About pages are excluded automatically.
        \default true
        \since 1.16.0
      */

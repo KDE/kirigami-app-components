@@ -4,9 +4,8 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.formcard as FormCard
-import org.kde.kirigamiaddons.formcard.templates as FormTemplates
 import org.kde.kirigami.settings
 import org.kde.kirigami.settings.private
 
@@ -127,8 +126,7 @@ QtObject {
     readonly property Component pageIndexComponent: Component {
         QtObject {
             required property Item page
-            readonly property list<Item> items: page instanceof FormCard.FormCardPage && !root.isAboutPage(page)
-                ? root.findSearchableItems(page.cards) : []
+            readonly property list<Item> items: !root.isAboutPage(page) ? root.findSearchableItems(page) : []
         }
     }
 
@@ -268,26 +266,16 @@ QtObject {
     }
 
     function isAboutPage(item: Item): bool {
-        return item instanceof FormCard.AboutPage || item instanceof FormCard.AboutKDEPage;
+        return item instanceof Kirigami.AboutPage;
     }
 
     function sameObjects(a: var, b: var): bool {
         return a.length === b.length && a.every((object, i) => object === b[i]);
     }
 
-    function findSearchableItems(cards: list<QtObject>): list<Item> {
+    function findSearchableItems(page: Item): list<Item> {
         const matches = [];
-        for (const card of cards) {
-            if (card instanceof FormTemplates.FormCard) {
-                for (const delegate of card.delegates) {
-                    if (delegate instanceof Item) {
-                        root.collectSearchableItems(delegate, matches);
-                    }
-                }
-            } else if (card instanceof FormTemplates.FormHeader || card instanceof FormCard.FormSectionText) {
-                matches.push(card);
-            }
-        }
+        root.collectSearchableItems(page, matches);
         return matches;
     }
 
@@ -296,15 +284,14 @@ QtObject {
             return;
         }
 
-        if (item instanceof FormCard.AbstractFormDelegate
-            || item instanceof FormCard.FormCheckDelegate
-            || item instanceof FormCard.FormRadioDelegate
-            || item instanceof FormCard.FormSwitchDelegate
-            || item instanceof FormTemplates.FormHeader
-            || item instanceof FormCard.FormSectionText) {
-            // Stop at delegates so editable values and control internals are not indexed.
+        if (item instanceof Kirigami.FormEntry) {
+            // Stop at entries so editable values and control internals are not indexed.
             matches.push(item);
             return;
+        }
+
+        if (item instanceof Kirigami.FormGroup) {
+            matches.push(item);
         }
 
         // Use children rather than visibleChildren: unopened pages are hidden.
@@ -314,15 +301,18 @@ QtObject {
     }
 
     function matchesItem(item: Item, pattern: string): bool {
-        if (item instanceof FormTemplates.FormHeader) {
-            return Helper.matches(pattern, item.title);
+        if (item instanceof Kirigami.FormGroup) {
+            return Helper.matches(pattern, item.title ?? "");
         }
-        // For editable fields, text is the value rather than the label.
-        const label = item.label !== undefined ? item.label : item.text;
-        return Helper.matches(pattern, label ?? "")
-            || Helper.matches(pattern, item.description ?? "")
-            || Helper.matches(pattern, item.explanation ?? "")
-            || (item instanceof FormCard.FormRadioSelectorDelegate
-                && item.actions.some(action => Helper.matches(pattern, action.text)));
+        // FormEntry: title and subtitle hold the label and the explanation.
+        if (Helper.matches(pattern, item.title ?? "") || Helper.matches(pattern, item.subtitle ?? "")) {
+            return true;
+        }
+        // Some labels live on the contentItem itself, such as a CheckBox text.
+        const content = item.contentItem ?? null;
+        if (content instanceof QQC2.AbstractButton) {
+            return Helper.matches(pattern, content.text ?? "");
+        }
+        return Helper.matches(pattern, item.action?.text ?? "");
     }
 }

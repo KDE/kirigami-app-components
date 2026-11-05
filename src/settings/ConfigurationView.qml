@@ -43,14 +43,14 @@ import org.kde.kirigami.settings.private as Private
                    moduleId: "about"
                    text: i18nc("@action:button", "About Tokodon")
                    icon.name: "help-about"
-                   page: () => Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage")
+                   page: () => Qt.createComponent("org.kde.kirigami", "AboutPage")
                    category: i18nc("@title:group", "About")
                },
                KirigamiSettings.ConfigurationModule {
                    moduleId: "aboutkde"
                    text: i18nc("@action:button", "About KDE")
                    icon.name: "kde"
-                   page: () => Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDE")
+                   page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "AboutKDEPage")
                    category: i18nc("@title:group", "About")
                }
            ]
