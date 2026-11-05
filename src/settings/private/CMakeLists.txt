@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2023 Carl Schwan <carl@carlschwan.eu>
+# SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
 # SPDX-License-Identifier: BSD-2-Clause
 
 ecm_add_qml_module(settingsprivateplugin
