@@ -7,10 +7,8 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigamiaddons.private
 import org.kde.kirigami as Kirigami
-import org.kde.kirigami.delegates as KirigamiDelegates
 import org.kde.sonnet as Sonnet
 import org.kde.kirigamiaddons.formcard as FormCard
-import org.kde.kirigamiaddons.delegates as Delegates
 
 FormCard.FormCardPage {
     id: root
@@ -118,7 +116,7 @@ FormCard.FormCardPage {
                     ListView {
                         clip: true
                         model: root.settings.dictionaryModel
-                        delegate: KirigamiDelegates.CheckSubtitleDelegate {
+                        delegate: Kirigami.CheckSubtitleDelegate {
                             width: ListView.view.width
 
                             text: model.display
@@ -164,7 +162,7 @@ FormCard.FormCardPage {
                         bottomMargin: Math.round(Kirigami.Units.smallSpacing / 2)
 
                         model: root.settings.currentIgnoreList
-                        delegate: Delegates.RoundedItemDelegate {
+                        delegate: QQC2.ItemDelegate {
                             id: wordDelegate
 
                             required property string modelData
@@ -174,8 +172,9 @@ FormCard.FormCardPage {
                             contentItem: RowLayout {
                                 spacing: Kirigami.Units.smallSpacing
 
-                                Delegates.DefaultContentItem {
-                                    itemDelegate: wordDelegate
+                                QQC2.Label {
+                                    text: wordDelegate.text
+                                    elide: Text.ElideRight
                                     Layout.fillWidth: true
                                 }
 

@@ -10,11 +10,10 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigamiaddons.private
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.delegates as Delegates
 
 /*!
    \qmltype CategorizedSettings
-   \inqmlmodule org.kde.kirigamiaddons.settings
+   \inqmlmodule org.kde.kirigami.settings
    \brief A container for setting actions showing them in a list view and displaying
    the actual page next to it.
 
@@ -146,7 +145,7 @@ Kirigami.PageRow {
                 }
                 return filteredActions;
             }
-            delegate: Delegates.RoundedItemDelegate {
+            delegate: QQC2.ItemDelegate {
                 id: settingDelegate
 
                 required property int index

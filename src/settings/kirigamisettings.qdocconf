@@ -1,6 +1,6 @@
 include($KDE_DOCS/global/qt-module-defaults.qdocconf)
 
-project = KirigamiAddonsSettings
+project = KirigamiSettings
 description = Pages and navigation for application settings.
 
 documentationinheaders = true
@@ -11,23 +11,23 @@ imagedirs  += ../../docs/pics
 
 outputformats = HTML
 
-navigation.landingpage = "Kirigami Addons"
+navigation.landingpage = "Kirigami"
 
 depends += kde kirigami kirigamiaddonsactions qtcore qtquick qtquickcontrols qtgui kirigamiaddonscomponents kirigamiaddonsformcard
 
-qhp.projects = KirigamiAddonsSettings
+qhp.projects = KirigamiSettings
 
-qhp.KirigamiAddonsSettings.file          = kirigamiaddonssettings.qhp
-qhp.KirigamiAddonsSettings.namespace     = org.kde.kirigamiaddonssettings.$QT_VERSION_TAG
-qhp.KirigamiAddonsSettings.virtualFolder = kirigamiaddonssettings
-qhp.KirigamiAddonsSettings.indexTitle    = Kirigami Addons Settings
-qhp.KirigamiAddonsSettings.indexRoot     =
+qhp.KirigamiSettings.file          = kirigamisettings.qhp
+qhp.KirigamiSettings.namespace     = org.kde.kirigami.settings.$QT_VERSION_TAG
+qhp.KirigamiSettings.virtualFolder = kirigamisettings
+qhp.KirigamiSettings.indexTitle    = Kirigami Settings
+qhp.KirigamiSettings.indexRoot     =
 
-qhp.KirigamiAddonsSettings.subprojects = settings
+qhp.KirigamiSettings.subprojects = settings
 
-qhp.KirigamiAddonsSettings.subprojects.settings.title = Kirigami Addons Settings QML Types
-qhp.KirigamiAddonsSettings.subprojects.settings.indexTitle = Kirigami Addons Settings QML Types
-qhp.KirigamiAddonsSettings.subprojects.settings.selectors = qmlmodule:org.kde.kirigamiaddons.settings
-qhp.KirigamiAddonsSettings.subprojects.settings.sortPages = true
+qhp.KirigamiSettings.subprojects.settings.title = Kirigami Settings QML Types
+qhp.KirigamiSettings.subprojects.settings.indexTitle = Kirigami Settings QML Types
+qhp.KirigamiSettings.subprojects.settings.selectors = qmlmodule:org.kde.kirigami.settings
+qhp.KirigamiSettings.subprojects.settings.sortPages = true
 
-tagfile = kirigamiaddonssettings.tags
+tagfile = kirigamisettings.tags

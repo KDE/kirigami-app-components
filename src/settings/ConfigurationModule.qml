@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 import QtQml
-import org.kde.kirigamiaddons.settings.private as Private
+import org.kde.kirigami.settings.private as Private
 
 /*!
    \qmltype ConfigurationModule
-   \inqmlmodule org.kde.kirigamiaddons.settings
+   \inqmlmodule org.kde.kirigami.settings
    \brief This object holds the information of configuration module.
    \since 1.3.0
  */
