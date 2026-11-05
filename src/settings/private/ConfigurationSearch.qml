@@ -8,7 +8,6 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.settings
-import org.kde.kirigami.settings.private
 
 QtObject {
     id: root
@@ -96,13 +95,13 @@ QtObject {
                 return false;
             }
             if (pattern.length === 0
-                || module.keywords.some(keyword => Helper.matches(pattern, keyword))) {
+                || module.keywords.some(keyword => root.matches(pattern, keyword))) {
                 return true;
             }
             const page = root.indexedPages[module.moduleId];
             const index = root.pageIndexes[module.moduleId];
             return module.searchable && page && !root.isAboutPage(page)
-                && (Helper.matches(pattern, module.text) || index?.items.some(item => root.matchesItem(item, pattern)));
+                && (root.matches(pattern, module.text) || index?.items.some(item => root.matchesItem(item, pattern)));
         });
     }
 
@@ -270,6 +269,10 @@ QtObject {
         return item instanceof Kirigami.AboutPage;
     }
 
+    function matches(pattern: string, text: string): bool {
+        return (text ?? "").toLowerCase().includes(pattern.toLowerCase());
+    }
+
     function sameObjects(a: var, b: var): bool {
         return a.length === b.length && a.every((object, i) => object === b[i]);
     }
@@ -303,17 +306,17 @@ QtObject {
 
     function matchesItem(item: Item, pattern: string): bool {
         if (item instanceof Kirigami.FormGroup) {
-            return Helper.matches(pattern, item.title ?? "");
+            return root.matches(pattern, item.title ?? "");
         }
         // FormEntry: title and subtitle hold the label and the explanation.
-        if (Helper.matches(pattern, item.title ?? "") || Helper.matches(pattern, item.subtitle ?? "")) {
+        if (root.matches(pattern, item.title ?? "") || root.matches(pattern, item.subtitle ?? "")) {
             return true;
         }
         // Some labels live on the contentItem itself, such as a CheckBox text.
         const content = item.contentItem ?? null;
         if (content instanceof QQC2.AbstractButton) {
-            return Helper.matches(pattern, content.text ?? "");
+            return root.matches(pattern, content.text ?? "");
         }
-        return Helper.matches(pattern, item.action?.text ?? "");
+        return root.matches(pattern, item.action?.text ?? "");
     }
 }

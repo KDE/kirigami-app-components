@@ -4,7 +4,6 @@
 
 import QtQuick
 import org.kde.kirigamiaddons.private
-import org.kde.kirigami.settings.private as Private
 
 /*!
    \qmltype SpellcheckingConfigurationModule
@@ -17,5 +16,5 @@ ConfigurationModule {
     text: I18n.i18nc("@action:button", "Spell Checking")
     icon.name: "tools-check-spelling"
     page: () => Qt.createComponent("org.kde.kirigami.settings.private", "SonnetConfigPage")
-    visible: Qt.platform.os !== "android" && (Private.Helper.styleName === 'org.kde.desktop' || Private.Helper.styleName === 'breeze')
+    visible: Qt.platform.os !== "android"
 }
