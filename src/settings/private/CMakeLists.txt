@@ -17,7 +17,6 @@ target_sources(settingsprivateplugin PRIVATE
 ecm_target_qml_sources(settingsprivateplugin SOURCES
     ConfigWindow.qml
     ConfigMobilePage.qml
-    ActionIconGroup.qml
     ConfigurationSearch.qml
 )
 

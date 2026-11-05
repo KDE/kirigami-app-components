@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 import QtQml
-import org.kde.kirigami.settings.private as Private
+import org.kde.kirigami as Kirigami
 
 /*!
    \qmltype ConfigurationModule
@@ -31,7 +31,7 @@ QtObject {
     /*!
        This property holds the icon of the module.
      */
-    readonly property Private.ActionIconGroup icon: Private.ActionIconGroup {}
+    readonly property Kirigami.IconPropertiesGroup icon: Kirigami.IconPropertiesGroup {}
 
     /*!
        This property holds a function that returns a Component.
