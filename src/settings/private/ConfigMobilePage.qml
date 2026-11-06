@@ -174,6 +174,6 @@ Kirigami.ScrollablePage {
     }
 
     function getModuleByName(moduleId: string): ConfigurationModule {
-        return modules.find(module => module.moduleId == moduleId) ?? null;
+        return modules.find(module => module.moduleId === moduleId) ?? null;
     }
 }
