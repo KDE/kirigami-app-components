@@ -5,7 +5,6 @@
 import QtQuick
 import org.kde.kirigamiaddons.private
 import org.kde.kirigami as Kirigami
-import org.kde.kirigami.settings.private as Private
 import org.kde.kirigamiaddons.actions as KirigamiActions
 
 /*!

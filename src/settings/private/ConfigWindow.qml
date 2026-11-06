@@ -119,16 +119,11 @@ Kirigami.ApplicationWindow {
                     currentIndex: configurationSearch.filteredModules.indexOf(root.currentModule)
 
                     onWidthChanged: if (!initDone) {
-                        let module = getModuleByName(defaultModule);
-                        if (module) {
-                            root.pageStack.push(pageForModule(module));
+                        const module = getModuleByName(defaultModule) ?? modules[0] ?? null;
+                        const page = module ? pageForModule(module) : null;
+                        if (page) {
+                            root.pageStack.push(page);
                             root.currentModule = module;
-                        } else {
-                            root.pageStack.push(pageForModule(modules[0]));
-                            root.currentModule = modules[0];
-                            if (root.pageStack.currentItem.title.length === 0) {
-                                root.pageStack.currentItem.title = modules[0].text;
-                            }
                         }
                         initDone = true;
                     }
@@ -173,11 +168,12 @@ Kirigami.ApplicationWindow {
             return;
         }
         const page = pageForModule(module);
-
-        while (root.pageStack.length > 1) {
-            root.pageStack.pop(null);
+        if (!page) {
+            return;
         }
-        root.pageStack.replace(page);
+
+        root.pageStack.clear();
+        root.pageStack.push(page);
 
         root.currentModule = module;
         if (root.pageStack.currentItem.title.length === 0) {
@@ -213,6 +209,6 @@ Kirigami.ApplicationWindow {
     }
 
     function getModuleByName(moduleId: string): ConfigurationModule {
-        return modules.find(module => module.moduleId == moduleId) ?? null;
+        return modules.find(module => module.moduleId === moduleId) ?? null;
     }
 }

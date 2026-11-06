@@ -6,7 +6,6 @@ import QtQuick
 import QtQml
 import org.kde.kirigamiaddons.private
 import org.kde.kirigami as Kirigami
-import org.kde.kirigami.settings.private as Private
 
 /*!
    \qmltype ConfigurationView
