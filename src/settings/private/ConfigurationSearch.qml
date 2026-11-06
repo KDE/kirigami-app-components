@@ -52,14 +52,15 @@ QtObject {
             return false;
         }
 
-        const pattern = root.searchText.trim();
-        if (pattern.length === 0) {
+        const query = root.searchText.trim().toLowerCase();
+        if (query.length === 0) {
             return true;
         }
-        if (module.searchable && root.matches(pattern, module.text)) {
-            return true;
-        }
-        return module.keywords.some(keyword => root.matches(pattern, keyword));
+
+        const terms = query.split(/\s+/);
+        const text = module.searchable ? (module.text ?? "").toLowerCase() : "";
+        const keywords = (module.keywords ?? []).map(keyword => (keyword ?? "").toLowerCase());
+        return terms.every(term => text.includes(term) || keywords.some(keyword => keyword.includes(term)));
     }
 
     function acceptFirstResult(): void {
@@ -69,10 +70,6 @@ QtObject {
         if (firstModule) {
             root.resultAccepted(firstModule);
         }
-    }
-
-    function matches(pattern: string, text: string): bool {
-        return (text ?? "").toLowerCase().includes(pattern.toLowerCase());
     }
 
     function sameObjects(a: var, b: var): bool {
