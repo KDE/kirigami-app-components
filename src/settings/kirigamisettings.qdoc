@@ -94,6 +94,11 @@
    Set \c category to a translated heading to group modules on mobile;
    modules with the default category appear in the main Settings group.
 
+   The search field filters modules by their \c text and \c keywords.
+   Set \c searchable to \c false for modules that should not be matched by
+   their text, such as About pages; their \c keywords are still searched.
+   Search does not open or index module pages.
+
    The view creates each page on its first visit and caches it for later
    visits. Use \c initialProperties to pass values needed at creation time.
    For example, if the page component declares a \c {required property string

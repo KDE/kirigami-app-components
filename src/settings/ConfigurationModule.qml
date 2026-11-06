@@ -45,17 +45,21 @@ QtObject {
     property bool visible: true
 
     /*!
-       Whether this module can appear in search results.
+       Whether this module's text can be matched by the settings search.
 
-       Set this to false for pages that do not contain searchable settings.
-       Built-in About pages are excluded automatically.
+       Set this to false for pages that do not contain searchable settings,
+       such as About pages. A module with \c searchable set to false can still
+       be found through its \c keywords.
        \default true
        \since 1.16.0
      */
     property bool searchable: true
 
     /*!
-       Additional search terms for this module, also used when searchable is false.
+       Additional search terms for this module.
+
+       Keywords are matched in addition to the module text, and are also used
+       when \c searchable is false.
 
        \qml
        keywords: [
