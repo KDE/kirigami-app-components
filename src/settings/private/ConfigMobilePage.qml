@@ -26,9 +26,6 @@ Kirigami.ScrollablePage {
     ConfigurationSearch {
         id: configurationSearch
         modules: root.modules
-        pageCache: root.pageCache
-        pageParent: root
-        currentPage: root.window.pageStack.layers.currentItem === root ? null : root.window.pageStack.layers.currentItem
         filterText: searchField.text
         onResultAccepted: module => root.openModule(module)
     }
@@ -124,9 +121,7 @@ Kirigami.ScrollablePage {
             Layout.alignment: Qt.AlignHCenter
             Layout.margins: Kirigami.Units.gridUnit
             visible: configurationSearch.noResults
-            text: configurationSearch.indexing
-                ? I18n.i18nc("@info:placeholder", "Searching…")
-                : I18n.i18nc("@info:placeholder", "No matching settings")
+            text: I18n.i18nc("@info:placeholder", "No matching settings")
         }
     }
 

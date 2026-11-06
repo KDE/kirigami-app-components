@@ -45,6 +45,7 @@ import org.kde.kirigami as Kirigami
                    icon.name: "help-about"
                    page: () => Qt.createComponent("org.kde.kirigami", "AboutPage")
                    category: i18nc("@title:group", "About")
+                   searchable: false
                },
                KirigamiSettings.ConfigurationModule {
                    moduleId: "aboutkde"
@@ -52,6 +53,7 @@ import org.kde.kirigami as Kirigami
                    icon.name: "kde"
                    page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "AboutKDEPage")
                    category: i18nc("@title:group", "About")
+                   searchable: false
                }
            ]
        }

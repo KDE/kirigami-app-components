@@ -26,9 +26,6 @@ Kirigami.ApplicationWindow {
     ConfigurationSearch {
         id: configurationSearch
         modules: root.modules
-        pageCache: root.pageCache
-        pageParent: root.contentItem
-        currentPage: root.pageStack.currentItem
         filterText: searchField.text
         onResultAccepted: module => {
             const hadFocus = searchField.activeFocus;
@@ -154,9 +151,7 @@ Kirigami.ApplicationWindow {
                         anchors.centerIn: parent
                         width: parent.width - Kirigami.Units.gridUnit * 2
                         visible: configurationSearch.noResults
-                        text: configurationSearch.indexing
-                            ? I18n.i18nc("@info:placeholder", "Searching…")
-                            : I18n.i18nc("@info:placeholder", "No matching settings")
+                        text: I18n.i18nc("@info:placeholder", "No matching settings")
                     }
                 }
             }
