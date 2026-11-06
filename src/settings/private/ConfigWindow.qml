@@ -79,7 +79,7 @@ Kirigami.ApplicationWindow {
         contentItem: ColumnLayout {
             spacing: 0
 
-            QQC2.ToolBar {
+            Kirigami.AbstractApplicationHeader {
                 Layout.fillWidth: true
                 Layout.preferredHeight: pageStack.globalToolBar.preferredHeight
 

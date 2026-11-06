@@ -77,6 +77,8 @@ Kirigami.ScrollablePage {
                 }
             }
 
+            Kirigami.FormSeparator {}
+
             Kirigami.FormEntry {
                 title: I18n.i18nc("@label:listbox", "Selected default language:")
 
@@ -114,6 +116,8 @@ Kirigami.ScrollablePage {
                 subtitle: I18n.i18n("%1 will provide spell checking and suggestions for the languages listed here when autodetection is enabled.", Qt.application.displayName)
             }
 
+            Kirigami.FormSeparator {}
+
             Kirigami.FormAction {
                 action: Kirigami.Action {
                     text: I18n.i18nc("@action:button", "Open Personal Dictionary")
@@ -137,6 +141,7 @@ Kirigami.ScrollablePage {
                 clip: true
                 model: root.settings.dictionaryModel
                 delegate: Kirigami.CheckSubtitleDelegate {
+                    required property var model
                     width: ListView.view.width
 
                     text: model.display
@@ -185,6 +190,7 @@ Kirigami.ScrollablePage {
                 model: root.settings.currentIgnoreList
                 delegate: QQC2.ItemDelegate {
                     id: wordDelegate
+                    width: ListView.view.width
 
                     required property string modelData
 
