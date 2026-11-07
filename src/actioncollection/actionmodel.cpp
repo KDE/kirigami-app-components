@@ -6,6 +6,7 @@
 #include "actionmodel_p.h"
 #include "qmlactioncollection_p.h"
 
+#include <KLocalizedString>
 #include <QKeySequence>
 #include <QPersistentModelIndex>
 #include <QQmlContext>
@@ -249,7 +250,7 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
     action = collection->activeActions().at(actualRow);
     switch (role) {
     case Qt::DisplayRole:
-        return action->text();
+        return KLocalizedString::removeAcceleratorMarker(action->text());
     case ActionDescriptionRole:
         return QVariant::fromValue(action);
     case ActionInstancesRole:
