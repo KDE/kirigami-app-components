@@ -16,6 +16,14 @@ import org.kde.ki18n
 Kirigami.SearchDialog {
     id: root
 
+    /*!
+     * \qmlproperty Window ActionsExplorer::actionWindow
+     * The window whose action instances are shown and invoked.
+     * Defaults to the parent item's window. Set this when the explorer is
+     * hosted in a separate window from its actions.
+     */
+    property alias actionWindow: actionModel.window
+
     KI18nContext {
         id: _tr
         translationDomain: "kirigami-actioncollection"
@@ -25,6 +33,7 @@ Kirigami.SearchDialog {
         sourceModel: AC.ActionModel {
             id: actionModel
             shownActions: AC.ActionModel.ActiveActions
+            window: root.parent.Window.window
         }
 
         filterRowCallback: function (source_row, source_parent) {
@@ -106,10 +115,13 @@ Kirigami.SearchDialog {
         }
 
         onClicked: {
-            actionInstances[0].trigger()
-            root.close()
+            const action = actionInstances.find(action => action.visible && action.enabled);
+            root.close();
+            action?.trigger();
         }
     }
+
+    onAccepted: (currentItem as QQC.ItemDelegate)?.clicked()
 
     emptyText: _tr.i18nc("@info:placeholder", "No results found")
 }

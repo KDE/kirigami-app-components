@@ -34,6 +34,7 @@ endmacro()
 
 kirigami_add_tests(
     tst_actioncollection.qml
+    tst_actionsexplorer.qml
 )
 
 set_tests_properties(

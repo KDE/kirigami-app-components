@@ -9,8 +9,10 @@
 #include <KLocalizedString>
 #include <QKeySequence>
 #include <QPersistentModelIndex>
+#include <QPointer>
 #include <QQmlContext>
 #include <QQmlProperty>
+#include <QQuickItem>
 #include <QtQml/qqmlinfo.h>
 
 using namespace KirigamiActions;
@@ -25,6 +27,7 @@ public:
 
     ActionModel *q;
     QString m_collectionName;
+    QPointer<QQuickWindow> m_window;
     QHash<ActionData *, QKeySequence> m_pendingShortcuts;
     QHash<ActionData *, QKeySequence> m_pendingAlternateShortcuts;
     ActionModel::ShownActions m_shownActions = ActionModel::AllActions;
@@ -151,6 +154,32 @@ void ActionModel::setShownActions(ShownActions shown)
     Q_EMIT shownActionsChanged(shown);
 }
 
+QQuickWindow *ActionModel::window() const
+{
+    return d->m_window;
+}
+
+void ActionModel::setWindow(QQuickWindow *window)
+{
+    if (d->m_window == window) {
+        return;
+    }
+    if (d->m_window) {
+        disconnect(d->m_window, nullptr, this, nullptr);
+    }
+    beginResetModel();
+    d->m_window = window;
+    if (window) {
+        connect(window, &QObject::destroyed, this, [this] {
+            beginResetModel();
+            endResetModel();
+            Q_EMIT windowChanged();
+        });
+    }
+    endResetModel();
+    Q_EMIT windowChanged();
+}
+
 void ActionModel::save()
 {
     for (auto it = d->m_pendingShortcuts.constBegin(); it != d->m_pendingShortcuts.constEnd(); ++it) {
@@ -253,8 +282,23 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
         return KLocalizedString::removeAcceleratorMarker(action->text());
     case ActionDescriptionRole:
         return QVariant::fromValue(action);
-    case ActionInstancesRole:
-        return QVariant::fromValue(action->kirigamiActions());
+    case ActionInstancesRole: {
+        auto instances = action->kirigamiActions();
+        if (d->m_window) {
+            instances.removeIf([this](QObject *instance) {
+                for (QObject *parent = instance; parent; parent = parent->parent()) {
+                    if (const auto *item = qobject_cast<QQuickItem *>(parent)) {
+                        return item->window() != d->m_window;
+                    }
+                    if (const auto *window = qobject_cast<QQuickWindow *>(parent)) {
+                        return window != d->m_window;
+                    }
+                }
+                return true;
+            });
+        }
+        return QVariant::fromValue(instances);
+    }
     case ActionCollectionRole:
         return collection->text();
     case ShortcutRole:

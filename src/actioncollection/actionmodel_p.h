@@ -5,6 +5,7 @@
 #define ACTIONMODEL_H
 
 #include <QAbstractListModel>
+#include <QQuickWindow>
 #include <qqmlregistration.h>
 
 #include "actiondata_p.h"
@@ -21,6 +22,13 @@ class ActionModel : public QAbstractListModel
     // TODO: this should be able to have multiple collections? or just a KConcatenateProxyModel?
     Q_PROPERTY(QString collectionName READ collectionName WRITE setCollectionName NOTIFY collectionNameChanged FINAL)
     Q_PROPERTY(ShownActions shownActions READ shownActions WRITE setShownActions NOTIFY shownActionsChanged FINAL)
+    /*!
+     * \qmlproperty Window ActionModel::window
+     *
+     * Limits each action's instances to this window. A null window includes
+     * instances from all windows. Action definitions and shortcuts remain shared.
+     */
+    Q_PROPERTY(QQuickWindow *window READ window WRITE setWindow NOTIFY windowChanged FINAL)
 
 public:
     enum ShownActions {
@@ -47,6 +55,9 @@ public:
     ShownActions shownActions() const;
     void setShownActions(ShownActions shown);
 
+    QQuickWindow *window() const;
+    void setWindow(QQuickWindow *window);
+
     Q_INVOKABLE void save();
     Q_INVOKABLE void reset(const QModelIndex &index);
     Q_INVOKABLE void resetAll();
@@ -60,6 +71,7 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 Q_SIGNALS:
+    void windowChanged();
     void collectionNameChanged(const QString &name);
     void shownActionsChanged(KirigamiActions::ActionModel::ShownActions shown);
 
