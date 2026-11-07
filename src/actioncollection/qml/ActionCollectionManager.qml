@@ -90,7 +90,7 @@ Item {
             onTriggered: {
                 // TODO: port to new forms
                 if (openDialogWindow) {
-                    root.pageRow.closeDialog();
+                    openDialogWindow.Kirigami.PageStack.closeDialog();
                     return;
                 }
                 openDialogWindow = root.pageRow.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"), {
@@ -100,9 +100,6 @@ Item {
                     height: Kirigami.Units.gridUnit * 30,
                     title: _tr.i18nc("@title:window", "About %1", CoreAddons.AboutData.displayName),
                 });
-                openDialogWindow.Keys.escapePressed.connect(function() {
-                    openDialogWindow.closeDialog();
-                });
             }
         }
         AC.StandardActionData {
@@ -110,18 +107,15 @@ Item {
             property QT.Page openDialogWindow
             onTriggered: {
                 if (openDialogWindow) {
-                    pageStack.closeDialog();
+                    openDialogWindow.Kirigami.PageStack.closeDialog();
                     return;
                 }
-                openDialogWindow = pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"), {
+                openDialogWindow = root.pageRow.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutKDEPage"), {
                     width: root.width
                 }, {
                     width: Kirigami.Units.gridUnit * 30,
                     height: Kirigami.Units.gridUnit * 30,
                     title: _tr.i18nc("@title:window", "About KDE"),
-                });
-                openDialogWindow.Keys.escapePressed.connect(function() {
-                    openDialogWindow.closeDialog();
                 });
             }
         }
