@@ -67,6 +67,9 @@ TestCase {
 
     function initTestCase() {
         mainWindow.show();
+        mainWindow.requestActivate();
+        tryCompare(mainWindow, "active", true);
+        waitForRendering(mainWindow.contentItem);
     }
 
     function cleanupTestCase() {
