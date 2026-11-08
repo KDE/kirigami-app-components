@@ -37,7 +37,7 @@ option(BUILD_EXAMPLES "Build example applications" OFF)
 
 set(REQUIRED_QT_VERSION 6.8.0)
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Widgets QuickControls2)
-find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS Config GuiAddons KirigamiPlatform I18n)
+find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS Config GuiAddons KirigamiPlatform ItemModels I18n)
 
 if (BUILD_TESTING)
     find_package(Qt6QuickTest ${REQUIRED_QT_VERSION} CONFIG QUIET)
@@ -51,6 +51,7 @@ ecm_setup_version(PROJECT
 )
 
 ecm_find_qmlmodule(org.kde.ki18n REQUIRED)
+ecm_find_qmlmodule(org.kde.kitemmodels REQUIRED)
 
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
