@@ -119,6 +119,9 @@ Kirigami.SearchDialog {
             root.close();
             action?.trigger();
         }
+
+        Keys.onReturnPressed: commandDelegate.clicked()
+        Keys.onEnterPressed: commandDelegate.clicked()
     }
 
     onAccepted: (currentItem as QQC.ItemDelegate)?.clicked()
