@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-01 00:44+0000\n"
+"POT-Creation-Date: 2026-11-09 15:16+0000\n"
 "PO-Revision-Date: 2026-06-06 15:07+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -112,13 +112,13 @@ msgctxt "@title:window"
 msgid "About %1"
 msgstr "%1 정보"
 
-#: actioncollection/qml/ActionCollectionManager.qml:121
+#: actioncollection/qml/ActionCollectionManager.qml:118
 #, kde-format
 msgctxt "@title:window"
 msgid "About KDE"
 msgstr "KDE 정보"
 
-#: actioncollection/qml/ActionsExplorer.qml:114
+#: actioncollection/qml/ActionsExplorer.qml:126
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No results found"
