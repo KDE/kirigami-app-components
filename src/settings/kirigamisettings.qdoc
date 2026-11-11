@@ -120,11 +120,9 @@
    \section1 Ready-made modules
 
    \l SpellcheckingConfigurationModule supplies a spellchecking settings
-   page when the desktop style supports it. \l ShortcutsConfigurationModule
-   supplies a keyboard shortcut editor on desktop and requires an
-   \l {AbstractKirigamiApplication} from the Actions module through its
-   \c application property. Add either type to \c modules alongside your
-   own \l ConfigurationModule objects.
+   page where the platform supports it. \l ShortcutsConfigurationModule
+   supplies a keyboard shortcut editor on desktop. Add either type to
+   \c modules alongside your own \l ConfigurationModule objects.
 
    \sa ConfigurationView
    \sa ConfigurationModule

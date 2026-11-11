@@ -25,6 +25,11 @@ Kirigami.ApplicationWindow {
     property var pageCache: Object.create(null)
     property ConfigurationModule currentModule: null
 
+    KI18nContext {
+        id: _tr
+        translationDomain: "kirigami-app-components"
+    }
+
     ConfigurationSearch {
         id: configurationSearch
         modules: root.modules
@@ -153,7 +158,7 @@ Kirigami.ApplicationWindow {
                         anchors.centerIn: parent
                         width: parent.width - Kirigami.Units.gridUnit * 2
                         visible: configurationSearch.noResults
-                        text: I18n.i18nc("@info:placeholder", "No matching settings")
+                        text: _tr.i18nc("@info:placeholder", "No matching settings")
                     }
                 }
             }

@@ -81,7 +81,7 @@ QtObject {
 
        \default "Settings"
      */
-    property string title: KI18n.i18nc("@title:window", "Settings")
+    property string title: KI18n.i18ndc("kirigami-app-components", "@title:window", "Settings")
 
     /*!
        \brief This property holds the list of pages for the settings.

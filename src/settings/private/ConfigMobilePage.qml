@@ -23,6 +23,11 @@ Kirigami.ScrollablePage {
     // Do not use Map, it crashes very frequently
     property var pageCache: Object.create(null)
 
+    KI18nContext {
+        id: _tr
+        translationDomain: "kirigami-app-components"
+    }
+
     ConfigurationSearch {
         id: configurationSearch
         modules: root.modules
@@ -119,7 +124,7 @@ Kirigami.ScrollablePage {
             Layout.alignment: Qt.AlignHCenter
             Layout.margins: Kirigami.Units.gridUnit
             visible: configurationSearch.noResults
-            text: I18n.i18nc("@info:placeholder", "No matching settings")
+            text: _tr.i18nc("@info:placeholder", "No matching settings")
         }
     }
 

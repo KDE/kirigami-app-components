@@ -20,6 +20,11 @@ Kirigami.ScrollablePage {
 
     readonly property Kirigami.PageRow pageStack: QQC2.ApplicationWindow.window.pageStack
 
+    KI18nContext {
+        id: _tr
+        translationDomain: "kirigami-app-components"
+    }
+
     function add(word: string): void {
         const dictionary = root.settings.currentIgnoreList;
         dictionary.push(word);
@@ -34,7 +39,7 @@ Kirigami.ScrollablePage {
         Kirigami.FormGroup {
             Kirigami.FormEntry {
                 contentItem: QQC2.CheckBox {
-                    text: I18n.i18nc("@label:checkbox", "Enable automatic spell checking")
+                    text: _tr.i18nc("@label:checkbox", "Enable automatic spell checking")
                     checked: root.settings.checkerEnabledByDefault
                     onToggled: {
                         root.settings.checkerEnabledByDefault = checked;
@@ -45,7 +50,7 @@ Kirigami.ScrollablePage {
 
             Kirigami.FormEntry {
                 contentItem: QQC2.CheckBox {
-                    text: I18n.i18nc("@label:checkbox", "Ignore uppercase words")
+                    text: _tr.i18nc("@label:checkbox", "Ignore uppercase words")
                     checked: root.settings.skipUppercase
                     onToggled: {
                         root.settings.skipUppercase = checked;
@@ -56,7 +61,7 @@ Kirigami.ScrollablePage {
 
             Kirigami.FormEntry {
                 contentItem: QQC2.CheckBox {
-                    text: I18n.i18nc("@label:checkbox", "Ignore hyphenated words")
+                    text: _tr.i18nc("@label:checkbox", "Ignore hyphenated words")
                     checked: root.settings.skipRunTogether
                     onToggled: {
                         root.settings.skipRunTogether = checked;
@@ -68,7 +73,7 @@ Kirigami.ScrollablePage {
             Kirigami.FormEntry {
                 contentItem: QQC2.CheckBox {
                     id: autodetectLanguageCheckbox
-                    text: I18n.i18nc("@label:checkbox", "Detect language automatically")
+                    text: _tr.i18nc("@label:checkbox", "Detect language automatically")
                     checked: root.settings.autodetectLanguage
                     onToggled: {
                         root.settings.autodetectLanguage = checked;
@@ -80,14 +85,14 @@ Kirigami.ScrollablePage {
             Kirigami.FormSeparator {}
 
             Kirigami.FormEntry {
-                title: I18n.i18nc("@label:listbox", "Selected default language:")
+                title: _tr.i18nc("@label:listbox", "Selected default language:")
 
                 contentItem: QQC2.ComboBox {
                     id: languageComboBox
 
                     property bool isEmpty: false
 
-                    model: languageComboBox.isEmpty ? [{"display": I18n.i18nc("No selected language", "None")}] : root.settings.dictionaryModel
+                    model: languageComboBox.isEmpty ? [{"display": _tr.i18nc("No selected language", "None")}] : root.settings.dictionaryModel
                     textRole: "display"
                     valueRole: "languageCode"
 
@@ -107,20 +112,20 @@ Kirigami.ScrollablePage {
 
             Kirigami.FormAction {
                 action: Kirigami.Action {
-                    text: I18n.i18nc("@label:listbox", "Additional Spell Checking Languages")
+                    text: _tr.i18nc("@label:listbox", "Additional Spell Checking Languages")
                     onTriggered: root.pageStack.pushDialogLayer(spellCheckingLanguageList, {}, {
                         width: root.pageStack.width - Kirigami.Units.gridUnit * 5,
                         height: root.pageStack.height - Kirigami.Units.gridUnit * 5,
                     })
                 }
-                subtitle: I18n.i18n("%1 will provide spell checking and suggestions for the languages listed here when autodetection is enabled.", Qt.application.displayName)
+                subtitle: _tr.i18n("%1 will provide spell checking and suggestions for the languages listed here when autodetection is enabled.", Qt.application.displayName)
             }
 
             Kirigami.FormSeparator {}
 
             Kirigami.FormAction {
                 action: Kirigami.Action {
-                    text: I18n.i18nc("@action:button", "Open Personal Dictionary")
+                    text: _tr.i18nc("@action:button", "Open Personal Dictionary")
                     onTriggered: root.pageStack.pushDialogLayer(dictionaryPage, {}, {
                         width: root.pageStack.width - Kirigami.Units.gridUnit * 5,
                         height: root.pageStack.height - Kirigami.Units.gridUnit * 5,
@@ -135,7 +140,7 @@ Kirigami.ScrollablePage {
 
         Kirigami.ScrollablePage {
             id: scroll
-            title: I18n.i18nc("@title:window", "Spell checking languages")
+            title: _tr.i18nc("@title:window", "Spell checking languages")
             enabled: autodetectLanguageCheckbox.checked
             ListView {
                 clip: true
@@ -148,7 +153,7 @@ Kirigami.ScrollablePage {
                     action: Kirigami.Action {
                         onTriggered: model.checked = checked
                     }
-                    Accessible.description: model.isDefault ? I18n.i18n("Default Language") : ''
+                    Accessible.description: model.isDefault ? _tr.i18n("Default Language") : ''
                     checked: model.checked
 
                     icon.source: model.isDefault ? "favorite" : undefined
@@ -161,17 +166,17 @@ Kirigami.ScrollablePage {
         id: dictionaryPage
 
         Kirigami.ScrollablePage {
-            title: I18n.i18nc("@title:window", "Spell checking dictionary")
+            title: _tr.i18nc("@title:window", "Spell checking dictionary")
             footer: QQC2.ToolBar {
                 contentItem: RowLayout {
                     QQC2.TextField {
                         id: dictionaryField
                         Layout.fillWidth: true
                         Accessible.name: placeholderText
-                        placeholderText: I18n.i18nc("Placeholder message", "Add a new word to your personal dictionary…")
+                        placeholderText: _tr.i18nc("Placeholder message", "Add a new word to your personal dictionary…")
                     }
                     QQC2.Button {
-                        text: I18n.i18nc("@action:button", "Add Word")
+                        text: _tr.i18nc("@action:button", "Add Word")
                         icon.name: "list-add"
                         enabled: dictionaryField.text.length > 0
                         onClicked: {
@@ -206,7 +211,7 @@ Kirigami.ScrollablePage {
                         }
 
                         QQC2.ToolButton {
-                            text: I18n.i18nc("@action:button", "Delete word")
+                            text: _tr.i18nc("@action:button", "Delete word")
                             icon.name: "delete"
                             display: QQC2.ToolButton.IconOnly
                             onClicked: {
