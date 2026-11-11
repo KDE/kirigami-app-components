@@ -5,7 +5,6 @@
 import QtQuick
 import org.kde.ki18n
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.actions as KirigamiActions
 
 /*!
    \qmltype ShortcutsConfigurationModule
@@ -15,27 +14,15 @@ import org.kde.kirigamiaddons.actions as KirigamiActions
    \since 1.7.0
  */
 ConfigurationModule {
-    id: root
-
-    /*!
-       This property holds the \l AbstractKirigamiApplication from the
-       \l {Kirigami Addons Actions QML Types} module.
-     */
-    required property KirigamiActions.AbstractKirigamiApplication application
-
     moduleId: "shortcuts"
-    text: I18n.i18nc("@action:button", "Keyboard Shortcuts")
-    icon.name: "input-keyboard-symbolic"
-    page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "ShortcutsEditor")
+    text: KI18n.i18nc("@action:button", "Keyboard Shortcuts")
+    icon.name: "configure-shortcuts-symbolic"
     visible: !Kirigami.Settings.isMobile
+    page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "ShortcutsEditor")
+    initialProperties: () => ({ allowModifierlessShortcuts: true })
     keywords: [
-        I18n.i18nc("@info:search keyword", "Hotkey"),
-        I18n.i18nc("@info:search keyword", "Key binding"),
-        I18n.i18nc("@info:search keyword", "Accelerator")
+        KI18n.i18nc("@info:search keyword", "Hotkey"),
+        KI18n.i18nc("@info:search keyword", "Key binding"),
+        KI18n.i18nc("@info:search keyword", "Accelerator")
     ]
-    initialProperties: () => {
-        return {
-            model: root.application.shortcutsModel
-        };
-    }
 }
