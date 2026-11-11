@@ -9,8 +9,8 @@ import QtQml
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.private
 import org.kde.kirigami.settings
 
 Kirigami.ApplicationWindow {

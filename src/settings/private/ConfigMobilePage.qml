@@ -9,7 +9,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-import org.kde.kirigamiaddons.private
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.settings
 

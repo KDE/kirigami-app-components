@@ -4,6 +4,7 @@
 
 import QtQuick
 import QtQml
+import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 
 /*!
@@ -119,7 +120,7 @@ QtObject {
 
         if (Kirigami.Settings.isMobile) {
             const component = Qt.createComponent('org.kde.kirigami.settings.private', 'ConfigMobilePage');
-            if (component.status === Component.Failed) {
+            if (component.status === Component.Error) {
                 console.error(component.errorString());
                 return;
             }
@@ -137,7 +138,7 @@ QtObject {
             });
         } else {
             const component = Qt.createComponent('org.kde.kirigami.settings.private', 'ConfigWindow');
-            if (component.status === Component.Failed) {
+            if (component.status === Component.Error) {
                 console.error(component.errorString());
                 return;
             }
