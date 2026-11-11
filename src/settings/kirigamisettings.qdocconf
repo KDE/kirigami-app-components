@@ -13,7 +13,7 @@ outputformats = HTML
 
 navigation.landingpage = "Kirigami"
 
-depends += kde kirigami kirigamiaddonsactions qtcore qtquick qtquickcontrols qtgui
+depends += kde kirigami qtcore qtquick qtquickcontrols qtgui
 
 qhp.projects = KirigamiSettings
 

@@ -4,7 +4,6 @@
 
 import QtQuick
 import QtQml
-import org.kde.kirigamiaddons.private
 import org.kde.kirigami as Kirigami
 
 /*!
