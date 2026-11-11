@@ -9,7 +9,6 @@ import org.kde.ki18n
    \qmltype SpellcheckingConfigurationModule
    \inqmlmodule org.kde.kirigami.settings
    \brief Configuration module for spellchecking.
-   \since 1.3.0
  */
 ConfigurationModule {
     moduleId: "spellchecking"

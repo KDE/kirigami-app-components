@@ -72,8 +72,6 @@ import org.kde.kirigami as Kirigami
    And the following page on mobile:
 
    \image settingsdialogmobile.png
-
-   \since 1.3.0
  */
 QtObject {
     id: root
