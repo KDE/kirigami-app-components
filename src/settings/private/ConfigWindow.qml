@@ -5,6 +5,8 @@
 // SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
+pragma ComponentBehavior: Bound
+
 import QtQml
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -171,9 +173,6 @@ Kirigami.ApplicationWindow {
         root.pageStack.push(page);
 
         root.currentModule = module;
-        if (root.pageStack.currentItem.title.length === 0) {
-            root.pageStack.currentItem.title = module.text;
-        }
     }
 
     function pageForModule(module: ConfigurationModule, parent = root.contentItem): var {

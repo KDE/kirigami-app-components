@@ -32,8 +32,6 @@ Kirigami.ScrollablePage {
 
     property bool initDone: false
 
-    title: I18n.i18nc("@title", "Settings")
-
     // The layers are not busy when the push of this page is not animated.
     Component.onCompleted: Qt.callLater(root.openDefaultModule)
 
