@@ -100,7 +100,7 @@ QtObject {
 
        Do not overwrite the default value if you want your module to
        be grouped in the default category.
-       \default "_main_category"
+       \default ""
      */
-    property string category: "_main_category"
+    property string category: ""
 }

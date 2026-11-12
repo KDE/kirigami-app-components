@@ -99,7 +99,7 @@ Kirigami.ScrollablePage {
 
                     required property var modelData
 
-                    title: categoryDelegate.modelData.name === "_main_category" ? root.title : categoryDelegate.modelData.name
+                    title: categoryDelegate.modelData.name.length === 0 ? root.title : categoryDelegate.modelData.name
 
                     Repeater {
                         model: categoryDelegate.modelData.modules
