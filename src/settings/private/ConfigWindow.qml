@@ -123,7 +123,7 @@ Kirigami.ApplicationWindow {
                     currentIndex: configurationSearch.filteredModules.indexOf(root.currentModule)
 
                     onWidthChanged: if (!initDone) {
-                        const module = getModuleByName(defaultModule) ?? modules[0] ?? null;
+                        const module = getModuleByName(root.defaultModule) ?? root.modules[0] ?? null;
                         const page = module ? pageForModule(module) : null;
                         if (page) {
                             root.pageStack.push(page);

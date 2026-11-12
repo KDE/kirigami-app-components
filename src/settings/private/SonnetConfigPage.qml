@@ -156,7 +156,7 @@ Kirigami.ScrollablePage {
                     Accessible.description: model.isDefault ? _tr.i18n("Default Language") : ''
                     checked: model.checked
 
-                    icon.source: model.isDefault ? "favorite" : undefined
+                    icon.source: model.isDefault ? "favorite" : ""
                 }
             }
         }
