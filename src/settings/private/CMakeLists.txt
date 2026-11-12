@@ -2,11 +2,16 @@
 # SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
 # SPDX-License-Identifier: BSD-2-Clause
 
+set(_settings_private_deps org.kde.kirigami)
+
+if (NOT ANDROID)
+    list(APPEND _settings_private_deps org.kde.sonnet)
+endif()
+
 ecm_add_qml_module(settingsprivateplugin
     URI "org.kde.kirigami.settings.private"
     GENERATE_PLUGIN_SOURCE
-    DEPENDENCIES
-        org.kde.kirigami
+    DEPENDENCIES ${_settings_private_deps}
 )
 
 ecm_target_qml_sources(settingsprivateplugin SOURCES

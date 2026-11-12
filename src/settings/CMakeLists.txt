@@ -8,7 +8,10 @@ ecm_add_qml_module(settingsplugin
     URI "org.kde.kirigami.settings"
     VERSION 1.0
     GENERATE_PLUGIN_SOURCE
-    DEPENDENCIES org.kde.kirigami.private "org.kde.kirigami.settings.private"
+    DEPENDENCIES
+        org.kde.kirigami
+        org.kde.ki18n
+        "org.kde.kirigami.settings.private"
 )
 
 ecm_generate_qdoc(settingsplugin kirigamisettings.qdocconf)
