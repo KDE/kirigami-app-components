@@ -109,6 +109,11 @@ QtObject {
        By default it is not specified, this will choose the first module.
      */
     function open(defaultModule = ''): void {
+        if (!root.window) {
+            console.warn("ConfigurationView: the window property must be set before calling open()");
+            return;
+        }
+
         if (root.configViewItem) {
             if (typeof root.configViewItem.requestActivate === "function") {
                 Qt.callLater(root.configViewItem.requestActivate);
@@ -116,31 +121,33 @@ QtObject {
             return;
         }
 
+        let view = null;
         if (Kirigami.Settings.isMobile) {
             const component = Qt.createComponent('org.kde.kirigami.settings.private', 'ConfigMobilePage');
             if (component.status === Component.Error) {
                 console.error(component.errorString());
                 return;
             }
-            root.configViewItem = root.window.pageStack.layers.push(component, {
+            view = root.window.pageStack.layers.push(component, {
                 defaultModule: defaultModule,
                 modules: root.modules,
                 title: root.title,
                 window: root.window,
-            })
-            root.configViewItem.backRequested.connect(event => {
-                if (!event.accepted) {
-                    root.configViewItem.destroy();
-                    root.configViewItem = null;
-                }
             });
+            if (view) {
+                view.backRequested.connect(event => {
+                    if (!event.accepted) {
+                        view.destroy();
+                    }
+                });
+            }
         } else {
             const component = Qt.createComponent('org.kde.kirigami.settings.private', 'ConfigWindow');
             if (component.status === Component.Error) {
                 console.error(component.errorString());
                 return;
             }
-            root.configViewItem = component.createObject(root.window, {
+            view = component.createObject(root.window, {
                 defaultModule: defaultModule,
                 modules: root.modules,
                 width: Kirigami.Units.gridUnit * 50,
@@ -149,13 +156,24 @@ QtObject {
                 minimumHeight: Kirigami.Units.gridUnit * 30,
                 title: root.title,
             });
-            root.configViewItem.closing.connect(event => {
-                if (event.accepted) {
-                    root.configViewItem.destroy();
-                    root.configViewItem = null;
-                }
-            });
+            if (view) {
+                view.closing.connect(event => {
+                    if (event.accepted) {
+                        view.destroy();
+                    }
+                });
+            }
         }
+
+        if (!view) {
+            console.error("ConfigurationView: failed to open the settings view");
+            return;
+        }
+
+        // The view can also be closed and destroyed by other means (for
+        // example by the page stack); make sure a subsequent open() works.
+        view.destroyed.connect(() => root.configViewItem = null);
+        root.configViewItem = view;
     }
 }
 
