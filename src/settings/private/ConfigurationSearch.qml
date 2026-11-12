@@ -65,10 +65,10 @@ QtObject {
 
     function acceptFirstResult(): void {
         queryTimer.stop();
+        // Assigning searchText synchronously updates filteredModules
         root.searchText = root.filterText.trim();
-        const firstModule = root.modules.find(module => root.matchesModule(module));
-        if (firstModule) {
-            root.resultAccepted(firstModule);
+        if (root.filteredModules.length > 0) {
+            root.resultAccepted(root.filteredModules[0]);
         }
     }
 
