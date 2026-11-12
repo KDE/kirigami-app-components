@@ -7,7 +7,10 @@ endif()
 
 add_executable(qmltest qmltest.cpp)
 qt_add_qml_module(qmltest URI ActionCollectionTestUtils)
-target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest  KirigamiActionCollection)
+target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest KirigamiActionCollection)
+# Make sure the settings QML modules are built before the tests run; they are
+# resolved at runtime through the -import ${CMAKE_BINARY_DIR}/bin import path
+add_dependencies(qmltest settingsplugin settingsprivateplugin)
 if (NOT QT6_IS_SHARED_LIBS_BUILD OR NOT BUILD_SHARED_LIBS)
     target_link_libraries(qmltest PRIVATE KirigamiPolyfillplugin)
     qt6_import_qml_plugins(qmltest)
@@ -35,10 +38,12 @@ endmacro()
 kirigami_add_tests(
     tst_actioncollection.qml
     tst_actionsexplorer.qml
+    tst_settings.qml
 )
 
 set_tests_properties(
     tst_actioncollection.qml
+    tst_settings.qml
 
     PROPERTIES
         RUN_SERIAL ON
