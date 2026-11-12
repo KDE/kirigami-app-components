@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2011-2014 Sebastian Kügler <sebas@kde.org>
  * SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  * SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
- * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
 pragma ComponentBehavior: Bound
