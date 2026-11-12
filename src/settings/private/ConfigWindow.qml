@@ -184,7 +184,7 @@ Kirigami.ApplicationWindow {
         if (pageCache[module.moduleId]) {
             return pageCache[module.moduleId];
         } else {
-            const component = module.page();
+            const component = typeof module.page === "function" ? module.page() : module.page;
             if (!component) {
                 console.error("Unable to create component for moduleId", module.moduleId);
                 return null;
@@ -199,7 +199,7 @@ Kirigami.ApplicationWindow {
             if (!page) {
                 return null;
             }
-            if (page.title.length === 0) {
+            if (page.title !== undefined && page.title.length === 0) {
                 page.title = module.text;
             }
             pageCache[module.moduleId] = page;
