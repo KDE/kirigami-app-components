@@ -18,6 +18,7 @@ ecm_target_qml_sources(settingsprivateplugin SOURCES
     ConfigWindow.qml
     ConfigMobilePage.qml
     ConfigurationSearch.qml
+    PageFactory.qml
 )
 
 if (NOT ANDROID)

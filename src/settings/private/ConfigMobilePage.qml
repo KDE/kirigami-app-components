@@ -20,12 +20,13 @@ Kirigami.ScrollablePage {
     required property list<ConfigurationModule> modules
     required property Kirigami.ApplicationWindow window
 
-    // Do not use Map, it crashes very frequently
-    property var pageCache: Object.create(null)
-
     KI18nContext {
         id: _tr
         translationDomain: "kirigami-app-components"
+    }
+
+    PageFactory {
+        id: pageFactory
     }
 
     ConfigurationSearch {
@@ -53,8 +54,8 @@ Kirigami.ScrollablePage {
             return;
         }
         root.initDone = true;
-        const module = root.getModuleByName(root.defaultModule);
-        const page = module ? root.pageForModule(module) : null;
+        const module = pageFactory.moduleById(root.modules, root.defaultModule);
+        const page = module ? pageFactory.pageForModule(module, root) : null;
         if (page) {
             root.window.pageStack.layers.push(page);
         }
@@ -133,7 +134,7 @@ Kirigami.ScrollablePage {
     property Item _pendingPage: null
 
     function openModule(module: ConfigurationModule): void {
-        const page = pageForModule(module);
+        const page = pageFactory.pageForModule(module, root);
         if (!page || root._pendingPage === page) {
             return;
         }
@@ -144,34 +145,5 @@ Kirigami.ScrollablePage {
                 root._pendingPage = null;
             }
         });
-    }
-
-    function pageForModule(module: ConfigurationModule, parent = root): var {
-        if (pageCache[module.moduleId]) {
-            return pageCache[module.moduleId];
-        } else {
-            const component = typeof module.page === "function" ? module.page() : module.page;
-            if (!component) {
-                console.error("Unable to create component for moduleId", module.moduleId);
-                return null;
-            }
-            if (component.status !== Component.Ready) {
-                console.error(component.errorString());
-                return null;
-            }
-            const page = component.createObject(parent, module.initialProperties());
-            if (!page) {
-                return null;
-            }
-            if (page.title !== undefined && page.title.length === 0) {
-                page.title = module.text;
-            }
-            pageCache[module.moduleId] = page;
-            return page;
-        }
-    }
-
-    function getModuleByName(moduleId: string): ConfigurationModule {
-        return modules.find(module => module.moduleId === moduleId) ?? null;
     }
 }

@@ -4,6 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+import QtQml
 import QtTest
 import org.kde.kirigami.settings
 import org.kde.kirigami.settings.private as Private
@@ -44,6 +45,25 @@ TestCase {
     Private.ConfigurationSearch {
         id: search
         modules: [appearanceModule, aboutModule, hiddenModule]
+    }
+
+    Component {
+        id: dummyPageComponent
+
+        QtObject {
+            property string title: ""
+        }
+    }
+
+    ConfigurationModule {
+        id: pageModule
+        moduleId: "paged"
+        text: "Paged"
+        page: dummyPageComponent
+    }
+
+    Private.PageFactory {
+        id: pageFactory
     }
 
     SignalSpy {
@@ -134,5 +154,22 @@ TestCase {
         search.filterText = "nonexistent";
         search.acceptFirstResult();
         compare(acceptSpy.count, 1);
+    }
+
+    function test_pageFactory() {
+        // The page property can also be a Component directly
+        const page = pageFactory.pageForModule(pageModule, null);
+        verify(page !== null);
+
+        // The module text is used as fallback title
+        compare(page.title, "Paged");
+
+        // The page is cached: a second call returns the same instance
+        compare(pageFactory.pageForModule(pageModule, null), page);
+
+        compare(pageFactory.moduleById([pageModule], "paged"), pageModule);
+        compare(pageFactory.moduleById([pageModule], "nonexistent"), null);
+
+        page.destroy();
     }
 }

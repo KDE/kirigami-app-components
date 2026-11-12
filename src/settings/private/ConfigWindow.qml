@@ -21,13 +21,15 @@ Kirigami.ApplicationWindow {
     required property string defaultModule
     required property list<ConfigurationModule> modules
 
-    // Do not use Map, it crashes very frequently
-    property var pageCache: Object.create(null)
     property ConfigurationModule currentModule: null
 
     KI18nContext {
         id: _tr
         translationDomain: "kirigami-app-components"
+    }
+
+    PageFactory {
+        id: pageFactory
     }
 
     ConfigurationSearch {
@@ -123,8 +125,8 @@ Kirigami.ApplicationWindow {
                     currentIndex: configurationSearch.filteredModules.indexOf(root.currentModule)
 
                     onWidthChanged: if (!initDone) {
-                        const module = getModuleByName(root.defaultModule) ?? root.modules[0] ?? null;
-                        const page = module ? pageForModule(module) : null;
+                        const module = pageFactory.moduleById(root.modules, root.defaultModule) ?? root.modules[0] ?? null;
+                        const page = module ? pageFactory.pageForModule(module, root.contentItem) : null;
                         if (page) {
                             root.pageStack.push(page);
                             root.currentModule = module;
@@ -169,7 +171,7 @@ Kirigami.ApplicationWindow {
         if (root.currentModule === module) {
             return;
         }
-        const page = pageForModule(module);
+        const page = pageFactory.pageForModule(module, root.contentItem);
         if (!page) {
             return;
         }
@@ -178,36 +180,5 @@ Kirigami.ApplicationWindow {
         root.pageStack.push(page);
 
         root.currentModule = module;
-    }
-
-    function pageForModule(module: ConfigurationModule, parent = root.contentItem): var {
-        if (pageCache[module.moduleId]) {
-            return pageCache[module.moduleId];
-        } else {
-            const component = typeof module.page === "function" ? module.page() : module.page;
-            if (!component) {
-                console.error("Unable to create component for moduleId", module.moduleId);
-                return null;
-            }
-
-            if (component.status !== Component.Ready) {
-                console.error(`Unable to create component for moduleId: "${module.moduleId}". Error: ${component.errorString()}`);
-                return null;
-            }
-
-            const page = component.createObject(parent, module.initialProperties());
-            if (!page) {
-                return null;
-            }
-            if (page.title !== undefined && page.title.length === 0) {
-                page.title = module.text;
-            }
-            pageCache[module.moduleId] = page;
-            return page;
-        }
-    }
-
-    function getModuleByName(moduleId: string): ConfigurationModule {
-        return modules.find(module => module.moduleId === moduleId) ?? null;
     }
 }
