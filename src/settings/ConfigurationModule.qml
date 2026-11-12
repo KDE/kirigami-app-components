@@ -34,7 +34,10 @@ QtObject {
     readonly property Kirigami.IconPropertiesGroup icon: Kirigami.IconPropertiesGroup {}
 
     /*!
-       This property holds a function that returns a Component.
+       This property holds the page for this module.
+
+       It can either be a function that returns a Component, or a Component
+       directly.
      */
     required property var page
 
