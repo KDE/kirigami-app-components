@@ -12,12 +12,21 @@ import org.kde.kirigami as Kirigami
    \brief Configuration module for keyboard shortcuts.
  */
 ConfigurationModule {
+    id: root
     moduleId: "shortcuts"
+
+    /*!
+       \brief This property holds whether we allow shortcuts without a modifier (i.e. just "T" instead of "Ctrl+T")
+
+       \default false
+     */
+    property bool allowModifierlessShortcuts: false
+
     text: KI18n.i18ndc("kirigami-app-components", "@action:button", "Keyboard Shortcuts")
     icon.name: "configure-shortcuts-symbolic"
     visible: !Kirigami.Settings.isMobile
     page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "ShortcutsEditor")
-    initialProperties: () => ({ allowModifierlessShortcuts: true })
+    initialProperties: () => ({ allowModifierlessShortcuts: root.allowModifierlessShortcuts })
     keywords: [
         KI18n.i18ndc("kirigami-app-components", "@info:search keyword", "Hotkey"),
         KI18n.i18ndc("kirigami-app-components", "@info:search keyword", "Key binding"),
