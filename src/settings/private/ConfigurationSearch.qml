@@ -4,7 +4,7 @@
 
 pragma ComponentBehavior: Bound
 
-import QtQuick
+import QtQml
 import org.kde.kirigami.settings
 
 QtObject {
