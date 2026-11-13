@@ -6,6 +6,7 @@
 
 import QtQml
 import QtTest
+import org.kde.kirigami as Kirigami
 import org.kde.kirigami.settings
 import org.kde.kirigami.settings.private as Private
 
@@ -16,6 +17,33 @@ TestCase {
     width: 400
     height: 400
     visible: true
+
+    Kirigami.ApplicationWindow {
+        id: testWindow
+
+        width: 800
+        height: 600
+
+        Component {
+            id: generalPage
+
+            Kirigami.Page {
+                title: "General"
+            }
+        }
+
+        ConfigurationView {
+            id: settingsView
+            window: testWindow
+            modules: [
+                ConfigurationModule {
+                    moduleId: "general"
+                    text: "General"
+                    page: generalPage
+                }
+            ]
+        }
+    }
 
     ConfigurationModule {
         id: appearanceModule
@@ -171,5 +199,26 @@ TestCase {
         compare(pageFactory.moduleById([pageModule], "nonexistent"), null);
 
         page.destroy();
+    }
+
+    function test_openDesktop() {
+        testWindow.show();
+        settingsView.open();
+
+        const view = settingsView.configViewItem;
+        verify(view !== null);
+        compare(view.title, "Settings");
+
+        // The default page is pushed asynchronously (Qt.callLater)
+        tryVerify(() => view.pageStack.depth === 1);
+        tryVerify(() => view.pageStack.currentItem !== null && view.pageStack.currentItem.title === "General");
+
+        // Opening again reuses the existing view
+        settingsView.open();
+        compare(settingsView.configViewItem, view);
+
+        // Closing destroys the view and clears configViewItem
+        view.close();
+        tryVerify(() => settingsView.configViewItem === null);
     }
 }
