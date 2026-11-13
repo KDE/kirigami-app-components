@@ -5,6 +5,7 @@
 import QtQml
 import org.kde.ki18n
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.settings.private as Private
 
 /*!
    \qmltype ConfigurationView
@@ -114,20 +115,21 @@ QtObject {
         }
 
         if (root.configViewItem) {
-            if (typeof root.configViewItem.requestActivate === "function") {
+            if (typeof root.configViewItem.objectName !== "string") {
+                // The previous view was destroyed by other means (for
+                // example by the page stack); open a new one.
+                root.configViewItem = null;
+            } else if (typeof root.configViewItem.requestActivate === "function") {
                 Qt.callLater(root.configViewItem.requestActivate);
+                return;
+            } else {
+                return;
             }
-            return;
         }
 
         let view = null;
         if (Kirigami.Settings.isMobile) {
-            const component = Qt.createComponent('org.kde.kirigami.settings.private', 'ConfigMobilePage');
-            if (component.status === Component.Error) {
-                console.error(component.errorString());
-                return;
-            }
-            view = root.window.pageStack.layers.push(component, {
+            view = root.window.pageStack.layers.push(d.mobilePageComponent, {
                 defaultModule: defaultModule,
                 modules: root.modules,
                 title: root.title,
@@ -137,16 +139,12 @@ QtObject {
                 view.backRequested.connect(event => {
                     if (!event.accepted) {
                         view.destroy();
+                        root.configViewItem = null;
                     }
                 });
             }
         } else {
-            const component = Qt.createComponent('org.kde.kirigami.settings.private', 'ConfigWindow');
-            if (component.status === Component.Error) {
-                console.error(component.errorString());
-                return;
-            }
-            view = component.createObject(root.window, {
+            view = d.windowComponent.createObject(root.window, {
                 defaultModule: defaultModule,
                 modules: root.modules,
                 width: Kirigami.Units.gridUnit * 50,
@@ -159,6 +157,7 @@ QtObject {
                 view.closing.connect(event => {
                     if (event.accepted) {
                         view.destroy();
+                        root.configViewItem = null;
                     }
                 });
             }
@@ -169,10 +168,15 @@ QtObject {
             return;
         }
 
-        // The view can also be closed and destroyed by other means (for
-        // example by the page stack); make sure a subsequent open() works.
-        view.destroyed.connect(() => root.configViewItem = null);
         root.configViewItem = view;
+    }
+
+    readonly property QtObject __d: QtObject {
+        id: d
+        // Mobile
+        readonly property Component mobilePageComponent: Private.ConfigMobilePage {}
+        // Desktop
+        readonly property Component windowComponent: Private.ConfigWindow {}
     }
 }
 

@@ -7,7 +7,7 @@ endif()
 
 add_executable(qmltest qmltest.cpp)
 qt_add_qml_module(qmltest URI KirigamiAppComponentsTestUtils)
-target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest KirigamiActionCollection)
+target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest KirigamiActionCollection KF6::I18nQml)
 # Make sure the settings QML modules are built before the tests run; they are
 # resolved at runtime through the -import ${CMAKE_BINARY_DIR}/bin import path
 add_dependencies(qmltest settingsplugin settingsprivateplugin)
