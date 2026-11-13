@@ -36,8 +36,6 @@ Kirigami.ScrollablePage {
         onResultAccepted: module => root.openModule(module)
     }
 
-    property bool initDone: false
-
     // The layers are not busy when the push of this page is not animated.
     Component.onCompleted: Qt.callLater(root.openDefaultModule)
 
@@ -50,10 +48,10 @@ Kirigami.ScrollablePage {
     }
 
     function openDefaultModule(): void {
-        if (root.initDone || root.window.pageStack.layers.busy) {
+        if (layout.initDone || root.window.pageStack.layers.busy) {
             return;
         }
-        root.initDone = true;
+        layout.initDone = true;
         const module = pageFactory.moduleById(root.modules, root.defaultModule);
         const page = module ? pageFactory.pageForModule(module, root) : null;
         if (page) {
@@ -62,7 +60,10 @@ Kirigami.ScrollablePage {
     }
 
     ColumnLayout {
+        id: layout
         spacing: 0
+
+        property bool initDone: false
 
         // search bar
         Kirigami.SearchField {

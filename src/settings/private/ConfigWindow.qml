@@ -23,6 +23,10 @@ Kirigami.ApplicationWindow {
 
     property ConfigurationModule currentModule: null
 
+    // Pushing the default page directly in Component.onCompleted would be too
+    // early; Qt.callLater defers it to after the initial binding evaluation.
+    Component.onCompleted: Qt.callLater(root.openDefaultModule)
+
     KI18nContext {
         id: _tr
         translationDomain: "kirigami-app-components"
@@ -67,6 +71,7 @@ Kirigami.ApplicationWindow {
 
     globalDrawer: Kirigami.OverlayDrawer {
         id: drawer
+        property bool initDone: false
         edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
 
         modal: false
@@ -111,8 +116,6 @@ Kirigami.ApplicationWindow {
                 ListView {
                     id: listview
 
-                    property bool initDone: false
-
                     function focusResult(index: int): void {
                         if (index < 0) {
                             searchField.forceActiveFocus(Qt.BacktabFocusReason);
@@ -124,15 +127,6 @@ Kirigami.ApplicationWindow {
 
                     currentIndex: configurationSearch.filteredModules.indexOf(root.currentModule)
 
-                    onWidthChanged: if (!initDone) {
-                        const module = pageFactory.moduleById(root.modules, root.defaultModule) ?? root.modules[0] ?? null;
-                        const page = module ? pageFactory.pageForModule(module, root.contentItem) : null;
-                        if (page) {
-                            root.pageStack.push(page);
-                            root.currentModule = module;
-                        }
-                        initDone = true;
-                    }
                     model: configurationSearch.filteredModules
                     delegate: QQC2.ItemDelegate {
                         id: settingDelegate
@@ -164,6 +158,19 @@ Kirigami.ApplicationWindow {
                     }
                 }
             }
+        }
+    }
+
+    function openDefaultModule(): void {
+        if (drawer.initDone) {
+            return;
+        }
+        drawer.initDone = true;
+        const module = pageFactory.moduleById(root.modules, root.defaultModule) ?? root.modules[0] ?? null;
+        const page = module ? pageFactory.pageForModule(module, root.contentItem) : null;
+        if (page) {
+            root.pageStack.push(page);
+            root.currentModule = module;
         }
     }
 
