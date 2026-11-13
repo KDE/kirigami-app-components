@@ -6,7 +6,7 @@ import QtQml
 import org.kde.kirigami as Kirigami
 
 /*!
-   \qmltype ConfigurationModule
+   \qmltype SettingsModule
    \inqmlmodule org.kde.kirigami.settings
    \brief This object holds the information of configuration module.
    \since 1.3.0
@@ -17,7 +17,7 @@ QtObject {
     /*!
        \brief This property holds the id of the module for when it needs to be referenced.
 
-       Primary use case is for setting a default module in ConfigurationView.
+       Primary use case is for setting a default module in SettingsViewController.
      */
     required property string moduleId
 

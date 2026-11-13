@@ -19,9 +19,9 @@ Kirigami.ApplicationWindow {
     id: root
 
     required property string defaultModule
-    required property list<ConfigurationModule> modules
+    required property list<SettingsModule> modules
 
-    property ConfigurationModule currentModule: null
+    property SettingsModule currentModule: null
 
     // Pushing the default page directly in Component.onCompleted would be too
     // early; Qt.callLater defers it to after the initial binding evaluation.
@@ -133,7 +133,7 @@ Kirigami.ApplicationWindow {
                         width: listview.width
 
                         required property int index
-                        required property ConfigurationModule modelData
+                        required property SettingsModule modelData
 
                         text: modelData?.text
                         icon.name: modelData?.icon.name
@@ -166,6 +166,8 @@ Kirigami.ApplicationWindow {
             return;
         }
         drawer.initDone = true;
+        // On desktop a missing or unknown defaultModule falls back to the
+        // first module; on mobile the module list is simply shown instead.
         const module = pageFactory.moduleById(root.modules, root.defaultModule) ?? root.modules[0] ?? null;
         const page = module ? pageFactory.pageForModule(module, root.contentItem) : null;
         if (page) {
@@ -174,7 +176,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    function openModule(module: ConfigurationModule): void {
+    function openModule(module: SettingsModule): void {
         if (root.currentModule === module) {
             return;
         }

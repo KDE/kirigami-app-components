@@ -32,11 +32,11 @@ TestCase {
             }
         }
 
-        ConfigurationView {
-            id: settingsView
+        SettingsViewController {
+            id: settingsViewController
             window: testWindow
             modules: [
-                ConfigurationModule {
+                SettingsModule {
                     moduleId: "general"
                     text: "General"
                     page: generalPage
@@ -45,7 +45,7 @@ TestCase {
         }
     }
 
-    ConfigurationModule {
+    SettingsModule {
         id: appearanceModule
         moduleId: "appearance"
         text: "Appearance"
@@ -53,7 +53,7 @@ TestCase {
         keywords: ["theme"]
     }
 
-    ConfigurationModule {
+    SettingsModule {
         id: aboutModule
         moduleId: "about"
         text: "About"
@@ -62,7 +62,7 @@ TestCase {
         keywords: ["credits", "dark"]
     }
 
-    ConfigurationModule {
+    SettingsModule {
         id: hiddenModule
         moduleId: "hidden"
         text: "Hidden"
@@ -83,7 +83,7 @@ TestCase {
         }
     }
 
-    ConfigurationModule {
+    SettingsModule {
         id: pageModule
         moduleId: "paged"
         text: "Paged"
@@ -92,6 +92,29 @@ TestCase {
 
     Private.PageFactory {
         id: pageFactory
+    }
+
+    // An unknown defaultModule falls back to the first module on desktop
+    Component {
+        id: pagedPageComponent
+
+        Kirigami.Page {
+            title: ""
+        }
+    }
+
+    SettingsModule {
+        id: pagedPageModule
+        moduleId: "paged-page"
+        text: "Paged"
+        page: pagedPageComponent
+    }
+
+    Private.ConfigWindow {
+        id: fallbackWindow
+
+        defaultModule: "nonexistent"
+        modules: [pagedPageModule]
     }
 
     SignalSpy {
@@ -203,22 +226,31 @@ TestCase {
 
     function test_openDesktop() {
         testWindow.show();
-        settingsView.open();
+        settingsViewController.open();
 
-        const view = settingsView.configViewItem;
+        const view = settingsViewController.configViewItem;
         verify(view !== null);
         compare(view.title, "Settings");
 
-        // The default page is pushed asynchronously (Qt.callLater)
+        // Without a defaultModule the first module is opened (desktop behavior)
         tryVerify(() => view.pageStack.depth === 1);
-        tryVerify(() => view.pageStack.currentItem !== null && view.pageStack.currentItem.title === "General");
+        tryVerify(() => {
+            const page = view.pageStack.currentItem as Kirigami.Page;
+            return page !== null && page.title === "General";
+        });
 
         // Opening again reuses the existing view
-        settingsView.open();
-        compare(settingsView.configViewItem, view);
+        settingsViewController.open();
+        compare(settingsViewController.configViewItem, view);
 
         // Closing destroys the view and clears configViewItem
         view.close();
-        tryVerify(() => settingsView.configViewItem === null);
+        tryVerify(() => settingsViewController.configViewItem === null);
+    }
+
+    function test_configWindowFallbacksToFirstModule() {
+        // On desktop an unknown defaultModule falls back to the first module
+        tryVerify(() => fallbackWindow.pageStack.depth === 1);
+        tryVerify(() => fallbackWindow.pageStack.currentItem !== null && fallbackWindow.pageStack.currentItem.title === "Paged");
     }
 }

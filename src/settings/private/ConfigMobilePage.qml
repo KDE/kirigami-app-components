@@ -17,7 +17,7 @@ Kirigami.ScrollablePage {
     id: root
 
     required property string defaultModule
-    required property list<ConfigurationModule> modules
+    required property list<SettingsModule> modules
     required property Kirigami.ApplicationWindow window
 
     KI18nContext {
@@ -112,7 +112,7 @@ Kirigami.ScrollablePage {
                         delegate: Kirigami.FormAction {
                             id: moduleDelegate
 
-                            required property ConfigurationModule modelData
+                            required property SettingsModule modelData
 
                             action: Kirigami.Action {
                                 text: moduleDelegate.modelData.text
@@ -133,7 +133,7 @@ Kirigami.ScrollablePage {
         }
     }
 
-    function openModule(module: ConfigurationModule): void {
+    function openModule(module: SettingsModule): void {
         const page = pageFactory.pageForModule(module, root);
         if (!page || layout.pendingPage === page) {
             return;

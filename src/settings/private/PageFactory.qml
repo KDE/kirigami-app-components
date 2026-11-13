@@ -12,7 +12,7 @@ QtObject {
     // Do not use Map, it crashes very frequently
     property var pageCache: Object.create(null)
 
-    function pageForModule(module: ConfigurationModule, parent: var): var {
+    function pageForModule(module: SettingsModule, parent: var): var {
         if (root.pageCache[module.moduleId]) {
             return root.pageCache[module.moduleId];
         }
@@ -40,7 +40,7 @@ QtObject {
         return page;
     }
 
-    function moduleById(modules: list<ConfigurationModule>, moduleId: string): ConfigurationModule {
+    function moduleById(modules: list<SettingsModule>, moduleId: string): SettingsModule {
         return modules.find(module => module.moduleId === moduleId) ?? null;
     }
 }

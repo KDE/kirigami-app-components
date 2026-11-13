@@ -8,11 +8,11 @@ import org.kde.kirigami as Kirigami
 import org.kde.kirigami.settings.private as Private
 
 /*!
-   \qmltype ConfigurationView
+   \qmltype SettingsViewController
    \inqmlmodule org.kde.kirigami.settings
-   \brief This is an abstract view to display the configuration of an application.
+   \brief Controls the views that display the configuration of an application.
 
-   The various configuration modules can be defined by providing ConfigurationModule
+   The various configuration modules can be defined by providing SettingsModule
    to the modules property.
 
    On desktop, this will display the modules in a list view and displaying
@@ -26,20 +26,20 @@ import org.kde.kirigami.settings.private as Private
    Controls.Button {
        id: button
 
-       KirigamiSettings.ConfigurationView {
+       KirigamiSettings.SettingsViewController {
            id: configuration
 
            window: button.Controls.ApplicationWindow.window as Kirigami.ApplicationWindow
 
            modules: [
-               KirigamiSettings.ConfigurationModule {
+               KirigamiSettings.SettingsModule {
                    moduleId: "appearance"
                    text: i18nc("@action:button", "Appearance")
                    icon.name: "preferences-desktop-theme-global"
                    page: () => Qt.createComponent("org.kde.tokodon", "AppearancePage")
                },
                ...
-               KirigamiSettings.ConfigurationModule {
+               KirigamiSettings.SettingsModule {
                    moduleId: "about"
                    text: i18nc("@action:button", "About Tokodon")
                    icon.name: "help-about"
@@ -47,7 +47,7 @@ import org.kde.kirigami.settings.private as Private
                    category: i18nc("@title:group", "About")
                    searchable: false
                },
-               KirigamiSettings.ConfigurationModule {
+               KirigamiSettings.SettingsModule {
                    moduleId: "aboutkde"
                    text: i18nc("@action:button", "About KDE")
                    icon.name: "kde"
@@ -86,7 +86,7 @@ QtObject {
     /*!
        \brief This property holds the list of pages for the settings.
      */
-    property list<ConfigurationModule> modules
+    property list<SettingsModule> modules
 
     /*!
        \brief This property holds the parent window.
@@ -106,11 +106,11 @@ QtObject {
        Open the configuration window for the given \a defaultModule.
 
        The defaultModule corresponds to the moduleId of the default configuration that should be preselected when opening the configuration view.
-       By default it is not specified, this will choose the first module.
+       By default it is not specified, on desktop the first module will be chosen, on mobile no page will be preselected.
      */
     function open(defaultModule = ''): void {
         if (!root.window) {
-            console.warn("ConfigurationView: the window property must be set before calling open()");
+            console.warn("SettingsViewController: the window property must be set before calling open()");
             return;
         }
 
@@ -164,7 +164,7 @@ QtObject {
         }
 
         if (!view) {
-            console.error("ConfigurationView: failed to open the settings view");
+            console.error("SettingsViewController: failed to open the settings view");
             return;
         }
 

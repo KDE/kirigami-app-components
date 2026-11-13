@@ -17,10 +17,10 @@ ecm_add_qml_module(settingsplugin
 ecm_generate_qdoc(settingsplugin kirigamisettings.qdocconf)
 
 ecm_target_qml_sources(settingsplugin SOURCES
-    ConfigurationView.qml
-    ConfigurationModule.qml
-    SpellcheckingConfigurationModule.qml
-    ShortcutsConfigurationModule.qml
+    SettingsViewController.qml
+    SettingsModule.qml
+    SpellcheckingSettingsModule.qml
+    ShortcutsSettingsModule.qml
 )
 
 target_link_libraries(settingsplugin PRIVATE

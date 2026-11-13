@@ -10,11 +10,11 @@ import org.kde.kirigami.settings
 QtObject {
     id: root
 
-    required property list<ConfigurationModule> modules
+    required property list<SettingsModule> modules
     property string filterText
     property string searchText
 
-    signal resultAccepted(module: ConfigurationModule)
+    signal resultAccepted(module: SettingsModule)
 
     onFilterTextChanged: {
         if (filterText.trim().length === 0) {
@@ -33,7 +33,7 @@ QtObject {
     readonly property bool noResults: root.searchText.length > 0 && root.filteredModules.length === 0
 
     // Views recreate all their delegates on model changes, so only update when needed.
-    property list<ConfigurationModule> filteredModules: []
+    property list<SettingsModule> filteredModules: []
 
     onModulesChanged: __updateSearch()
     onSearchTextChanged: __updateSearch()
@@ -47,7 +47,7 @@ QtObject {
         }
     }
 
-    function matchesModule(module: ConfigurationModule): bool {
+    function matchesModule(module: SettingsModule): bool {
         if (!module.visible) {
             return false;
         }

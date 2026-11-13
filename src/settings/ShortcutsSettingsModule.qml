@@ -7,11 +7,11 @@ import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 
 /*!
-   \qmltype ShortcutsConfigurationModule
+   \qmltype ShortcutsSettingsModule
    \inqmlmodule org.kde.kirigami.settings
    \brief Configuration module for keyboard shortcuts.
  */
-ConfigurationModule {
+SettingsModule {
     id: root
     moduleId: "shortcuts"
 

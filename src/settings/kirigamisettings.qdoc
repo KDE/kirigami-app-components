@@ -13,7 +13,7 @@
 
    \section1 Organizing settings pages
 
-   A \l ConfigurationView owns a list of \l ConfigurationModule objects.
+   A \l SettingsViewController owns a list of \l SettingsModule objects.
    Each module describes one settings page: its identifier, label, icon, and
    the component used to create the page. The view shows a list beside the
    selected page on desktop. On mobile, it shows the list first and opens a
@@ -61,12 +61,12 @@
            }
        }
 
-       Settings.ConfigurationView {
+       Settings.SettingsViewController {
            id: settingsView
            window: window
 
            modules: [
-               Settings.ConfigurationModule {
+               Settings.SettingsModule {
                    moduleId: "general"
                    text: i18nc("@action:button", "General")
                    icon.name: "preferences-system-symbolic"
@@ -82,7 +82,7 @@
    }
    \endqml
 
-   Add more \l ConfigurationModule objects to \c modules for more pages.
+   Add more \l SettingsModule objects to \c modules for more pages.
    Give each module a distinct \c moduleId. Pass that ID to
    \c {settingsView.open("general")} to select a page when opening the
    settings view. Without an ID, desktop opens the first module and mobile
@@ -105,7 +105,7 @@
    accountName}, initialize it like this:
 
    \qml
-   Settings.ConfigurationModule {
+   Settings.SettingsModule {
        moduleId: "account"
        text: i18nc("@action:button", "Account")
        page: () => accountPage
@@ -119,13 +119,13 @@
 
    \section1 Ready-made modules
 
-   \l SpellcheckingConfigurationModule supplies a spellchecking settings
-   page where the platform supports it. \l ShortcutsConfigurationModule
+   \l SpellcheckingSettingsModule supplies a spellchecking settings
+   page where the platform supports it. \l ShortcutsSettingsModule
    supplies a keyboard shortcut editor on desktop. Add either type to
-   \c modules alongside your own \l ConfigurationModule objects.
+   \c modules alongside your own \l SettingsModule objects.
 
-   \sa ConfigurationView
-   \sa ConfigurationModule
-   \sa SpellcheckingConfigurationModule
-   \sa ShortcutsConfigurationModule
+   \sa SettingsViewController
+   \sa SettingsModule
+   \sa SpellcheckingSettingsModule
+   \sa ShortcutsSettingsModule
  */

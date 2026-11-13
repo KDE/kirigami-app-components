@@ -6,11 +6,11 @@ import QtQml
 import org.kde.ki18n
 
 /*!
-   \qmltype SpellcheckingConfigurationModule
+   \qmltype SpellcheckingSettingsModule
    \inqmlmodule org.kde.kirigami.settings
    \brief Configuration module for spellchecking.
  */
-ConfigurationModule {
+SettingsModule {
     moduleId: "spellchecking"
     text: KI18n.i18ndc("kirigami-app-components", "@action:button", "Spell Checking")
     icon.name: "tools-check-spelling"
