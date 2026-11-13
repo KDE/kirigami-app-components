@@ -64,6 +64,9 @@ Kirigami.ScrollablePage {
         spacing: 0
 
         property bool initDone: false
+        // The static form action can trigger more than once in a row; avoid
+        // pushing the same page twice.
+        property Item pendingPage: null
 
         // search bar
         Kirigami.SearchField {
@@ -130,20 +133,16 @@ Kirigami.ScrollablePage {
         }
     }
 
-    // The static form action can trigger more than once in a row; avoid
-    // pushing the same page twice.
-    property Item _pendingPage: null
-
     function openModule(module: ConfigurationModule): void {
         const page = pageFactory.pageForModule(module, root);
-        if (!page || root._pendingPage === page) {
+        if (!page || layout.pendingPage === page) {
             return;
         }
-        root._pendingPage = page;
+        layout.pendingPage = page;
         root.window.pageStack.layers.push(page);
         Qt.callLater(() => {
-            if (root._pendingPage === page) {
-                root._pendingPage = null;
+            if (layout.pendingPage === page) {
+                layout.pendingPage = null;
             }
         });
     }
