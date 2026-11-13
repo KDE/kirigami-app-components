@@ -20,3 +20,9 @@ path = ["src/actioncollection/kirigamiactioncollection.qdocconf", "src/actioncol
 precedence = "aggregate"
 SPDX-FileCopyrightText = "Marco Martin <mart@kde.org>"
 SPDX-License-Identifier = "FSFAP"
+
+[[annotations]]
+path = ["**.qdoc", "**.qdocconf", "**.qdocinc"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 by Thiago Masato Costa Sueto <thiago.sueto@kde.org>"
+SPDX-License-Identifier = "FSFAP"
