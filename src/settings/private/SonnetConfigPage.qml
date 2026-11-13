@@ -146,12 +146,14 @@ Kirigami.ScrollablePage {
                 clip: true
                 model: root.settings.dictionaryModel
                 delegate: Kirigami.CheckSubtitleDelegate {
+                    id: languageDelegate
+
                     required property var model
                     width: ListView.view.width
 
                     text: model.display
                     action: Kirigami.Action {
-                        onTriggered: model.checked = checked
+                        onTriggered: languageDelegate.model.checked = languageDelegate.checked
                     }
                     Accessible.description: model.isDefault ? _tr.i18n("Default Language") : ''
                     checked: model.checked

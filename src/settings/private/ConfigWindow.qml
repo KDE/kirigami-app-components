@@ -87,7 +87,7 @@ Kirigami.ApplicationWindow {
 
             Kirigami.AbstractApplicationHeader {
                 Layout.fillWidth: true
-                Layout.preferredHeight: pageStack.globalToolBar.preferredHeight
+                Layout.preferredHeight: root.pageStack.globalToolBar.preferredHeight
 
                 visible: !Kirigami.Settings.isMobile
 
