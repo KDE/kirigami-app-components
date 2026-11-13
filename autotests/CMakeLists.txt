@@ -6,7 +6,7 @@ if(NOT TARGET Qt6::QuickTest)
 endif()
 
 add_executable(qmltest qmltest.cpp)
-qt_add_qml_module(qmltest URI ActionCollectionTestUtils)
+qt_add_qml_module(qmltest URI KirigamiAppComponentsTestUtils)
 target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest KirigamiActionCollection)
 # Make sure the settings QML modules are built before the tests run; they are
 # resolved at runtime through the -import ${CMAKE_BINARY_DIR}/bin import path

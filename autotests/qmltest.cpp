@@ -6,4 +6,4 @@
 
 #include <quicktest.h>
 
-QUICK_TEST_MAIN(ActionCollection)
+QUICK_TEST_MAIN(KirigamiAppComponents)
