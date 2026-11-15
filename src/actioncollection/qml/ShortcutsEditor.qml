@@ -61,7 +61,7 @@ Kirigami.ScrollablePage {
                 shownActions: AC.ActionModel.ActiveActions
             }
 
-            filterRoleName: 'actionName'
+            filterRole: AC.ActionModel.SearchTextRole
             filterCaseSensitivity: Qt.CaseInsensitive
         }
 
@@ -79,7 +79,6 @@ Kirigami.ScrollablePage {
             id: shortcutDelegate
 
             required property int index
-            // Bind model in order to have editing work
             required property var model
 
             width: ListView.view.width
@@ -124,8 +123,7 @@ Kirigami.ScrollablePage {
                 shortcutDialog.actionDescription = model.actionDescription;
                 shortcutDialog.keySequence = model.shortcut;
                 shortcutDialog.alternateKeySequence = model.alternateShortcut;
-                shortcutDialog.index = shortcutDelegate.index;
-                shortcutDialog.shortcutDelegate = shortcutDelegate
+                shortcutDialog.sourceIndex = listView.model.mapToSource(listView.model.index(shortcutDelegate.index, 0));
                 shortcutDialog.open()
             }
         }
@@ -139,9 +137,8 @@ Kirigami.ScrollablePage {
             property AC.ActionData actionDescription
             property alias keySequence: keySequenceItem.keySequence
             property alias alternateKeySequence: alternateKeySequenceItem.keySequence
-            // Needs to access shortcutDelegate.model for doing setData on the model
-            property ShortcutDelegate shortcutDelegate
-            property int index: -1
+            // Filtering can remove the delegate while its shortcut is being edited.
+            property var sourceIndex
             modal: true
 
             parent: root.QQC.Overlay.overlay
@@ -157,8 +154,7 @@ Kirigami.ScrollablePage {
 
                     label: _tr.i18nc("@label", "Shortcut:")
                     onKeySequenceModified: {
-                        print("SETTING", keySequence)
-                        shortcutDialog.shortcutDelegate.model.shortcut = keySequence;
+                        actionModel.setData(shortcutDialog.sourceIndex, keySequence, AC.ActionModel.ShortcutRole);
                     }
 
                     onErrorOccurred: (title, message) => {
@@ -185,7 +181,7 @@ Kirigami.ScrollablePage {
                     label: _tr.i18nc("@label", "Alternative:")
 
                     onKeySequenceModified: {
-                        shortcutDialog.shortcutDelegate.model.alternateShortcut = keySequence;
+                        actionModel.setData(shortcutDialog.sourceIndex, keySequence, AC.ActionModel.AlternateShortcutRole);
                     }
 
                     onErrorOccurred: (title, message) => {
@@ -234,9 +230,9 @@ Kirigami.ScrollablePage {
                     standardButtons: QQC.DialogButtonBox.Close | QQC.DialogButtonBox.Reset
                     onRejected: shortcutDialog.close();
                     onReset: {
-                        root.model.reset(listView.model.mapToSource(listView.model.index(shortcutDialog.index, 0)));
-                        shortcutDialog.keySequence = shortcutDialog.shortcutDelegate.model.shortcut;
-                        shortcutDialog.alternateKeySequence = shortcutDialog.shortcutDelegate.model.alternateShortcut;
+                        actionModel.reset(shortcutDialog.sourceIndex);
+                        shortcutDialog.keySequence = actionModel.data(shortcutDialog.sourceIndex, AC.ActionModel.ShortcutRole);
+                        shortcutDialog.alternateKeySequence = actionModel.data(shortcutDialog.sourceIndex, AC.ActionModel.AlternateShortcutRole);
                     }
                     leftPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
                     topPadding: Kirigami.Units.smallSpacing

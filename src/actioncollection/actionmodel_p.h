@@ -43,6 +43,7 @@ public:
         ActionCollectionRole,
         ShortcutRole,
         AlternateShortcutRole,
+        SearchTextRole,
     };
     Q_ENUM(Role);
 

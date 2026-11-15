@@ -214,7 +214,7 @@ void ActionModel::reset(const QModelIndex &index)
     }
 
     if (found) {
-        Q_EMIT dataChanged(index, index, {ShortcutRole, AlternateShortcutRole});
+        Q_EMIT dataChanged(index, index, {ShortcutRole, AlternateShortcutRole, SearchTextRole});
     }
 }
 
@@ -311,6 +311,9 @@ QVariant ActionModel::data(const QModelIndex &index, int role) const
             return it.value();
         }
         return action->variantAlternateShortcut();
+    case SearchTextRole:
+        return QString{data(index, Qt::DisplayRole).toString() + QLatin1Char('\n') + data(index, ShortcutRole).toString() + QLatin1Char('\n')
+                       + data(index, AlternateShortcutRole).toString()};
     }
 
     return {};
@@ -328,7 +331,7 @@ bool ActionModel::setData(const QModelIndex &index, const QVariant &value, int r
         Q_ASSERT(action);
         if (action->variantShortcut().value<QKeySequence>() == QKeySequence(value.toString())) {
             d->m_pendingShortcuts[action] = QKeySequence();
-            Q_EMIT dataChanged(idx, idx, {role});
+            Q_EMIT dataChanged(idx, idx, {ShortcutRole, SearchTextRole});
         }
     }
 
@@ -342,7 +345,7 @@ bool ActionModel::setData(const QModelIndex &index, const QVariant &value, int r
     } else {
         d->m_pendingAlternateShortcuts[action] = seq;
     }
-    Q_EMIT dataChanged(index, index, {role});
+    Q_EMIT dataChanged(index, index, {role, SearchTextRole});
     return true;
 }
 
@@ -364,7 +367,8 @@ QHash<int, QByteArray> ActionModel::roleNames() const
             {ActionInstancesRole, "actionInstances"},
             {ActionCollectionRole, "actionCollection"},
             {ShortcutRole, "shortcut"},
-            {AlternateShortcutRole, "alternateShortcut"}};
+            {AlternateShortcutRole, "alternateShortcut"},
+            {SearchTextRole, "searchText"}};
 }
 
 #include "moc_actionmodel_p.cpp"
