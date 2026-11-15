@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kirigami-app-components package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2026.
+# SPDX-FileCopyrightText: 2026 Yuri Chornoivan <yurchor@ukr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-13 11:40+0000\n"
-"PO-Revision-Date: 2026-05-15 09:54+0300\n"
+"PO-Revision-Date: 2026-11-14 20:57+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: actioncollection/keysequencehelper.cpp:134
 #, kde-format
@@ -178,13 +178,13 @@ msgstr "Скасувати запис послідовності клавіш"
 #, kde-format
 msgctxt "KDE title besides logo in the About KDE page"
 msgid "KDE"
-msgstr ""
+msgstr "KDE"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:67
 #, kde-format
 msgctxt "KDE motto in About KDE page"
 msgid "Be Free!"
-msgstr ""
+msgstr "Будьте вільними!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:78
 #, kde-format
@@ -200,18 +200,29 @@ msgid ""
 "the world's finest Free Software. Everyone is welcome to join and contribute "
 "to KDE, including you."
 msgstr ""
+"KDE — це всесвітня спільнота програмістів, художників, авторів текстів, "
+"перекладачів та фахівців з полегшення користування програмами, які роблять "
+"свій внесок до розвитку вільного програмного забезпечення. Цією спільнотою "
+"створено стільничне середовище Плазма, сотні вільних програм і безліч "
+"програмних бібліотек, які є основою роботи програм.\n"
+"\n"
+"Розробка KDE є спільною працею, у якій жоден з учасників не має переважного "
+"контролю над зусиллями або результатами роботи інших розробників KDE. Ми "
+"працюємо разом заради спільної мети, якою є створення якомога якіснішого "
+"вільного програмного забезпечення. Кожен може долучитися і зробити свій "
+"внесок до KDE, зокрема це можете зробити ви."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:90
 #, kde-format
 msgctxt "Link to kde.org"
 msgid "Homepage"
-msgstr ""
+msgstr "Домашня сторінка"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:97
 #, kde-format
 msgctxt "Form bugs section title"
 msgid "Report bugs"
-msgstr ""
+msgstr "Повідомити про помилку"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:103
 #, kde-format
@@ -228,18 +239,29 @@ msgid ""
 "tracking system to register your wish. Make sure you use the severity called "
 "\"Wishlist\"."
 msgstr ""
+"Програмне забезпечення завжди потребує вдосконалення, і команда KDE готова "
+"це робити Проте, вам (користувачеві) варто повідомити нам, якщо щось не "
+"працює, як слід, або щось можна покращити.\n"
+"\n"
+"KDE має систему стеження за вадами. Скористайтеся розташованою нижче кнопкою "
+"для створення звіту щодо вади або скористайтеся сторінкою «Про програму», "
+"щоб створити звіт щодо вади саме у цій програм.\n"
+"\n"
+"Якщо у вас є пропозиція щодо вдосконалення, за допомогою цієї системи можна "
+"зареєструвати ваше побажання. Переконайтеся, що поле «Важливість» "
+"встановлено у значення «Список побажань» («Wishlist»)."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:116
 #, kde-format
 msgctxt "Link to bugzilla"
 msgid "Report a bug"
-msgstr ""
+msgstr "Повідомити про ваду"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:123
 #, kde-format
 msgctxt "Form section title about getting involved"
 msgid "Join us"
-msgstr ""
+msgstr "Долучитися до нас"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:128
 #, kde-format
@@ -249,24 +271,28 @@ msgid ""
 "You can join the language teams that translate program interfaces. You can "
 "provide graphics, themes, sounds, and improved documentation. You decide!"
 msgstr ""
+"Не обов'язково бути програмістом, щоб належати до Команди KDE. Можете "
+"приєднатися до команд, що перекладають інтерфейс програм. Можете "
+"забезпечувати користувачів графікою, темами, звуками та вдосконаленою "
+"документацію. Вам вирішувати!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:139
 #, kde-format
 msgctxt "Link to wiki page get involved"
 msgid "Get Involved"
-msgstr ""
+msgstr "Приєднатися до команди"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:150
 #, kde-format
 msgctxt "Link to develop.kde.org"
 msgid "Developer Documentation"
-msgstr ""
+msgstr "Документація для розробників"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:157
 #, kde-format
 msgctxt "Form section title about donations"
 msgid "Support us"
-msgstr ""
+msgstr "Підтримати нас"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:162
 #, kde-format
@@ -289,18 +315,33 @@ msgid ""
 "\n"
 "Thank you very much in advance for your support."
 msgstr ""
+"Програмне забезпечення KDE розповсюджувалося і буде розповсюджуватися завжди "
+"безкоштовно, однак на його розробку потрібні гроші.\n"
+"\n"
+"Тому, команда KDE створила Спілку KDE  (KDE eV.) — неприбуткову організацію, "
+"яку юридично зареєстровано у Тюбінгені, Німеччина. Спілка KDE юридично та "
+"фінансово представляє спільноту KDE.\n"
+"\n"
+"Команда KDE потребує допомоги у багатьох аспектах, зокрема фінансових. В "
+"основному кошти витрачаються на відшкодування витрат людям, які працюють над "
+"розробкою KDE. Інші кошти буде витрачено на підтримку та організацію "
+"конференцій та зустрічей.\n"
+"\n"
+"Будемо раді вашій фінансовій підтримці наших зусиль.\n"
+"\n"
+"Заздалегідь вдячні вам за допомогу."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:176
 #, kde-format
 msgctxt "link to ev.kde.org"
 msgid "KDE e.V."
-msgstr ""
+msgstr "KDE e.V."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:187
 #, kde-format
 msgctxt "Link to donation page"
 msgid "Donate"
-msgstr ""
+msgstr "Підтримати фінансово"
 
 #: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format

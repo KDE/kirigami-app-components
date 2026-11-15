@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-13 11:40+0000\n"
-"PO-Revision-Date: 2026-05-15 04:55-0300\n"
+"PO-Revision-Date: 2026-11-14 06:20-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.04.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: actioncollection/keysequencehelper.cpp:134
 #, kde-format
@@ -178,13 +178,13 @@ msgstr "Cancelar gravação de sequência de teclas"
 #, kde-format
 msgctxt "KDE title besides logo in the About KDE page"
 msgid "KDE"
-msgstr ""
+msgstr "KDE"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:67
 #, kde-format
 msgctxt "KDE motto in About KDE page"
 msgid "Be Free!"
-msgstr ""
+msgstr "Seja livre!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:78
 #, kde-format
@@ -200,18 +200,27 @@ msgid ""
 "the world's finest Free Software. Everyone is welcome to join and contribute "
 "to KDE, including you."
 msgstr ""
+"A KDE é uma comunidade mundial de engenheiros de software, artistas, "
+"escritores, tradutores e criadores comprometidos com o desenvolvimento de "
+"Software Livre. A KDE produz o ambiente de desktop Plasma, centenas de "
+"aplicativos e muitas bibliotecas de software que os suportam.\n"
+"\n"
+"A KDE é uma empresa cooperativa: nenhuma entidade controla sua direção ou "
+"produtos. Em vez disso, trabalhamos juntos para alcançar o objetivo comum de "
+"construir o melhor Software Livre do mundo. Todos são bem-vindos para "
+"participar e contribuir com a KDE, inclusive você."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:90
 #, kde-format
 msgctxt "Link to kde.org"
 msgid "Homepage"
-msgstr ""
+msgstr "Site"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:97
 #, kde-format
 msgctxt "Form bugs section title"
 msgid "Report bugs"
-msgstr ""
+msgstr "Relatar bugs"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:103
 #, kde-format
@@ -228,18 +237,29 @@ msgid ""
 "tracking system to register your wish. Make sure you use the severity called "
 "\"Wishlist\"."
 msgstr ""
+"Software sempre pode ser melhorado e a equipe da KDE está pronta para isso. "
+"No entanto, você - o usuário - deve nos informar quando algo não funcionar "
+"conforme o esperado ou puder ser feito melhor.\n"
+"\n"
+"A KDE possui um sistema de rastreamento de bugs. Use o botão abaixo para "
+"registrar um bug ou use a página Sobre do programa para relatar um bug "
+"específico para este aplicativo.\n"
+"\n"
+"Se você tiver uma sugestão de melhoria, poderá usar o sistema de "
+"rastreamento de bugs para registrar seu desejo. Certifique-se de usar a "
+"gravidade (severity) chamada \"Wishlist\"."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:116
 #, kde-format
 msgctxt "Link to bugzilla"
 msgid "Report a bug"
-msgstr ""
+msgstr "Relate um bug"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:123
 #, kde-format
 msgctxt "Form section title about getting involved"
 msgid "Join us"
-msgstr ""
+msgstr "Junte-se a nós"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:128
 #, kde-format
@@ -249,24 +269,28 @@ msgid ""
 "You can join the language teams that translate program interfaces. You can "
 "provide graphics, themes, sounds, and improved documentation. You decide!"
 msgstr ""
+"Não é necessário ser um desenvolvedor de software para ser um membro da "
+"equipe da KDE. Você pode tornar-se um membro das equipes de idiomas que "
+"traduzem as interfaces dos programas. Você pode fornecer gráficos, temas, "
+"sons e melhorar a documentação. Você decide!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:139
 #, kde-format
 msgctxt "Link to wiki page get involved"
 msgid "Get Involved"
-msgstr ""
+msgstr "Participe"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:150
 #, kde-format
 msgctxt "Link to develop.kde.org"
 msgid "Developer Documentation"
-msgstr ""
+msgstr "Documentação do desenvolvedor"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:157
 #, kde-format
 msgctxt "Form section title about donations"
 msgid "Support us"
-msgstr ""
+msgstr "Apoie-nos"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:162
 #, kde-format
@@ -289,18 +313,34 @@ msgid ""
 "\n"
 "Thank you very much in advance for your support."
 msgstr ""
+"O software da KDE é e sempre estará disponível gratuitamente, mas criá-lo "
+"não é gratuito.\n"
+"\n"
+"Para apoiar o desenvolvimento, a comunidade KDE formou o KDE e.V., uma "
+"organização sem fins lucrativos fundada legalmente na Alemanha. KDE e.V. "
+"representa a comunidade KDE em questões jurídicas e financeiras.\n"
+"\n"
+"A KDE se beneficia de muitos tipos de contribuições, inclusive financeiras. "
+"Usamos os fundos para reembolsar os membros e outros pelas despesas em que "
+"incorrem ao contribuir. Outros fundos são usados para apoio jurídico e "
+"organização de conferências e reuniões.\n"
+"\n"
+"Gostaríamos de incentivá-lo a apoiar nossos esforços com uma doação "
+"financeira.\n"
+"\n"
+"Muito obrigado antecipadamente por seu apoio."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:176
 #, kde-format
 msgctxt "link to ev.kde.org"
 msgid "KDE e.V."
-msgstr ""
+msgstr "KDE e.V."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:187
 #, kde-format
 msgctxt "Link to donation page"
 msgid "Donate"
-msgstr ""
+msgstr "Doar"
 
 #: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format

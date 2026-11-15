@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-13 11:40+0000\n"
-"PO-Revision-Date: 2026-05-15 13:25+0300\n"
+"PO-Revision-Date: 2026-11-14 18:35+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.04.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: actioncollection/keysequencehelper.cpp:134
 #, kde-format
@@ -178,13 +178,13 @@ msgstr "Düğme dizisi kaydını iptal et"
 #, kde-format
 msgctxt "KDE title besides logo in the About KDE page"
 msgid "KDE"
-msgstr ""
+msgstr "KDE"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:67
 #, kde-format
 msgctxt "KDE motto in About KDE page"
 msgid "Be Free!"
-msgstr ""
+msgstr "Özgür olun!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:78
 #, kde-format
@@ -200,18 +200,28 @@ msgid ""
 "the world's finest Free Software. Everyone is welcome to join and contribute "
 "to KDE, including you."
 msgstr ""
+"KDE; dünyanın dört bir yanında bulunan ve Özgür Yazılım geliştirme "
+"felsefesini benimsemiş yazılım mühendislerinin, sanatçıların, yazarların ve "
+"çevirmenlerin katılımı ile oluşmuş bir topluluktur. KDE; Plasma masaüstü "
+"ortamını, yüzlerce uygulamayı ve bu uygulamaları destekleyen çok sayıda "
+"yazılım kitaplığını geliştirir.\n"
+"\n"
+"KDE, iş birliğine dayalı bir kuruluştur; yönünü veya ürünlerini tek başına "
+"denetleyen bir kuruluş yoktur. Bunun yerine, dünyanın en iyi özgür "
+"yazılımlarını oluşturma ortak ereğine ulaşmak için birlikte çalışıyoruz. Siz "
+"de dâhil olmak üzere herkes KDE’ye katılıp katkıda bulunabilir."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:90
 #, kde-format
 msgctxt "Link to kde.org"
 msgid "Homepage"
-msgstr ""
+msgstr "Ana Sayfa"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:97
 #, kde-format
 msgctxt "Form bugs section title"
 msgid "Report bugs"
-msgstr ""
+msgstr "Hatalar Bildir"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:103
 #, kde-format
@@ -228,18 +238,29 @@ msgid ""
 "tracking system to register your wish. Make sure you use the severity called "
 "\"Wishlist\"."
 msgstr ""
+"Bir yazılım, doğası gereği her zaman iyileştirmeye açıktır ve KDE takımının "
+"tek amacı budur. Kullanıcılar olarak, bir şeyler beklediğiniz gibi "
+"çalışmadığında veya kimi şeylerin daha iyi olabileceğini düşündüğünüzde "
+"lütfen bize bunları bildirin.\n"
+"\n"
+"KDE’nin bir hata izleme sistemi vardır. Bir hata bildirmek için aşağıdaki "
+"düğmeyi veya bu uygulamaya özgü bir hatayı bildirmek için uygulamanın "
+"“Hakkında” sayfasına bakın.\n"
+"\n"
+"Bir iyileştirme önerisinde bulunmak için de hata izleme sistemini "
+"kullanabilirsiniz. “Wishlist” önceliğini seçtiğinizden emin olun."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:116
 #, kde-format
 msgctxt "Link to bugzilla"
 msgid "Report a bug"
-msgstr ""
+msgstr "Hata Bildir"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:123
 #, kde-format
 msgctxt "Form section title about getting involved"
 msgid "Join us"
-msgstr ""
+msgstr "Bize Katıl"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:128
 #, kde-format
@@ -249,24 +270,28 @@ msgid ""
 "You can join the language teams that translate program interfaces. You can "
 "provide graphics, themes, sounds, and improved documentation. You decide!"
 msgstr ""
+"KDE Takımının bir üyesi olmak için yazılım mühendisi olmanız gerekmez. "
+"Uygulama arayüzleri çevirisi için kendi dilinizin çeviri takımınıza "
+"katılabilirsiniz. İsterseniz grafikler, temalar, sesler yaratabilir ve "
+"yardım belgeleri yazıp var olanları geliştirebilirsiniz. Karar sizin!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:139
 #, kde-format
 msgctxt "Link to wiki page get involved"
 msgid "Get Involved"
-msgstr ""
+msgstr "Katıl"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:150
 #, kde-format
 msgctxt "Link to develop.kde.org"
 msgid "Developer Documentation"
-msgstr ""
+msgstr "Geliştirici Belgelendirmesi"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:157
 #, kde-format
 msgctxt "Form section title about donations"
 msgid "Support us"
-msgstr ""
+msgstr "Bizi Destekle"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:162
 #, kde-format
@@ -289,18 +314,33 @@ msgid ""
 "\n"
 "Thank you very much in advance for your support."
 msgstr ""
+"KDE yazılımları ücretsizdir ve her zaman ücretsiz kalacaktır; ancak onları "
+"yapmak bedava değildir.\n"
+"\n"
+"KDE topluluğu, kâr amacı gütmeyen bir organizasyon olan KDE e.V’yi "
+"Almanya’da kurmuştur. KDE e.V, KDE topluluğunu finansal ve hukukî konularda "
+"temsil etmektedir.\n"
+"\n"
+"KDE Takımı’nın her zaman finansal desteğe gereksinimi vardır. Yapılan "
+"bağışlar; yasal destek, KDE geliştiricilerinin KDE’ye yaptıkları desteğin "
+"sürekliliğini sağlamak ve toplantıların/konferansların organizasyonu için "
+"harcanır.\n"
+"\n"
+"Çabalarımızı maddi bir bağışla desteklemenizi teşvik etmek istiyoruz.\n"
+"\n"
+"Desteğiniz için şimdiden teşekkürler."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:176
 #, kde-format
 msgctxt "link to ev.kde.org"
 msgid "KDE e.V."
-msgstr ""
+msgstr "KDE e.V."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:187
 #, kde-format
 msgctxt "Link to donation page"
 msgid "Donate"
-msgstr ""
+msgstr "Bağış Yap"
 
 #: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format
