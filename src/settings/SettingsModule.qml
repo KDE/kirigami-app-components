@@ -9,7 +9,6 @@ import org.kde.kirigami as Kirigami
    \qmltype SettingsModule
    \inqmlmodule org.kde.kirigami.settings
    \brief This object holds the information of configuration module.
-   \since 1.3.0
  */
 QtObject {
     id: root
@@ -48,17 +47,6 @@ QtObject {
     property bool visible: true
 
     /*!
-       Whether this module's text can be matched by the settings search.
-
-       Set this to false for pages that do not contain searchable settings,
-       such as About pages. A module with \c searchable set to false can still
-       be found through its \c keywords.
-       \default true
-       \since 1.16.0
-     */
-    property bool searchable: true
-
-    /*!
        Additional search terms for this module.
 
        Keywords are matched in addition to the module text, and are also used
@@ -70,7 +58,6 @@ QtObject {
            i18nc("@info:search keyword", "Key binding")
        ]
        \endqml
-       \since 1.16.0
      */
     property list<string> keywords
 
