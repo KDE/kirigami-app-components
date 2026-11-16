@@ -30,32 +30,29 @@ import org.kde.kirigami.settings.private as Private
            id: configuration
 
            window: button.Controls.ApplicationWindow.window as Kirigami.ApplicationWindow
+           defaultModule: appearance
 
-           modules: [
-               KirigamiSettings.SettingsModule {
-                   moduleId: "appearance"
-                   text: i18nc("@action:button", "Appearance")
-                   icon.name: "preferences-desktop-theme-global"
-                   page: () => Qt.createComponent("org.kde.tokodon", "AppearancePage")
-               },
-               ...
-               KirigamiSettings.SettingsModule {
-                   moduleId: "about"
-                   text: i18nc("@action:button", "About Tokodon")
-                   icon.name: "help-about"
-                   page: () => Qt.createComponent("org.kde.kirigami", "AboutPage")
-                   category: i18nc("@title:group", "About")
-                   searchable: false
-               },
-               KirigamiSettings.SettingsModule {
-                   moduleId: "aboutkde"
-                   text: i18nc("@action:button", "About KDE")
-                   icon.name: "kde"
-                   page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "AboutKDEPage")
-                   category: i18nc("@title:group", "About")
-                   searchable: false
-               }
-           ]
+            KirigamiSettings.SettingsModule {
+                id: appearance
+                moduleId: "appearance"
+                text: i18nc("@action:button", "Appearance")
+                icon.name: "preferences-desktop-theme-global"
+                page: () => Qt.createComponent("org.kde.tokodon", "AppearancePage")
+            }
+            KirigamiSettings.SettingsModule {
+                moduleId: "about"
+                text: i18nc("@action:button", "About Tokodon")
+                icon.name: "help-about"
+                page: () => Qt.createComponent("org.kde.kirigami", "AboutPage")
+                category: i18nc("@title:group", "About")
+            }
+            KirigamiSettings.SettingsModule {
+                moduleId: "aboutkde"
+                text: i18nc("@action:button", "About KDE")
+                icon.name: "kde"
+                page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "AboutKDEPage")
+                category: i18nc("@title:group", "About")
+            }
        }
 
        icon.name: 'settings-configure-symbolic'
@@ -86,7 +83,7 @@ QtObject {
     /*!
        \brief This property holds the list of pages for the settings.
      */
-    property list<SettingsModule> modules
+    default property list<SettingsModule> modules
 
     /*!
        \brief This property holds the parent window.
@@ -105,10 +102,10 @@ QtObject {
     /*!
        Open the configuration window for the given \a defaultModule.
 
-       The defaultModule corresponds to the moduleId of the default configuration that should be preselected when opening the configuration view.
-       By default it is not specified, on desktop the first module will be chosen, on mobile no page will be preselected.
+       \a module The module we want to open as soon the config view is open.
+       If left empty, on desktop the first module will be chosen, on mobile no page will be preselected.
      */
-    function open(defaultModule = ''): void {
+    function open(module = ''): void {
         if (!root.window) {
             console.warn("SettingsViewController: the window property must be set before calling open()");
             return;
@@ -130,7 +127,7 @@ QtObject {
         let view = null;
         if (Kirigami.Settings.isMobile) {
             view = root.window.pageStack.layers.push(d.mobilePageComponent, {
-                defaultModule: defaultModule,
+                defaultModule: module,
                 modules: root.modules,
                 title: root.title,
                 window: root.window,
@@ -145,7 +142,7 @@ QtObject {
             }
         } else {
             view = d.windowComponent.createObject(root.window, {
-                defaultModule: defaultModule,
+                defaultModule: module,
                 modules: root.modules,
                 width: Kirigami.Units.gridUnit * 50,
                 height: Kirigami.Units.gridUnit * 30,
