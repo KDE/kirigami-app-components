@@ -34,11 +34,8 @@ QtObject {
 
     /*!
        This property holds the page for this module.
-
-       It can either be a function that returns a Component, or a Component
-       directly.
      */
-    required property var page
+    required property Component page
 
     /*!
        This property holds whether the module is visible.

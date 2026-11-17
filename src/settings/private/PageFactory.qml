@@ -17,7 +17,7 @@ QtObject {
             return root.pageCache[module.moduleId];
         }
 
-        const component = typeof module.page === "function" ? module.page() : module.page;
+        const component = module.page;
         if (!component) {
             console.error("Unable to create component for moduleId", module.moduleId);
             return null;

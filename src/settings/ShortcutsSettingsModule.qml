@@ -25,7 +25,7 @@ SettingsModule {
     name: _tr.i18nd("@action:button", "Keyboard Shortcuts")
     icon.name: "configure-shortcuts-symbolic"
     visible: !Kirigami.Settings.isMobile
-    page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "ShortcutsEditor")
+    page: Qt.createComponent("org.kde.kirigami.actioncollection", "ShortcutsEditor")
     initialProperties: () => ({ allowModifierlessShortcuts: root.allowModifierlessShortcuts })
     keywords: [
         _tr.i18nd("@info:search keyword", "Hotkey"),

@@ -28,8 +28,8 @@
    \image settingsdialogmobile.png Mobile settings page with Settings and About groups
 
    Set \c window to the application's \c Kirigami.ApplicationWindow
-   before calling \c open(). A module's \c page property is a function that
-   returns a \c Component. A \l {Kirigami::ScrollablePage} hosting a
+   before calling \c open(). A module's \c page property is a
+   \c Component. A \l {Kirigami::ScrollablePage} hosting a
    \l {Kirigami::Form} is a convenient root for a settings page:
 
    \qml
@@ -70,7 +70,7 @@
                    moduleId: "general"
                    text: i18nc("@action:button", "General")
                    icon.name: "preferences-system-symbolic"
-                   page: () => generalPage
+                   page: generalPage
                }
            ]
        }
@@ -108,7 +108,7 @@
    Settings.SettingsModule {
        moduleId: "account"
        text: i18nc("@action:button", "Account")
-       page: () => accountPage
+       page: accountPage
        initialProperties: () => ({ accountName: window.activeAccountName })
    }
    \endqml

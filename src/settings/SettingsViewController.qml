@@ -37,20 +37,20 @@ import org.kde.kirigami.settings.private as Private
                 moduleId: "appearance"
                 text: i18nc("@action:button", "Appearance")
                 icon.name: "preferences-desktop-theme-global"
-                page: () => Qt.createComponent("org.kde.tokodon", "AppearancePage")
+                page: Qt.createComponent("org.kde.tokodon", "AppearancePage")
             }
             KirigamiSettings.SettingsModule {
                 moduleId: "about"
                 text: i18nc("@action:button", "About Tokodon")
                 icon.name: "help-about"
-                page: () => Qt.createComponent("org.kde.kirigami", "AboutPage")
+                page: Qt.createComponent("org.kde.kirigami", "AboutPage")
                 category: i18nc("@title:group", "About")
             }
             KirigamiSettings.SettingsModule {
                 moduleId: "aboutkde"
                 text: i18nc("@action:button", "About KDE")
                 icon.name: "kde"
-                page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "AboutKDEPage")
+                page: Qt.createComponent("org.kde.kirigami.actioncollection", "AboutKDEPage")
                 category: i18nc("@title:group", "About")
             }
        }

@@ -49,7 +49,7 @@ TestCase {
         id: appearanceModule
         moduleId: "appearance"
         text: "Appearance"
-        page: () => null
+        page: null
         keywords: ["theme"]
     }
 
@@ -57,7 +57,7 @@ TestCase {
         id: aboutModule
         moduleId: "about"
         text: "About"
-        page: () => null
+        page: null
         searchable: false
         keywords: ["credits", "dark"]
     }
@@ -66,7 +66,7 @@ TestCase {
         id: hiddenModule
         moduleId: "hidden"
         text: "Hidden"
-        page: () => null
+        page: null
         visible: false
     }
 
@@ -208,7 +208,6 @@ TestCase {
     }
 
     function test_pageFactory() {
-        // The page property can also be a Component directly
         const page = pageFactory.pageForModule(pageModule, null);
         verify(page !== null);
 
