@@ -97,7 +97,7 @@ QtObject {
 
        Null if one currently doesn't exist.
      */
-    property QtObject configViewItem: null
+    property QtObject currentItem: null
 
     /*!
        Open the configuration window for the given \a defaultModule.

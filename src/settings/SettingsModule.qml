@@ -25,7 +25,7 @@ QtObject {
 
        This will be displayed in the list of modules.
      */
-    required property string text
+    required property string name
 
     /*!
        This property holds the icon of the module.

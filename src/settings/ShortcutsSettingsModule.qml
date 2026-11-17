@@ -22,14 +22,18 @@ SettingsModule {
      */
     property bool allowModifierlessShortcuts: false
 
-    text: KI18n.i18ndc("kirigami-app-components", "@action:button", "Keyboard Shortcuts")
+    name: _tr.i18nd("@action:button", "Keyboard Shortcuts")
     icon.name: "configure-shortcuts-symbolic"
     visible: !Kirigami.Settings.isMobile
     page: () => Qt.createComponent("org.kde.kirigami.actioncollection", "ShortcutsEditor")
     initialProperties: () => ({ allowModifierlessShortcuts: root.allowModifierlessShortcuts })
     keywords: [
-        KI18n.i18ndc("kirigami-app-components", "@info:search keyword", "Hotkey"),
-        KI18n.i18ndc("kirigami-app-components", "@info:search keyword", "Key binding"),
-        KI18n.i18ndc("kirigami-app-components", "@info:search keyword", "Accelerator")
+        _tr.i18nd("@info:search keyword", "Hotkey"),
+        _tr.i18nd("@info:search keyword", "Key binding"),
+        _tr.i18nd("@info:search keyword", "Accelerator")
     ]
+
+    property KI18nContext _tr: KI18nContext {
+        translationDomain: "kirigami-actioncollection"
+    }
 }

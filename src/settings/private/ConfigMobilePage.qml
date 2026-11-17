@@ -115,7 +115,7 @@ Kirigami.ScrollablePage {
                             required property SettingsModule modelData
 
                             action: Kirigami.Action {
-                                text: moduleDelegate.modelData.text
+                                text: moduleDelegate.modelData.name
                                 icon.name: moduleDelegate.modelData.icon.name
                                 onTriggered: root.openModule(moduleDelegate.modelData)
                             }

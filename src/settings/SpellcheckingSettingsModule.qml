@@ -12,7 +12,7 @@ import org.kde.ki18n
  */
 SettingsModule {
     moduleId: "spellchecking"
-    text: KI18n.i18ndc("kirigami-app-components", "@action:button", "Spell Checking")
+    name: KI18n.i18ndc("kirigami-app-components", "@action:button", "Spell Checking")
     icon.name: "tools-check-spelling"
     page: () => Qt.createComponent("org.kde.kirigami.settings.private", "SonnetConfigPage")
     visible: Qt.platform.os !== "android"

@@ -135,7 +135,7 @@ Kirigami.ApplicationWindow {
                         required property int index
                         required property SettingsModule modelData
 
-                        text: modelData?.text
+                        text: modelData?.name
                         icon.name: modelData?.icon.name
                         icon.source: modelData?.icon.source
                         checked: root.currentModule === settingDelegate.modelData
