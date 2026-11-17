@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-13 11:40+0000\n"
+"POT-Creation-Date: 2026-11-16 16:39+0000\n"
 "PO-Revision-Date: 2026-07-04 12:45+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -312,25 +312,25 @@ msgctxt "@label:textbox"
 msgid "Filter…"
 msgstr "Suodata…"
 
-#: actioncollection/qml/ShortcutsEditor.qml:123
+#: actioncollection/qml/ShortcutsEditor.qml:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcut: %1"
 msgstr "Pikanäppäin: %1"
 
-#: actioncollection/qml/ShortcutsEditor.qml:158
+#: actioncollection/qml/ShortcutsEditor.qml:155
 #, kde-format
 msgctxt "@label"
 msgid "Shortcut:"
 msgstr "Pikanäppäin:"
 
-#: actioncollection/qml/ShortcutsEditor.qml:185
+#: actioncollection/qml/ShortcutsEditor.qml:181
 #, kde-format
 msgctxt "@label"
 msgid "Alternative:"
 msgstr "Vaihtoehto:"
 
-#: actioncollection/qml/ShortcutsEditor.qml:252
+#: actioncollection/qml/ShortcutsEditor.qml:248
 #, kde-format
 msgctxt "Placeholder message"
 msgid "No shortcuts found"

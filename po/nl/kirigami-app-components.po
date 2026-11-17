@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-13 11:40+0000\n"
-"PO-Revision-Date: 2026-05-15 14:25+0200\n"
-"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"POT-Creation-Date: 2026-11-16 16:39+0000\n"
+"PO-Revision-Date: 2026-11-16 13:53+0100\n"
+"Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -177,13 +177,13 @@ msgstr "Toetsenreeks opnemen annuleren"
 #, kde-format
 msgctxt "KDE title besides logo in the About KDE page"
 msgid "KDE"
-msgstr ""
+msgstr "KDE"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:67
 #, kde-format
 msgctxt "KDE motto in About KDE page"
 msgid "Be Free!"
-msgstr ""
+msgstr "Wees vrij!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:78
 #, kde-format
@@ -199,18 +199,28 @@ msgid ""
 "the world's finest Free Software. Everyone is welcome to join and contribute "
 "to KDE, including you."
 msgstr ""
+"KDE is een wereldwijde gemeenschap van software engineers, artiesten, "
+"schrijvers, vertalers en makers die toegewijd zijn aan Vrije Software "
+"ontwikkeling. KDE produceert de Plasma bureaubladomgeving, honderden "
+"toepassingen en de vele software bibliotheken die hen ondersteunen.\n"
+"\n"
+"KDE is een samenwerkingsorganisatie: geen enkele entiteit bestuurt zijn "
+"richting of producten. In plaats daarvan werken we samen om het "
+"gemeenschappelijke doel van het bouwen van de mooiste Vrije Software te "
+"bereiken. Iedereen is welkom om mee te doen en bij te dragen aan KDE, "
+"inclusief u."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:90
 #, kde-format
 msgctxt "Link to kde.org"
 msgid "Homepage"
-msgstr ""
+msgstr "Homepagina"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:97
 #, kde-format
 msgctxt "Form bugs section title"
 msgid "Report bugs"
-msgstr ""
+msgstr "Bugs rapporteren"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:103
 #, kde-format
@@ -227,18 +237,29 @@ msgid ""
 "tracking system to register your wish. Make sure you use the severity called "
 "\"Wishlist\"."
 msgstr ""
+"Software kan altijd verbeterd worden en het KDE-team is gereed om dat te "
+"doen. Maar, u - de gebruiker - moet ons vertellen wanneer iets niet werkt "
+"zoals verwacht of zou beter gedaan kunnen worden.\n"
+"\n"
+"KDE heeft een volgsysteem voor bugs. Gebruik de onderstaande knop om een bug "
+"te rapporteren of gebruik de pagina Info over van het programma om een bug "
+"specifiek voor die toepassing te rapporteren.\n"
+"\n"
+"Als u een suggestie voor verbetering hebt dan bent u welkom om het "
+"volgsysteem voor bugs te gebruiken om uw wens te registreren. Ga na dat u de "
+"ernst genaamd \"Wishlist\" gebruikt."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:116
 #, kde-format
 msgctxt "Link to bugzilla"
 msgid "Report a bug"
-msgstr ""
+msgstr "Een bug rapporteren"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:123
 #, kde-format
 msgctxt "Form section title about getting involved"
 msgid "Join us"
-msgstr ""
+msgstr "Doe mee"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:128
 #, kde-format
@@ -248,24 +269,28 @@ msgid ""
 "You can join the language teams that translate program interfaces. You can "
 "provide graphics, themes, sounds, and improved documentation. You decide!"
 msgstr ""
+"U hoeft geen softwareontwikkelaar te zijn om lid te worden van het KDE-team. "
+"U kunt deelnemen aan een van de vertaalteams die de programma's en "
+"documentatie vertalen. U kunt afbeeldingen, thema's, geluiden en verbeterde "
+"documentatie leveren. Aan u de keuze!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:139
 #, kde-format
 msgctxt "Link to wiki page get involved"
 msgid "Get Involved"
-msgstr ""
+msgstr "Doe mee"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:150
 #, kde-format
 msgctxt "Link to develop.kde.org"
 msgid "Developer Documentation"
-msgstr ""
+msgstr "Documentatie voor ontwikkelaars"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:157
 #, kde-format
 msgctxt "Form section title about donations"
 msgid "Support us"
-msgstr ""
+msgstr "Ondersteun ons"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:162
 #, kde-format
@@ -288,18 +313,32 @@ msgid ""
 "\n"
 "Thank you very much in advance for your support."
 msgstr ""
+"KDE-software is en zal altijd gratis verkrijgbaar zijn, maar de ontwikkeling "
+"ervan is allerminst vrij van kosten.\n"
+"Daarom heeft de KDE-gemeenschap KDE e.V. gevormd, een non-profit organisatie "
+"die gevestigd is in Duitsland. KDE e.V. representeert de KDE-gemeenschap in "
+"juridische en financiële zaken.\n"
+"KDE profiteert van allerlei bijdragen inclusief financiële. We gebruiken de "
+"fondsen om de kosten te vergoeden die KDE-leden en anderen gemaakt hebben "
+"voor hun bijdrage aan KDE. Andere fondsen worden gebruikt voor juridische "
+"ondersteuning en voor het organiseren van conferenties en bijeenkomsten.\n"
+"\n"
+"Wij willen u graag aanmoedigen om KDE te ondersteunen door middel van een "
+"financiële donatie.\n"
+"\n"
+"Alvast hartelijk bedankt voor uw bijdrage."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:176
 #, kde-format
 msgctxt "link to ev.kde.org"
 msgid "KDE e.V."
-msgstr ""
+msgstr "KDE e.V."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:187
 #, kde-format
 msgctxt "Link to donation page"
 msgid "Donate"
-msgstr ""
+msgstr "Doneren"
 
 #: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format
@@ -313,25 +352,25 @@ msgctxt "@label:textbox"
 msgid "Filter…"
 msgstr "Filter…"
 
-#: actioncollection/qml/ShortcutsEditor.qml:123
+#: actioncollection/qml/ShortcutsEditor.qml:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Shortcut: %1"
 msgstr "Sneltoets: %1"
 
-#: actioncollection/qml/ShortcutsEditor.qml:158
+#: actioncollection/qml/ShortcutsEditor.qml:155
 #, kde-format
 msgctxt "@label"
 msgid "Shortcut:"
 msgstr "Sneltoets:"
 
-#: actioncollection/qml/ShortcutsEditor.qml:185
+#: actioncollection/qml/ShortcutsEditor.qml:181
 #, kde-format
 msgctxt "@label"
 msgid "Alternative:"
 msgstr "Alternatief:"
 
-#: actioncollection/qml/ShortcutsEditor.qml:252
+#: actioncollection/qml/ShortcutsEditor.qml:248
 #, kde-format
 msgctxt "Placeholder message"
 msgid "No shortcuts found"
