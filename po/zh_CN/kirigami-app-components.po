@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-16 16:39+0000\n"
+"POT-Creation-Date: 2026-11-19 05:19+0000\n"
 "PO-Revision-Date: 2026-05-15 18:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -120,7 +120,7 @@ msgctxt "@title:window"
 msgid "About KDE"
 msgstr "关于 KDE"
 
-#: actioncollection/qml/ActionsExplorer.qml:126
+#: actioncollection/qml/ActionsExplorer.qml:129
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No results found"

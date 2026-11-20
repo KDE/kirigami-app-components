@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-16 16:39+0000\n"
-"PO-Revision-Date: 2026-05-21 22:29+0900\n"
+"POT-Creation-Date: 2026-11-19 05:19+0000\n"
+"PO-Revision-Date: 2026-11-19 22:16+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 26.07.70\n"
+"X-Generator: Lokalize 27.03.70\n"
 
 #: actioncollection/keysequencehelper.cpp:134
 #, kde-format
@@ -119,7 +119,7 @@ msgctxt "@title:window"
 msgid "About KDE"
 msgstr "關於 KDE"
 
-#: actioncollection/qml/ActionsExplorer.qml:126
+#: actioncollection/qml/ActionsExplorer.qml:129
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No results found"
@@ -174,13 +174,13 @@ msgstr "取消按鍵記錄"
 #, kde-format
 msgctxt "KDE title besides logo in the About KDE page"
 msgid "KDE"
-msgstr ""
+msgstr "KDE"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:67
 #, kde-format
 msgctxt "KDE motto in About KDE page"
 msgid "Be Free!"
-msgstr ""
+msgstr "擁抱自由！"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:78
 #, kde-format
@@ -196,18 +196,24 @@ msgid ""
 "the world's finest Free Software. Everyone is welcome to join and contribute "
 "to KDE, including you."
 msgstr ""
+"KDE 是一個接受全世界的軟體工程師、美工畫家、寫作者、翻譯者與創造者提交各種服"
+"務與貢獻的自由軟體開發社群。KDE 做出了 Plasma 桌面環境、數百個應用程式和支援"
+"它們的軟體函式庫。\n"
+"\n"
+"KDE 是個合作企業：沒有任何人操控 KDE 的目標和產品，取而代之的是一起達到建立世"
+"界上最好自由軟體的共同目標。歡迎任何人 -- 包括您。"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:90
 #, kde-format
 msgctxt "Link to kde.org"
 msgid "Homepage"
-msgstr ""
+msgstr "首頁"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:97
 #, kde-format
 msgctxt "Form bugs section title"
 msgid "Report bugs"
-msgstr ""
+msgstr "回報問題"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:103
 #, kde-format
@@ -224,18 +230,26 @@ msgid ""
 "tracking system to register your wish. Make sure you use the severity called "
 "\"Wishlist\"."
 msgstr ""
+"軟體總是可以改善，而 KDE 團隊準備好繼續此項工作。不過您 — 作為使用者 — 需要在"
+"有東西沒有正常運作或是可以更好的時候告訴我們。\n"
+"\n"
+"KDE 有一個問題追蹤系統。請用以下按鈕來回報問題，或是從程式的關於頁面回報應用"
+"程式自己的問題。\n"
+"\n"
+"如果您有改善的建議，您也可以使用問題追蹤系統來寫下您的希望。此時請使用"
+"「Wishlist」（願望清單）作為問題的嚴重程度。"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:116
 #, kde-format
 msgctxt "Link to bugzilla"
 msgid "Report a bug"
-msgstr ""
+msgstr "回報問題"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:123
 #, kde-format
 msgctxt "Form section title about getting involved"
 msgid "Join us"
-msgstr ""
+msgstr "加入我們"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:128
 #, kde-format
@@ -245,24 +259,26 @@ msgid ""
 "You can join the language teams that translate program interfaces. You can "
 "provide graphics, themes, sounds, and improved documentation. You decide!"
 msgstr ""
+"您不需要是軟體工程師也可以成為 KDE 團隊的一份子。您可以加入翻譯團隊來翻譯程式"
+"的介面。您可以提供圖形、佈景主題、音效，或幫忙撰寫文件，看您喜歡做哪一項。"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:139
 #, kde-format
 msgctxt "Link to wiki page get involved"
 msgid "Get Involved"
-msgstr ""
+msgstr "參與"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:150
 #, kde-format
 msgctxt "Link to develop.kde.org"
 msgid "Developer Documentation"
-msgstr ""
+msgstr "開發者說明文件"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:157
 #, kde-format
 msgctxt "Form section title about donations"
 msgid "Support us"
-msgstr ""
+msgstr "支持我們"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:162
 #, kde-format
@@ -285,18 +301,29 @@ msgid ""
 "\n"
 "Thank you very much in advance for your support."
 msgstr ""
+"KDE 是可免費取得的，但建立 KDE 的工作並不是免費的！\n"
+"\n"
+"因此，KDE 社群組織了 KDE eV，一個在德國創辦的非營利組織。KDE e.V. 是 KDE 社群"
+"在法律和財政方面的代表。\n"
+"\n"
+"KDE 團隊需要各種支持，包含財政上的支持。大部分捐獻是用作補償成員和其他人在貢"
+"獻 KDE 時所用的經費，此外還有用於法律支持與大型研討會等等的經費。\n"
+"\n"
+"我們鼓勵您透過捐獻來支持 KDE。\n"
+"\n"
+"我們非常感謝您對 KDE 的支持。"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:176
 #, kde-format
 msgctxt "link to ev.kde.org"
 msgid "KDE e.V."
-msgstr ""
+msgstr "KDE e.V."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:187
 #, kde-format
 msgctxt "Link to donation page"
 msgid "Donate"
-msgstr ""
+msgstr "贊助"
 
 #: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format

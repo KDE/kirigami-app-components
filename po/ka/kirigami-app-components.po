@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-16 16:39+0000\n"
+"POT-Creation-Date: 2026-11-19 05:19+0000\n"
 "PO-Revision-Date: 2026-05-16 04:37+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -123,7 +123,7 @@ msgctxt "@title:window"
 msgid "About KDE"
 msgstr "KDE-ის შესახებ"
 
-#: actioncollection/qml/ActionsExplorer.qml:126
+#: actioncollection/qml/ActionsExplorer.qml:129
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "No results found"

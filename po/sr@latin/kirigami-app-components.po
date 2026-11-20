@@ -1,0 +1,382 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: kirigami-app-components\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-11-19 05:19+0000\n"
+"PO-Revision-Date: 2026-11-19 17:02+0100\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@latin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: actioncollection/keysequencehelper.cpp:134
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Reserved Shortcut"
+msgstr "Rezervisana prečica"
+
+#: actioncollection/keysequencehelper.cpp:136
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The F12 key is reserved on Windows, so cannot be used for a global "
+"shortcut.\n"
+"Please choose another one."
+msgstr ""
+"Taster F12 je rezervisan na Windowsu, pa se ne može koristiti kao globalna "
+"prečica.\n"
+"Izaberite neku drugu."
+
+#: actioncollection/keysequencehelper.cpp:160
+#, kde-format
+msgctxt ""
+"@title:dialog This happen when a global shortcut is already defined with the "
+"same shortcut"
+msgid "Global Shortcut Shadowing"
+msgstr "Zasenjivanje globalnih prečica"
+
+#: actioncollection/keysequencehelper.cpp:163
+#, kde-format
+msgctxt "@info"
+msgid "The '%1' key combination is shadowed by following global actions:\n"
+msgstr "Kombinaciju tastera %1 zasenjuju sledeće globalne radnje:\n"
+
+#: actioncollection/keysequencehelper.cpp:165
+#: actioncollection/keysequencehelper.cpp:171
+#, kde-format
+msgctxt "@info"
+msgid "Action '%1' in context '%2'\n"
+msgstr "Radnja „%1“ u kontekstu „%2“\n"
+
+#: actioncollection/keysequencehelper.cpp:169
+#, kde-format
+msgctxt "@info"
+msgid "The '%1' key combination shadows following global actions:\n"
+msgstr "Kombinacija tastera %1 zasenjuje sledeće globalne radnje:\n"
+
+#: actioncollection/keysequencehelper.cpp:220
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Conflict with existing Shortcut"
+msgstr "Sukob sa postojećom prečicom"
+
+#: actioncollection/keysequencehelper.cpp:222
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The '%1' key combination is already used for the action \"%2\".\n"
+"Do you really want to use the shortcut here instead??"
+msgstr ""
+"Kombinacija tastera %1 već se koristi za radnju „%2“.\n"
+"Želite li zaista da ipak koristite prečicu ovde??"
+
+#: actioncollection/keysequencehelper.cpp:239
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Conflict with Standard Application Shortcut"
+msgstr "Sukob sa standardnom programskom prečicom"
+
+#: actioncollection/keysequencehelper.cpp:241
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The '%1' key combination is also used for the standard action \"%2\" that "
+"some applications use.\n"
+"Do you really want to use it as a global shortcut as well?"
+msgstr ""
+"Kombinacija tastera %1 već je dodeljena standardnoj radnji „%2“, koju "
+"koriste neki programi.\n"
+"Želite li zaista da je koristite i kao globalnu prečicu?"
+
+#: actioncollection/qml/ActionCollectionManager.qml:53
+#, kde-format
+msgctxt "Configure application menu entry"
+msgid "Configure %1…"
+msgstr "Podesi %1…|/|Podesi $[aku %1]…"
+
+#: actioncollection/qml/ActionCollectionManager.qml:63
+#, kde-format
+msgctxt "Opens the actions search dialog"
+msgid "Find Action…"
+msgstr "Nađi radnju…"
+
+#: actioncollection/qml/ActionCollectionManager.qml:103
+#, kde-format
+msgctxt "@title:window"
+msgid "About %1"
+msgstr "O %1|/|O $[dat %1]"
+
+#: actioncollection/qml/ActionCollectionManager.qml:120
+#: actioncollection/qml/private/AboutKDEPage.qml:16
+#, kde-format
+msgctxt "@title:window"
+msgid "About KDE"
+msgstr "O KDE‑u"
+
+#: actioncollection/qml/ActionsExplorer.qml:129
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "No results found"
+msgstr "Nisu nađeni rezultati"
+
+#: actioncollection/qml/KeySequenceItem.qml:115
+#, kde-format
+msgctxt "Default shortcut label when there is no shortcut"
+msgid "Default: None"
+msgstr "Podrazumevana: nijedna"
+
+#: actioncollection/qml/KeySequenceItem.qml:116
+#, kde-format
+msgctxt "Default shortcut label"
+msgid "Default: %1"
+msgstr "Podrazumevana: %1"
+
+#: actioncollection/qml/KeySequenceItem.qml:171
+#, kde-format
+msgctxt "What the user inputs now will be taken as the new shortcut"
+msgid "Input"
+msgstr "unesite"
+
+#: actioncollection/qml/KeySequenceItem.qml:172
+#, kde-format
+msgctxt "No shortcut defined"
+msgid "None"
+msgstr "nijedna"
+
+#: actioncollection/qml/KeySequenceItem.qml:183
+#, kde-format
+msgid ""
+"Click on the button, then enter the shortcut like you would in the program.\n"
+"Example for Ctrl+A: hold the Ctrl key and press A."
+msgstr ""
+"Kliknite na dugme, pa unesite prečicu kao što biste u programu.\n"
+"Primer za Ctrl+A: držite taster Ctrl i pritisnite A."
+
+#: actioncollection/qml/KeySequenceItem.qml:224
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Clear Key Sequence"
+msgstr "Očisti kombinaciju tastera"
+
+#: actioncollection/qml/KeySequenceItem.qml:240
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Cancel Key Sequence Recording"
+msgstr "Otkaži snimanje kombinacije tastera"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:58
+#, kde-format
+msgctxt "KDE title besides logo in the About KDE page"
+msgid "KDE"
+msgstr "KDE"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:67
+#, kde-format
+msgctxt "KDE motto in About KDE page"
+msgid "Be Free!"
+msgstr "Ka slobodi!"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:78
+#, kde-format
+msgctxt "KDE community description"
+msgid ""
+"KDE is a world-wide community of software engineers, artists, writers, "
+"translators and creators who are committed to Free Software development. KDE "
+"produces the Plasma desktop environment, hundreds of applications, and the "
+"many software libraries that support them.\n"
+"\n"
+"KDE is a cooperative enterprise: no single entity controls its direction or "
+"products. Instead, we work together to achieve the common goal of building "
+"the world's finest Free Software. Everyone is welcome to join and contribute "
+"to KDE, including you."
+msgstr ""
+"KDE je svetska zajednica softverskih inženjera, grafičara, pisaca, "
+"prevodilaca i stvaralaca posvećenih razvoju slobodnog softvera. KDE stvara "
+"okruženje površi Plasma, stotine programa i mnoge softverske biblioteke koje "
+"ih podržavaju.\n"
+"\n"
+"KDE je zajednički poduhvat: nijedan entitet ne upravlja njegovim smerom ni "
+"proizvodima. Umesto toga, radimo zajedno na zajedničkom cilju — stvaranju "
+"najboljeg slobodnog softvera na svetu. Svi su dobrodošli da se priključe i "
+"doprinesu KDE‑u, uključujući i vas."
+
+#: actioncollection/qml/private/AboutKDEPage.qml:90
+#, kde-format
+msgctxt "Link to kde.org"
+msgid "Homepage"
+msgstr "Domaća stranica"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:97
+#, kde-format
+msgctxt "Form bugs section title"
+msgid "Report bugs"
+msgstr "Prijavite greške"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:103
+#, kde-format
+msgctxt "Explanation about reporting bugs"
+msgid ""
+"Software can always be improved, and the KDE team is ready to do so. "
+"However, you - the user - must tell us when something does not work as "
+"expected or could be done better.\n"
+"\n"
+"KDE has a bug tracking system. Use the button below to file a bug, or use "
+"the program's About page to report a bug specific to this application.\n"
+"\n"
+"If you have a suggestion for improvement then you are welcome to use the bug "
+"tracking system to register your wish. Make sure you use the severity called "
+"\"Wishlist\"."
+msgstr ""
+"Softver uvek može biti poboljšan, i tim KDE‑a postojano radi na tome. Ipak, "
+"vi — korisnik — morate izvestiti programere kada nešto ne radi kako je "
+"očekivano, ili može biti urađeno na bolji način.\n"
+"\n"
+"KDE poseduje sistem za praćenje grešaka. Upotrebite dugme ispod da biste "
+"prijavili grešku, ili stranicu o programu da biste prijavili grešku koja se "
+"tiče samo ovog programa.\n"
+"\n"
+"Ukoliko imate predlog za poboljšanje, takođe možete iskoristiti sistem za "
+"praćenje grešaka da registrujete svoju želju. Ne zaboravite da tada za "
+"ozbiljnost izaberete „Wishlist“ (spisak želja)."
+
+#: actioncollection/qml/private/AboutKDEPage.qml:116
+#, kde-format
+msgctxt "Link to bugzilla"
+msgid "Report a bug"
+msgstr "Prijavi grešku"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:123
+#, kde-format
+msgctxt "Form section title about getting involved"
+msgid "Join us"
+msgstr "Pridružite nam se"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:128
+#, kde-format
+msgctxt "Descrioption of roles one can get involved as"
+msgid ""
+"You do not have to be a software developer to be a member of the KDE team. "
+"You can join the language teams that translate program interfaces. You can "
+"provide graphics, themes, sounds, and improved documentation. You decide!"
+msgstr ""
+"Ne morate biti programer da biste postali član tima KDE‑a. Možete se "
+"pridružiti jezičkim timovima koji prevode programska sučelja. Možete crtati "
+"grafiku, teme, snimati zvukove, ili pisati dokumentaciju. Na vama je da "
+"odlučite!"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:139
+#, kde-format
+msgctxt "Link to wiki page get involved"
+msgid "Get Involved"
+msgstr "Uključi se"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:150
+#, kde-format
+msgctxt "Link to develop.kde.org"
+msgid "Developer Documentation"
+msgstr "Dokumentacija za programere"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:157
+#, kde-format
+msgctxt "Form section title about donations"
+msgid "Support us"
+msgstr "Podržite nas"
+
+#: actioncollection/qml/private/AboutKDEPage.qml:162
+#, kde-format
+msgctxt "Text about donations to KDE"
+msgid ""
+"KDE software is and will always be available free of charge, however "
+"creating it is not free.\n"
+"\n"
+"To support development the KDE community has formed the KDE e.V., a non-"
+"profit organization legally founded in Germany. KDE e.V. represents the KDE "
+"community in legal and financial matters.\n"
+"\n"
+"KDE benefits from many kinds of contributions, including financial. We use "
+"the funds to reimburse members and others for expenses they incur when "
+"contributing. Further funds are used for legal support and organizing "
+"conferences and meetings.\n"
+"\n"
+"We would like to encourage you to support our efforts with a financial "
+"donation.\n"
+"\n"
+"Thank you very much in advance for your support."
+msgstr ""
+"Softver KDE‑a je dostupan besplatno, i to će uvek biti tako, ali se u "
+"njegovo stvaranje ulažu sredstva.\n"
+"\n"
+"Radi podrške razvoju, zajednica KDE‑a je oformila KDE e.V., neprofitnu "
+"organizaciju sa sedištem u Nemačkoj. KDE e.V. predstavlja zajednicu KDE‑a u "
+"pravnim i finansijskim pitanjima.\n"
+"\n"
+"KDE‑u znače raznovrsni vidovi podrške, uključujući i finansijsku. Novčanim "
+"sredstvima pokrivamo izdatke nastale tokom doprinošenja, članovima i "
+"drugima. Sredstva se takođe koriste za zakonsku zaštitu i organizovanje "
+"konferencija i susreta.\n"
+"\n"
+"Želimo da vas podstaknemo da podržite KDE novčanom donacijom.\n"
+"\n"
+"Unapred vam se zahvaljujemo na podršci."
+
+#: actioncollection/qml/private/AboutKDEPage.qml:176
+#, kde-format
+msgctxt "link to ev.kde.org"
+msgid "KDE e.V."
+msgstr "KDE e.V."
+
+#: actioncollection/qml/private/AboutKDEPage.qml:187
+#, kde-format
+msgctxt "Link to donation page"
+msgid "Donate"
+msgstr "Doniraj"
+
+#: actioncollection/qml/ShortcutsEditor.qml:36
+#, kde-format
+msgctxt "@title:window"
+msgid "Shortcuts"
+msgstr "Prečice"
+
+#: actioncollection/qml/ShortcutsEditor.qml:40
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Filter…"
+msgstr "Filter…"
+
+#: actioncollection/qml/ShortcutsEditor.qml:122
+#, kde-format
+msgctxt "@title:window"
+msgid "Shortcut: %1"
+msgstr "Prečica: %1"
+
+#: actioncollection/qml/ShortcutsEditor.qml:155
+#, kde-format
+msgctxt "@label"
+msgid "Shortcut:"
+msgstr "Prečica:"
+
+#: actioncollection/qml/ShortcutsEditor.qml:181
+#, kde-format
+msgctxt "@label"
+msgid "Alternative:"
+msgstr "Alternativna:"
+
+#: actioncollection/qml/ShortcutsEditor.qml:248
+#, kde-format
+msgctxt "Placeholder message"
+msgid "No shortcuts found"
+msgstr "Nisu nađene prečice"
+
+#: actioncollection/standardactiondata.cpp:46
+#, kde-format
+msgctxt "About [application name]"
+msgid "About %1…"
+msgstr "O %1…|/|O $[dat %1]…"
