@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-19 05:19+0000\n"
-"PO-Revision-Date: 2026-06-06 15:07+0200\n"
+"PO-Revision-Date: 2026-11-22 00:24+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -174,13 +174,13 @@ msgstr "키 배열 기록 취소"
 #, kde-format
 msgctxt "KDE title besides logo in the About KDE page"
 msgid "KDE"
-msgstr ""
+msgstr "KDE"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:67
 #, kde-format
 msgctxt "KDE motto in About KDE page"
 msgid "Be Free!"
-msgstr ""
+msgstr "자유롭게!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:78
 #, kde-format
@@ -196,18 +196,26 @@ msgid ""
 "the world's finest Free Software. Everyone is welcome to join and contribute "
 "to KDE, including you."
 msgstr ""
+"KDE는  자유 소프트웨어를 개발하려고 모인 소프트웨어 개발자, 예술가, 집필가, "
+"번역가 및 기타 인원의 모임입니다. KDE 커뮤니티에서는 Plasma 데스크톱 환경, 다"
+"양한 앱 및 지원 라이브러리를 개발합니다.\n"
+"\n"
+"KDE는 협동 조합입니다. 어떠한 단일 집단도 방향이나 제품을 결정하지 않습니다. "
+"우리는 전 세계에서 가장 뛰어난 자유 소프트웨어 개발이라는 공통 목표를 향해 함"
+"께 힘을 모으고 있습니다. KDE에는 이 글을 읽는 여러분과 같은 누구나 참여하고 "
+"기여할 수 있습니다."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:90
 #, kde-format
 msgctxt "Link to kde.org"
 msgid "Homepage"
-msgstr ""
+msgstr "홈페이지"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:97
 #, kde-format
 msgctxt "Form bugs section title"
 msgid "Report bugs"
-msgstr ""
+msgstr "버그 보고"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:103
 #, kde-format
@@ -224,18 +232,27 @@ msgid ""
 "tracking system to register your wish. Make sure you use the severity called "
 "\"Wishlist\"."
 msgstr ""
+"소프트웨어는 항상 개선되며, KDE 팀도 그럴 준비가 되어 있습니다. 따라서 사용"
+"자 여러분은 무언가가 예상한 대로 작동하지 않거나 더 잘 작동하기를 바라면 개발"
+"자에게 알려 주십시오.\n"
+"\n"
+"KDE는 버그 추적 시스템을 가지고 있습니다. 아래 단추를 사용하여 버그를 보고하"
+"거나 프로그램 정보 페이지에서 프로그램별 버그를 보고할 수 있습니다.\n"
+"\n"
+"개선 사항 제안을 하고 싶으시다면 버그 보고 시스템을 통해서 알려 주십시오. 이 "
+"경우 심각성 항목에서 \"Wishlist\"를 선택하셔야 합니다."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:116
 #, kde-format
 msgctxt "Link to bugzilla"
 msgid "Report a bug"
-msgstr ""
+msgstr "버그 보고"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:123
 #, kde-format
 msgctxt "Form section title about getting involved"
 msgid "Join us"
-msgstr ""
+msgstr "참여하기"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:128
 #, kde-format
@@ -245,24 +262,27 @@ msgid ""
 "You can join the language teams that translate program interfaces. You can "
 "provide graphics, themes, sounds, and improved documentation. You decide!"
 msgstr ""
+"소프트웨어 개발자만이 KDE에 참가할 수 있는 것은 아닙니다. 프로그램 인터페이스"
+"를 번역하는 각 언어 번역팀을 도울 수도 있습니다. 또한 그래픽, 테마, 소리, 더 "
+"나은 문서 등을 기여할 수도 있습니다. 직접 결정하십시오!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:139
 #, kde-format
 msgctxt "Link to wiki page get involved"
 msgid "Get Involved"
-msgstr ""
+msgstr "참여하기"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:150
 #, kde-format
 msgctxt "Link to develop.kde.org"
 msgid "Developer Documentation"
-msgstr ""
+msgstr "개발자 문서"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:157
 #, kde-format
 msgctxt "Form section title about donations"
 msgid "Support us"
-msgstr ""
+msgstr "지원하기"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:162
 #, kde-format
@@ -285,18 +305,30 @@ msgid ""
 "\n"
 "Thank you very much in advance for your support."
 msgstr ""
+"KDE는 무료로 사용 가능하지만, 만드는 것은 무료가 아닙니다.\n"
+"\n"
+"따라서 KDE 커뮤니티는 독일에 비영리 재단 KDE eV.를 설립했습니다. KDE e.V.는 "
+"KDE 커뮤니티를 법적, 재정적인 면에서 후원합니다.\n"
+"\n"
+"KDE는 재정적 보조를 포함한 여러 기여를 받고 있습니다. 대부분의 지원금은 구성"
+"원에게 대가를 지급하거나 KDE에 기여하는 데 필요한 비용 지원에 사용됩니다. 추"
+"가적인 예산은 법적 지원과 컨퍼런스, 미팅 주최에 사용됩니다.\n"
+"\n"
+"금전적 기부를 통하여 재정적인 지원을 해 주십시오.\n"
+"\n"
+"여러분의 협조에  미리 감사드립니다."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:176
 #, kde-format
 msgctxt "link to ev.kde.org"
 msgid "KDE e.V."
-msgstr ""
+msgstr "KDE e.V."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:187
 #, kde-format
 msgctxt "Link to donation page"
 msgid "Donate"
-msgstr ""
+msgstr "기부하기"
 
 #: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format

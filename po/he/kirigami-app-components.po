@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-19 05:19+0000\n"
-"PO-Revision-Date: 2026-05-15 09:51+0300\n"
+"PO-Revision-Date: 2026-11-21 08:14+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 26.04.0\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: actioncollection/keysequencehelper.cpp:134
 #, kde-format
@@ -175,13 +175,13 @@ msgstr "ביטול הקלטת רצף מקשים"
 #, kde-format
 msgctxt "KDE title besides logo in the About KDE page"
 msgid "KDE"
-msgstr ""
+msgstr "KDE"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:67
 #, kde-format
 msgctxt "KDE motto in About KDE page"
 msgid "Be Free!"
-msgstr ""
+msgstr "החופש להיות!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:78
 #, kde-format
@@ -202,13 +202,13 @@ msgstr ""
 #, kde-format
 msgctxt "Link to kde.org"
 msgid "Homepage"
-msgstr ""
+msgstr "דף הבית"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:97
 #, kde-format
 msgctxt "Form bugs section title"
 msgid "Report bugs"
-msgstr ""
+msgstr "דיווח על תקלות"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:103
 #, kde-format
@@ -230,13 +230,13 @@ msgstr ""
 #, kde-format
 msgctxt "Link to bugzilla"
 msgid "Report a bug"
-msgstr ""
+msgstr "דיווח על תקלה"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:123
 #, kde-format
 msgctxt "Form section title about getting involved"
 msgid "Join us"
-msgstr ""
+msgstr "הצטרפות אלינו"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:128
 #, kde-format
@@ -246,24 +246,27 @@ msgid ""
 "You can join the language teams that translate program interfaces. You can "
 "provide graphics, themes, sounds, and improved documentation. You decide!"
 msgstr ""
+"לא צריך לדעת לפתח תוכנה כדי להצטרף לחברות בצוות KDE. אפשר להצטרף לצוותי השפה "
+"שמתרגמים את ממשקי המשתמש של היישומים. אפשר לספק גרפיקה, ערכות עיצוב, צלילים "
+"ותיעוד משופר. הבחירה היא שלך!"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:139
 #, kde-format
 msgctxt "Link to wiki page get involved"
 msgid "Get Involved"
-msgstr ""
+msgstr "הצטרפות"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:150
 #, kde-format
 msgctxt "Link to develop.kde.org"
 msgid "Developer Documentation"
-msgstr ""
+msgstr "תיעוד למתכנתים"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:157
 #, kde-format
 msgctxt "Form section title about donations"
 msgid "Support us"
-msgstr ""
+msgstr "תמיכה בנו"
 
 #: actioncollection/qml/private/AboutKDEPage.qml:162
 #, kde-format
@@ -286,18 +289,30 @@ msgid ""
 "\n"
 "Thank you very much in advance for your support."
 msgstr ""
+"התוכנות של KDE היו ותמיד יישארו ללא תשלום, עם זאת, הפקתן אינה בחינם.\n"
+"\n"
+"כדי לתמוך בפיתוח, קהילת KDE גיבשה את KDE e.V.‎, מלכ״ר שהוקם חוקית בגרמניה. "
+"KDE e.V.‎ מייצג את קהילת KDE בנושאים משפטיים ופיננסיים.\n"
+"\n"
+"מיזם KDE מרוויח ממגוון של תרומות, כולל פיננסיות. אנחנו משתמשים בכספים כדי "
+"לשפות חברים והוצאות אחרות שחלות עליהם כשהם תורמים. כספים נוספים משמשים "
+"לתמיכה משפטים וארגון כנסים ומפגשים.\n"
+"\n"
+"אנו מעודדים אותך לתמוך במאמצים שלנו פיננסית באמצעות תרומה.\n"
+"\n"
+"תודה מראש על התמיכה שלך."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:176
 #, kde-format
 msgctxt "link to ev.kde.org"
 msgid "KDE e.V."
-msgstr ""
+msgstr "KDE e.V."
 
 #: actioncollection/qml/private/AboutKDEPage.qml:187
 #, kde-format
 msgctxt "Link to donation page"
 msgid "Donate"
-msgstr ""
+msgstr "תרומה"
 
 #: actioncollection/qml/ShortcutsEditor.qml:36
 #, kde-format
