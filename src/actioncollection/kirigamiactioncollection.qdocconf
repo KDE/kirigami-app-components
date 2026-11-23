@@ -11,7 +11,7 @@ imagedirs = .
 #../../docs/pics
 #exampledirs = . ../../examples
 
-depends = kde qtcore qtqml qtquick qtquickcontrols kcoreaddons kconfig
+depends += kde qtcore qtqml qtquick qtquickcontrols kcoreaddons kconfig
 
 excludedirs = platform
 

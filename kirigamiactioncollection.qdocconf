@@ -14,7 +14,7 @@ examples += ../examples/snippets
 
 navigation.landingpage = "KirigamiActionCollection"
 
-depends = kde qtcore qtquick qtquickcontrols KirigamiActionCollectioncontrols
+depends += kde qtcore qtquick qtquickcontrols KirigamiActionCollectioncontrols
 
 imagedirs = ../docs/pics \
             ../examples/snippets
