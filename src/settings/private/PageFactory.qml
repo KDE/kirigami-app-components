@@ -34,7 +34,7 @@ QtObject {
         }
 
         if (page.title !== undefined && page.title.length === 0) {
-            page.title = module.text;
+            page.title = module.name;
         }
         root.pageCache[module.moduleId] = page;
         return page;

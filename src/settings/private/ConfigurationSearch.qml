@@ -58,7 +58,7 @@ QtObject {
         }
 
         const terms = query.split(/\s+/);
-        const text = module.searchable ? (module.text ?? "").toLowerCase() : "";
+        const text = (module.name ?? "").toLowerCase();
         const keywords = (module.keywords ?? []).map(keyword => (keyword ?? "").toLowerCase());
         return terms.every(term => text.includes(term) || keywords.some(keyword => keyword.includes(term)));
     }
@@ -66,8 +66,11 @@ QtObject {
     function acceptFirstResult(): void {
         queryTimer.stop();
         // Assigning searchText synchronously updates filteredModules
+        print("ACCEPRFIRST",root.filteredModules)
         root.searchText = root.filterText.trim();
+        print("ACCEPRFIRST2",root.filteredModules,"-",root.searchText)
         if (root.filteredModules.length > 0) {
+            print("EMITTING")
             root.resultAccepted(root.filteredModules[0]);
         }
     }

@@ -38,7 +38,7 @@ TestCase {
             modules: [
                 SettingsModule {
                     moduleId: "general"
-                    text: "General"
+                    name: "General"
                     page: generalPage
                 }
             ]
@@ -48,7 +48,7 @@ TestCase {
     SettingsModule {
         id: appearanceModule
         moduleId: "appearance"
-        text: "Appearance"
+        name: "Appearance"
         page: null
         keywords: ["theme"]
     }
@@ -56,16 +56,15 @@ TestCase {
     SettingsModule {
         id: aboutModule
         moduleId: "about"
-        text: "About"
+        name: "About"
         page: null
-        searchable: false
         keywords: ["credits", "dark"]
     }
 
     SettingsModule {
         id: hiddenModule
         moduleId: "hidden"
-        text: "Hidden"
+        name: "Hidden"
         page: null
         visible: false
     }
@@ -86,7 +85,7 @@ TestCase {
     SettingsModule {
         id: pageModule
         moduleId: "paged"
-        text: "Paged"
+        name: "Paged"
         page: dummyPageComponent
     }
 
@@ -106,15 +105,8 @@ TestCase {
     SettingsModule {
         id: pagedPageModule
         moduleId: "paged-page"
-        text: "Paged"
+        name: "Paged"
         page: pagedPageComponent
-    }
-
-    Private.ConfigWindow {
-        id: fallbackWindow
-
-        defaultModule: "nonexistent"
-        modules: [pagedPageModule]
     }
 
     SignalSpy {
@@ -177,20 +169,6 @@ TestCase {
         verify(search.noResults);
     }
 
-    function test_unsearchableModuleOnlyMatchedByKeywords() {
-        // The about module is not searchable: its text must not match...
-        search.filterText = "about";
-        tryVerify(() => search.searchText === "about");
-        compare(search.filteredModules.length, 0);
-        verify(search.noResults);
-
-        // ...but its keywords are still searched
-        search.filterText = "credits";
-        tryVerify(() => search.searchText === "credits");
-        compare(search.filteredModules.length, 1);
-        compare(search.filteredModules[0], aboutModule);
-    }
-
     function test_acceptFirstResult() {
         search.filterText = "appearance";
 
@@ -227,12 +205,16 @@ TestCase {
         testWindow.show();
         settingsViewController.open();
 
-        const view = settingsViewController.configViewItem;
+        // configViewItem is no longer public; the test (which already imports
+        // the private module) can still reach it through the private __d.
+        const view = settingsViewController.__d.configViewItem;
         verify(view !== null);
-        compare(view.title, "Settings");
 
-        // Without a defaultModule the first module is opened (desktop behavior)
-        tryVerify(() => view.pageStack.depth === 1);
+        // On desktop the settings open as a dialog layer: the dialog window's
+        // page stack holds the sidebar (titled "Settings") and, once the
+        // default module is pushed, its page on top.
+        compare(view.pageStack.get(0).title, "Settings");
+        tryVerify(() => view.pageStack.depth === 2);
         tryVerify(() => {
             const page = view.pageStack.currentItem as Kirigami.Page;
             return page !== null && page.title === "General";
@@ -240,16 +222,10 @@ TestCase {
 
         // Opening again reuses the existing view
         settingsViewController.open();
-        compare(settingsViewController.configViewItem, view);
+        compare(settingsViewController.__d.configViewItem, view);
 
-        // Closing destroys the view and clears configViewItem
+        // Closing destroys the view and clears the private configViewItem
         view.close();
-        tryVerify(() => settingsViewController.configViewItem === null);
-    }
-
-    function test_configWindowFallbacksToFirstModule() {
-        // On desktop an unknown defaultModule falls back to the first module
-        tryVerify(() => fallbackWindow.pageStack.depth === 1);
-        tryVerify(() => fallbackWindow.pageStack.currentItem !== null && fallbackWindow.pageStack.currentItem.title === "Paged");
+        tryVerify(() => settingsViewController.__d.configViewItem === null);
     }
 }

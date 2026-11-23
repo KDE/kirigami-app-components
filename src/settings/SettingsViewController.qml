@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 import QtQml
+import QtQuick.Window
 import org.kde.ki18n
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.settings.private as Private
@@ -111,13 +112,13 @@ QtObject {
             return;
         }
 
-        if (root.configViewItem) {
-            if (typeof root.configViewItem.objectName !== "string") {
+        if (d.configViewItem) {
+            if (typeof d.configViewItem.objectName !== "string") {
                 // The previous view was destroyed by other means (for
                 // example by the page stack); open a new one.
-                root.configViewItem = null;
-            } else if (typeof root.configViewItem.requestActivate === "function") {
-                Qt.callLater(root.configViewItem.requestActivate);
+                d.configViewItem = null;
+            } else if (typeof d.configViewItem.requestActivate === "function") {
+                Qt.callLater(d.configViewItem.requestActivate);
                 return;
             } else {
                 return;
@@ -141,20 +142,26 @@ QtObject {
                 });
             }
         } else {
-            view = d.windowComponent.createObject(root.window, {
-                defaultModule: module,
-                modules: root.modules,
-                width: Kirigami.Units.gridUnit * 50,
-                height: Kirigami.Units.gridUnit * 30,
-                minimumWidth: Kirigami.Units.gridUnit * 50,
-                minimumHeight: Kirigami.Units.gridUnit * 30,
-                title: root.title,
-            });
+            // On desktop a missing or unknown defaultModule falls back to the
+            // first module; on mobile the module list is simply shown instead.
+            const sidebarInstance = root.window.pageStack.pushDialogLayer(d.desktopSidebarComponent, {
+                    defaultModule: module,
+                    modules: root.modules,
+                    title: root.title,
+                }, {
+                    width: Kirigami.Units.gridUnit * 50,
+                    height: Kirigami.Units.gridUnit * 30,
+                    minimumWidth: Kirigami.Units.gridUnit * 50,
+                    minimumHeight: Kirigami.Units.gridUnit * 30
+                });
+            if (sidebarInstance) {
+                view = sidebarInstance.Window.window;
+            }
             if (view) {
                 view.closing.connect(event => {
                     if (event.accepted) {
                         view.destroy();
-                        root.configViewItem = null;
+                        d.configViewItem = null;
                     }
                 });
             }
@@ -165,7 +172,7 @@ QtObject {
             return;
         }
 
-        root.configViewItem = view;
+        d.configViewItem = view;
     }
 
     readonly property QtObject __d: QtObject {
@@ -173,7 +180,11 @@ QtObject {
         // Mobile
         readonly property Component mobilePageComponent: Private.ConfigMobilePage {}
         // Desktop
-        readonly property Component windowComponent: Private.ConfigWindow {}
+        readonly property Component desktopSidebarComponent: Private.ConfigDesktopSidebar {}
+        readonly property Private.PageFactory pageFactory: Private.PageFactory {
+            id: pageFactory
+        }
+        property QtObject configViewItem: null
     }
 }
 

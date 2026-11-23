@@ -15,7 +15,7 @@ ecm_add_qml_module(settingsprivateplugin
 )
 
 ecm_target_qml_sources(settingsprivateplugin SOURCES
-    ConfigWindow.qml
+    ConfigDesktopSidebar.qml
     ConfigMobilePage.qml
     ConfigurationSearch.qml
     PageFactory.qml
