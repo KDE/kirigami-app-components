@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kirigami-app-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-19 05:19+0000\n"
-"PO-Revision-Date: 2026-11-14 18:35+0300\n"
+"PO-Revision-Date: 2026-11-23 17:58+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -132,13 +132,13 @@ msgstr "Bulunan sonuç yok"
 #, kde-format
 msgctxt "Default shortcut label when there is no shortcut"
 msgid "Default: None"
-msgstr "Öntanımlı: Yok"
+msgstr "Varsayılan: Yok"
 
 #: actioncollection/qml/KeySequenceItem.qml:116
 #, kde-format
 msgctxt "Default shortcut label"
 msgid "Default: %1"
-msgstr "Öntanımlı: %1"
+msgstr "Varsayılan: %1"
 
 #: actioncollection/qml/KeySequenceItem.qml:171
 #, kde-format
